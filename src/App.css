@@ -987,7 +987,7 @@ section .button {
 .conatiner-xsm{
   width: 63%;
   max-width: 105rem;
-  padding: 50px;
+  padding-top: 50px;
 
 }
 

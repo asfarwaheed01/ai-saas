@@ -366,14 +366,16 @@ function App() {
           </div>
         </div>
       </section>
-      <section className="conatiner-xsm">
-        <button className="button-small-card">
-          <span className="button-text">USE CASES</span>
-        </button>
-        <h1 className="heading-xlarge-section5">
-          50,000+ teams use our AI avatars to save time, cut costs, and boost
-          engagement
-        </h1>
+      <section className="container-xlarge">
+        <div className="conatiner-xsm">
+          <button className="button-small-card">
+            <span className="button-text">USE CASES</span>
+          </button>
+          <h1 className="heading-xlarge-section5">
+            50,000+ teams use our AI avatars to save time, cut costs, and boost
+            engagement
+          </h1>
+        </div>
       </section>
       <section>
         <div className="slider-space">
