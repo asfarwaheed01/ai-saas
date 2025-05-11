@@ -467,7 +467,7 @@ section .button {
   background-image: url("../public//images/background-2.jpg");
   background-size: cover;
   background-position: center;
-  height: 150vh;
+  padding-bottom: 50px;
   width: 100%;
 }
 
@@ -495,4 +495,196 @@ section .button {
   font-size: 23px;
   text-align: center;
   line-height: 35px;
+}
+
+.card {
+  display: flex;
+  background: white;
+  border-radius: 20px 50px 20px 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  border-bottom-right-radius: 100px!important;
+  min-height: 300px;
+}
+
+/* Default layout (image on left) */
+.card.left {
+  flex-direction: row;
+}
+
+/* Image on right layout */
+.card.right {
+  flex-direction: row-reverse;
+}
+
+/* Outer wrapper for the image side */
+.card-image-wrapper {
+  flex: 0 0 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Inner card inside the image area */
+.inner-card {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border-bottom-right-radius: 100px!important;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* background-color: pink; */
+  padding: 50px;
+  padding-top: 70px !important;
+  padding-bottom: 70px !important;
+}
+
+/* Container for image + gradient overlay */
+.image-overlay {
+  width: 100%;
+  height: 100%;
+  /* position: relative; */
+}
+
+.image-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
+  z-index: 1;
+  border-radius: 16px;
+}
+
+.image-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 0;
+  border-radius: 16px;
+  border-bottom-right-radius: 100px!important;
+}
+
+/* Content Area */
+.card-content {
+  /* flex: 0 0 40%; */
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-content h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.card-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    border-radius: 20px;
+  }
+
+  .card.right {
+    flex-direction: column;
+  }
+
+  .card.left {
+    flex-direction: column;
+  }
+
+  .card-image-wrapper {
+    /* width: 100%; */
+    padding: 15px;
+  }
+
+  .card-content {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+.card-button {
+  padding: 10px 20px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.card-button:hover {
+  background-color: #3730a3;
+}
+
+.card-bullets {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+  
+}
+
+.card-bullets li {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #444;
+}
+
+.bullet-icon {
+  margin-right: 10px;
+  color: #4f46e5;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+
+.container-xlarge {
+  width: 95%;
+  max-width: 105rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button-small-card {
+  border-radius: 8px;
+  letter-spacing: -0.009rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  line-height: 1.625rem;
+  font-weight: 600;
+  background-color: #e4e3f5;
+  color: #4f46e5;
+  align-self: flex-start; 
+  border: none;
+}
+
+.card-content h3{
+  font-size: 39px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.feature-button{
+  margin-top: 40px;
+  border: none;
 }
