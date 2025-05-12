@@ -84,7 +84,7 @@ const Card = ({
             topIcon && <div className="card-top-icon">{topIcon}</div>
           )}
 
-          <h3>{title}</h3>
+          <h3 className="card-title-font">{title}</h3>
 
           {/* Content area - bullets or description */}
           {variant === "bullets" ? (

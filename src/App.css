@@ -23,7 +23,7 @@ body {
 
 .heading-xlarge{
   font-weight: 500px;
-  font-size: 80px;
+  font-size: clamp(40px, 7vw, 80px);
   margin-top: 0px;
   padding-top: 220px;
   text-align: center;
@@ -44,7 +44,7 @@ body {
 }
 
 .small-text{
-  margin-top: -50px;
+  /* margin-top: -50px; */
   font-size: 26px;
   text-align: center;
   line-height: 35px;
@@ -403,7 +403,7 @@ section .button {
   .navbar-links {
     display: none;
     position: absolute;
-    top: 100%;
+    top: 70%;
     left: 0;
     width: 100%;
     background-color: #ffffff;
@@ -431,6 +431,7 @@ section .button {
   .navbar-right {
     display: none;
     position: absolute;
+    top:271px;
     top: calc(100% + 5 reproducedrem);
     left: 0;
     width: 100%;
@@ -473,7 +474,7 @@ section .button {
 
 .heading-xlarge-section2{
   font-weight: 500px;
-  font-size: 65px;
+  font-size: clamp(2rem, 5vw, 4.063rem);
   margin-top: 0px;
   padding-top: 20px;
   text-align: center;
@@ -491,8 +492,8 @@ section .button {
 }
 
 .extra-small-text{
-  margin-top: -50px;
-  font-size: 23px;
+  /* margin-top: -50px; */
+  font-size: clamp(16px, 2.8vw, 23px);
   text-align: center;
   line-height: 35px;
 }
@@ -578,17 +579,18 @@ section .button {
   justify-content: center;
 }
 
-.card-content h3 {
+/* .card-content h3 {
   font-size: 24px;
   margin-bottom: 15px;
   color: #333;
-}
+} */
 
 .card-content p {
-  font-size: 16px;
+  font-size: clamp(14px, 2.5vw, 19px);
   line-height: 1.6;
   color: #666;
   margin-bottom: 20px;
+  padding: 0px;
 }
 
 /* Responsive */
@@ -612,7 +614,7 @@ section .button {
   }
 
   .card-content {
-    width: 100%;
+    /* width: 100%; */
     padding: 20px;
   }
 }
@@ -679,7 +681,7 @@ section .button {
 }
 
 .card-content h3{
-  font-size: 39px;
+  font-size: clamp(24px, 4vw, 39px);
   margin-bottom: 15px;
   color: #333;
 }
@@ -729,9 +731,9 @@ section .button {
   font-size: 30px;
 }
 
-.card-description{
+/* .card-description{
   font-size: 19px !important;
-}
+} */
 
 .container-xxlarge {
   width: 100%;
@@ -757,8 +759,9 @@ section .button {
 
 .heading-xlarge-section4{
   font-weight: 500px;
-  font-size: 65px;
+  font-size: clamp(2rem, 5vw, 4.063rem);
   margin-top: 0px;
+  margin-bottom: 70px;
   padding-top: 20px;
   text-align: center;
   color: white;
@@ -827,7 +830,7 @@ section .button {
 
 @media (max-width: 480px) {
   .two-column-layout {
-    padding: 20px;
+    /* padding: 20px;  */
   }
   
   .image-column img {
@@ -993,7 +996,7 @@ section .button {
 
 .heading-xlarge-section5{
   font-weight: 500px;
-  font-size: 65px;
+  font-size: clamp(2rem, 5vw, 4.063rem);
   margin-top: 0px;
   padding-top: 20px;
   }
@@ -1086,8 +1089,35 @@ section .button {
   .slider-2-img img {
     height: auto;
   }
-  
+
   .slider-2-content {
-    padding: 10px;
+   padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%; 
+  }  
+
+  .conatiner-xsm{
+    width: 100%;
+    max-width: 105rem;
+    padding-top: 50px;
+  
+  }
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+  .slider-2-card {
+    background: #F5F8FF;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    height: 600px;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
   }
 }
