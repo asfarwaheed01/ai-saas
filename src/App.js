@@ -5,6 +5,7 @@ import Navbar from "./components/navbar";
 import Card from "./components/card";
 import Test from "./image/test.jpg";
 import { FaCheckCircle } from "react-icons/fa";
+import Slider2 from "./components/carousel";
 
 function App() {
   return (
@@ -377,9 +378,9 @@ function App() {
           </h1>
         </div>
       </section>
-      <section>
+      <section className="container-xlarge">
         <div className="slider-space">
-          <Slider />
+          <Slider2 />
         </div>
       </section>
     </>

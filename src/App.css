@@ -997,3 +997,97 @@ section .button {
   margin-top: 0px;
   padding-top: 20px;
   }
+
+
+/* Card Styling */
+.slider-2-card {
+  background: #F5F8FF;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  height: 500px;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.slider-2-text-content {
+  flex-grow: 1; /* Takes available space */
+}
+
+.slider-2-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Image Styling (with 10px padding) */
+.slider-2-img {
+  padding: 40px;
+}
+
+.slider-2-img img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Content Styling */
+.slider-2-content {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%; 
+
+}
+
+.slider-2-title {
+  margin: 0 0 0 0;
+  font-size: 1.6rem;
+  color: #333;
+  flex-shrink: 0;
+}
+
+.slider-2-desc {
+  margin: 8px 0 15px 0;
+  color: #666;
+  font-size: 1.1rem;
+  overflow: hidden;
+}
+
+/* Button Styling */
+.slider-2-btn {
+  background-color: transparent !important;
+  color: #6265F0 !important;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-top: auto; /* Pushes button to bottom */
+  align-self: flex-start; /* Aligns button to left */
+}
+.slider-2-btn:hover {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.slider-2-btn:hover .arrow-icon {
+  transform: scale(1.7) translateX(5px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .slider-2-img img {
+    height: auto;
+  }
+  
+  .slider-2-content {
+    padding: 10px;
+  }
+}
