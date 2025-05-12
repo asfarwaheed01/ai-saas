@@ -1,0 +1,202 @@
+/* Sidebar.css */
+.docs-sidebar {
+  width: 280px;
+  height: 100vh;
+  background: #ffffff;
+  color: #333;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+  border-right: 1px solid #f0f0f0;
+}
+
+/* Sidebar header and branding */
+.docs-sidebar-header {
+  display: flex;
+  align-items: center;
+  padding: 24px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #0b3b6b;
+  color: #fff;
+}
+
+.docs-sidebar-logo {
+  font-size: 24px;
+  margin-right: 12px;
+  color: #93c5fd;
+}
+
+.docs-sidebar-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sidebar navigation */
+.docs-sidebar-nav {
+  padding: 20px 0;
+}
+
+.docs-sidebar-main-links {
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.docs-sidebar-link {
+  display: block;
+  padding: 10px 0;
+  color: #666;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  font-size: 15px;
+}
+
+.docs-sidebar-link:hover {
+  color: #0b3b6b;
+}
+
+.docs-sidebar-link.active {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* Section headers */
+.docs-sidebar-sections {
+  margin-top: 20px;
+}
+
+.docs-sidebar-section {
+  margin-bottom: 6px;
+}
+
+.docs-sidebar-section-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #444;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+}
+
+.docs-sidebar-section-header:hover {
+  background-color: #f9f9f9;
+  color: #0b3b6b;
+}
+
+.docs-sidebar-section-header.active {
+  background-color: #f5f9ff;
+  color: #1d4ed8;
+  border-left-color: #1d4ed8;
+  font-weight: 600;
+}
+
+.docs-sidebar-section-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+  font-size: 16px;
+  color: #666;
+}
+
+.docs-sidebar-section-header.active .docs-sidebar-section-icon {
+  color: #1d4ed8;
+}
+
+.docs-sidebar-section-title {
+  flex: 1;
+  font-weight: 500;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.docs-sidebar-section-arrow {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #999;
+  transition: transform 0.3s ease;
+}
+
+.docs-sidebar-section-header.active .docs-sidebar-section-arrow {
+  color: #1d4ed8;
+}
+
+/* Section items (sub-links) */
+.docs-sidebar-section-items {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #f5f9ff;
+  transition: max-height 0.3s ease;
+}
+
+.docs-sidebar-section-items.expanded {
+  max-height: 500px; /* Adjust as needed */
+  transition: max-height 0.5s ease;
+}
+
+.docs-sidebar-item {
+  display: block;
+  padding: 10px 20px 10px 48px;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.docs-sidebar-item:hover {
+  background-color: #edf2ff;
+  color: #1d4ed8;
+}
+
+.docs-sidebar-item.active {
+  background-color: #edf2ff;
+  color: #1d4ed8;
+  font-weight: 500;
+}
+
+.docs-sidebar-item.active::before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #1d4ed8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .docs-sidebar {
+    width: 240px;
+  }
+
+  .docs-sidebar-header h1 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .docs-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .docs-sidebar.open {
+    transform: translateX(0);
+  }
+}

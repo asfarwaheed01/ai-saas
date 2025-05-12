@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ROUTES } from "../routes/routes";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -34,7 +35,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="navbar-logo">
           <a href="/">
-            <span className="logo-icon">S</span> synthesia
+            <span className="logo-icon">AI</span> Avatars
           </a>
         </div>
 
@@ -64,7 +65,7 @@ const Navbar = () => {
             </ul>
           </li>
           <li className="navbar-item">
-            <a href="/solutions">Solutions</a>
+            <a href={ROUTES.docs.path}>Docs</a>
           </li>
           <li className="navbar-item">
             <a href="/resources">Resources</a>

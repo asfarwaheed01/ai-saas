@@ -1,0 +1,176 @@
+/* GettingStarted.css */
+.docs-page {
+  padding-bottom: 60px;
+}
+
+.docs-list {
+  margin: 16px 0;
+  padding-left: 20px;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.docs-list li {
+  margin-bottom: 8px;
+}
+
+.docs-list li strong {
+  color: #2b6cb0;
+}
+
+.docs-subsection-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 30px 0 16px;
+}
+
+/* Documentation page animations */
+.docs-section {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Code block copy button */
+.docs-code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2d3748;
+  padding: 10px 16px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  color: #e2e8f0;
+}
+
+.docs-code {
+  position: relative;
+  margin: 20px 0;
+  background-color: #1a202c;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.docs-code pre {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  color: #e2e8f0;
+  font-family: "Roboto Mono", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.docs-code-copy {
+  background: none;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+
+.docs-code-copy:hover {
+  color: #e2e8f0;
+}
+
+/* Table styling */
+.docs-table {
+  width: 100%;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.docs-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.docs-table th {
+  background-color: #edf2f7;
+  color: #2d3748;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.docs-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #4a5568;
+}
+
+.docs-table tr:last-child td {
+  border-bottom: none;
+}
+
+.docs-table tr:nth-child(even) {
+  background-color: #f7fafc;
+}
+
+/* Enhanced typography for content */
+.docs-page p {
+  color: #4a5568;
+  line-height: 1.7;
+  margin: 16px 0;
+}
+
+.docs-page strong {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.docs-page em {
+  color: #4a5568;
+}
+
+.docs-page a {
+  color: #3182ce;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.docs-page a:hover {
+  color: #2c5282;
+  text-decoration: underline;
+}
+
+/* Additional component styles */
+.docs-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  margin: 20px 0;
+  border-left: 4px solid #3182ce;
+}
+
+.docs-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.docs-card-content {
+  color: #4a5568;
+  line-height: 1.6;
+}

@@ -1,0 +1,264 @@
+/* ApiEndpointPage.css */
+/* Endpoint method badges */
+.docs-endpoint-method {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 60px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.docs-endpoint-method.get {
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+}
+
+.docs-endpoint-method.post {
+  background-color: #f0fff4;
+  color: #2c7a7b;
+}
+
+.docs-endpoint-method.put {
+  background-color: #faf5ff;
+  color: #6b46c1;
+}
+
+.docs-endpoint-method.delete {
+  background-color: #fff5f5;
+  color: #c53030;
+}
+
+/* Endpoint URL and header */
+.docs-endpoint-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.docs-endpoint-url {
+  flex: 1;
+  padding: 8px 12px;
+  background-color: #edf2f7;
+  border-radius: 4px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 14px;
+  color: #2d3748;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.docs-endpoint-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.docs-endpoint-auth {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #4a5568;
+  background-color: #f0f5fa;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.docs-endpoint-auth svg {
+  color: #3182ce;
+}
+
+/* Response styling */
+.docs-response-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 24px 0 12px;
+}
+
+/* Tabs for response examples */
+.docs-tabs {
+  margin: 24px 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.docs-tabs-header {
+  display: flex;
+  background-color: #f7fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.docs-tab-button {
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5568;
+  transition: all 0.2s;
+  flex: 1;
+  text-align: center;
+  border-bottom: 2px solid transparent;
+}
+
+.docs-tab-button:hover {
+  background-color: #edf2f7;
+  color: #2d3748;
+}
+
+.docs-tab-button.active {
+  color: #3182ce;
+  background-color: #fff;
+  border-bottom-color: #3182ce;
+}
+
+.docs-tabs-content {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.docs-tab-pane {
+  display: none;
+}
+
+.docs-tab-pane.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Interactive console */
+.docs-console {
+  margin-top: 40px;
+}
+
+.docs-console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.docs-console-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.docs-console-form {
+  background-color: #f7fafc;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.docs-form-group {
+  margin-bottom: 16px;
+}
+
+.docs-form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5568;
+  margin-bottom: 8px;
+}
+
+.docs-form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #2d3748;
+  transition: border-color 0.2s;
+}
+
+.docs-form-input:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 1px rgba(66, 153, 225, 0.5);
+}
+
+.docs-form-submit {
+  background-color: #3182ce;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.docs-form-submit:hover {
+  background-color: #2c5282;
+}
+
+.docs-response-preview {
+  background-color: #2d3748;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 16px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100px;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 16px;
+}
+
+/* Utilities */
+.docs-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.docs-badge-required {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.docs-badge-optional {
+  background-color: #e2e8f0;
+  color: #64748b;
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .docs-endpoint-url {
+    background-color: #2d3748;
+    color: #e2e8f0;
+  }
+
+  .docs-endpoint-auth {
+    background-color: #2d3748;
+    color: #e2e8f0;
+  }
+}
