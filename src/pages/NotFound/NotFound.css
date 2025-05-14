@@ -250,3 +250,8 @@
     width: 100%;
   }
 }
+
+.logo-navbar {
+  height: auto;
+  width: 100px;
+}  

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ROUTES } from "../routes/routes";
-
+import Logo from "../image/logo.jpeg";
+import "../pages/NotFound/NotFound.css";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -34,9 +35,11 @@ const Navbar = () => {
       <div className="navbar-container">
         {/* Logo */}
         <div className="navbar-logo">
-          <a href="/">
+          {/* {" "} */}
+          {/* <a href="/">
             <span className="logo-icon">AI</span> Avatars
-          </a>
+          </a>{" "} */}
+          <img src={Logo} alt="logo" className="logo-navbar" />
         </div>
 
         {/* Hamburger Menu for Mobile */}

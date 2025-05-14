@@ -3,7 +3,11 @@ import Slider2 from "../../components/carousel";
 import { FaCheckCircle } from "react-icons/fa";
 import Card from "../../components/card";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import Test from "../../image/test.jpg";
+// import Test from "../../image/test.jpg";
+import Image1 from "../../image/1.jpeg";
+import Image2 from "../../image/2.jpeg";
+import Image3 from "../../image/3.jpeg";
+import Image4 from "../../image/4.jpeg";
 import Slider from "../../components/slider";
 
 const HomePage = () => {
@@ -40,7 +44,7 @@ const HomePage = () => {
       <section className="background-2">
         <div className="container-small">
           <div className="button-center">
-            <button className="button button-small">
+            <button className="feature-button button-small">
               <span className="button-text">AI AVATARS</span>
             </button>
           </div>
@@ -60,7 +64,7 @@ const HomePage = () => {
           <Card
             imagePosition="right"
             innerBackground="lightblue"
-            imageUrl={Test}
+            imageUrl={Image1}
             buttonLabel="EXPRESSIVE AVATARS"
             title="Ready-to-use expressive AI avatars"
             description="This card has image on right (60%) and content on left (40%)."
@@ -80,7 +84,7 @@ const HomePage = () => {
             ]}
           />
           <Card
-            imageUrl={Test}
+            imageUrl={Image2}
             title="Create a custom AI avatar of yourself"
             buttonLabel="PERSONAL AVATARS"
             description="This card has image on left (60%) and content on right (40%)."
@@ -103,7 +107,7 @@ const HomePage = () => {
             imagePosition="right"
             innerBackground="lightblue"
             buttonLabel="STUDIO AVATARS"
-            imageUrl={Test}
+            imageUrl={Image3}
             title="Create a studio-quality custom avatar"
             description="This card has image on right (60%) and content on left (40%)."
             bullets={[
@@ -122,7 +126,7 @@ const HomePage = () => {
             ]}
           />
           <Card
-            imageUrl={Test}
+            imageUrl={Image4}
             title="Quickly create branded AI avatars at scale"
             buttonLabel="AVATAR BUILDER"
             description="This card has image on left (60%) and content on right (40%)."
@@ -166,7 +170,7 @@ const HomePage = () => {
         </div>
         <div className="container-xlarge">
           <Card
-            imageUrl={Test}
+            imageUrl={Image1}
             title="Create videos in minutes"
             buttonLabel="Get Started"
             description="Create and update avatar videos in minutes with an easy text-to-video editor, pre-built templates, and a built-in media library."
@@ -175,17 +179,17 @@ const HomePage = () => {
             innerBackground="lightblue"
           />
           <Card
-            imageUrl={Test}
+            imageUrl={Image2}
             imagePosition="right"
             title="Speak your audience’s language"
-            buttonLabel="See al languages"
+            buttonLabel="See all languages"
             description="Connect with global audiences—our talking avatars can deliver your message in over 140 languages and accents."
             topIcon={<FaCheckCircle />}
             variant="description"
             innerBackground="pink"
           />
           <Card
-            imageUrl={Test}
+            imageUrl={Image3}
             title="Create videos in minutes"
             buttonLabel="Get Started"
             description="Create and update avatar videos in minutes with an easy text-to-video editor, pre-built templates, and a built-in media library."
@@ -269,7 +273,7 @@ const HomePage = () => {
             {/* Image Column - 65% width */}
             <div className="image-column" style={{ width: "65%" }}>
               <img
-                src={Test}
+                src={Image4}
                 alt="AI Avatar creation"
                 style={{
                   width: "100%",

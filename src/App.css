@@ -10,7 +10,8 @@ body {
   background-image: url("../public//images/1stbackground.jpg");
   background-size: cover;
   background-position: center;
-  height: 150vh;
+  /* height: 150vh; */
+  height:auto;
   width: 100%;
 }
 
@@ -177,6 +178,10 @@ section .button {
 /* Adding a gap between cards */
 .slick-list {
   margin: 0 -10px;
+}
+
+.slick-track{
+  height:320px !important;
 }
 
 .slick-slide {
