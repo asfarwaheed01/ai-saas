@@ -39,7 +39,9 @@ const Navbar = () => {
           {/* <a href="/">
             <span className="logo-icon">AI</span> Avatars
           </a>{" "} */}
+           <a href="/">
           <img src={Logo} alt="logo" className="logo-navbar" />
+          </a>
         </div>
 
         {/* Hamburger Menu for Mobile */}
@@ -77,7 +79,7 @@ const Navbar = () => {
             <a href="/pricing">Pricing</a>
           </li>
           <li className="navbar-item">
-            <a href="/enterprise">Enterprise</a>
+            <a href="/contact-us">Contact Us</a>
           </li>
         </ul>
 

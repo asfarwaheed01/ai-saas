@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/Home/HomePage";
+import Contact from "./pages/Contact/contactUs";
 import MainLayout from "./layout/MainLayout";
 import DocsLayout from "./layout/DocsLayout";
 import GettingStarted from "./pages/Documents/GettingStarted/GettingStarted";
@@ -21,6 +22,14 @@ function App() {
         element={
           <MainLayout>
             <HomePage />
+          </MainLayout>
+        }
+      />
+      <Route
+        path={ROUTES.contact.path}
+        element={
+          <MainLayout>
+            <Contact />
           </MainLayout>
         }
       />

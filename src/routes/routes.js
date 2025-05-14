@@ -1,5 +1,6 @@
 export const ROUTES = {
   home: { path: "/", name: "Home" },
+  contact: {path: "/contact-us", name: "Contact Us"},
   docs: { path: "/docs", name: "Documents" },
   // Documentation sections
   docsGettingStarted: {
