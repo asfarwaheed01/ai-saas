@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { ROUTES } from "../routes/routes";
 import Logo from "../image/logo.jpeg";
 import "../pages/NotFound/NotFound.css";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,6 +32,10 @@ const Navbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleClick = () => {
+    navigate(ROUTES.docsGettingStarted.path);
+  };
+
   return (
     <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
       <div className="navbar-container">
@@ -39,8 +45,8 @@ const Navbar = () => {
           {/* <a href="/">
             <span className="logo-icon">AI</span> Avatars
           </a>{" "} */}
-           <a href="/">
-          <img src={Logo} alt="logo" className="logo-navbar" />
+          <a href="/">
+            <img src={Logo} alt="logo" className="logo-navbar" />
           </a>
         </div>
 
@@ -54,7 +60,7 @@ const Navbar = () => {
         {/* Navbar Links */}
         <ul className={`navbar-links ${isMobileMenuOpen ? "active" : ""}`}>
           <li className="navbar-item dropdown">
-            <span className="dropdown-toggle" onClick={toggleDropdown}>
+            {/* <span className="dropdown-toggle" onClick={toggleDropdown}>
               Platform <i className="arrow-down"></i>
             </span>
             <ul className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}>
@@ -67,17 +73,18 @@ const Navbar = () => {
               <li>
                 <a href="/platform/feature3">Feature 3</a>
               </li>
-            </ul>
+            </ul> */}
+            <a href={ROUTES.services.path}>Services</a>
           </li>
           <li className="navbar-item">
-            <a href={ROUTES.docs.path}>Docs</a>
+            <a href={ROUTES.docsGettingStarted.path}>Docs</a>
           </li>
-          <li className="navbar-item">
+          {/* <li className="navbar-item">
             <a href="/resources">Resources</a>
           </li>
           <li className="navbar-item">
             <a href="/pricing">Pricing</a>
-          </li>
+          </li> */}
           <li className="navbar-item">
             <a href="/contact-us">Contact Us</a>
           </li>
@@ -85,13 +92,7 @@ const Navbar = () => {
 
         {/* Right Side */}
         <div className={`navbar-right ${isMobileMenuOpen ? "active" : ""}`}>
-          <a href="/login" className="navbar-right-link">
-            Log in
-          </a>
-          <a href="/book-demo" className="navbar-right-link">
-            Book demo
-          </a>
-          <button className="navbar-button">
+          <button className="navbar-button" onClick={handleClick}>
             Get started <i className="arrow-right">➔</i>
           </button>
         </div>

@@ -12,6 +12,13 @@ import DeleteDocuments from "./pages/Documents/DeleteDocuments/DeleteDocuments";
 import AgentProcessVideo from "./pages/Documents/AgentProcessVideo/AgentProcessVideo";
 import AgentConversationalResponse from "./pages/Documents/AgentConversationalResponse/AgentConversationalResponse";
 import NotFound from "./pages/NotFound/NotFound";
+import CreateSubscriptionPlan from "./pages/Documents/CreateSubscriptionPlan/CreateSubscriptionPlan";
+import ListSubscriptionPlans from "./pages/Documents/ListSubscriptionPlans/ListSubscriptionPlans";
+import UpdateSubscriptionPlan from "./pages/Documents/UpdateSubscriptionPlan/UpdateSubscriptionPlan";
+import CreateStripePaymentSession from "./pages/Documents/CreateStrpieSession/CreateStripePaymentSession";
+import CancelSubscription from "./pages/Documents/CancelSubscription/CancelSubscription";
+import GetActiveSubscription from "./pages/Documents/GetActiveSubscription/GetActiveSubscription";
+import Services from "./pages/Services/Services";
 
 function App() {
   return (
@@ -33,6 +40,15 @@ function App() {
           </MainLayout>
         }
       />
+      <Route
+        path={ROUTES.services.path}
+        element={
+          <MainLayout>
+            <Services />
+          </MainLayout>
+        }
+      />
+      Services
       <Route
         path={ROUTES.docs.path}
         element={
@@ -83,7 +99,6 @@ function App() {
           </DocsLayout>
         }
       />
-
       <Route
         path={ROUTES.docsGenerateResponse.path}
         element={
@@ -92,7 +107,54 @@ function App() {
           </DocsLayout>
         }
       />
-
+      <Route
+        path={ROUTES.docsCreateSubscription.path}
+        element={
+          <DocsLayout>
+            <CreateSubscriptionPlan />
+          </DocsLayout>
+        }
+      />
+      <Route
+        path={ROUTES.docsListSubscriptions.path}
+        element={
+          <DocsLayout>
+            <ListSubscriptionPlans />
+          </DocsLayout>
+        }
+      />
+      <Route
+        path={ROUTES.docsUpdateSubscription.path}
+        element={
+          <DocsLayout>
+            <UpdateSubscriptionPlan />
+          </DocsLayout>
+        }
+      />
+      <Route
+        path={ROUTES.docsStripePayment.path}
+        element={
+          <DocsLayout>
+            <CreateStripePaymentSession />
+          </DocsLayout>
+        }
+      />
+      <Route
+        path={ROUTES.docsCancelSubscription.path}
+        element={
+          <DocsLayout>
+            <CancelSubscription />
+          </DocsLayout>
+        }
+      />
+      <Route
+        path={ROUTES.docsActiveSubscription.path}
+        element={
+          <DocsLayout>
+            <GetActiveSubscription />
+          </DocsLayout>
+        }
+      />
       {/* Fallback route */}
       <Route path="*" element={<NotFound />} />
     </Routes>
