@@ -19,6 +19,8 @@ import CreateStripePaymentSession from "./pages/Documents/CreateStrpieSession/Cr
 import CancelSubscription from "./pages/Documents/CancelSubscription/CancelSubscription";
 import GetActiveSubscription from "./pages/Documents/GetActiveSubscription/GetActiveSubscription";
 import Services from "./pages/Services/Services";
+import Avatars from "./pages/Avatars/Avatars";
+import Login from "./pages/Auth/Login/Login";
 
 function App() {
   return (
@@ -29,6 +31,15 @@ function App() {
         element={
           <MainLayout>
             <HomePage />
+          </MainLayout>
+        }
+      />
+
+      <Route
+        path={ROUTES.login.path}
+        element={
+          <MainLayout>
+            <Login />
           </MainLayout>
         }
       />
@@ -48,7 +59,8 @@ function App() {
           </MainLayout>
         }
       />
-      Services
+      <Route path={ROUTES.avatars.path} element={<Avatars />} />
+
       <Route
         path={ROUTES.docs.path}
         element={

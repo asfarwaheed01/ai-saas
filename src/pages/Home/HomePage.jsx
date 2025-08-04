@@ -9,6 +9,7 @@ import Image2 from "../../image/2.jpeg";
 import Image3 from "../../image/3.jpeg";
 import Image4 from "../../image/4.jpeg";
 import Slider from "../../components/slider";
+import TryOurAvatars from "../../components/HomePage/TryOurAvatars";
 
 const HomePage = () => {
   return (
@@ -199,6 +200,9 @@ const HomePage = () => {
           />
         </div>
       </section>
+
+      <TryOurAvatars />
+
       <section className="container-xlarge space-top">
         <div className="background-4">
           <div className="button-center">

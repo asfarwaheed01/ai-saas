@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ROUTES } from "../routes/routes";
 import Logo from "../image/logo.jpeg";
 import "../pages/NotFound/NotFound.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -41,13 +41,9 @@ const Navbar = () => {
       <div className="navbar-container">
         {/* Logo */}
         <div className="navbar-logo">
-          {/* {" "} */}
-          {/* <a href="/">
-            <span className="logo-icon">AI</span> Avatars
-          </a>{" "} */}
-          <a href="/">
+          <Link to="/">
             <img src={Logo} alt="logo" className="logo-navbar" />
-          </a>
+          </Link>
         </div>
 
         {/* Hamburger Menu for Mobile */}
@@ -60,33 +56,14 @@ const Navbar = () => {
         {/* Navbar Links */}
         <ul className={`navbar-links ${isMobileMenuOpen ? "active" : ""}`}>
           <li className="navbar-item dropdown">
-            {/* <span className="dropdown-toggle" onClick={toggleDropdown}>
-              Platform <i className="arrow-down"></i>
-            </span>
-            <ul className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}>
-              <li>
-                <a href="/platform/feature1">Feature 1</a>
-              </li>
-              <li>
-                <a href="/platform/feature2">Feature 2</a>
-              </li>
-              <li>
-                <a href="/platform/feature3">Feature 3</a>
-              </li>
-            </ul> */}
-            <a href={ROUTES.services.path}>Services</a>
+            <Link to={ROUTES.services.path}>Services</Link>
           </li>
           <li className="navbar-item">
-            <a href={ROUTES.docsGettingStarted.path}>Docs</a>
+            <Link to={ROUTES.docsGettingStarted.path}>Docs</Link>
           </li>
-          {/* <li className="navbar-item">
-            <a href="/resources">Resources</a>
-          </li>
+
           <li className="navbar-item">
-            <a href="/pricing">Pricing</a>
-          </li> */}
-          <li className="navbar-item">
-            <a href="/contact-us">Contact Us</a>
+            <Link to="/contact-us">Contact Us</Link>
           </li>
         </ul>
 

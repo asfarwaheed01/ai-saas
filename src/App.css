@@ -11,7 +11,7 @@ body {
   background-size: cover;
   background-position: center;
   /* height: 150vh; */
-  height:auto;
+  height: auto;
   width: 100%;
 }
 
@@ -22,7 +22,7 @@ body {
   margin-right: auto;
 }
 
-.heading-xlarge{
+.heading-xlarge {
   font-weight: 500px;
   font-size: clamp(40px, 7vw, 80px);
   margin-top: 0px;
@@ -31,7 +31,7 @@ body {
 }
 
 .text-highlight-gradient {
-  background-image: linear-gradient(90deg, #6366f1, #4f46e5 50%, #4338ca); 
+  background-image: linear-gradient(90deg, #6366f1, #4f46e5 50%, #4338ca);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
@@ -44,7 +44,7 @@ body {
   margin-right: auto;
 }
 
-.small-text{
+.small-text {
   /* margin-top: -50px; */
   font-size: 26px;
   text-align: center;
@@ -57,10 +57,10 @@ body {
   border: none;
   cursor: pointer;
   transition: background 0.3s ease;
-  display: inline-flex;         
-  align-items: center;          
-  justify-content: center;       
-  gap: 0.5rem;                   
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   text-align: center;
 }
 
@@ -78,7 +78,7 @@ body {
   font-weight: 600;
 }
 
-.button-center{
+.button-center {
   text-align: center;
   margin-top: -20px;
 }
@@ -104,7 +104,8 @@ section .button {
   text-align: center;
 }
 
-.slick-prev, .slick-next {
+.slick-prev,
+.slick-next {
   /* background-color: #4f46e5;
   border-radius: 50%;
   color: white;
@@ -113,10 +114,10 @@ section .button {
   display: none !important;
 }
 
-.slick-prev:hover, .slick-next:hover {
+.slick-prev:hover,
+.slick-next:hover {
   background-color: #3730a3;
 }
-
 
 /* Style for each card in the slider */
 .slider-card {
@@ -136,13 +137,13 @@ section .button {
   height: 414px;
   display: block;
   object-fit: cover;
-  transform: none; 
+  transform: none;
   border-radius: 8px !important;
 }
 
 /* Hover effect on card */
 .slider-card:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
   filter: brightness(1.2);
   z-index: 10;
   border-radius: 8px !important;
@@ -171,7 +172,7 @@ section .button {
 /* Ensure the hovered card is not blurred */
 .carousel-container .slider-card:hover {
   filter: none;
-  transform: scale(1.05); 
+  transform: scale(1.05);
   border-radius: 8px !important;
 }
 
@@ -180,15 +181,15 @@ section .button {
   margin: 0 -10px;
 }
 
-.slick-track{
-  height:320px !important;
+.slick-track {
+  height: 320px !important;
 }
 
 .slick-slide {
   padding: 0 10px; /* Gap between cards */
 }
 
-.slider-space{
+.slider-space {
   margin-top: 70px;
 }
 
@@ -245,7 +246,7 @@ section .button {
 }
 
 .navbar-item a {
-  color: gray;
+  color: black;
   text-decoration: none;
   font-size: 1.05rem;
   font-weight: 500;
@@ -436,7 +437,7 @@ section .button {
   .navbar-right {
     display: none;
     position: absolute;
-    top:271px;
+    top: 271px;
     top: calc(100% + 5 reproducedrem);
     left: 0;
     width: 100%;
@@ -477,7 +478,7 @@ section .button {
   width: 100%;
 }
 
-.heading-xlarge-section2{
+.heading-xlarge-section2 {
   font-weight: 500px;
   font-size: clamp(2rem, 5vw, 4.063rem);
   margin-top: 0px;
@@ -496,7 +497,7 @@ section .button {
   color: #4f46e5;
 }
 
-.extra-small-text{
+.extra-small-text {
   /* margin-top: -50px; */
   font-size: clamp(16px, 2.8vw, 23px);
   text-align: center;
@@ -510,7 +511,7 @@ section .button {
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 20px 0;
-  border-bottom-right-radius: 100px!important;
+  border-bottom-right-radius: 100px !important;
   min-height: 300px;
 }
 
@@ -538,7 +539,7 @@ section .button {
   width: 100%;
   height: auto;
   border-radius: 16px;
-  border-bottom-right-radius: 100px!important;
+  border-bottom-right-radius: 100px !important;
   overflow: hidden;
   position: relative;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -559,7 +560,11 @@ section .button {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.1)
+  );
   z-index: 1;
   border-radius: 16px;
 }
@@ -572,7 +577,7 @@ section .button {
   position: relative;
   z-index: 0;
   border-radius: 16px;
-  border-bottom-right-radius: 100px!important;
+  border-bottom-right-radius: 100px !important;
 }
 
 /* Content Area */
@@ -644,7 +649,6 @@ section .button {
   list-style: none;
   padding: 0;
   margin-top: 30px;
-  
 }
 
 .card-bullets li {
@@ -664,7 +668,6 @@ section .button {
   align-items: center;
 }
 
-
 .container-xlarge {
   width: 95%;
   max-width: 105rem;
@@ -681,17 +684,17 @@ section .button {
   font-weight: 600;
   background-color: #e4e3f5;
   color: #4f46e5;
-  align-self: flex-start; 
+  align-self: flex-start;
   border: none;
 }
 
-.card-content h3{
+.card-content h3 {
   font-size: clamp(24px, 4vw, 39px);
   margin-bottom: 15px;
   color: #333;
 }
 
-.feature-button{
+.feature-button {
   margin-top: 150px;
   border: none;
 }
@@ -700,7 +703,7 @@ section .button {
   position: relative;
   padding-bottom: 50px;
   width: 100%;
-  z-index: 0; 
+  z-index: 0;
   overflow: hidden;
 }
 
@@ -732,7 +735,7 @@ section .button {
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
-.card-top-icon{
+.card-top-icon {
   font-size: 30px;
 }
 
@@ -754,7 +757,7 @@ section .button {
   border-bottom-right-radius: 100px;
 }
 
-.ex-small-text{
+.ex-small-text {
   margin-top: -50px;
   font-size: 23px;
   text-align: center;
@@ -762,7 +765,7 @@ section .button {
   color: white;
 }
 
-.heading-xlarge-section4{
+.heading-xlarge-section4 {
   font-weight: 500px;
   font-size: clamp(2rem, 5vw, 4.063rem);
   margin-top: 0px;
@@ -820,13 +823,13 @@ section .button {
     padding: 30px;
     gap: 30px;
   }
-  
+
   .content-column,
   .image-column {
     width: 100% !important;
     padding-right: 0;
   }
-  
+
   .image-column img {
     border-bottom-right-radius: 50px !important;
     max-height: 400px;
@@ -837,23 +840,23 @@ section .button {
   .two-column-layout {
     /* padding: 20px;  */
   }
-  
+
   .image-column img {
     border-width: 5px;
     border-bottom-right-radius: 30px !important;
   }
-  
+
   .paragraph-heading {
     font-size: 16px;
   }
-  
+
   .paragraph-description {
     font-size: 14px;
   }
 }
 
-.space-top{
-  margin-top: 100px;;
+.space-top {
+  margin-top: 100px;
 }
 
 /* Two Column Layout */
@@ -885,21 +888,20 @@ section .button {
     flex-direction: column;
     gap: 20px;
   }
-  
+
   .column-left,
   .column-right {
     width: 100%;
   }
-  
+
   .column-heading {
     font-size: 1.5rem;
   }
 }
 
-.button-sec4{
+.button-sec4 {
   margin-top: 0px !important;
 }
-
 
 /* Card Grid Layout */
 .quad-card-grid {
@@ -913,13 +915,13 @@ section .button {
   border: 1px solid #e2e8f0;
   border-bottom-right-radius: 50px;
   padding: 30px;
-  background: #F5F8FF;
+  background: #f5f8ff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature-card-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* Card Content */
@@ -969,47 +971,45 @@ section .button {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .feature-card-item {
     border-bottom-right-radius: 30px;
     padding: 25px;
   }
-  
+
   .space-section-top {
     margin-top: 40px;
   }
-  
+
   .icon-title-row {
     gap: 10px;
   }
-  
+
   .card-icon-box {
     font-size: 1.6rem;
   }
-  
+
   .card-title-text {
     font-size: 1.2rem;
   }
 }
 
-.conatiner-xsm{
+.conatiner-xsm {
   width: 63%;
   max-width: 105rem;
   padding-top: 50px;
-
 }
 
-.heading-xlarge-section5{
+.heading-xlarge-section5 {
   font-weight: 500px;
   font-size: clamp(2rem, 5vw, 4.063rem);
   margin-top: 0px;
   padding-top: 20px;
-  }
-
+}
 
 /* Card Styling */
 .slider-2-card {
-  background: #F5F8FF;
+  background: #f5f8ff;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1048,8 +1048,7 @@ section .button {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  height: 100%; 
-
+  height: 100%;
 }
 
 .slider-2-title {
@@ -1069,7 +1068,7 @@ section .button {
 /* Button Styling */
 .slider-2-btn {
   background-color: transparent !important;
-  color: #6265F0 !important;
+  color: #6265f0 !important;
   border: none;
   padding: 10px 15px;
   border-radius: 4px;
@@ -1096,26 +1095,25 @@ section .button {
   }
 
   .slider-2-content {
-   padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  height: 100%; 
-  }  
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+  }
 
-  .conatiner-xsm{
+  .conatiner-xsm {
     width: 100%;
     max-width: 105rem;
     padding-top: 50px;
-  
   }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {
   .slider-2-card {
-    background: #F5F8FF;
+    background: #f5f8ff;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
