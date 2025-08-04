@@ -2,6 +2,7 @@ export const ROUTES = {
   home: { path: "/", name: "Home" },
   login: { path: "/login", name: "Login" },
   services: { path: "/services", name: "Services" },
+  dashboard: { path: "/dashboard", name: "Dashboard" },
   contact: { path: "/contact-us", name: "Contact Us" },
   docs: { path: "/docs", name: "Documents" },
   avatars: { path: "/avatars", name: "Avatars" },

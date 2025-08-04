@@ -3,7 +3,9 @@ import { ROUTES } from "../routes/routes";
 import Logo from "../image/logo.jpeg";
 import "../pages/NotFound/NotFound.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../providers/AuthContext";
 const Navbar = () => {
+  const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -33,7 +35,7 @@ const Navbar = () => {
   };
 
   const handleClick = () => {
-    navigate(ROUTES.docsGettingStarted.path);
+    navigate(ROUTES.login.path);
   };
 
   return (
@@ -69,9 +71,26 @@ const Navbar = () => {
 
         {/* Right Side */}
         <div className={`navbar-right ${isMobileMenuOpen ? "active" : ""}`}>
-          <button className="navbar-button" onClick={handleClick}>
-            Get started <i className="arrow-right">➔</i>
-          </button>
+          {isAuthenticated ? (
+            <div className="user-info">
+              <span className="user-name">{user?.name || user?.email}</span>
+              <div className="user-avatar">
+                {user?.avatar ? (
+                  <img src={user.avatar} alt="User avatar" />
+                ) : (
+                  <div className="avatar-placeholder">
+                    {user?.name
+                      ? user.name.charAt(0).toUpperCase()
+                      : user?.email?.charAt(0).toUpperCase()}
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <button className="navbar-button" onClick={handleClick}>
+              Get started <i className="arrow-right">➔</i>
+            </button>
+          )}
         </div>
       </div>
     </nav>
