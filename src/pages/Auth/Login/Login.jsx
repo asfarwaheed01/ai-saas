@@ -66,7 +66,7 @@ const Login = () => {
           setFormData({ username: "", email: "", password: "" });
 
           // Redirect to home page
-          navigate("/");
+          navigate("/dashboard");
         } else {
           throw new Error(
             loginResult.error || "Failed to save authentication data"

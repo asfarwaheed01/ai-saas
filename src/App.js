@@ -21,6 +21,11 @@ import GetActiveSubscription from "./pages/Documents/GetActiveSubscription/GetAc
 import Services from "./pages/Services/Services";
 import Avatars from "./pages/Avatars/Avatars";
 import Login from "./pages/Auth/Login/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import DashboardLayout from "./layout/DashboardLayout";
+import OrganizationContext from "./pages/OrganizationContext/OrganizationContext";
+import Apikeys from "./pages/ApiKeys/Apikeys";
+import PricingPlans from "./pages/PricingPlans/PricingPlans";
 
 function App() {
   return (
@@ -56,6 +61,14 @@ function App() {
         element={
           <MainLayout>
             <Services />
+          </MainLayout>
+        }
+      />
+      <Route
+        path={ROUTES.pricing.path}
+        element={
+          <MainLayout>
+            <PricingPlans />
           </MainLayout>
         }
       />
@@ -165,6 +178,31 @@ function App() {
           <DocsLayout>
             <GetActiveSubscription />
           </DocsLayout>
+        }
+      />
+      {/* Dashboard Routes */}
+      <Route
+        path={ROUTES.dashboard.path}
+        element={
+          <DashboardLayout>
+            <Dashboard />
+          </DashboardLayout>
+        }
+      />
+      <Route
+        path={ROUTES.organization.path}
+        element={
+          <DashboardLayout>
+            <OrganizationContext />
+          </DashboardLayout>
+        }
+      />
+      <Route
+        path={ROUTES.apiKeys.path}
+        element={
+          <DashboardLayout>
+            <Apikeys />
+          </DashboardLayout>
         }
       />
       {/* Fallback route */}

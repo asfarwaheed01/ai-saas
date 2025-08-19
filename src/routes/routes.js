@@ -2,7 +2,6 @@ export const ROUTES = {
   home: { path: "/", name: "Home" },
   login: { path: "/login", name: "Login" },
   services: { path: "/services", name: "Services" },
-  dashboard: { path: "/dashboard", name: "Dashboard" },
   contact: { path: "/contact-us", name: "Contact Us" },
   docs: { path: "/docs", name: "Documents" },
   avatars: { path: "/avatars", name: "Avatars" },
@@ -67,4 +66,12 @@ export const ROUTES = {
     path: "/docs/payments/active-subscription",
     name: "Active Subscription",
   },
+  pricing: {
+    path: "/pricing-plans",
+    name: "Pricing Plans",
+  },
+  // Dashboard routes
+  dashboard: { path: "/dashboard", name: "Dashboard" },
+  organization: { path: "/dashboard/organization", name: "Organization" },
+  apiKeys: { path: "/dashboard/api-keys", name: "API Keys" },
 };
