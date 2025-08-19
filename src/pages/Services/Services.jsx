@@ -6,6 +6,8 @@ import {
   FaChartLine,
   FaShieldAlt,
   FaHeadset,
+  FaDownload,
+  FaExternalLinkAlt,
 } from "react-icons/fa";
 import "./Services.css";
 import { useNavigate } from "react-router-dom";
@@ -98,6 +100,13 @@ const Services = () => {
     },
   ];
 
+  const handleDownloadPlugin = () => {
+    window.open(
+      "https://drive.google.com/drive/folders/1I3Cg35SUA4EaB8LeBnirApIDBsc-w9ep",
+      "_blank"
+    );
+  };
+
   return (
     <div className="services-page">
       <div className="services-header">
@@ -122,6 +131,88 @@ const Services = () => {
             <button className="service-button">Learn More</button>
           </div>
         ))}
+      </div>
+
+      <div className="desktop-app-section">
+        <div className="desktop-app-container">
+          <div className="desktop-app-header">
+            <div className="desktop-app-icon">
+              <FaDownload />
+            </div>
+            <h2>Desktop Application</h2>
+            <p>
+              Download our powerful desktop application for seamless AI
+              integration
+            </p>
+          </div>
+
+          <div className="desktop-app-content">
+            <div className="app-info">
+              <div className="app-feature">
+                <FaRobot className="feature-icon" />
+                <div className="feature-content">
+                  <h3>AI-Powered Desktop Client</h3>
+                  <p>
+                    Full-featured desktop application with advanced AI
+                    capabilities and local processing power.
+                  </p>
+                </div>
+              </div>
+
+              <div className="app-feature">
+                <FaShieldAlt className="feature-icon" />
+                <div className="feature-content">
+                  <h3>Secure & Private</h3>
+                  <p>
+                    Enhanced security with local data processing and encrypted
+                    communications.
+                  </p>
+                </div>
+              </div>
+
+              <div className="app-feature">
+                <FaChartLine className="feature-icon" />
+                <div className="feature-content">
+                  <h3>Advanced Features</h3>
+                  <p>
+                    Access to premium features, offline capabilities, and
+                    enhanced performance.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="app-download">
+              <div className="download-card">
+                <div className="download-header">
+                  <FaDownload className="download-icon" />
+                  <h3>Download Desktop App</h3>
+                </div>
+                <p>Get access to our complete desktop application package:</p>
+                <ul className="download-features">
+                  <li>Windows Desktop Application</li>
+                  <li>macOS Desktop Application</li>
+                  <li>Installation Guides & Documentation</li>
+                  <li>Configuration & Setup Files</li>
+                </ul>
+                <button
+                  className="download-button"
+                  onClick={handleDownloadPlugin}
+                >
+                  <FaDownload />
+                  Download Desktop App
+                  <FaExternalLinkAlt className="external-icon" />
+                </button>
+                <p className="download-note">
+                  <small>
+                    Access our Google Drive folder with all desktop app
+                    resources
+                  </small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="services-cta">
