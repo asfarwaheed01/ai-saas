@@ -69,7 +69,7 @@ const Navbar = () => {
           </li>
 
           <li className="navbar-item">
-            <Link to="/pricing-plans">Pricing Plans</Link>
+            <a href="https://web.todopharma.com/pricing">Pricing Plans</a>
           </li>
         </ul>
 
