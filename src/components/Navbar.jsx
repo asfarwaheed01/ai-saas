@@ -82,7 +82,7 @@ const Navbar = () => {
                 {user?.avatar ? (
                   <img src={user.avatar} alt="User avatar" />
                 ) : (
-                  <div className="avatar-placeholder">
+                  <div className="avatar-placeholder-navbar">
                     {user?.name
                       ? user.name.charAt(0).toUpperCase()
                       : user?.email?.charAt(0).toUpperCase()}
