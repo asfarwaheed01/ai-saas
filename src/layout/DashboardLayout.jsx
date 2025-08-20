@@ -9,6 +9,7 @@ import {
   HiLogout,
 } from "react-icons/hi";
 import "./DashboardLayout.css";
+import Logo from "../assets/logo.jpeg";
 import { ROUTES } from "../routes/routes.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../providers/AuthContext.jsx";
@@ -88,7 +89,7 @@ const DashboardLayout = ({ children }) => {
         }`}
       >
         <div className="dashboard-sidebar-header">
-          <img src="/images/logo.jpeg" alt="Logo" className="dashboard-logo" />
+          <img src={Logo} alt="Logo" className="dashboard-logo" />
           <button
             onClick={() => setSidebarOpen(false)}
             className="dashboard-close-btn"
