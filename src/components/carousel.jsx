@@ -2,12 +2,7 @@ import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import Test from "../image/test.jpg";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import Image1 from "../image/1.jpeg";
-import Image2 from "../image/2.jpeg";
-import Image3 from "../image/3.jpeg";
-import Image4 from "../image/4.jpeg";
 
 const Slider2 = () => {
   const settings = {
@@ -42,7 +37,7 @@ const Slider2 = () => {
   const cardData = [
     {
       id: 1,
-      image: Image1,
+      image: "/images/1.jpeg",
       title: (
         <>
           <span className="text-highlight-gradient">
@@ -56,7 +51,7 @@ const Slider2 = () => {
     },
     {
       id: 2,
-      image: Image2,
+      image: "/images/2.jpeg",
       title: (
         <>
           Corporate{" "}
@@ -69,7 +64,7 @@ const Slider2 = () => {
     },
     {
       id: 3,
-      image: Image3,
+      image: "/images/3.jpeg",
       title: (
         <>
           Replace <span className="slider-2-gradient-text">dull content</span>{" "}
@@ -81,7 +76,7 @@ const Slider2 = () => {
     },
     {
       id: 4,
-      image: Image4,
+      image: "/images/4.jpeg",
       title: (
         <>
           No more <span className="slider-2-gradient-text">boring</span>{" "}

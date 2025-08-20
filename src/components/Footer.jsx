@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import Logo from "../image/logo.jpeg";
+// import Logo from "../../public/images/logo.jpeg";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io";
@@ -74,7 +74,7 @@ const Footer = () => {
       <section className="container-xmedium footer-section">
         {/* First Column (Logo & Description) */}
         <div className="footer-col footer-col-1">
-          <img src={Logo} alt="Logo" className="footer-logo" />
+          <img src="/images/logo.jpeg" alt="Logo" className="footer-logo" />
           <p>
             Our platform helps you convert knowledge into intelligent video
             experiences.

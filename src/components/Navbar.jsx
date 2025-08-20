@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { ROUTES } from "../routes/routes";
-import Logo from "../image/logo.jpeg";
 import "../pages/NotFound/NotFound.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../providers/AuthContext";
@@ -44,7 +43,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="navbar-logo">
           <Link to="/">
-            <img src={Logo} alt="logo" className="logo-navbar" />
+            <img src="/images/logo.jpeg" alt="logo" className="logo-navbar" />
           </Link>
         </div>
 

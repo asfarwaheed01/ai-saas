@@ -2,10 +2,6 @@ import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import Image1 from "../image/1.jpeg";
-import Image2 from "../image/2.jpeg";
-import Image3 from "../image/3.jpeg";
-import Image4 from "../image/4.jpeg";
 
 const slider = () => {
   const settings = {
@@ -39,16 +35,16 @@ const slider = () => {
     <div className="carousel-container">
       <Slider {...settings}>
         <div className="slider-card">
-          <img src={Image1} alt="Slide 1" />
+          <img src="/images/1.jpeg" alt="Slide 1" />
         </div>
         <div className="slider-card">
-          <img src={Image2} alt="Slide 2" />
+          <img src="/images/2.jpeg" alt="Slide 2" />
         </div>
         <div className="slider-card">
-          <img src={Image3} alt="Slide 3" />
+          <img src="/images/3.jpeg" alt="Slide 3" />
         </div>
         <div className="slider-card">
-          <img src={Image4} alt="Slide 4" />
+          <img src="/images/1.jpeg" alt="Slide 4" />
         </div>
       </Slider>
     </div>
