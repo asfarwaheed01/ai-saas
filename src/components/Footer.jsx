@@ -74,7 +74,7 @@ const Footer = () => {
       <section className="container-xmedium footer-section">
         {/* First Column (Logo & Description) */}
         <div className="footer-col footer-col-1">
-          <img src="/images/logo.jpeg" alt="Logo" className="footer-logo" />
+          <img src="/images/logo.png" alt="Logo" className="footer-logo" />
           <p>
             Our platform helps you convert knowledge into intelligent video
             experiences.
@@ -98,7 +98,7 @@ const Footer = () => {
       <section className="container-xmedium">
         <hr></hr>
         <div className="footer-end">
-          <div>2025 Synthesia Limited. All rights reserved.</div>
+          <div>2025 Todo Ai. All rights reserved.</div>
           <div className="icons-gap">
             <FaSquareXTwitter />
             <FaLinkedin />
