@@ -18,15 +18,19 @@ const HomePage = () => {
         <div className="background">
           <div className="container-medium">
             <h1 className="heading-xlarge">
-              Create studio-quality videos with realistic talking{" "}
-              <span className="text-highlight-gradient">AI avatars.</span>
+              Artificial Intelligence Redefining the Future of{" "}
+              <span className="text-highlight-gradient">Health</span>,{" "}
+              <span className="text-highlight-gradient">Beauty </span>
+              and <span className="text-highlight-gradient">Wellness</span>
+              {/* Create studio-quality videos with realistic talking{" "}
+              <span className="text-highlight-gradient">AI avatars.</span> */}
             </h1>
           </div>
           <div className="container-small">
             <p className="small-text">
-              Try the world’s most realistic talking AI avatars for free. Turn
-              text into engaging video content for training, sales enablement,
-              and marketing in any language in minutes.
+              TODO AI is redefining health, beauty, and wellness with
+              intelligent, personalized, and empathetic solutions powered by
+              advanced artificial intelligence for global impact and growth.
             </p>
           </div>
           <div className="button-center">
@@ -50,14 +54,18 @@ const HomePage = () => {
             </button>
           </div>
           <h1 className="heading-xlarge-section2">
-            Choose the avatar that works for you
+            Redefining Customer Experience with AI Avatars
           </h1>
         </div>
         <div className="container-small">
           <p className="extra-small-text">
-            Choose from 230+ ready-to-use stock AI avatars, generate a lifelike
-            custom avatar by recording yourself with a webcam or phone, or visit
-            a certified studio for a professionally produced avatar.
+            TODO AI combines ultra-realistic avatars, advanced facial
+            recognition, and NLP-driven conversations to deliver personalized,
+            empathetic interactions. With no-code training, SaaS modules, and
+            real-time learning, businesses can easily adapt the AI to their
+            domain. From clinics and pharmacies to beauty centers, our platform
+            brings intelligent, human-like consultants to both digital and
+            physical worlds.
           </p>
         </div>
         <section className="container-xlarge">
@@ -66,83 +74,111 @@ const HomePage = () => {
             imagePosition="right"
             innerBackground="lightblue"
             imageUrl={Image1}
-            buttonLabel="EXPRESSIVE AVATARS"
-            title="Ready-to-use expressive AI avatars"
-            description="This card has image on right (60%) and content on left (40%)."
+            buttonLabel="PHARMA AI SOLUTION"
+            title="Vision"
+            description="TODO AI is the world’s first platform offering intelligent, empathetic, and professional advice in the beauty, pharma, and medical sectors."
             bullets={[
               {
                 icon: <FaCheckCircle />,
-                text: "Choose from 230+ realistic stock AI avatars",
+                text: "Hybrid AI engine trained on vertical datasets",
               },
               {
                 icon: <FaCheckCircle />,
-                text: "Our stock AI avatars speak 140+ languages",
+                text: "Learns from the customer’s domain in real time",
               },
               {
                 icon: <FaCheckCircle />,
-                text: "Easily make engaging avatar videos with an intuitive editor",
+                text: "Delivers advice through ultra-realistic avatars",
+              },
+              {
+                icon: <FaCheckCircle />,
+                text: "Creates interactive, personalized, and autonomous experiences",
+              },
+              {
+                icon: <FaCheckCircle />,
+                text: "Meets growing demand for fast and digital user experiences",
               },
             ]}
           />
           <Card
             imageUrl={Image2}
-            title="Create a custom AI avatar of yourself"
-            buttonLabel="PERSONAL AVATARS"
-            description="This card has image on left (60%) and content on right (40%)."
+            title="Proprietary Technology"
+            buttonLabel="AI POWERED ENGINE"
+            description="TODO AI is a modular system built on mixed cloud + local infrastructure, integrating advanced AI technologies for the pharma, beauty, and medical sectors."
             bullets={[
               {
                 icon: <FaCheckCircle />,
-                text: "Record yourself with a webcam or smartphone — no studio needed",
+                text: "Facial recognition for analyzing skin, emotions, and expressions",
               },
               {
                 icon: <FaCheckCircle />,
-                text: "Record in English, German, French, or Spanish and we’ll create a copy of your voice in 29 languagest",
+                text: "Vertical machine learning models for pharma, beauty, and medical domains",
               },
               {
                 icon: <FaCheckCircle />,
-                text: "Capture your avatar standing, sitting, or walking for more dynamic videos",
+                text: "Dynamic training that learns from products, content, and user behavior",
+              },
+              {
+                icon: <FaCheckCircle />,
+                text: "Advanced NLP for natural, guided, and contextual dialogues",
+              },
+              {
+                icon: <FaCheckCircle />,
+                text: "Adaptive semantic engine evolving with GDPR-compliant data",
+              },
+              {
+                icon: <FaCheckCircle />,
+                text: "No-code dashboard for training and updating AI assistants in real time",
               },
             ]}
           />
           <Card
             imagePosition="right"
             innerBackground="lightblue"
-            buttonLabel="STUDIO AVATARS"
+            buttonLabel="SUBSCRIPTION ACCESS"
             imageUrl={Image3}
-            title="Create a studio-quality custom avatar"
-            description="This card has image on right (60%) and content on left (40%)."
+            title="SaaS Platform"
+            description="TODO AI is offered in SaaS mode with flexible monthly subscriptions, providing access to powerful modules and APIs."
             bullets={[
               {
                 icon: <FaCheckCircle />,
-                text: "Work with our team to capture your avatar in a professional studio",
+                text: "Intelligent control panel with avatar management, analytics, and training",
               },
               {
                 icon: <FaCheckCircle />,
-                text: "Get hyper-realistic visuals with natural gestures and expressions",
+                text: "Full API + SDK access for developers and system integrators",
               },
               {
                 icon: <FaCheckCircle />,
-                text: "Perfect for polished, enterprise-grade video content",
+                text: "Official plugins available for WordPress and Shopify",
+              },
+              {
+                icon: <FaCheckCircle />,
+                text: "Development kit for mobile apps (iOS/Android) and custom web apps",
               },
             ]}
           />
           <Card
             imageUrl={Image4}
-            title="Quickly create branded AI avatars at scale"
-            buttonLabel="AVATAR BUILDER"
-            description="This card has image on left (60%) and content on right (40%)."
+            title="Ultra-Realistic Virtual Avatars"
+            buttonLabel="CUSTOM AVATARS"
+            description="TODO AI’s intelligent assistants are lifelike digital avatars with natural voices, expressions, and deep contextual understanding."
             bullets={[
               {
                 icon: <FaCheckCircle />,
-                text: "Customize clothing and add logos to our stock avatars in minutes",
+                text: "Choose avatar ethnicity, age, and gender",
               },
               {
                 icon: <FaCheckCircle />,
-                text: "Keep your videos consistent and on-brand across projects",
+                text: "Customize vocabulary, tone, and communication style",
               },
               {
                 icon: <FaCheckCircle />,
-                text: "Choose from 20 customizable stock avatars",
+                text: "Select from roles like beauty expert, mental coach, pharmacist, or medical consultant",
+              },
+              {
+                icon: <FaCheckCircle />,
+                text: "Activate a personalized version with your face or brand",
               },
             ]}
           />
@@ -172,9 +208,9 @@ const HomePage = () => {
         <div className="container-xlarge">
           <Card
             imageUrl={Image1}
-            title="Create videos in minutes"
-            buttonLabel="Get Started"
-            description="Create and update avatar videos in minutes with an easy text-to-video editor, pre-built templates, and a built-in media library."
+            title="Intelligent Contextual Interaction"
+            buttonLabel="Smart Assistant"
+            description="TODO AI’s contextual engine analyzes the user’s face to detect skin type, visible signs, and imperfections, then suggests personalized products such as skincare, medical solutions, or supplements. By understanding habits and preferences through natural dialogue, the assistant accompanies users throughout the entire purchasing journey, boosting both satisfaction and conversion. Every interaction is processed by the NLP engine to continuously optimize responses, improve performance, and fine-tune the assistant’s tone."
             topIcon={<FaCheckCircle />}
             variant="description"
             innerBackground="lightblue"
@@ -182,18 +218,18 @@ const HomePage = () => {
           <Card
             imageUrl={Image2}
             imagePosition="right"
-            title="Speak your audience’s language"
-            buttonLabel="See all languages"
-            description="Connect with global audiences—our talking avatars can deliver your message in over 140 languages and accents."
+            title="AI Avatars in the Physical World"
+            buttonLabel="REAL USE CASES"
+            description="TODO AI extends beyond digital platforms into the physical world. Our avatars can be installed in stores, pharmacies, clinics, and beauty centers through interactive life-size totems powered by Unreal Engine 5, or on Windows/Mac screens with touch and voice interaction. Local licenses also support fully offline and protected solutions. Real-world use cases include hospitals and clinics, where the Medical Consultant guides patients through facilities; pharmacies, where the Pharmacist Consultant assists with product recommendations; and beauty centers or spas, where the Beauty Consultant welcomes customers and suggests tailored treatments."
             topIcon={<FaCheckCircle />}
             variant="description"
             innerBackground="pink"
           />
           <Card
             imageUrl={Image3}
-            title="Create videos in minutes"
-            buttonLabel="Get Started"
-            description="Create and update avatar videos in minutes with an easy text-to-video editor, pre-built templates, and a built-in media library."
+            title="No-Code Personalized Training"
+            buttonLabel="TRAIN YOUR AI"
+            description="At the core of TODO AI’s flexibility is a powerful no-code training dashboard that makes personalization simple and accessible. Businesses can paste texts, upload descriptions, or import relevant information, and the system automatically generates a structured dataset that adapts to their specific domain. Content can be organized by topic, category, or priority, while the AI continuously learns and fine-tunes responses to match the company’s language, customers, and market. For premium users, we even enable the creation of a fully personalized avatar that replicates the professional’s own face and voice."
             topIcon={<FaCheckCircle />}
             variant="description"
             innerBackground="lightblue"
@@ -215,8 +251,8 @@ const HomePage = () => {
           </h1>
           <div className="container-small">
             <p className="ex-small-text">
-              Here's how to generate an AI-generated talking avatar that looks
-              and sounds just like you.
+              Here’s how to generate a lifelike digital assistant tailored to
+              you or your brand.
             </p>
           </div>
 
@@ -231,24 +267,24 @@ const HomePage = () => {
             >
               {[
                 {
-                  heading: "Upload Your Photo",
+                  heading: "Choose Your Avatar",
                   description:
-                    "Start by uploading a clear, well-lit headshot of yourself. The AI works best with high-quality images where your face is clearly visible.",
+                    "Select the ethnicity, age, gender, and role of your avatar — from beauty expert and medical consultant to mental coach or pharmacist.",
                 },
                 {
-                  heading: "Customize Your Avatar",
+                  heading: "Customize Style & Personality",
                   description:
-                    "Choose from various styles and customization options. Adjust facial features, hairstyle, and other attributes to match your preferences.",
+                    "Define vocabulary, tone, and communication style. Adjust how your avatar looks, sounds, and interacts for a truly personalized experience.",
                 },
                 {
-                  heading: "Record Your Voice",
+                  heading: "Train With Your Content",
                   description:
-                    "Provide voice samples by reading short texts. Our AI will analyze your speech patterns to create a natural-sounding voice clone.",
+                    "Use the no-code dashboard to upload texts, descriptions, or business information. The system automatically creates a dataset and adapts to your language and market.",
                 },
                 {
-                  heading: "Generate & Download",
+                  heading: "Activate Your Avatar",
                   description:
-                    "Our system will process your inputs and generate your personalized AI avatar. Download it in your preferred format when ready.",
+                    "Deploy your personalized AI assistant with your own face, your brand, or a custom identity — ready to engage users in real time.",
                 },
               ].map((step, index) => (
                 <div key={index} style={{ marginBottom: "30px" }}>
@@ -306,8 +342,9 @@ const HomePage = () => {
           {/* Second Column - Description + Button */}
           <div className="column-right">
             <p className="column-description">
-              People first, always. Since 2017, we've prioritized secure, safe
-              and ethical use of Artificial Intelligence.
+              People first, always. TODO AI is designed for secure, ethical, and
+              GDPR-compliant use of artificial intelligence in health, beauty,
+              and wellness.
             </p>
             <button className="button button-medium button-sec4">
               <span className="button-text">Learn more</span>
@@ -324,11 +361,11 @@ const HomePage = () => {
             <div className="card-content-wrapper">
               <div className="icon-title-row">
                 <div className="card-icon-box">📊</div>
-                <h3 className="card-title-text">Analytics</h3>
+                <h3 className="card-title-text">Control Panel</h3>
               </div>
               <p className="card-desc-text">
-                Track and analyze your performance with our advanced analytics
-                dashboard.
+                Manage avatars, training, and analytics through an intelligent
+                dashboard
               </p>
             </div>
           </div>
@@ -338,10 +375,11 @@ const HomePage = () => {
             <div className="card-content-wrapper">
               <div className="icon-title-row">
                 <div className="card-icon-box">⚙️</div>
-                <h3 className="card-title-text">Automation</h3>
+                <h3 className="card-title-text">No-Code Training</h3>
               </div>
               <p className="card-desc-text">
-                Streamline workflows with powerful automation tools.
+                Easily customize vocabulary, tone, and datasets without
+                technical skills.
               </p>
             </div>
           </div>
@@ -351,10 +389,11 @@ const HomePage = () => {
             <div className="card-content-wrapper">
               <div className="icon-title-row">
                 <div className="card-icon-box">🔒</div>
-                <h3 className="card-title-text">Security</h3>
+                <h3 className="card-title-text">Security & Compliance</h3>
               </div>
               <p className="card-desc-text">
-                Enterprise-grade security to protect your data.
+                Hybrid cloud + local infrastructure with enterprise-grade data
+                protection.
               </p>
             </div>
           </div>
@@ -364,10 +403,11 @@ const HomePage = () => {
             <div className="card-content-wrapper">
               <div className="icon-title-row">
                 <div className="card-icon-box">🌐</div>
-                <h3 className="card-title-text">Integration</h3>
+                <h3 className="card-title-text">Integrations</h3>
               </div>
               <p className="card-desc-text">
-                Connect with all your favorite tools and services.
+                Seamlessly connect with WordPress, Shopify, mobile apps, and
+                custom platforms.
               </p>
             </div>
           </div>
@@ -379,8 +419,8 @@ const HomePage = () => {
             <span className="button-text">USE CASES</span>
           </button>
           <h1 className="heading-xlarge-section5">
-            50,000+ teams use our AI avatars to save time, cut costs, and boost
-            engagement
+            Hospitals, pharmacies, and beauty centers use TODO AI to
+            boost engagement and deliver personalized care.
           </h1>
         </div>
       </section>

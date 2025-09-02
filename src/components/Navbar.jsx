@@ -95,7 +95,8 @@ const Navbar = () => {
           </li>
           <li className="navbar-item">
             <a
-              href="https://web.todopharma.com/pricing"
+              // href="https://web.todopharma.com/pricing"
+              href="/pricing-plans"
               onClick={closeMobileMenu}
             >
               Pricing Plans
