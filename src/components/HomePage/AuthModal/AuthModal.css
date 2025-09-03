@@ -109,7 +109,7 @@
 
 .form-input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: #05b1bd;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -136,7 +136,7 @@
 .auth-submit-btn {
   width: 100%;
   padding: 16px 24px;
-  background: #3b82f6;
+  background: #05b1bd;
   color: white;
   border: none;
   border-radius: 8px;
@@ -191,7 +191,7 @@
 .auth-toggle-btn {
   background: none;
   border: none;
-  color: #3b82f6;
+  color: #05b1bd;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -200,7 +200,7 @@
 }
 
 .auth-toggle-btn:hover:not(:disabled) {
-  color: #2563eb;
+  color: #05b1bd;
 }
 
 .auth-toggle-btn:disabled {

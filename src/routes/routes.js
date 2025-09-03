@@ -74,4 +74,10 @@ export const ROUTES = {
   dashboard: { path: "/dashboard", name: "Dashboard" },
   organization: { path: "/dashboard/organization", name: "Organization" },
   apiKeys: { path: "/dashboard/api-keys", name: "API Keys" },
+
+  //Footer Routes
+  certificate: {
+    path: "/informativa_privacy",
+    name: "Co-financed by the eurpeion union",
+  },
 };

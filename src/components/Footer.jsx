@@ -4,70 +4,37 @@ import "./Footer.css";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  // const columnData = [
-  //   {
-  //     heading: "Company",
-  //     items: [
-  //       "About Us",
-  //       "Careers",
-  //       "Blog",
-  //       "Press",
-  //       "Partners",
-  //       "Team",
-  //       "Mission",
-  //       "Vision",
-  //       "Values",
-  //       "Legal",
-  //     ],
-  //   },
-  //   {
-  //     heading: "Resources",
-  //     items: [
-  //       "Documentation",
-  //       "Tutorials",
-  //       "Community",
-  //       "Events",
-  //       "Webinars",
-  //       "Newsletters",
-  //       "Podcasts",
-  //       "Guides",
-  //       "Reports",
-  //       "Updates",
-  //     ],
-  //   },
-  //   {
-  //     heading: "Support",
-  //     items: [
-  //       "Contact Support",
-  //       "FAQs",
-  //       "Live Chat",
-  //       "System Status",
-  //       "Feedback",
-  //       "Help Center",
-  //       "Tickets",
-  //       "Account Recovery",
-  //       "Refunds",
-  //       "Terms",
-  //     ],
-  //   },
-  //   {
-  //     heading: "Product",
-  //     items: [
-  //       "Features",
-  //       "Integrations",
-  //       "Pricing",
-  //       "Demos",
-  //       "Roadmap",
-  //       "API Access",
-  //       "Use Cases",
-  //       "Solutions",
-  //       "What's New",
-  //       "Security",
-  //     ],
-  //   },
-  // ];
+  const columnData = [
+    {
+      heading: "Navigation",
+      items: [
+        { label: "Services", url: "/services" },
+        { label: "Docs", url: "/docs/getting-started" },
+        { label: "Contact Us", url: "/contact-us" },
+        { label: "Pricing Plans", url: "/pricing-plans" },
+      ],
+    },
+    {
+      heading: "Support",
+      items: [
+        {
+          label: "Co-financed by the European Union",
+          url: "/informativa_privacy",
+        },
+        { label: "Terms & Conditions", url: "#" },
+      ],
+    },
+    {
+      heading: "TODO AI",
+      items: [
+        { label: "VAT number: 09781131215", url: "#" },
+        { label: "support@todopharma.it", url: "mailto:support@todopharma.it" },
+      ],
+    },
+  ];
 
   return (
     <div className="footer-background">
@@ -86,18 +53,18 @@ const Footer = () => {
         </div>
 
         {/* Other Columns */}
-        {/* {columnData.map((col, index) => (
+        {columnData.map((col, index) => (
           <div className="footer-col footer-col-other" key={index}>
             <h4>{col.heading}</h4>
             <ul>
               {col.items.map((item, idx) => (
                 <li key={idx}>
-                  <a href="#">{item}</a>
+                  <Link to={item.url}>{item.label}</Link>
                 </li>
               ))}
             </ul>
           </div>
-        ))} */}
+        ))}
       </section>
       <section className="container-xmedium">
         <hr></hr>

@@ -27,7 +27,7 @@
   font-weight: 700;
   color: #1e293b;
   margin: 0 0 0.5rem 0;
-  background: linear-gradient(135deg, #1e293b, #3b82f6);
+  background: linear-gradient(135deg, #1e293b, #036a71);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -68,7 +68,8 @@
 }
 
 .apikeys-btn-primary {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  /* background: linear-gradient(135deg, #3b82f6, #1d4ed8); */
+  background: linear-gradient(135deg, #05b1bd 0%, #036a71 100%);
   color: white;
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
@@ -338,7 +339,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid #e2e8f0;
-  border-top: 3px solid #3b82f6;
+  border-top: 3px solid #05b1bd;
   border-radius: 50%;
   animation: apikeysSpin 1s linear infinite;
 }

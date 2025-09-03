@@ -230,7 +230,7 @@ section .button {
 }
 
 .logo-icon {
-  color: #0052cc;
+  color: #05b1bd;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -354,7 +354,7 @@ section .button {
 }
 
 .navbar-button {
-  background-color: #0052cc;
+  background-color: #05b1bd;
   color: white;
   border: none;
   border-radius: 4px;
@@ -369,7 +369,7 @@ section .button {
 }
 
 .navbar-button:hover {
-  background-color: #05b1bd;
+  background-color: #036A71;
 }
 
 .arrow-right {

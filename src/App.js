@@ -27,6 +27,7 @@ import OrganizationContext from "./pages/OrganizationContext/OrganizationContext
 import Apikeys from "./pages/ApiKeys/Apikeys";
 import PricingPlans from "./pages/PricingPlans/PricingPlans";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import Certificate from "./pages/Certificate/Certificate";
 
 function App() {
   return (
@@ -72,6 +73,14 @@ function App() {
           element={
             <MainLayout>
               <PricingPlans />
+            </MainLayout>
+          }
+        />
+        <Route
+          path={ROUTES.certificate.path}
+          element={
+            <MainLayout>
+              <Certificate />
             </MainLayout>
           }
         />
@@ -208,6 +217,7 @@ function App() {
             </DashboardLayout>
           }
         />
+
         {/* Fallback route */}
         <Route path="*" element={<NotFound />} />
       </Routes>

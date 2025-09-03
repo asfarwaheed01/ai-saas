@@ -52,7 +52,7 @@
 .footer-col h4 {
   margin-bottom: 1rem;
   font-size: 1.2rem;
-  color: #3e57da;
+  color: white;
 }
 
 .footer-col ul {
@@ -74,7 +74,7 @@
 }
 
 .footer-col a:hover {
-  color: #3e57da;
+  color: #a8f9ff;
 }
 
 /* Responsive */
