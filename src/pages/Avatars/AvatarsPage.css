@@ -293,9 +293,31 @@
   cursor: not-allowed;
 }
 
+.fullscreen-select {
+  padding: 8px 20px;
+  height: 56px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.fullscreen-select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.fullscreen-select option {
+  background: #000;
+  color: white;
+}
+
 .fullscreen-speak-btn {
   padding: 16px 24px;
-  background: #3b82f6;
+  background: #05b1bd;
   color: white;
   border: none;
   border-radius: 12px;
@@ -311,7 +333,7 @@
 }
 
 .fullscreen-speak-btn:hover:not(.disabled) {
-  background: #2563eb;
+  background: #05b1bd;
   transform: translateY(-2px);
 }
 

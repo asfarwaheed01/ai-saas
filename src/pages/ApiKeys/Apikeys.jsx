@@ -72,8 +72,18 @@ const Apikeys = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
+      //     const data = await response.json();
+      //     setApiKeys(Array.isArray(data) ? data : []);
+      //   } catch (err) {
+      //     console.error("Error fetching API keys:", err);
+      //     setError("Failed to load API keys. Please try again.");
+      //   } finally {
+      //     setIsLoading(false);
+      //   }
+      // }, [apiHeaders, handleUnauthorized]);
       const data = await response.json();
-      setApiKeys(Array.isArray(data) ? data : []);
+      const apiKeysArray = data.has_api_key ? [data] : [];
+      setApiKeys(apiKeysArray);
     } catch (err) {
       console.error("Error fetching API keys:", err);
       setError("Failed to load API keys. Please try again.");

@@ -421,6 +421,7 @@ const Avatars = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userToken, setUserToken] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const videoRef = useRef(null);
   const avatarRef = useRef(null);
@@ -428,6 +429,7 @@ const Avatars = () => {
   const streamRef = useRef(null);
 
   let apiKey = process.env.REACT_APP_HEYGEN_API_KEY;
+  console.log(apiKey, "API KEY");
 
   // Check authentication status on component mount
   useEffect(() => {
@@ -602,20 +604,66 @@ const Avatars = () => {
   };
 
   // Handle speaking event
-  const handleSpeak = async () => {
-    if (!avatarRef.current || !userInput.trim()) return;
+  // const handleSpeak = async () => {
+  //   if (!avatarRef.current || !userInput.trim()) return;
+
+  //   try {
+  //     setIsSpeaking(true);
+
+  //     await avatarRef.current.speak({
+  //       text: userInput.trim(),
+  //     });
+
+  //     setUserInput(""); // Clear input after speaking
+  //   } catch (error) {
+  //     console.error("Error making avatar speak:", error);
+  //     alert(`Failed to make avatar speak: ${error.message}`);
+  //   } finally {
+  //     setIsSpeaking(false);
+  //   }
+  // };
+
+  const handleSend = async () => {
+    if (!userInput.trim() || !selectedOption) {
+      alert("Please enter a message and select a domain.");
+      return;
+    }
 
     try {
-      setIsSpeaking(true);
+      // setIsSpeaking(true);
 
-      await avatarRef.current.speak({
-        text: userInput.trim(),
+      const response = await fetch(`${backendURL}/agents/generate-response/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Agar token authentication use hoti hai to yeh add karo:
+          Authorization: `Bearer ${userToken}`,
+          "X-API-Key": "pk_52f3be533702428c8d4566fa138ea4d3",
+        },
+        body: JSON.stringify({
+          text_query: userInput.trim(),
+          domain: selectedOption,
+        }),
       });
 
-      setUserInput(""); // Clear input after speaking
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("✅ API Response:", data);
+
+      // Agar tum chahte ho ke avatar bolay, to:
+      if (avatarRef.current && data.response) {
+        await avatarRef.current.speak({
+          text: data.response, // API se jo response aya
+        });
+      }
+
+      setUserInput(""); // input clear
     } catch (error) {
-      console.error("Error making avatar speak:", error);
-      alert(`Failed to make avatar speak: ${error.message}`);
+      console.error("❌ Error sending message:", error);
+      alert("Failed to send message. Check console for details.");
     } finally {
       setIsSpeaking(false);
     }
@@ -625,7 +673,8 @@ const Avatars = () => {
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSpeak();
+      // handleSpeak();
+      handleSend();
     }
   };
 
@@ -822,7 +871,27 @@ const Avatars = () => {
                 disabled={!streamReady}
                 rows={2}
               />
+              <select
+                value={selectedOption}
+                onChange={(e) => setSelectedOption(e.target.value)}
+                className="fullscreen-select"
+                disabled={!streamReady}
+              >
+                <option value="">Select option</option>
+                <option value="therapy">Therapy</option>
+                <option value="beauty">Beauty</option>
+                <option value="consultation">Consultation</option>
+                <option value="medical">Medical</option>
+              </select>
               <button
+                onClick={handleSend}
+                // disabled={!streamReady || !userInput.trim() || isSpeaking}
+                className="fullscreen-speak-btn"
+              >
+                Send
+              </button>
+
+              {/* <button
                 onClick={handleSpeak}
                 disabled={!streamReady || !userInput.trim() || isSpeaking}
                 className={`fullscreen-speak-btn ${
@@ -840,7 +909,7 @@ const Avatars = () => {
                     Speak
                   </>
                 )}
-              </button>
+              </button> */}
             </div>
 
             <button
