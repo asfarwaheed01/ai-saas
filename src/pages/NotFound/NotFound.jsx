@@ -109,7 +109,7 @@ const NotFound = () => {
               <path d="M120,100 L170,100 L170,150 L120,150 Z" fill="#f0f5fa" />
 
               {/* Code brackets decoration */}
-              <text x="30" y="120" fontSize="30" fill="#3182ce">{`{ }`}</text>
+              <text x="30" y="120" fontSize="30" fill="#05b1bd">{`{ }`}</text>
             </g>
 
             {/* Dots pattern */}

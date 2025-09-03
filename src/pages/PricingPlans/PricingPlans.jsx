@@ -86,28 +86,32 @@ const PricingPlans = () => {
       <div className="pricing-cards">
         {plans.map((plan, index) => (
           <div className="pricing-card" key={index}>
-            <h2 className="plan-name">{plan.name}</h2>
+            <div className="test">
+            <p className="plan-name">{plan.name}</p>
             <div className="plan-price">
               <span className="price">€{plan.price}</span>
               <span className="per">/MESE</span>
             </div>
+            </div>
+            <div className="pricing-card-spacing">
             <h3 className="plan-subtitle">{plan.subtitle}</h3>
             <ul className="plan-features">
               {plan.features.map((feature, idx) => (
                 <li
                   key={idx}
-                  className={feature.included ? "included" : "excluded"}
+                  className={feature.included ? "included" : "included"}
                 >
                   {feature.included ? (
                     <FaCheckCircle className="icon included-icon" />
                   ) : (
-                    <FaTimesCircle className="icon excluded-icon" />
+                    <FaTimesCircle className="icon included-icon" />
                   )}
                   {feature.text}
                 </li>
               ))}
             </ul>
             <button className="subscribe-btn">Subscribe</button>
+            </div>
           </div>
         ))}
       </div>

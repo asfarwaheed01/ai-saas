@@ -31,7 +31,9 @@ body {
 }
 
 .text-highlight-gradient {
-  background-image: linear-gradient(90deg, #6366f1, #4f46e5 50%, #4338ca);
+  /* background-image: linear-gradient(90deg, #6366f1, #4f46e5 50%, #4338ca); */
+  background-image: linear-gradient(90deg, #05b1bd, #4fd5dc);
+
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
@@ -52,7 +54,7 @@ body {
 }
 
 .button {
-  background-color: #4f46e5;
+  background-color: #05b1bd;
   color: white;
   border: none;
   cursor: pointer;
@@ -65,7 +67,7 @@ body {
 }
 
 .button:hover {
-  background-color: #3730a3;
+  background-color: #43d1db;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -254,7 +256,7 @@ section .button {
 }
 
 .navbar-item a:hover {
-  color: #0052cc;
+  color: #05b1bd;
 }
 
 /* Dropdown Menu */
@@ -367,7 +369,7 @@ section .button {
 }
 
 .navbar-button:hover {
-  background-color: #003d99;
+  background-color: #05b1bd;
 }
 
 .arrow-right {
@@ -493,8 +495,8 @@ section .button {
   font-size: 1rem;
   line-height: 1.625rem;
   font-weight: 600;
-  background-color: white;
-  color: #4f46e5;
+  background-color: #e8f7f8;
+  color: #05b1bd;
 }
 
 .extra-small-text {
@@ -662,7 +664,7 @@ section .button {
 
 .bullet-icon {
   margin-right: 10px;
-  color: #4f46e5;
+  color: #05b1bd;
   font-size: 20px;
   display: flex;
   align-items: center;
@@ -682,8 +684,8 @@ section .button {
   font-size: 1rem;
   line-height: 1.625rem;
   font-weight: 600;
-  background-color: #e4e3f5;
-  color: #4f46e5;
+  background-color: #e8f7f8;
+  color: #05b1bd;
   align-self: flex-start;
   border: none;
 }
@@ -737,6 +739,7 @@ section .button {
 
 .card-top-icon {
   font-size: 30px;
+  color: #05b1bd;
 }
 
 /* .card-description{
@@ -1123,4 +1126,12 @@ section .button {
     display: flex;
     flex-direction: column;
   }
+}
+
+.primary-color {
+  color: #05b1bd;
+}
+
+.secondary-color {
+  color: #e8f7f8;
 }

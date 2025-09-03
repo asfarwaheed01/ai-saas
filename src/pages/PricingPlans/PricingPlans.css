@@ -15,7 +15,7 @@
 .pricing-header h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #0b3b6b;
+  color: #05b1bd;
   margin-bottom: 16px;
   position: relative;
   display: inline-block;
@@ -29,20 +29,34 @@
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, #0b3b6b, #4dabf7);
+  background: linear-gradient(90deg, #05b1bd, #e8f7f8);
   border-radius: 2px;
 }
 
 .pricing-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* Desktop: 3 cards */
   gap: 20px;
+}
+
+/* Medium screens (tablet) */
+@media (max-width: 1024px) {
+  .pricing-cards {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards */
+  }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 640px) {
+  .pricing-cards {
+    grid-template-columns: 1fr; /* 1 card */
+  }
 }
 
 .pricing-card {
   background: #fff;
   border-radius: 12px;
-  padding: 30px 20px;
+  /* padding: 30px 20px; */
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease-in-out;
@@ -55,17 +69,15 @@
 .plan-name {
   font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 12px;
-  color: #0b3b6b;
-}
-
-.plan-price {
-  margin-bottom: 10px;
+  margin: 0px !important;
+  color: #05b1bd;
+  padding-top: 15px;
+  padding-bottom: 30px;
 }
 
 .plan-price .price {
-  font-size: 2.2rem;
-  font-weight: 500;
+  font-size: 2rem;
+  font-weight: 400;
   color: #222;
 }
 
@@ -100,17 +112,11 @@
   margin-right: 8px;
   font-size: 1.2rem;
 }
-
 .included-icon {
-  color: #28a745; /* green */
+  color: #05b1bd; /* green */
 }
-
-.excluded-icon {
-  color: #dc3545; /* red */
-}
-
 .subscribe-btn {
-  background: linear-gradient(90deg, #0b3b6b, #4dabf7);
+  background: #05b1bd;
   color: #fff;
   border: none;
   padding: 12px 18px;
@@ -122,5 +128,29 @@
 }
 
 .subscribe-btn:hover {
-  background: linear-gradient(90deg, #082848, #368adf);
+  background: white;
+  color: black;
+  border-radius: 6px;
+  border: 1px solid black;
+}
+
+.test {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+
+  background: linear-gradient(-3deg, #e8f7f8 50%, #d4f1f3 50%);
+}
+
+.pricing-card:hover .test {
+  background: linear-gradient(-3deg, #d4f1f3 50%, #05b1bd 50%);
+  color: white;
+}
+
+.pricing-card:hover .plan-name {
+  color: white;
+}
+
+.pricing-card-spacing {
+  padding: 30px 20px;
 }

@@ -419,8 +419,8 @@ const HomePage = () => {
             <span className="button-text">USE CASES</span>
           </button>
           <h1 className="heading-xlarge-section5">
-            Hospitals, pharmacies, and beauty centers use TODO AI to
-            boost engagement and deliver personalized care.
+            Hospitals, pharmacies, and beauty centers use TODO AI to boost
+            engagement and deliver personalized care.
           </h1>
         </div>
       </section>

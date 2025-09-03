@@ -6,83 +6,87 @@ import { FaLinkedin } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io";
 
 const Footer = () => {
-  const columnData = [
-    {
-      heading: "Company",
-      items: [
-        "About Us",
-        "Careers",
-        "Blog",
-        "Press",
-        "Partners",
-        "Team",
-        "Mission",
-        "Vision",
-        "Values",
-        "Legal",
-      ],
-    },
-    {
-      heading: "Resources",
-      items: [
-        "Documentation",
-        "Tutorials",
-        "Community",
-        "Events",
-        "Webinars",
-        "Newsletters",
-        "Podcasts",
-        "Guides",
-        "Reports",
-        "Updates",
-      ],
-    },
-    {
-      heading: "Support",
-      items: [
-        "Contact Support",
-        "FAQs",
-        "Live Chat",
-        "System Status",
-        "Feedback",
-        "Help Center",
-        "Tickets",
-        "Account Recovery",
-        "Refunds",
-        "Terms",
-      ],
-    },
-    {
-      heading: "Product",
-      items: [
-        "Features",
-        "Integrations",
-        "Pricing",
-        "Demos",
-        "Roadmap",
-        "API Access",
-        "Use Cases",
-        "Solutions",
-        "What's New",
-        "Security",
-      ],
-    },
-  ];
+  // const columnData = [
+  //   {
+  //     heading: "Company",
+  //     items: [
+  //       "About Us",
+  //       "Careers",
+  //       "Blog",
+  //       "Press",
+  //       "Partners",
+  //       "Team",
+  //       "Mission",
+  //       "Vision",
+  //       "Values",
+  //       "Legal",
+  //     ],
+  //   },
+  //   {
+  //     heading: "Resources",
+  //     items: [
+  //       "Documentation",
+  //       "Tutorials",
+  //       "Community",
+  //       "Events",
+  //       "Webinars",
+  //       "Newsletters",
+  //       "Podcasts",
+  //       "Guides",
+  //       "Reports",
+  //       "Updates",
+  //     ],
+  //   },
+  //   {
+  //     heading: "Support",
+  //     items: [
+  //       "Contact Support",
+  //       "FAQs",
+  //       "Live Chat",
+  //       "System Status",
+  //       "Feedback",
+  //       "Help Center",
+  //       "Tickets",
+  //       "Account Recovery",
+  //       "Refunds",
+  //       "Terms",
+  //     ],
+  //   },
+  //   {
+  //     heading: "Product",
+  //     items: [
+  //       "Features",
+  //       "Integrations",
+  //       "Pricing",
+  //       "Demos",
+  //       "Roadmap",
+  //       "API Access",
+  //       "Use Cases",
+  //       "Solutions",
+  //       "What's New",
+  //       "Security",
+  //     ],
+  //   },
+  // ];
 
   return (
     <div className="footer-background">
       <section className="container-xmedium footer-section">
         {/* First Column (Logo & Description) */}
         <div className="footer-col footer-col-1">
-          <img src="/images/logo.png" alt="Logo" className="footer-logo" />
+          <img
+            src="/images/logo todo 1.png"
+            alt="Logo"
+            className="footer-logo"
+          />
           <p>
-            Our platform helps you convert knowledge into intelligent video
-            experiences.
+            Artificial Intelligence Redefining the Future of Health, Beauty and
+            Wellness
           </p>
         </div>
 
         {/* Other Columns */}
-        {columnData.map((col, index) => (
+        {/* {columnData.map((col, index) => (
           <div className="footer-col footer-col-other" key={index}>
             <h4>{col.heading}</h4>
             <ul>
@@ -93,12 +97,12 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-        ))}
+        ))} */}
       </section>
       <section className="container-xmedium">
         <hr></hr>
         <div className="footer-end">
-          <div>2025 Todo Ai. All rights reserved.</div>
+          <div>{new Date().getFullYear()} Todo Ai. All rights reserved.</div>
           <div className="icons-gap">
             <FaSquareXTwitter />
             <FaLinkedin />

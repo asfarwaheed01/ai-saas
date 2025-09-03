@@ -13,17 +13,17 @@
 
 .docs-endpoint-method.get {
   background-color: #ebf8ff;
-  color: #2b6cb0;
+  color: #05b1bd;
 }
 
 .docs-endpoint-method.post {
   background-color: #f0fff4;
-  color: #2c7a7b;
+  color: #05b1bd;
 }
 
 .docs-endpoint-method.put {
-  background-color: #faf5ff;
-  color: #6b46c1;
+  background-color: #d9f9fb;
+  color: #05b1bd;
 }
 
 .docs-endpoint-method.delete {
@@ -69,7 +69,7 @@
 }
 
 .docs-endpoint-auth svg {
-  color: #3182ce;
+  color: #05b1bd;
 }
 
 /* Response styling */
@@ -114,9 +114,9 @@
 }
 
 .docs-tab-button.active {
-  color: #3182ce;
+  color: #05b1bd;
   background-color: #fff;
-  border-bottom-color: #3182ce;
+  border-bottom-color: #05b1bd;
 }
 
 .docs-tabs-content {
@@ -201,7 +201,7 @@
 }
 
 .docs-form-submit {
-  background-color: #3182ce;
+  background-color: #05b1bd;
   color: #fff;
   border: none;
   border-radius: 4px;

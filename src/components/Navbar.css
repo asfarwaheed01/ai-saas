@@ -23,8 +23,8 @@
 
   .navbar-button.mobile {
     background: transparent;
-    border: 2px solid #007bff;
-    color: #007bff;
+    border: 2px solid #05b1bd;
+    color: #05b1bd;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
@@ -36,7 +36,7 @@
   }
 
   .navbar-button.mobile:hover {
-    background: #007bff;
+    background: #05b1bd;
     color: white;
   }
 }
@@ -138,7 +138,7 @@
 
 .dropdown-item:hover {
   background-color: #f8f9fa;
-  color: #007bff;
+  color: #05b1bd;
 }
 
 /* Ensure proper spacing for mobile menu items */

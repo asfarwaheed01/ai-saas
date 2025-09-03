@@ -40,7 +40,7 @@
 .docs-page-title {
   font-size: 32px;
   font-weight: 700;
-  color: #0b3b6b;
+  color: #05b1bd;
   margin-bottom: 16px;
 }
 
@@ -62,7 +62,7 @@
 .docs-section-title {
   font-size: 22px;
   font-weight: 600;
-  color: #0d4c8c;
+  color: #05b1bd;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -70,7 +70,7 @@
 
 .docs-section-title svg {
   margin-right: 12px;
-  color: #2b6cb0;
+  color: #1ad3e0;
 }
 
 .docs-endpoint {
@@ -103,7 +103,7 @@
 
 .docs-endpoint-method.get {
   background-color: #ebf8ff;
-  color: #2c5282;
+  color: #05b1bd;
 }
 
 .docs-endpoint-method.post {
@@ -112,8 +112,8 @@
 }
 
 .docs-endpoint-method.put {
-  background-color: #faf5ff;
-  color: #553c9a;
+  background-color: #a8f9ff;
+  color: #05b1bd
 }
 
 .docs-endpoint-method.delete {
@@ -250,7 +250,7 @@
 
 .docs-alert-info {
   background-color: #ebf8ff;
-  border-left: 4px solid #3182ce;
+  border-left: 4px solid #05b1bd;
 }
 
 .docs-alert-warning {
@@ -269,7 +269,7 @@
 }
 
 .docs-alert-icon {
-  color: #2b6cb0;
+  color: #05b1bd;
   font-size: 18px;
   margin-top: 2px;
 }

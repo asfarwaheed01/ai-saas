@@ -2,7 +2,7 @@
 
 .try-avatars-section {
   padding: 120px 0;
-  background: linear-gradient(135deg, #667eea 0%, #2319db 100%);
+  background: linear-gradient(135deg, #05b1bd 100%, #e8f7f8 0%);
   position: relative;
   overflow: hidden;
 }
@@ -82,7 +82,9 @@
   align-items: center;
   gap: 12px;
   padding: 20px 40px;
-  background: linear-gradient(135deg, #6b8eff 0%, hsl(239, 86%, 42%) 100%);
+  /* background: linear-gradient(135deg, #6b8eff 0%, hsl(239, 86%, 42%) 100%); */
+  background: linear-gradient(135deg, #91d0d5 0%, #058e98 100%);
+  border: 2px solid white;
   color: white;
   text-decoration: none;
   border-radius: 50px;
