@@ -168,6 +168,7 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import "./PricingPlans.css";
 import { useAuth } from "../../providers/AuthContext";
 import { backendURL } from "../../config/constants";
+import { loadStripe } from "@stripe/stripe-js";
 
 const fallbackPlans = [
   {
@@ -216,6 +217,8 @@ const PricingPlans = () => {
   const { getAccessToken, logout } = useAuth();
   const [plans, setPlans] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  // const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
   // Handle unauthorized errors
   const handleUnauthorized = useCallback(() => {
@@ -274,10 +277,7 @@ const PricingPlans = () => {
     try {
       const response = await fetch(`${backendURL}/payments/stripe-payment`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getAccessToken()}`,
-        },
+        headers: apiHeaders,
         body: JSON.stringify({
           sub_plan_id: plan.id,
         }),
@@ -295,12 +295,9 @@ const PricingPlans = () => {
       const data = await response.json();
       console.log("Payment Response:", data);
 
-      // if (data?.checkout_url) {
-      //   window.location.href = data.checkout_url;
-      // }
-      if (data?.checkout_url) {
-        // Redirect to stripe checkout
-        window.location.href = data.checkout_url;
+      if (data?.session_id) {
+        // const stripe = await stripePromise;
+        // await stripe.redirectToCheckout({ sessionId: data.session_id });
       } else {
         // Agar checkout_url nahi mila but subscription ban gaya ho
         await fetchActiveSubscription();

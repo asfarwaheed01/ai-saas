@@ -95,7 +95,7 @@
 
 .avatar-select:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: #05b1bd;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -445,4 +445,35 @@
   .bottom-controls {
     padding: 16px 0;
   }
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logout-btn {
+  padding: 5px;
+  border-radius: 5px;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  color: white;
+  background-color: #05b1bd;
+  border: #036a71;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #036a71;
+}
+
+.form-alignment {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.form-alignment .input-group {
+  flex: 1; /* har input equal width lega */
 }

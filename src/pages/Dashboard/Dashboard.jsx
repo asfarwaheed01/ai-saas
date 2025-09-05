@@ -55,7 +55,7 @@ const Dashboard = () => {
   ];
 
   const deviceData = [
-    { name: "Desktop", value: 45, color: "#3b82f6" },
+    { name: "Desktop", value: 45, color: "#05b1bd" },
     { name: "Mobile", value: 35, color: "#10b981" },
     { name: "Tablet", value: 20, color: "#f59e0b" },
   ];
@@ -153,8 +153,8 @@ const Dashboard = () => {
                     x2="0"
                     y2="1"
                   >
-                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#05b1bd" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#05b1bd" stopOpacity={0} />
                   </linearGradient>
                   <linearGradient
                     id="usersGradient"
@@ -182,7 +182,7 @@ const Dashboard = () => {
                 <Area
                   type="monotone"
                   dataKey="revenue"
-                  stroke="#3b82f6"
+                  stroke="#05b1bd"
                   fillOpacity={1}
                   fill="url(#revenueGradient)"
                   name="Revenue ($)"
@@ -223,7 +223,7 @@ const Dashboard = () => {
                 <Legend />
                 <Bar
                   dataKey="organic"
-                  fill="#3b82f6"
+                  fill="#05b1bd"
                   name="Organic"
                   radius={[2, 2, 0, 0]}
                 />

@@ -427,6 +427,7 @@ const Avatars = () => {
   const avatarRef = useRef(null);
   const sessionDataRef = useRef(null);
   const streamRef = useRef(null);
+  const formRef = useRef(null);
 
   let apiKey = process.env.REACT_APP_HEYGEN_API_KEY;
   console.log(apiKey, "API KEY");
@@ -623,28 +624,35 @@ const Avatars = () => {
   //   }
   // };
 
-  const handleSend = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!userInput.trim() || !selectedOption) {
       alert("Please enter a message and select a domain.");
       return;
     }
 
     try {
-      // setIsSpeaking(true);
+      setIsSpeaking(true);
 
-      const response = await fetch(`${backendURL}/agents/generate-response/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // Agar token authentication use hoti hai to yeh add karo:
-          Authorization: `Bearer ${userToken}`,
-          "X-API-Key": "pk_52f3be533702428c8d4566fa138ea4d3",
-        },
-        body: JSON.stringify({
-          text_query: userInput.trim(),
-          domain: selectedOption,
-        }),
-      });
+      const formData = new FormData(formRef.current);
+      formData.append("domain", selectedOption);
+      formData.append("text_query", userInput);
+      const response = await fetch(
+        `http://16.171.93.127:8001/api/agents/generate-response/`,
+        // `http://51.21.148.115:8001/api/agents/generate-response`,
+        // `${backendURL}/agents/generate-response/`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+            "X-API-Key": "pk_669c5a085c8241a7b8b718c319a083fe",
+            "X-SIGNATURE":
+              "f5f5b384c39d8e7cb4ac6e1e065ada9b1435584e403d9003b78c8d668ca94429",
+          },
+
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`API error: ${response.status}`);
@@ -652,15 +660,28 @@ const Avatars = () => {
 
       const data = await response.json();
       console.log("✅ API Response:", data);
+      if (!avatarRef.current) {
+        console.error("Avatar reference is null");
+        return;
+      }
+
+      if (!data.response) {
+        console.error("No response in API data");
+        return;
+      }
 
       // Agar tum chahte ho ke avatar bolay, to:
       if (avatarRef.current && data.response) {
+        console.log("Making avatar speak:", data.response);
         await avatarRef.current.speak({
-          text: data.response, // API se jo response aya
+          text: data.response,
+          // taskType: TaskType.TALK,
+          task_type: TaskType.REPEAT,
         });
       }
 
-      setUserInput(""); // input clear
+      setUserInput("");
+      setSelectedOption("");
     } catch (error) {
       console.error("❌ Error sending message:", error);
       alert("Failed to send message. Check console for details.");
@@ -674,7 +695,7 @@ const Avatars = () => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       // handleSpeak();
-      handleSend();
+      // handleSend();
     }
   };
 
@@ -766,6 +787,86 @@ const Avatars = () => {
                       </option>
                     ))}
                   </select>
+                </div>
+
+                <div className="form-alignment">
+                  <div className="input-group">
+                    <label htmlFor="avatar-select" className="input-label">
+                      Choose Category
+                    </label>
+                    <select
+                      id="avatar-select"
+                      value={selectedAvatar}
+                      onChange={(e) => setSelectedAvatar(e.target.value)}
+                      className="avatar-select"
+                      disabled={isLoading}
+                    >
+                      {AVATAR_IDS.map((avatar) => (
+                        <option key={avatar.id} value={avatar.id}>
+                          {avatar.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="input-group">
+                    <label htmlFor="avatar-select" className="input-label">
+                      Ethnicity
+                    </label>
+                    <select
+                      id="avatar-select"
+                      value={selectedAvatar}
+                      onChange={(e) => setSelectedAvatar(e.target.value)}
+                      className="avatar-select"
+                      disabled={isLoading}
+                    >
+                      {AVATAR_IDS.map((avatar) => (
+                        <option key={avatar.id} value={avatar.id}>
+                          {avatar.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-alignment">
+                  <div className="input-group">
+                    <label htmlFor="avatar-select" className="input-label">
+                      Select Gender
+                    </label>
+                    <select
+                      id="avatar-select"
+                      value={selectedAvatar}
+                      onChange={(e) => setSelectedAvatar(e.target.value)}
+                      className="avatar-select"
+                      disabled={isLoading}
+                    >
+                      {AVATAR_IDS.map((avatar) => (
+                        <option key={avatar.id} value={avatar.id}>
+                          {avatar.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="input-group">
+                    <label htmlFor="avatar-select" className="input-label">
+                      Select Age
+                    </label>
+                    <select
+                      id="avatar-select"
+                      value={selectedAvatar}
+                      onChange={(e) => setSelectedAvatar(e.target.value)}
+                      className="avatar-select"
+                      disabled={isLoading}
+                    >
+                      {AVATAR_IDS.map((avatar) => (
+                        <option key={avatar.id} value={avatar.id}>
+                          {avatar.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 <button
@@ -861,37 +962,38 @@ const Avatars = () => {
       <div className="bottom-controls">
         <div className="container-medium">
           <div className="chat-section">
-            <div className="input-container">
-              <textarea
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Type what you want the avatar to say..."
-                className="fullscreen-chat-input"
-                disabled={!streamReady}
-                rows={2}
-              />
-              <select
-                value={selectedOption}
-                onChange={(e) => setSelectedOption(e.target.value)}
-                className="fullscreen-select"
-                disabled={!streamReady}
-              >
-                <option value="">Select option</option>
-                <option value="therapy">Therapy</option>
-                <option value="beauty">Beauty</option>
-                <option value="consultation">Consultation</option>
-                <option value="medical">Medical</option>
-              </select>
-              <button
-                onClick={handleSend}
-                // disabled={!streamReady || !userInput.trim() || isSpeaking}
-                className="fullscreen-speak-btn"
-              >
-                Send
-              </button>
+            <form onSubmit={handleSubmit} ref={formRef}>
+              <div className="input-container">
+                <textarea
+                  value={userInput}
+                  onChange={(e) => setUserInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Type what you want the avatar to say..."
+                  className="fullscreen-chat-input"
+                  disabled={!streamReady}
+                  rows={2}
+                />
+                <select
+                  value={selectedOption}
+                  onChange={(e) => setSelectedOption(e.target.value)}
+                  className="fullscreen-select"
+                  disabled={!streamReady}
+                >
+                  <option value="">Select option</option>
+                  <option value="therapy">Therapy</option>
+                  <option value="beauty">Beauty</option>
+                  <option value="consultation">Consultation</option>
+                  <option value="medical">Medical</option>
+                </select>
+                <button
+                  // onClick={handleSend}
+                  // disabled={!streamReady || !userInput.trim() || isSpeaking}
+                  className="fullscreen-speak-btn"
+                >
+                  Send
+                </button>
 
-              {/* <button
+                {/* <button
                 onClick={handleSpeak}
                 disabled={!streamReady || !userInput.trim() || isSpeaking}
                 className={`fullscreen-speak-btn ${
@@ -910,7 +1012,8 @@ const Avatars = () => {
                   </>
                 )}
               </button> */}
-            </div>
+              </div>
+            </form>
 
             <button
               onClick={terminateAvatarSession}
