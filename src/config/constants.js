@@ -1,4 +1,5 @@
-export const backendURL = "http://51.21.148.115:8001/api";
+// export const backendURL = "http://51.21.148.115:8001/api";
+export const backendURL = "https://backend.todopharma.com/api";
 
 export const getToken = () => {
   const token = localStorage.getItem("access_token");
