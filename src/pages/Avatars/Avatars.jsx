@@ -638,9 +638,9 @@ const Avatars = () => {
       formData.append("domain", selectedOption);
       formData.append("text_query", userInput);
       const response = await fetch(
-        `http://16.171.93.127:8001/api/agents/generate-response/`,
+        // `http://16.171.93.127:8001/api/agents/generate-response/`,
         // `http://51.21.148.115:8001/api/agents/generate-response`,
-        // `${backendURL}/agents/generate-response/`,
+        `${backendURL}/agents/generate-response/`,
         {
           method: "POST",
           headers: {

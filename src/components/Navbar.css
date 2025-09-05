@@ -153,3 +153,23 @@
     margin-top: 20px;
   }
 }
+
+/* default black links */
+.black-links a {
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.black-links a:hover {
+  color: #05b1bd;
+}
+
+/* white links (login/signup page without scroll) */
+.white-links a {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.white-links a:hover {
+  color: black;
+}

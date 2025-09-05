@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ROUTES } from "../routes/routes";
 import "../pages/NotFound/NotFound.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../providers/AuthContext";
 import "./Navbar.css";
 import { IoChevronDown } from "react-icons/io5";
@@ -58,6 +58,11 @@ const Navbar = () => {
   };
 
   console.log("is user dropdown open", isUserDropdownOpen);
+  const location = useLocation();
+
+  const isAuthPage =
+    (location.pathname === "/login" || location.pathname === "/signup") &&
+    !isScrolled;
 
   return (
     <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
@@ -65,7 +70,12 @@ const Navbar = () => {
         {/* Logo */}
         <div className="navbar-logo">
           <Link to="/" onClick={closeMobileMenu}>
-            <img src="/images/logo.png" alt="logo" className="logo-navbar" />
+            {/* <img src="/images/logo.png" alt="logo" className="logo-navbar" /> */}
+            <img
+              src={isAuthPage ? "/images/logo todo 1.png" : "/images/logo.png"}
+              alt="logo"
+              className="logo-navbar"
+            />
           </Link>
         </div>
 
@@ -77,7 +87,11 @@ const Navbar = () => {
         </div>
 
         {/* Navbar Links */}
-        <ul className={`navbar-links ${isMobileMenuOpen ? "active" : ""}`}>
+        <ul
+          className={`navbar-links ${isMobileMenuOpen ? "active" : ""} ${
+            isAuthPage ? "white-links" : "black-links"
+          }`}
+        >
           <li className="navbar-item">
             <Link to={ROUTES.services.path} onClick={closeMobileMenu}>
               Services

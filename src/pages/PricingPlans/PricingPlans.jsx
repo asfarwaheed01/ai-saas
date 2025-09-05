@@ -218,7 +218,7 @@ const PricingPlans = () => {
   const [plans, setPlans] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
   // Handle unauthorized errors
   const handleUnauthorized = useCallback(() => {
@@ -296,8 +296,8 @@ const PricingPlans = () => {
       console.log("Payment Response:", data);
 
       if (data?.session_id) {
-        // const stripe = await stripePromise;
-        // await stripe.redirectToCheckout({ sessionId: data.session_id });
+        const stripe = await stripePromise;
+        await stripe.redirectToCheckout({ sessionId: data.session_id });
       } else {
         // Agar checkout_url nahi mila but subscription ban gaya ho
         await fetchActiveSubscription();
