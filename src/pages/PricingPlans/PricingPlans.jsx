@@ -1,174 +1,10 @@
-// import React, { useCallback, useEffect, useMemo, useState } from "react";
-// import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-// import "./PricingPlans.css";
-// import { useAuth } from "../../providers/AuthContext";
-// import { backendURL } from "../../config/constants";
-
-// const PricingPlans = () => {
-//   const plans = [
-//     {
-//       name: "Basic",
-//       price: 14,
-//       subtitle: "Best for individuals",
-//       features: [
-//         { text: "Access to basic features", included: true },
-//         { text: "Email support", included: true },
-//         { text: "Advanced analytics", included: false },
-//         { text: "Team collaboration", included: false },
-//       ],
-//     },
-//     {
-//       name: "Standard",
-//       price: 29,
-//       subtitle: "Best for small teams",
-//       features: [
-//         { text: "All basic features", included: true },
-//         { text: "Priority email support", included: true },
-//         { text: "Advanced analytics", included: true },
-//         { text: "Team collaboration", included: false },
-//       ],
-//     },
-//     {
-//       name: "Pro",
-//       price: 49,
-//       subtitle: "For growing businesses",
-//       features: [
-//         { text: "All standard features", included: true },
-//         { text: "24/7 support", included: true },
-//         { text: "Advanced analytics", included: true },
-//         { text: "Team collaboration", included: true },
-//       ],
-//     },
-//     {
-//       name: "Enterprise",
-//       price: 99,
-//       subtitle: "For large companies",
-//       features: [
-//         { text: "Unlimited access", included: true },
-//         { text: "Dedicated support", included: true },
-//         { text: "Custom integrations", included: true },
-//         { text: "Team collaboration", included: true },
-//       ],
-//     },
-//     {
-//       name: "Custom",
-//       price: 199,
-//       subtitle: "Tailored for you",
-//       features: [
-//         { text: "Everything in Enterprise", included: true },
-//         { text: "Dedicated account manager", included: true },
-//         { text: "On-premise deployment", included: true },
-//         { text: "Custom SLA", included: true },
-//       ],
-//     },
-//   ];
-
-//   const { getAccessToken, logout } = useAuth();
-//   const [fetchPricingData, setfetchPricingData] = useState([]);
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   // Handle unauthorized errors
-//   const handleUnauthorized = useCallback(() => {
-//     logout();
-//   }, [logout]);
-
-//   // API Headers with memoization
-//   const apiHeaders = useMemo(
-//     () => ({
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${getAccessToken()}`,
-//     }),
-//     [getAccessToken]
-//   );
-
-//   // Fetch API keys
-//   const fetchPricing = useCallback(async () => {
-//     try {
-//       setIsLoading(true);
-//       setError(null);
-
-//       const response = await fetch(
-//         `${backendURL}/payments/active-subscription`,
-//         {
-//           method: "GET",
-//           headers: apiHeaders,
-//         }
-//       );
-
-//       if (response.status === 401) {
-//         handleUnauthorized();
-//         return;
-//       }
-
-//       if (!response.ok) {
-//         throw new Error(`HTTP error! status: ${response.status}`);
-//       }
-
-//       const data = await response.json();
-//       fetchPricingData(Array.isArray(data) ? data : []);
-//     } catch (err) {
-//       console.error("Error fetching Plan Pricng:", err);
-//       setError("Failed to load Plan Pricing. Please try again.");
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   }, [apiHeaders, handleUnauthorized]);
-
-//   useEffect(() => {
-//     fetchPricing();
-//   }, [fetchPricing]);
-
-//   return (
-//     <div className="pricing-page">
-//       <div className="pricing-header">
-//         <h1>Pricing Plans</h1>
-//       </div>
-
-//       <div className="pricing-cards">
-//         {plans.map((plan, index) => (
-//           <div className="pricing-card" key={index}>
-//             <div className="test">
-//               <p className="plan-name">{plan.name}</p>
-//               <div className="plan-price">
-//                 <span className="price">€{plan.price}</span>
-//                 <span className="per">/MESE</span>
-//               </div>
-//             </div>
-//             <div className="pricing-card-spacing">
-//               <h3 className="plan-subtitle">{plan.subtitle}</h3>
-//               <ul className="plan-features">
-//                 {plan.features.map((feature, idx) => (
-//                   <li
-//                     key={idx}
-//                     className={feature.included ? "included" : "included"}
-//                   >
-//                     {feature.included ? (
-//                       <FaCheckCircle className="icon included-icon" />
-//                     ) : (
-//                       <FaTimesCircle className="icon included-icon" />
-//                     )}
-//                     {feature.text}
-//                   </li>
-//                 ))}
-//               </ul>
-//               <button className="subscribe-btn">Subscribe</button>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default PricingPlans;
-
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 import "./PricingPlans.css";
 import { useAuth } from "../../providers/AuthContext";
 import { backendURL } from "../../config/constants";
 import { loadStripe } from "@stripe/stripe-js";
+import { data } from "react-router-dom";
 
 const fallbackPlans = [
   {
@@ -217,6 +53,7 @@ const PricingPlans = () => {
   const { getAccessToken, logout } = useAuth();
   const [plans, setPlans] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeSubscription, setActiveSubscription] = useState(null);
 
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -235,6 +72,37 @@ const PricingPlans = () => {
   );
 
   // Fetch Pricing Plans
+  // const fetchPricing = useCallback(async () => {
+  //   try {
+  //     setIsLoading(true);
+
+  //     const response = await fetch(
+  //       `${backendURL}/payments/api_usage/subscription-plans`,
+  //       {
+  //         method: "GET",
+  //         headers: apiHeaders,
+  //       }
+  //     );
+
+  //     if (response.status === 401) {
+  //       handleUnauthorized();
+  //       setPlans(fallbackPlans); // fallback if unauthorized
+  //       return;
+  //     }
+
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+
+  //     const data = await response.json();
+  //     setPlans(Array.isArray(data) ? data : fallbackPlans);
+  //   } catch (err) {
+  //     console.error("Error fetching Plan Pricing:", err);
+  //     setPlans(fallbackPlans); // fallback on error
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }, [apiHeaders, handleUnauthorized]);
   const fetchPricing = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -249,7 +117,10 @@ const PricingPlans = () => {
 
       if (response.status === 401) {
         handleUnauthorized();
-        setPlans(fallbackPlans); // fallback if unauthorized
+        const sortedFallback = fallbackPlans.sort(
+          (a, b) => a.priority - b.priority
+        );
+        setPlans(sortedFallback); // fallback sorted
         return;
       }
 
@@ -258,10 +129,18 @@ const PricingPlans = () => {
       }
 
       const data = await response.json();
-      setPlans(Array.isArray(data) ? data : fallbackPlans);
+
+      const sortedPlans = (Array.isArray(data) ? data : fallbackPlans).sort(
+        (a, b) => a.priority - b.priority
+      );
+
+      setPlans(sortedPlans);
     } catch (err) {
       console.error("Error fetching Plan Pricing:", err);
-      setPlans(fallbackPlans); // fallback on error
+      const sortedFallback = fallbackPlans.sort(
+        (a, b) => a.priority - b.priority
+      );
+      setPlans(sortedFallback); // fallback sorted
     } finally {
       setIsLoading(false);
     }
@@ -304,7 +183,7 @@ const PricingPlans = () => {
       }
     } catch (err) {
       console.error("Error during subscription:", err);
-      alert("Subscription failed. Please try again.");
+      // alert(data?.response?.error);
     }
   };
 
@@ -332,10 +211,55 @@ const PricingPlans = () => {
 
       const data = await response.json();
       console.log("Active Subscription:", data);
+      setActiveSubscription(data);
     } catch (err) {
       console.error("Error fetching active subscription:", err);
     }
   }, [getAccessToken, handleUnauthorized]);
+
+  // useEffect(() => {
+  //   const init = async () => {
+  //     await fetchActiveSubscription();
+  //   };
+
+  //   init();
+  // }, [fetchActiveSubscription]);
+
+  useEffect(() => {
+    const init = async () => {
+      await fetchActiveSubscription();
+      await fetchPricing();
+    };
+    init();
+  }, [fetchActiveSubscription, fetchPricing]);
+  const handleCancelSubscription = async () => {
+    try {
+      const response = await fetch(
+        `${backendURL}/payments/cancel-subscription`,
+        {
+          method: "POST",
+          headers: apiHeaders,
+        }
+      );
+
+      if (response.status === 401) {
+        handleUnauthorized();
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Cancel Subscription Response:", data);
+
+      // cancel ke baad refresh active subscription
+      await fetchActiveSubscription();
+    } catch (err) {
+      console.error("Error cancelling subscription:", err);
+    }
+  };
 
   return (
     <div className="pricing-page">
@@ -346,41 +270,97 @@ const PricingPlans = () => {
       {isLoading ? (
         <p>Loading plans...</p>
       ) : (
+        // <div className="pricing-cards">
+        //   {plans.map((plan, index) => (
+        //     <div className="pricing-card" key={plan.id || index}>
+        //       <div className="test">
+        //         <p className="plan-name">{plan.name}</p>
+        //         <div className="plan-price">
+        //           <span className="price">€{plan.price}</span>
+        //           <span className="per">/MESE</span>
+        //         </div>
+        //       </div>
+        //       <div className="pricing-card-spacing">
+        //         <h3 className="plan-subtitle">{plan.description}</h3>
+        //         <ul className="plan-features">
+        //           <li>
+        //             <FaCheckCircle className="icon included-icon" /> API
+        //             Requests: {plan.api_requests}
+        //           </li>
+        //           <li>
+        //             <FaCheckCircle className="icon included-icon" /> PDF
+        //             Uploads: {plan.pdf_uploads}
+        //           </li>
+        //           <li>
+        //             <FaCheckCircle className="icon included-icon" /> Domains:{" "}
+        //             {plan.allowed_domains}
+        //           </li>
+        //         </ul>
+        //         <button
+        //           className="subscribe-btn"
+        //           onClick={() => handleSubscribe(plan)}
+        //         >
+        //           Subscribe
+        //         </button>
+        //       </div>
+        //     </div>
+        //   ))}
+        // </div>
         <div className="pricing-cards">
-          {plans.map((plan, index) => (
-            <div className="pricing-card" key={plan.id || index}>
-              <div className="test">
-                <p className="plan-name">{plan.name}</p>
-                <div className="plan-price">
-                  <span className="price">€{plan.price}</span>
-                  <span className="per">/MESE</span>
+          {plans.map((plan, index) => {
+            // const isActive = activeSubscription?.plan?.id
+            const isActive =
+              activeSubscription?.is_subscribed === true &&
+              activeSubscription?.plan?.id === plan.id;
+            return (
+              <div className="pricing-card" key={plan.id || index}>
+                <div className="test">
+                  <p className="plan-name">{plan.name}</p>
+                  <div className="plan-price">
+                    <span className="price">€{plan.price}</span>
+                    <span className="per">/MESE</span>
+                  </div>
+                </div>
+                <div className="pricing-card-spacing">
+                  <h3 className="plan-subtitle">{plan.description}</h3>
+                  <ul className="plan-features">
+                    <li>
+                      <FaCheckCircle className="icon included-icon" /> API
+                      Requests: {plan.api_requests}
+                    </li>
+                    <li>
+                      <FaCheckCircle className="icon included-icon" /> PDF
+                      Uploads: {plan.pdf_uploads}
+                    </li>
+                    <li>
+                      <FaCheckCircle className="icon included-icon" /> Domains:{" "}
+                      {plan.allowed_domains}
+                    </li>
+                  </ul>
+
+                  {isActive ? (
+                    <button
+                      className="subscribe-btn"
+                      onClick={handleCancelSubscription}
+                    >
+                      Cancel Subscription
+                    </button>
+                  ) : plan.name.toLowerCase() === "free" ? (
+                    <button className="subscribe-btn" disabled>
+                      Active
+                    </button>
+                  ) : (
+                    <button
+                      className="subscribe-btn"
+                      onClick={() => handleSubscribe(plan)}
+                    >
+                      Subscribe
+                    </button>
+                  )}
                 </div>
               </div>
-              <div className="pricing-card-spacing">
-                <h3 className="plan-subtitle">{plan.description}</h3>
-                <ul className="plan-features">
-                  <li>
-                    <FaCheckCircle className="icon included-icon" /> API
-                    Requests: {plan.api_requests}
-                  </li>
-                  <li>
-                    <FaCheckCircle className="icon included-icon" /> PDF
-                    Uploads: {plan.pdf_uploads}
-                  </li>
-                  <li>
-                    <FaCheckCircle className="icon included-icon" /> Domains:{" "}
-                    {plan.allowed_domains}
-                  </li>
-                </ul>
-                <button
-                  className="subscribe-btn"
-                  onClick={() => handleSubscribe(plan)}
-                >
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

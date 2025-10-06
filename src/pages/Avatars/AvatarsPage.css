@@ -3,9 +3,27 @@
 .avatars-page {
   min-height: 100vh;
   padding: 40px 20px;
-  background: white;
+  /* background: linear-gradient(135deg, #05b1bd, #036a71); */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     sans-serif;
+  background: linear-gradient(135deg, #05b1bd, #036a71);
+  background-size: 400% 400%;
+  animation: gradientMove 4s ease infinite;
+}
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.error-text {
+  color: red;
 }
 
 /* Start Form Styles */
@@ -34,7 +52,7 @@
 .form-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #000;
+  color: #05b1bd;
   margin-bottom: 16px;
 }
 
@@ -476,4 +494,8 @@
 
 .form-alignment .input-group {
   flex: 1; /* har input equal width lega */
+}
+
+.avatar-logo {
+  margin-left: 100px;
 }

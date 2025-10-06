@@ -8,6 +8,7 @@ import {
   HiChevronDown,
   HiLogout,
 } from "react-icons/hi";
+import { BsPersonArmsUp } from "react-icons/bs";
 import "./DashboardLayout.css";
 import Logo from "../assets/logo.jpeg";
 import { ROUTES } from "../routes/routes.js";
@@ -29,6 +30,11 @@ const DASHBOARD_ROUTES = {
     path: "/dashboard/api-keys",
     name: "API Keys",
     icon: HiKey,
+  },
+  avatar: {
+    path: "/avatars",
+    name: "Try out Avatars",
+    icon: BsPersonArmsUp,
   },
 };
 
@@ -55,6 +61,11 @@ const DashboardLayout = ({ children }) => {
       icon: DASHBOARD_ROUTES.apiKeys.icon,
       label: DASHBOARD_ROUTES.apiKeys.name,
       href: DASHBOARD_ROUTES.apiKeys.path,
+    },
+    {
+      icon: DASHBOARD_ROUTES.avatar.icon,
+      label: DASHBOARD_ROUTES.avatar.name,
+      href: DASHBOARD_ROUTES.avatar.path,
     },
   ];
 
@@ -89,13 +100,15 @@ const DashboardLayout = ({ children }) => {
         }`}
       >
         <div className="dashboard-sidebar-header">
-          <img src={Logo} alt="Logo" className="dashboard-logo" />
-          <button
-            onClick={() => setSidebarOpen(false)}
-            className="dashboard-close-btn"
-          >
-            <HiX />
-          </button>
+          <Link to={ROUTES.home.path}>
+            <img src={Logo} alt="Logo" className="dashboard-logo" />
+            <button
+              onClick={() => setSidebarOpen(false)}
+              className="dashboard-close-btn"
+            >
+              <HiX />
+            </button>
+          </Link>
         </div>
 
         <nav className="dashboard-nav">

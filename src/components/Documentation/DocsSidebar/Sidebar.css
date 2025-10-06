@@ -14,27 +14,38 @@
   border-right: 1px solid #f0f0f0;
 }
 
+.docs-logo {
+  width: 100px;
+  height: auto;
+  padding: 5px;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
 /* Sidebar header and branding */
 .docs-sidebar-header {
   display: flex;
   align-items: center;
   padding: 24px 20px;
   border-bottom: 1px solid #f0f0f0;
-  background-color: #05b1bd;
-  color: #fff;
+  /* background-color: #05b1bd; */
+  color: black !important;
 }
 
 .docs-sidebar-logo {
   font-size: 24px;
   margin-right: 12px;
-  color: white;
+  /* color: white; */
+  color: black !important;
 }
 
 .docs-sidebar-header h1 {
   font-size: 18px;
   font-weight: 600;
   margin: 0;
-  color: #fff;
+  /* color: #fff; */
+  color: black !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

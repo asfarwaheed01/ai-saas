@@ -5,10 +5,11 @@ export const ROUTES = {
   contact: { path: "/contact-us", name: "Contact Us" },
   docs: { path: "/docs", name: "Documents" },
   avatars: { path: "/avatars", name: "Avatars" },
+  aboutUs: { path: "/about-us", name: "About Us" },
   // Documentation sections
   docsGettingStarted: {
     path: "/docs/getting-started",
-    name: "Getting Started",
+    name: "Getting API Documentation",
   },
 
   // Knowledge Base API routes
@@ -79,5 +80,13 @@ export const ROUTES = {
   certificate: {
     path: "/informativa_privacy",
     name: "Co-financed by the eurpeion union",
+  },
+  success: {
+    path: "/payment-success",
+    name: "Payment Success",
+  },
+  failure: {
+    path: "/payment-fail",
+    name: "Payment Fail",
   },
 };

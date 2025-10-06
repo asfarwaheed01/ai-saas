@@ -13,11 +13,12 @@ import {
 } from "react-icons/fa";
 import "./Sidebar.css";
 import { ROUTES } from "../../../routes/routes";
+import Logo from "../../../assets/logo.png";
 
 const API_SECTIONS = [
   {
     id: "getting-started",
-    title: "Getting Started",
+    title: "Getting API Documentation",
     icon: <FaRocket />,
     path: "/docs/getting-started",
     items: [],
@@ -131,6 +132,11 @@ const Sidebar = () => {
 
   return (
     <aside className="docs-sidebar">
+      <div>
+        <Link to={ROUTES.home.path}>
+          <img src={Logo} alt="TODO AI Logo" className="docs-logo" />
+        </Link>
+      </div>
       <div className="docs-sidebar-header">
         <FaBook className="docs-sidebar-logo" />
         <h1>API Documentation</h1>

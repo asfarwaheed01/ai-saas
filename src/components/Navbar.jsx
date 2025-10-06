@@ -61,7 +61,10 @@ const Navbar = () => {
   const location = useLocation();
 
   const isAuthPage =
-    (location.pathname === "/login" || location.pathname === "/signup") &&
+    (location.pathname === "/login" ||
+      location.pathname === "/signup" ||
+      location.pathname === "/payment-success" ||
+      location.pathname === "/payment-fail") &&
     !isScrolled;
 
   return (
@@ -99,7 +102,7 @@ const Navbar = () => {
           </li>
           <li className="navbar-item">
             <Link to={ROUTES.docsGettingStarted.path} onClick={closeMobileMenu}>
-              Docs
+              API Docs
             </Link>
           </li>
           <li className="navbar-item">
@@ -108,13 +111,19 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="navbar-item">
-            <a
+            <Link
               // href="https://web.todopharma.com/pricing"
-              href="/pricing-plans"
+              to="/pricing-plans"
               onClick={closeMobileMenu}
             >
               Pricing Plans
-            </a>
+            </Link>
+          </li>
+
+          <li className="navbar-item">
+            <Link to="/about-us" onClick={closeMobileMenu}>
+              About Us
+            </Link>
           </li>
 
           {/* Mobile-only user menu items */}

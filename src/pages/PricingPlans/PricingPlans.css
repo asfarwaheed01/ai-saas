@@ -35,8 +35,12 @@
 
 .pricing-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Desktop: 3 cards */
+  grid-template-columns: repeat(2, 1fr); /* Desktop: 3 cards */
   gap: 20px;
+  justify-content: center;
+  max-width: 900px; /* limit total width */
+  margin: 0 auto;
+  /* display: flex; */
 }
 
 /* Medium screens (tablet) */
@@ -55,6 +59,7 @@
 
 .pricing-card {
   background: #fff;
+  /* max-width: 400px; */
   border-radius: 12px;
   /* padding: 30px 20px; */
   text-align: center;
@@ -138,6 +143,8 @@
   font-size: 20px;
   font-weight: bold;
   color: white;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 
   background: linear-gradient(-3deg, #e8f7f8 50%, #d4f1f3 50%);
 }

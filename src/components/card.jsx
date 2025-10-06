@@ -101,14 +101,14 @@ const Card = ({
           )}
 
           {/* Bottom button - only for description variant */}
-          {variant === "description" && (
+          {/* {variant === "description" && (
             <button className="button button-medium">
               <span className="button-text">{buttonLabel}</span>
               <span className="arrow-icon">
                 <IoIosArrowRoundForward />
               </span>
             </button>
-          )}
+          )} */}
         </div>
       </div>
     </div>

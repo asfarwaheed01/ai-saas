@@ -82,7 +82,7 @@ body {
 
 .button-center {
   text-align: center;
-  margin-top: -20px;
+  margin-top: -21px;
 }
 
 section .button {
@@ -369,7 +369,7 @@ section .button {
 }
 
 .navbar-button:hover {
-  background-color: #036A71;
+  background-color: #036a71;
 }
 
 .arrow-right {
@@ -701,6 +701,11 @@ section .button {
   border: none;
 }
 
+.feature-button-Ai-Avatar {
+  /* margin-top: 150px; */
+  border: none;
+}
+
 .background-3 {
   position: relative;
   padding-bottom: 50px;
@@ -1017,7 +1022,7 @@ section .button {
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  height: 500px;
+  /* height: 500px; */
   margin: 0 10px;
   display: flex;
   flex-direction: column;

@@ -10,6 +10,7 @@ import Image3 from "../../assets/3.jpeg";
 import Image4 from "../../assets/4.jpeg";
 import Slider from "../../components/slider";
 import TryOurAvatars from "../../components/HomePage/TryOurAvatars";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -34,12 +35,14 @@ const HomePage = () => {
             </p>
           </div>
           <div className="button-center">
-            <button className="button button-large">
-              <span className="button-text">Get started for FREE</span>
-              <span className="arrow-icon">
-                <IoIosArrowRoundForward />
-              </span>
-            </button>
+            <Link to="/pricing-plans">
+              <button className="button button-large">
+                <span className="button-text">Get started for FREE</span>
+                <span className="arrow-icon">
+                  <IoIosArrowRoundForward />
+                </span>
+              </button>
+            </Link>
           </div>
           <div className="slider-space">
             <Slider />
@@ -49,12 +52,12 @@ const HomePage = () => {
       <section className="background-2">
         <div className="container-small">
           <div className="button-center">
-            <button className="feature-button button-small">
+            <button className="feature-button-Ai-Avatar button-small">
               <span className="button-text">AI AVATARS</span>
             </button>
           </div>
           <h1 className="heading-xlarge-section2">
-            Redefining Customer Experience with AI Avatars
+            Redefining Customer Experience with Ultra-Realistic Virtual Avatars
           </h1>
         </div>
         <div className="container-small">
@@ -346,12 +349,12 @@ const HomePage = () => {
               GDPR-compliant use of artificial intelligence in health, beauty,
               and wellness.
             </p>
-            <button className="button button-medium button-sec4">
+            {/* <button className="button button-medium button-sec4">
               <span className="button-text">Learn more</span>
               <span className="arrow-icon">
                 <IoIosArrowRoundForward />
               </span>
-            </button>
+            </button> */}
           </div>
         </div>
 

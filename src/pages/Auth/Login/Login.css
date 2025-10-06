@@ -49,7 +49,7 @@
 
 .floating-shapes {
   position: absolute;
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
   overflow: hidden;
   z-index: -1;
@@ -218,7 +218,7 @@
 
 .form-input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #05b1bd;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
   transform: translateY(-1px);
 }
@@ -420,7 +420,7 @@
   }
 
   .form-input:focus {
-    border-color: #667eea;
+    border-color: #05b1bd;
     background: #374151;
   }
 

@@ -28,6 +28,9 @@ import Apikeys from "./pages/ApiKeys/Apikeys";
 import PricingPlans from "./pages/PricingPlans/PricingPlans";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Certificate from "./pages/Certificate/Certificate";
+import AboutUs from "./pages/AboutUs/AboutUs";
+import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
+import PaymentFailure from "./pages/PaymentFailure/PaymentFailure";
 
 function App() {
   return (
@@ -81,6 +84,30 @@ function App() {
           element={
             <MainLayout>
               <Certificate />
+            </MainLayout>
+          }
+        />
+        <Route
+          path={ROUTES.success.path}
+          element={
+            <MainLayout>
+              <PaymentSuccess />
+            </MainLayout>
+          }
+        />
+        <Route
+          path={ROUTES.failure.path}
+          element={
+            <MainLayout>
+              <PaymentFailure />
+            </MainLayout>
+          }
+        />
+        <Route
+          path={ROUTES.aboutUs.path}
+          element={
+            <MainLayout>
+              <AboutUs />
             </MainLayout>
           }
         />

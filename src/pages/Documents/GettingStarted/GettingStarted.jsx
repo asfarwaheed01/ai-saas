@@ -12,7 +12,7 @@ const GettingStarted = () => {
   return (
     <div className="docs-page">
       <div className="docs-page-header">
-        <h1 className="docs-page-title">Getting Started</h1>
+        <h1 className="docs-page-title">Getting API Documentation</h1>
         <p className="docs-page-description">
           Welcome to the AI Customer Service API Documentation. This guide will
           help you get started with our APIs and show you how to integrate them
