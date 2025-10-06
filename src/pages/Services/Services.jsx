@@ -138,8 +138,10 @@ const Services = () => {
         },
       ],
       // downloadLink: "https://example.com/beauty-salon.zip",
-      androidLink: "https://example.com/beauty-android.apk1",
-      iosLink: "https://example.com/beauty-ios.ipa2",
+      androidLink:
+        "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/desktop_programs/beauty_salon/english/SaloonInstaller.rar",
+      iosLink:
+        "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/desktop_programs/beauty_salon/italian/salon_program.rar",
     },
     {
       id: "medical",
@@ -168,8 +170,10 @@ const Services = () => {
         },
       ],
       // downloadLink: "https://example.com/medical-consultant.zip",
-      androidLink: "https://example.com/medical-android.apk3",
-      iosLink: "https://example.com/medical-ios.ipa4",
+      androidLink:
+        "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/desktop_programs/medical_consultant/english/MedicalInstaller.rar",
+      iosLink:
+        "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/desktop_programs/medical_consultant/italian/Medical_program.rar",
     },
     {
       id: "pharmacist",
@@ -198,8 +202,10 @@ const Services = () => {
         },
       ],
       // downloadLink: "https://example.com/pharmacist.zip",
-      androidLink: "https://example.com/pharmacist-android.apk5",
-      iosLink: "https://example.com/pharmacist-ios.ipa6",
+      androidLink:
+        "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/desktop_programs/pharmacist/english/PharmaInstaller.rar",
+      iosLink:
+        "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/desktop_programs/pharmacist/italian/pharmacist_program.rar",
     },
   ];
 
@@ -399,7 +405,7 @@ const Services = () => {
             <div className="popup-buttons">
               <button
                 onClick={() =>
-                  window.open(selectedPackage.androidLink, "_blank")
+                  window.open(selectedPackage.androidLink, "_self")
                 }
                 className="popup-download-btn android"
               >
@@ -410,10 +416,10 @@ const Services = () => {
                 />
               </button>
               <button
-                onClick={() => window.open(selectedPackage.iosLink, "_blank")}
+                onClick={() => window.open(selectedPackage.iosLink, "_self")}
                 className="popup-download-btn ios"
               >
-                Download Italic Version
+                Download Italian Version
                 <FaCloudArrowDown
                   className="icon"
                   style={{ marginLeft: "35px" }}
