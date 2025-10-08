@@ -26,11 +26,11 @@ const DASHBOARD_ROUTES = {
     name: "Organization",
     icon: HiOfficeBuilding,
   },
-  apiKeys: {
-    path: "/dashboard/api-keys",
-    name: "API Keys",
-    icon: HiKey,
-  },
+  // apiKeys: {
+  //   path: "/docs/api-keys",
+  //   name: "API Keys",
+  //   icon: HiKey,
+  // },
   avatar: {
     path: "/avatars",
     name: "Try out Avatars",
@@ -52,16 +52,16 @@ const DashboardLayout = ({ children }) => {
       label: DASHBOARD_ROUTES.dashboard.name,
       href: DASHBOARD_ROUTES.dashboard.path,
     },
-    {
-      icon: DASHBOARD_ROUTES.organization.icon,
-      label: DASHBOARD_ROUTES.organization.name,
-      href: DASHBOARD_ROUTES.organization.path,
-    },
-    {
-      icon: DASHBOARD_ROUTES.apiKeys.icon,
-      label: DASHBOARD_ROUTES.apiKeys.name,
-      href: DASHBOARD_ROUTES.apiKeys.path,
-    },
+    // {
+    //   icon: DASHBOARD_ROUTES.organization.icon,
+    //   label: DASHBOARD_ROUTES.organization.name,
+    //   href: DASHBOARD_ROUTES.organization.path,
+    // },
+    // {
+    //   icon: DASHBOARD_ROUTES.apiKeys.icon,
+    //   label: DASHBOARD_ROUTES.apiKeys.name,
+    //   href: DASHBOARD_ROUTES.apiKeys.path,
+    // },
     {
       icon: DASHBOARD_ROUTES.avatar.icon,
       label: DASHBOARD_ROUTES.avatar.name,
@@ -157,7 +157,7 @@ const DashboardLayout = ({ children }) => {
                     className="dashboard-user-avatar-img"
                     onError={(e) => {
                       e.target.style.display = "none";
-                      e.target.nextSibling.style.display = "flex";
+                      // e.target.nextSibling.style.display = "flex";
                     }}
                   />
                 ) : null}
@@ -186,7 +186,7 @@ const DashboardLayout = ({ children }) => {
                           className="dashboard-dropdown-avatar-img"
                           onError={(e) => {
                             e.target.style.display = "none";
-                            e.target.nextSibling.style.display = "flex";
+                            // e.target.nextSibling.style.display = "flex";
                           }}
                         />
                       ) : null}

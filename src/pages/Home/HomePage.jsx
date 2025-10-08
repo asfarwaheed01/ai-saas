@@ -6,13 +6,14 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 // import Test from "../../image/test.jpg";
 import Image1 from "../../assets/1.jpeg";
 import Image2 from "../../assets/2.jpeg";
-import Image3 from "../../assets/3.jpeg";
+import Image3 from "../../assets/3.png";
 import Image4 from "../../assets/4.jpeg";
 import Slider from "../../components/slider";
 import TryOurAvatars from "../../components/HomePage/TryOurAvatars";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <section>
@@ -430,6 +431,36 @@ const HomePage = () => {
       <section className="container-xlarge">
         <div className="slider-space">
           <Slider2 />
+        </div>
+      </section>
+      {/* <section className="live-api-section container-xlarge">
+        <h2 className="api-heading">Developer's API</h2>
+
+        <div
+          className="api-box"
+          onClick={() => navigate("/docs/getting-started")}
+        >
+          <div className="api-code">https://saas.todopharma.com/</div>
+          <div className="tooltip">Access Developer API →</div>
+        </div>
+      </section> */}
+      <section className="live-api-section container-xlarge">
+        <h2 className="api-heading">Developer API</h2>
+
+        <div
+          className="api-box"
+          onClick={() => navigate("/docs/getting-started")}
+        >
+          <pre className="api-code">
+            {`const url = https://saas.todopharma.com/
+  {
+    auth: {
+      token: 'your_api_key_here'
+    },
+  }
+`}
+          </pre>
+          <div className="tooltip">Access Developer API 🔒</div>
         </div>
       </section>
     </>

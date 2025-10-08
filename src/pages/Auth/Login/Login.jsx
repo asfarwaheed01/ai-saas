@@ -63,10 +63,13 @@ const Login = () => {
 
         if (loginResult.success) {
           // Reset form
-          setFormData({ username: "", email: "", password: "" });
-
-          // Redirect to home page
-          navigate("/dashboard");
+          // setFormData({ username: "", email: "", password: "" });
+          // navigate("/dashboard");
+          if (data.is_superuser) {
+            navigate("/dashboard");
+          } else {
+            navigate("/docs/getting-started");
+          }
         } else {
           throw new Error(
             loginResult.error || "Failed to save authentication data"

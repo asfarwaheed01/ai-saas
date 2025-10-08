@@ -15,6 +15,8 @@ import { backendURL } from "../../config/constants";
 import { useAuth } from "../../providers/AuthContext";
 import "./ApiKeys.css";
 import { HiExclamationTriangle } from "react-icons/hi2";
+import AuthPopup from "../../components/AuthPopUp";
+import { useLocation } from "react-router-dom";
 
 const Apikeys = () => {
   // State management
@@ -27,8 +29,10 @@ const Apikeys = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(null);
   const [visibleKeys, setVisibleKeys] = useState(new Set());
   const [copiedKey, setCopiedKey] = useState(null);
+  const [showAuthPopup, setShowAuthPopup] = useState(false); //new code
 
   const { getAccessToken, logout } = useAuth();
+  const location = useLocation();
 
   // API Headers with memoization
   const apiHeaders = useMemo(
@@ -94,6 +98,12 @@ const Apikeys = () => {
 
   // Create API key
   const createApiKey = useCallback(async () => {
+    const token = getAccessToken();
+
+    if (!token) {
+      setShowAuthPopup(true);
+      return;
+    }
     try {
       setIsCreating(true);
       setError(null);
@@ -452,6 +462,32 @@ const Apikeys = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* {showAuthPopup && (
+        <AuthPopup
+          onClose={() => setShowAuthPopup(false)}
+          redirectPath={location.pathname}
+        />
+      )}
+      {showAuthPopup && (
+        <AuthPopup
+          onClose={() => setShowAuthPopup(false)}
+          onSuccess={() => {
+            setShowAuthPopup(false);
+            fetchApiKeys();
+          }}
+        />
+      )} */}
+      {showAuthPopup && (
+        <AuthPopup
+          onClose={() => setShowAuthPopup(false)}
+          redirectPath={location.pathname}
+          onSuccess={() => {
+            setShowAuthPopup(false);
+            fetchApiKeys(); // refresh after successful login
+          }}
+        />
       )}
     </div>
   );

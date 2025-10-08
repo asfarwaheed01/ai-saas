@@ -173,3 +173,7 @@
 .white-links a:hover {
   color: black;
 }
+
+.icon-down {
+  padding-top: 0px;
+}

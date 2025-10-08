@@ -15,6 +15,7 @@ import "./Services.css";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import { FaCloudArrowDown } from "react-icons/fa6";
+import { useAuth } from "../../providers/AuthContext";
 
 const Services = () => {
   const navigate = useNavigate();
@@ -113,7 +114,8 @@ const Services = () => {
   const packages = [
     {
       id: "beauty",
-      title: "Beauty Salon – €120/month",
+      // title: "Beauty Salon – €120/month",
+      title: "Beauty Salon – Try Free for 3 months",
       description:
         "Specialized in beauty and wellness consultations, enhancing customer experience in salons.",
       features: [
@@ -145,7 +147,7 @@ const Services = () => {
     },
     {
       id: "medical",
-      title: "Medical Consultant – €120/month",
+      title: "Medical Consultant –  Try Free for 3 months",
       description:
         "Ideal for clinics, hospitals, and medical practices offering robust support.",
       features: [
@@ -177,7 +179,7 @@ const Services = () => {
     },
     {
       id: "pharmacist",
-      title: "Pharmacist – €120/month",
+      title: "Pharmacist –  Try Free for 3 months",
       description:
         "Specifically tailored for pharmacies, provides expert advice and guidance.",
       features: [
@@ -212,8 +214,13 @@ const Services = () => {
   const [selectedPackage, setSelectedPackage] = useState(packages[0]);
 
   const [showDownloadPopup, setShowDownloadPopup] = useState(false);
+  const { user } = useAuth();
 
   const handleShowPopup = (pkg) => {
+    if (!user) {
+      navigate(ROUTES.login.path);
+      return;
+    }
     setSelectedPackage(pkg);
     setShowDownloadPopup(true);
   };
@@ -230,6 +237,10 @@ const Services = () => {
   // const wordpressPluginLink = "https://example.com/wordpress-plugin.zip";
 
   const handleDownloadPlugins = (link) => {
+    if (!user) {
+      navigate(ROUTES.login.path);
+      return;
+    }
     window.open(link, "_blank");
   };
 
@@ -460,9 +471,23 @@ const Services = () => {
               <FaWordpress className="icon" /> Download WordPress Plugin{" "}
               <FaDownload />
             </button> */}
-            <a
+            {/* <a
+            
               href="https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin.zip"
               download
+            > */}
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                if (!user) {
+                  navigate(ROUTES.login.path);
+                  return;
+                }
+                window.open(
+                  "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin.zip",
+                  "_blank"
+                );
+              }}
             >
               <button className="plugin-button wordpress">
                 <FaWordpress className="icon" /> Download WordPress Plugin{" "}
@@ -473,7 +498,7 @@ const Services = () => {
         </div>
       </div>
 
-      <div className="mobile-apps-section">
+      {/* <div className="mobile-apps-section">
         <div className="mobile-apps-container">
           <h2 className="mobile-apps-title">Download Our Mobile Apps</h2>
           <p className="mobile-apps-subtitle">
@@ -482,7 +507,6 @@ const Services = () => {
           </p>
 
           <div className="mobile-apps-grid">
-            {/* Android Column */}
             <div className="mobile-app-card android">
               <h3>Android Version</h3>
               <p>
@@ -503,7 +527,6 @@ const Services = () => {
               </button>
             </div>
 
-            {/* iOS Column */}
             <div className="mobile-app-card ios">
               <h3>iOS Version</h3>
               <p>
@@ -525,17 +548,21 @@ const Services = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="services-cta">
         <div className="cta-content">
-          <h2>Ready to transform your customer experience?</h2>
+          {/* <h2>Ready to transform your customer experience?</h2> */}
+          <h2>Build with Our API</h2>
           <p>
-            Get started with our AI-powered customer service platform today.
+            {/* Get started with our AI-powered customer service platform today. */}
+            Empower your applications with our AI-driven platform. Explore our
+            API documentation to learn how to integrate, automate, and innovate
+            with powerful endpoints and developer tools.
           </p>
           <div className="cta-buttons">
             <button className="primary-button" onClick={handleClick}>
-              Get Started
+              View API Docs
             </button>
           </div>
         </div>

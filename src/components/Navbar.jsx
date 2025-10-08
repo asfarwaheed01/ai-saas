@@ -5,9 +5,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../providers/AuthContext";
 import "./Navbar.css";
 import { IoChevronDown } from "react-icons/io5";
+import { HiLogout } from "react-icons/hi";
 
 const Navbar = () => {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
@@ -26,6 +27,16 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLogout = () => {
+    try {
+      logout();
+      setIsUserDropdownOpen(false);
+      navigate(ROUTES.login.path);
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
 
   // Close user dropdown when clicking outside
   useEffect(() => {
@@ -129,14 +140,19 @@ const Navbar = () => {
           {/* Mobile-only user menu items */}
           {isAuthenticated && (
             <>
-              <li className="navbar-item mobile-only">
+              {/* <li className="navbar-item mobile-only">
                 <Link to={ROUTES.dashboard.path} onClick={closeMobileMenu}>
                   Dashboard
                 </Link>
-              </li>
+              </li> */}
               <li className="navbar-item mobile-only">
                 <Link to={ROUTES.avatars.path} onClick={closeMobileMenu}>
                   Try out Avatars
+                </Link>
+              </li>
+              <li className="navbar-item mobile-only">
+                <Link to="/" onClick={handleLogout}>
+                  Logout
                 </Link>
               </li>
             </>
@@ -184,19 +200,22 @@ const Navbar = () => {
 
               {isUserDropdownOpen && (
                 <div className="navbar-dropdown-menu">
-                  <Link
+                  {/* <Link
                     to={ROUTES.dashboard.path}
                     className="dropdown-item"
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
                     Dashboard
-                  </Link>
+                  </Link> */}
                   <Link
                     to={ROUTES.avatars.path}
                     className="dropdown-item"
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
                     Try out Avatars
+                  </Link>
+                  <Link to="/" className="dropdown-item" onClick={handleLogout}>
+                    <HiLogout className="icon-down" /> Logout
                   </Link>
                 </div>
               )}

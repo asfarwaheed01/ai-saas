@@ -1,0 +1,43 @@
+/* Popup overlay and card styles */
+.auth-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.auth-popup-card {
+  position: relative;
+  animation: popupFadeIn 0.3s ease-out;
+}
+
+.auth-popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #444;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.auth-popup-close:hover {
+  transform: scale(1.2);
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -10,12 +10,21 @@ import {
   FaRobot,
   FaChevronDown,
   FaChevronRight,
+  FaPlus,
 } from "react-icons/fa";
 import "./Sidebar.css";
 import { ROUTES } from "../../../routes/routes";
 import Logo from "../../../assets/logo.png";
+import { IoKeySharp } from "react-icons/io5";
 
 const API_SECTIONS = [
+  {
+    id: "generate-api-key",
+    title: "Generate API Keys",
+    icon: <IoKeySharp />,
+    path: "/docs/api-keys",
+    items: [],
+  },
   {
     id: "getting-started",
     title: "Getting API Documentation",
@@ -64,44 +73,44 @@ const API_SECTIONS = [
       },
     ],
   },
-  {
-    id: "payments",
-    title: "Payments API",
-    icon: <FaCreditCard />,
-    path: "/docs/payments",
-    items: [
-      {
-        id: "create-subscription",
-        title: "Create Subscription Plan",
-        path: "/docs/payments/create-subscription",
-      },
-      {
-        id: "list-subscriptions",
-        title: "List Subscription Plans",
-        path: "/docs/payments/list-subscriptions",
-      },
-      {
-        id: "update-subscription",
-        title: "Update Subscription Plan",
-        path: "/docs/payments/update-subscription",
-      },
-      {
-        id: "stripe-payment",
-        title: "Create Stripe Payment Session",
-        path: "/docs/payments/stripe-payment",
-      },
-      {
-        id: "cancel-subscription",
-        title: "Cancel Subscription",
-        path: "/docs/payments/cancel-subscription",
-      },
-      {
-        id: "active-subscription",
-        title: "Get Active Subscription",
-        path: "/docs/payments/active-subscription",
-      },
-    ],
-  },
+  // {
+  //   id: "payments",
+  //   title: "Payments API",
+  //   icon: <FaCreditCard />,
+  //   path: "/docs/payments",
+  //   items: [
+  //     {
+  //       id: "create-subscription",
+  //       title: "Create Subscription Plan",
+  //       path: "/docs/payments/create-subscription",
+  //     },
+  //     {
+  //       id: "list-subscriptions",
+  //       title: "List Subscription Plans",
+  //       path: "/docs/payments/list-subscriptions",
+  //     },
+  //     {
+  //       id: "update-subscription",
+  //       title: "Update Subscription Plan",
+  //       path: "/docs/payments/update-subscription",
+  //     },
+  //     {
+  //       id: "stripe-payment",
+  //       title: "Create Stripe Payment Session",
+  //       path: "/docs/payments/stripe-payment",
+  //     },
+  //     {
+  //       id: "cancel-subscription",
+  //       title: "Cancel Subscription",
+  //       path: "/docs/payments/cancel-subscription",
+  //     },
+  //     {
+  //       id: "active-subscription",
+  //       title: "Get Active Subscription",
+  //       path: "/docs/payments/active-subscription",
+  //     },
+  //   ],
+  // },
 ];
 
 const Sidebar = () => {

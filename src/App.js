@@ -31,6 +31,7 @@ import Certificate from "./pages/Certificate/Certificate";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
 import PaymentFailure from "./pages/PaymentFailure/PaymentFailure";
+import ProtectedRoute from "./routes/protectedRoutes";
 
 function App() {
   return (
@@ -116,132 +117,167 @@ function App() {
         <Route
           path={ROUTES.docs.path}
           element={
-            <DocsLayout>
-              <GettingStarted />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <GettingStarted />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.docsGettingStarted.path}
           element={
-            <DocsLayout>
-              <GettingStarted />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <GettingStarted />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         {/* Knowledge Base API Routes */}
         <Route
           path={ROUTES.docsListDocuments.path}
           element={
-            <DocsLayout>
-              <ListDocumentsPage />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <ListDocumentsPage />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.docsUploadDocuments.path}
           element={
-            <DocsLayout>
-              <UploadAndProcessDoc />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <UploadAndProcessDoc />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.docsDeleteDocuments.path}
           element={
-            <DocsLayout>
-              <DeleteDocuments />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <DeleteDocuments />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         {/* Agent API Routes */}
         <Route
           path={ROUTES.docsProcessVideo.path}
           element={
-            <DocsLayout>
-              <AgentProcessVideo />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <AgentProcessVideo />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.docsGenerateResponse.path}
           element={
-            <DocsLayout>
-              <AgentConversationalResponse />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <AgentConversationalResponse />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.docsCreateSubscription.path}
           element={
-            <DocsLayout>
-              <CreateSubscriptionPlan />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <CreateSubscriptionPlan />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.docsListSubscriptions.path}
           element={
-            <DocsLayout>
-              <ListSubscriptionPlans />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <ListSubscriptionPlans />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.docsUpdateSubscription.path}
           element={
-            <DocsLayout>
-              <UpdateSubscriptionPlan />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <UpdateSubscriptionPlan />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.docsStripePayment.path}
           element={
-            <DocsLayout>
-              <CreateStripePaymentSession />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <CreateStripePaymentSession />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.docsCancelSubscription.path}
           element={
-            <DocsLayout>
-              <CancelSubscription />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <CancelSubscription />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.docsActiveSubscription.path}
           element={
-            <DocsLayout>
-              <GetActiveSubscription />
-            </DocsLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <GetActiveSubscription />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         {/* Dashboard Routes */}
         <Route
           path={ROUTES.dashboard.path}
           element={
-            <DashboardLayout>
-              <Dashboard />
-            </DashboardLayout>
+            <ProtectedRoute adminOnly>
+              <DashboardLayout>
+                <Dashboard />
+              </DashboardLayout>
+            </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.organization.path}
           element={
-            <DashboardLayout>
-              <OrganizationContext />
-            </DashboardLayout>
+            <ProtectedRoute>
+              <DashboardLayout>
+                <OrganizationContext />
+              </DashboardLayout>
+            </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.apiKeys.path}
           element={
-            <DashboardLayout>
-              <Apikeys />
-            </DashboardLayout>
+            // <DashboardLayout>
+            //   <Apikeys />
+            // </DashboardLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
+                <Apikeys />
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
 
