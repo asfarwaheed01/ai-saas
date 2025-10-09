@@ -47,33 +47,35 @@ const AboutUs = () => {
         <p>In a global context in which user experience and automation become fundamental for success, TODO PHARMA AI is the technological response to the evolution of consumer behavior, today increasingly demanding, fast and digital.</p>
       </div> */}
 
-      <div class="container">
-        <div class="text-section">
-          <h2>
-            <i class="fas fa-eye"></i> Vision
-          </h2>
-          <p>
-            TODO PHARMA AI is the world's first platform designed to offer
-            intelligent, empathetic and professional advice in the beauty,
-            pharma and medical sectors, both online and in physical stores.
-          </p>
-          <p>
-            We have developed TODO AI, a hybrid artificial intelligence engine,
-            trained on vertical datasets and capable of learning from the
-            customer's domain in real time. Through a network of ultra-realistic
-            avatars, the system takes the advice experience to a new
-            interactive, personalized and autonomous level.
-          </p>
-          <p>
-            In a global context in which user experience and automation become
-            fundamental for success, TODO PHARMA AI is the technological
-            response to the evolution of consumer behavior, today increasingly
-            demanding, fast and digital.
-          </p>
-        </div>
+      <div className="bg-vision">
+        <div class="container">
+          <div class="text-section">
+            <h2>
+              <i class="fas fa-eye"></i> Vision
+            </h2>
+            <p>
+              TODO PHARMA AI is the world's first platform designed to offer
+              intelligent, empathetic and professional advice in the beauty,
+              pharma and medical sectors, both online and in physical stores.
+            </p>
+            <p>
+              We have developed TODO AI, a hybrid artificial intelligence
+              engine, trained on vertical datasets and capable of learning from
+              the customer's domain in real time. Through a network of
+              ultra-realistic avatars, the system takes the advice experience to
+              a new interactive, personalized and autonomous level.
+            </p>
+            <p>
+              In a global context in which user experience and automation become
+              fundamental for success, TODO PHARMA AI is the technological
+              response to the evolution of consumer behavior, today increasingly
+              demanding, fast and digital.
+            </p>
+          </div>
 
-        <div class="image-section">
-          <img src={Eye} alt="Vision" />
+          <div class="image-section">
+            <img src={Eye} alt="Vision" />
+          </div>
         </div>
       </div>
 
