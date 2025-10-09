@@ -20,7 +20,7 @@ const ListDocumentsPage = () => {
         <div className="docs-endpoint">
           <div className="docs-endpoint-header">
             <span className="docs-endpoint-method get">GET</span>
-            <code className="docs-endpoint-url">/api/documents/</code>
+            <code className="docs-endpoint-url">/api/knowledge-base/docs/</code>
           </div>
 
           <div className="docs-endpoint-meta">
@@ -46,7 +46,7 @@ const ListDocumentsPage = () => {
             </div>
             <pre>
               {`curl -X GET \\
-  https://api.example.com/api/documents/ \\
+  https://api.example.com/api/knowledge-base/docs/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json"`}
             </pre>

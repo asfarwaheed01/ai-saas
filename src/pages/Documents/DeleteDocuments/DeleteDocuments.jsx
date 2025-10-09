@@ -30,7 +30,7 @@ const DeleteDocuments = () => {
           <div className="docs-endpoint-header">
             <span className="docs-endpoint-method delete">DELETE</span>
             <code className="docs-endpoint-url">
-              /api/documents/&lt;document_id&gt;/&lt;domain&gt;/
+              /api/knowledge-base/docs/delete/&lt;document_id&gt;/&lt;domain&gt;/
             </code>
           </div>
 
@@ -100,7 +100,7 @@ const DeleteDocuments = () => {
             </div>
             <pre>
               {`curl -X DELETE \\
-  https://api.example.com/api/documents/123/pharma/ \\
+  https://api.example.com/api/knowledge-base/docs/delete/123/pharma/ \\
   -H "Authorization: Bearer YOUR_API_KEY"`}
             </pre>
           </div>
@@ -328,7 +328,7 @@ const DeleteDocuments = () => {
   const apiKey = 'YOUR_API_KEY';
   
   try {
-    const response = await fetch(\`https://api.example.com/api/documents/\${documentId}/\${domain}/\`, {
+    const response = await fetch(\`https://api.example.com/api/knowledge-base/docs/delete/\${documentId}/\${domain}/\`, {
       method: 'DELETE',
       headers: {
         'Authorization': \`Bearer \${apiKey}\`,

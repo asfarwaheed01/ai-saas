@@ -27,7 +27,7 @@ const UploadAndProcessDoc = () => {
         <div className="docs-endpoint">
           <div className="docs-endpoint-header">
             <span className="docs-endpoint-method post">POST</span>
-            <code className="docs-endpoint-url">/api/documents/</code>
+            <code className="docs-endpoint-url">/api/knowledge-base/docs/</code>
           </div>
 
           <div className="docs-endpoint-meta">
@@ -98,7 +98,7 @@ const UploadAndProcessDoc = () => {
             </div>
             <pre>
               {`curl -X POST \\
-  https://api.example.com/api/documents/ \\
+  https://api.example.com/api/knowledge-base/docs/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -F "file=@/path/to/your/document.csv" \\
   -F "domain=pharma"`}
@@ -327,7 +327,7 @@ formData.append('file', fileInput.files[0]);
 formData.append('domain', domain);
 
 // Make the API request
-fetch('https://api.example.com/api/documents/', {
+fetch('https://api.example.com/api/knowledge-base/docs/', {
   method: 'POST',
   headers: {
     'Authorization': \`Bearer \${apiKey}\`

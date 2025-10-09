@@ -35,7 +35,9 @@ const AgentConversationalResponse = () => {
         <div className="docs-endpoint">
           <div className="docs-endpoint-header">
             <span className="docs-endpoint-method post">POST</span>
-            <code className="docs-endpoint-url">/api/generate-response/</code>
+            <code className="docs-endpoint-url">
+              /api/agents/generate-response/
+            </code>
           </div>
 
           <div className="docs-endpoint-meta">
@@ -155,7 +157,7 @@ const AgentConversationalResponse = () => {
                       className="docs-code-copy"
                       onClick={() =>
                         copyToClipboard(`curl -X POST \\
-  https://api.example.com/api/generate-response/ \\
+  https://api.example.com/api/agents/generate-response/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -169,7 +171,7 @@ const AgentConversationalResponse = () => {
                   </div>
                   <pre>
                     {`curl -X POST \\
-  https://api.example.com/api/generate-response/ \\
+  https://api.example.com/api/agents/generate-response/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -187,7 +189,7 @@ const AgentConversationalResponse = () => {
                       className="docs-code-copy"
                       onClick={() =>
                         copyToClipboard(`curl -X POST \\
-  https://api.example.com/api/generate-response/ \\
+  https://api.example.com/api/agents/generate-response/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -F "domain=cosmetici" \\
   -F "audio_file=@/path/to/your/audio.wav"`)
@@ -198,7 +200,7 @@ const AgentConversationalResponse = () => {
                   </div>
                   <pre>
                     {`curl -X POST \\
-  https://api.example.com/api/generate-response/ \\
+  https://api.example.com/api/agents/generate-response/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -F "domain=cosmetici" \\
   -F "audio_file=@/path/to/your/audio.wav"`}
@@ -473,7 +475,7 @@ const AgentConversationalResponse = () => {
                     copyToClipboard(`// Function to send a text query and process the response
 async function generateResponse(domain, textQuery) {
   const apiKey = 'YOUR_API_KEY';
-  const url = 'https://api.example.com/api/generate-response/';
+  const url = 'https://api.example.com/api/agents/generate-response/';
   
   try {
     const response = await fetch(url, {
@@ -553,7 +555,7 @@ sendButton.addEventListener('click', async () => {
                 {`// Function to send a text query and process the response
 async function generateResponse(domain, textQuery) {
   const apiKey = 'YOUR_API_KEY';
-  const url = 'https://api.example.com/api/generate-response/';
+  const url = 'https://api.example.com/api/agents/generate-response/';
   
   try {
     const response = await fetch(url, {
@@ -648,7 +650,7 @@ sendButton.addEventListener('click', async () => {
                     copyToClipboard(`// Function to upload audio and get response
 async function uploadAudioAndGetResponse(domain, audioFile) {
   const apiKey = 'YOUR_API_KEY';
-  const url = 'https://api.example.com/api/generate-response/';
+  const url = 'https://api.example.com/api/agents/generate-response/';
   
   const formData = new FormData();
   formData.append('domain', domain);
@@ -745,7 +747,7 @@ stopButton.addEventListener('click', () => {
                 {`// Function to upload audio and get response
 async function uploadAudioAndGetResponse(domain, audioFile) {
   const apiKey = 'YOUR_API_KEY';
-  const url = 'https://api.example.com/api/generate-response/';
+  const url = 'https://api.example.com/api/agents/generate-response/';
   
   const formData = new FormData();
   formData.append('domain', domain);

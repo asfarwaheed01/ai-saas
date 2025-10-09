@@ -114,8 +114,8 @@ const Services = () => {
   const packages = [
     {
       id: "beauty",
-      // title: "Beauty Salon – €120/month",
-      title: "Beauty Salon – Try Free for 3 months",
+      title: "Beauty Salon – €120/month - Try Free for 3 months",
+      // title: "Beauty Salon – Try Free for 3 months",
       description:
         "Specialized in beauty and wellness consultations, enhancing customer experience in salons.",
       features: [
@@ -147,7 +147,7 @@ const Services = () => {
     },
     {
       id: "medical",
-      title: "Medical Consultant –  Try Free for 3 months",
+      title: "Medical Consultant – €120/month –  Try Free for 3 months",
       description:
         "Ideal for clinics, hospitals, and medical practices offering robust support.",
       features: [
@@ -179,7 +179,7 @@ const Services = () => {
     },
     {
       id: "pharmacist",
-      title: "Pharmacist –  Try Free for 3 months",
+      title: "Pharmacist – €120/month – Try Free for 3 months",
       description:
         "Specifically tailored for pharmacies, provides expert advice and guidance.",
       features: [

@@ -33,7 +33,9 @@ const AgentProcessVideo = () => {
         <div className="docs-endpoint">
           <div className="docs-endpoint-header">
             <span className="docs-endpoint-method post">POST</span>
-            <code className="docs-endpoint-url">/api/process-video/</code>
+            <code className="docs-endpoint-url">
+              /api/agents/process-video/
+            </code>
           </div>
 
           <div className="docs-endpoint-meta">
@@ -118,7 +120,7 @@ const AgentProcessVideo = () => {
                 className="docs-code-copy"
                 onClick={() =>
                   copyToClipboard(`curl -X POST \\
-  https://api.example.com/api/process-video/ \\
+  https://api.example.com/api/agents/process-video/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -F "video_file=@/path/to/your/video.mp4"`)
                 }
@@ -128,7 +130,7 @@ const AgentProcessVideo = () => {
             </div>
             <pre>
               {`curl -X POST \\
-  https://api.example.com/api/process-video/ \\
+  https://api.example.com/api/agents/process-video/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -F "video_file=@/path/to/your/video.mp4"`}
             </pre>
@@ -399,7 +401,7 @@ const resultDiv = document.getElementById('result');
 resultDiv.innerHTML = 'Processing video, please wait...';
 
 // Make the API request
-fetch('https://api.example.com/api/process-video/', {
+fetch('https://api.example.com/api/agents/process-video/', {
   method: 'POST',
   headers: {
     'Authorization': \`Bearer \${apiKey}\`
@@ -452,7 +454,7 @@ const resultDiv = document.getElementById('result');
 resultDiv.innerHTML = 'Processing video, please wait...';
 
 // Make the API request
-fetch('https://api.example.com/api/process-video/', {
+fetch('https://api.example.com/api/agents/process-video/', {
   method: 'POST',
   headers: {
     'Authorization': \`Bearer \${apiKey}\`

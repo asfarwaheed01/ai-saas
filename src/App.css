@@ -467,6 +467,11 @@ section .button {
     font-size: 1rem;
   }
 
+  /* .navbar-container {
+    max-width: 17rem;
+    margin: 0px !important;
+  } */
+
   .navbar-button {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;

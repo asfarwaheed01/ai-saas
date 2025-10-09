@@ -30,6 +30,28 @@ export const ROUTES = {
     name: "Delete Documents",
   },
 
+  //Organizational Context
+  docsOrganizationalContext: {
+    path: "/docs/organizational-context",
+    name: "Organizational Context",
+  },
+  docsRetrieveOrganization: {
+    path: "/docs/organizational-context/retrieve",
+    name: "Retrieve Organization Details",
+  },
+  docsCreateOrganization: {
+    path: "/docs/organizational-context/create",
+    name: "Create Organization Details",
+  },
+  docsUpdateOrganization: {
+    path: "/docs/organizational-context/update",
+    name: "Update Organization Details",
+  },
+  docsDeleteOrganization: {
+    path: "/docs/organizational-context/delete",
+    name: "Delete Organization Details",
+  },
+
   // Agent API routes
   docsAgent: { path: "/docs/agent", name: "Agent API" },
   docsProcessVideo: {

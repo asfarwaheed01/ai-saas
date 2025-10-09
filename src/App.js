@@ -32,6 +32,10 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
 import PaymentFailure from "./pages/PaymentFailure/PaymentFailure";
 import ProtectedRoute from "./routes/protectedRoutes";
+import GetOrganizationContext from "./pages/Documents/GetOrganizationalContext/GetOrganizationContext";
+import CreateOrganizationContext from "./pages/Documents/CreateOrganizationContext/CreateOrganizationContext";
+import UpdateOrganizationContext from "./pages/Documents/UpdateOrganizationContext/UpdateOrganizationContext";
+import DeleteOrganizationContext from "./pages/Documents/DeleteOrganizationContext/DeleteOrganizationContext";
 
 function App() {
   return (
@@ -118,9 +122,9 @@ function App() {
           path={ROUTES.docs.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <GettingStarted />
-              </DocsLayout>
+            <DocsLayout>
+              <GettingStarted />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -128,9 +132,9 @@ function App() {
           path={ROUTES.docsGettingStarted.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <GettingStarted />
-              </DocsLayout>
+            <DocsLayout>
+              <GettingStarted />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -139,9 +143,9 @@ function App() {
           path={ROUTES.docsListDocuments.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <ListDocumentsPage />
-              </DocsLayout>
+            <DocsLayout>
+              <ListDocumentsPage />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -149,9 +153,9 @@ function App() {
           path={ROUTES.docsUploadDocuments.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <UploadAndProcessDoc />
-              </DocsLayout>
+            <DocsLayout>
+              <UploadAndProcessDoc />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -159,9 +163,9 @@ function App() {
           path={ROUTES.docsDeleteDocuments.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <DeleteDocuments />
-              </DocsLayout>
+            <DocsLayout>
+              <DeleteDocuments />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -170,9 +174,9 @@ function App() {
           path={ROUTES.docsProcessVideo.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <AgentProcessVideo />
-              </DocsLayout>
+            <DocsLayout>
+              <AgentProcessVideo />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -180,9 +184,9 @@ function App() {
           path={ROUTES.docsGenerateResponse.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <AgentConversationalResponse />
-              </DocsLayout>
+            <DocsLayout>
+              <AgentConversationalResponse />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -190,9 +194,9 @@ function App() {
           path={ROUTES.docsCreateSubscription.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <CreateSubscriptionPlan />
-              </DocsLayout>
+            <DocsLayout>
+              <CreateSubscriptionPlan />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -200,9 +204,9 @@ function App() {
           path={ROUTES.docsListSubscriptions.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <ListSubscriptionPlans />
-              </DocsLayout>
+            <DocsLayout>
+              <ListSubscriptionPlans />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -210,9 +214,9 @@ function App() {
           path={ROUTES.docsUpdateSubscription.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <UpdateSubscriptionPlan />
-              </DocsLayout>
+            <DocsLayout>
+              <UpdateSubscriptionPlan />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -220,9 +224,9 @@ function App() {
           path={ROUTES.docsStripePayment.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <CreateStripePaymentSession />
-              </DocsLayout>
+            <DocsLayout>
+              <CreateStripePaymentSession />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -230,9 +234,9 @@ function App() {
           path={ROUTES.docsCancelSubscription.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <CancelSubscription />
-              </DocsLayout>
+            <DocsLayout>
+              <CancelSubscription />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -240,9 +244,50 @@ function App() {
           path={ROUTES.docsActiveSubscription.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <GetActiveSubscription />
-              </DocsLayout>
+            <DocsLayout>
+              <GetActiveSubscription />
+            </DocsLayout>
+            // </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path={ROUTES.docsRetrieveOrganization.path}
+          element={
+            // <ProtectedRoute>
+            <DocsLayout>
+              <GetOrganizationContext />
+            </DocsLayout>
+            // </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.docsCreateOrganization.path}
+          element={
+            // <ProtectedRoute>
+            <DocsLayout>
+              <CreateOrganizationContext />
+            </DocsLayout>
+            // </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.docsUpdateOrganization.path}
+          element={
+            // <ProtectedRoute>
+            <DocsLayout>
+              <UpdateOrganizationContext />
+            </DocsLayout>
+            // </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.docsDeleteOrganization.path}
+          element={
+            // <ProtectedRoute>
+            <DocsLayout>
+              <DeleteOrganizationContext />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />
@@ -274,9 +319,9 @@ function App() {
             //   <Apikeys />
             // </DashboardLayout>
             // <ProtectedRoute>
-              <DocsLayout>
-                <Apikeys />
-              </DocsLayout>
+            <DocsLayout>
+              <Apikeys />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />

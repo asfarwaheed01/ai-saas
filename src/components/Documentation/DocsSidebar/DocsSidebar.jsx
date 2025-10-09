@@ -12,6 +12,7 @@ import {
   FaChevronRight,
   FaPlus,
 } from "react-icons/fa";
+import { GrOrganization } from "react-icons/gr";
 import "./Sidebar.css";
 import { ROUTES } from "../../../routes/routes";
 import Logo from "../../../assets/logo.png";
@@ -70,6 +71,34 @@ const API_SECTIONS = [
         id: "generate-response",
         title: "Generate Conversational Response",
         path: "/docs/agent/generate-response",
+      },
+    ],
+  },
+  {
+    id: "organization-context",
+    title: "Organizational Context",
+    icon: <GrOrganization />,
+    path: "/docs/organizational-context",
+    items: [
+      {
+        id: "get-organization",
+        title: "Retrive Organization Details",
+        path: "/docs/organizational-context/retrieve",
+      },
+      {
+        id: "create-organization",
+        title: "Create Organization Details",
+        path: "/docs/organizational-context/create",
+      },
+      {
+        id: "update-organization",
+        title: "Update Organization Details",
+        path: "/docs/organizational-context/update",
+      },
+      {
+        id: "delete-organization",
+        title: "Delete organization Details",
+        path: "/docs/organizational-context/delete",
       },
     ],
   },
