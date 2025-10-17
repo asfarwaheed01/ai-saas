@@ -2213,9 +2213,44 @@ const Avatars = () => {
     };
   };
 
+  // Signature generation function
+  const generatePluginSignature = async (payload) => {
+    const secretKey = "a4687fee-afdd-407a-a8c0-493b0c6972fc";
+
+    // Convert strings to ArrayBuffers
+    const enc = new TextEncoder();
+    const keyData = enc.encode(secretKey);
+    const payloadData = enc.encode(payload);
+
+    // Import the key for HMAC-SHA256
+    const cryptoKey = await window.crypto.subtle.importKey(
+      "raw",
+      keyData,
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"]
+    );
+
+    // Generate the HMAC signature
+    const signatureBuffer = await window.crypto.subtle.sign(
+      "HMAC",
+      cryptoKey,
+      payloadData
+    );
+
+    // Convert the signature to hex string
+    const signatureArray = Array.from(new Uint8Array(signatureBuffer));
+    const hexSignature = signatureArray
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+
+    return hexSignature;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const inputToSend = userInput.trim() || transcriptRef.current;
+
     if (!inputToSend || !selectedOption) {
       alert("Please enter a message and select a domain.");
       return;
@@ -2228,22 +2263,46 @@ const Avatars = () => {
       formData.append("domain", selectedOption);
       formData.append("text_query", inputToSend);
       formData.append("lang", selectedLanguage);
+      // formData.append("artificizen:todopharma_avatars:${selectedOption}:1.0.0")
+
+      const payload = `artificizen:todopharma_avatars:${selectedOption}:1.0.0`;
+      const signature = await generatePluginSignature(payload);
+
       const response = await fetch(`${backendURL}/agents/generate-response/`, {
         method: "POST",
         headers: {
-          "X-API-Key": "pk_669c5a085c8241a7b8b718c319a083fe",
+          // "X-API-Key": "pk_16c7ab4cb3564aa4811dda3180bbcb41",
+          "X-API-Key": "pk_b2cfcca7353942b58dc479dfb0a90014",
           "X-SIGNATURE":
-            "f5f5b384c39d8e7cb4ac6e1e065ada9b1435584e403d9003b78c8d668ca94429",
+            "290825050c59759b465c778334f5bcfcdff4fde8f9824dda72417b3d931fe203",
         },
         body: formData,
       });
 
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+      console.log(signature, "SSSSSIGNATURE");
+
+      // Always parse JSON — even on error
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
       }
 
-      const data = await response.json();
+      // Handle API errors (like 402)
+      if (!response.ok) {
+        const message =
+          data?.error ||
+          data?.message ||
+          `Request failed with status ${response.status}`;
+        alert(message);
+        console.error("❌ API Error:", message);
+        return; // Stop here
+      }
+
+      // Success flow
       console.log("✅ API Response:", data);
+
       if (!avatarRef.current) {
         console.error("Avatar reference is null");
         return;
@@ -2254,6 +2313,10 @@ const Avatars = () => {
         return;
       }
 
+      // await avatarRef.current.speak({
+      //   text: data.response,
+      //   task_type: TaskType.REPEAT,
+      // });
       if (avatarRef.current && data.response) {
         console.log("Making avatar speak:", data.response);
         await avatarRef.current.speak({
@@ -2266,7 +2329,7 @@ const Avatars = () => {
       transcriptRef.current = "";
     } catch (error) {
       console.error("❌ Error sending message:", error);
-      alert("Failed to send message. Check console for details.");
+      alert("Something went wrong. Check console for details.");
     } finally {
       setIsSpeaking(false);
     }
@@ -2392,33 +2455,6 @@ const Avatars = () => {
               </div>
 
               <div className="form-content">
-                {/* <div className="input-group">
-                  <label htmlFor="category-select" className="input-label">
-                    Choose Category
-                  </label>
-                  <select
-                    id="category-select"
-                    value={selectedOption}
-                    onChange={(e) => setSelectedOption(e.target.value)}
-                    className="avatar-select"
-                    disabled={isLoading}
-                    required
-                  >
-                    <option value="">Select Category</option>
-                    <option value="therapy">
-                      Mental health coaching/therapy counseling
-                    </option>
-                    <option value="beauty">Beauty consulting</option>
-                    <option value="consultation">
-                      Pharmaceutical consultancy
-                    </option>
-                    <option value="medical">Medical consultation</option>
-                  </select>
-                  {errors.category && (
-                    <p className="error-text">{errors.category}</p>
-                  )}
-                </div> */}
-
                 <div className="input-group">
                   <label htmlFor="category-select" className="input-label">
                     Choose Category
@@ -2663,45 +2699,6 @@ const Avatars = () => {
         <div className="container-medium">
           <div className="chat-section">
             <form onSubmit={handleSubmit} ref={formRef}>
-              {/* <div className="input-container">
-                <textarea
-                  value={userInput}
-                  onChange={(e) => setUserInput(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Type what you want the avatar to say..."
-                  className="fullscreen-chat-input"
-                  disabled={!streamReady}
-                  rows={2}
-                />
-                <button
-                  type="button"
-                  onClick={startListening}
-                  className={`fullscreen-speak-btn ${
-                    isListening ? "recording" : ""
-                  }`}
-                  disabled={!streamReady}
-                >
-                  {!isListening ? (
-                    <span className="speak-icon">🎙️</span>
-                  ) : (
-                    <div className="voice-wave-container">
-                      <div className="voice-wave"></div>
-                      <div className="voice-wave"></div>
-                      <div className="voice-wave"></div>
-                      <div className="voice-wave"></div>
-                      <div className="voice-wave"></div>
-                    </div>
-                  )}
-                </button>
-
-                <button
-                  type="submit"
-                  className="fullscreen-speak-btn"
-                  disabled={!streamReady || !userInput.trim() || isSpeaking}
-                >
-                  Send
-                </button>
-              </div> */}
               <div className="input-container">
                 {/* <div className="textarea-wrapper"> */}
                 <textarea
