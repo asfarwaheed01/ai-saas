@@ -305,11 +305,11 @@ function App() {
         <Route
           path={ROUTES.organization.path}
           element={
-            <ProtectedRoute>
-              <DashboardLayout>
+            // <ProtectedRoute>
+              <DocsLayout>
                 <OrganizationContext />
-              </DashboardLayout>
-            </ProtectedRoute>
+              </DocsLayout>
+            // </ProtectedRoute>
           }
         />
         <Route

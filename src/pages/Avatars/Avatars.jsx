@@ -2286,7 +2286,7 @@ const Avatars = () => {
         body: formData,
       });
 
-      console.log(signature, "SSSSSIGNATURE");
+      //organizational context wala krna ha ab bas
 
       // Always parse JSON — even on error
       let data;
@@ -2422,6 +2422,22 @@ const Avatars = () => {
   useEffect(() => {
     fetchActiveSubscription();
   }, [fetchActiveSubscription]);
+
+  useEffect(() => {
+    if (selectedGender === "binary") {
+      setSelectedEthnicity("african_american");
+      setSelectedAge("Young");
+
+      // Find Marcus in availableAvatars and auto-select him
+      const marcusAvatar = availableAvatars.find(
+        (av) => av.name.toLowerCase() === "marcus"
+      );
+
+      if (marcusAvatar) {
+        setSelectedAvatar(marcusAvatar.id);
+      }
+    }
+  }, [selectedGender, availableAvatars]);
 
   if (!isSessionActive) {
     return (

@@ -16,6 +16,8 @@ import { GrOrganization } from "react-icons/gr";
 import "./Sidebar.css";
 import { ROUTES } from "../../../routes/routes";
 import Logo from "../../../assets/logo.png";
+import { GoOrganization } from "react-icons/go";
+
 import { IoKeySharp } from "react-icons/io5";
 
 const API_SECTIONS = [
@@ -24,6 +26,13 @@ const API_SECTIONS = [
     title: "Generate API Keys",
     icon: <IoKeySharp />,
     path: "/docs/api-keys",
+    items: [],
+  },
+  {
+    id: "organizational-context",
+    title: "Organization Context",
+    icon: <GoOrganization />,
+    path: "/docs/organization",
     items: [],
   },
   {
