@@ -241,6 +241,8 @@
 /* Date Display */
 .apikeys-date-cell {
   min-width: 180px;
+  color: #64748b;
+
 }
 
 .apikeys-date-display {
@@ -249,6 +251,12 @@
   gap: 0.5rem;
   color: #64748b;
   font-size: 0.875rem;
+}
+.apikeys-days-display {
+  /* text-align: center;
+   */
+  color: #64748b;
+
 }
 
 /* Status Display */

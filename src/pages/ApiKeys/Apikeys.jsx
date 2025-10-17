@@ -30,6 +30,7 @@ const Apikeys = () => {
   const [visibleKeys, setVisibleKeys] = useState(new Set());
   const [copiedKey, setCopiedKey] = useState(null);
   const [showAuthPopup, setShowAuthPopup] = useState(false); //new code
+  const [activeSubscription, setActiveSubscription] = useState(null);
 
   const { getAccessToken, logout } = useAuth();
   const location = useLocation();
@@ -242,6 +243,40 @@ const Apikeys = () => {
     )}`;
   }, []);
 
+  const fetchActiveSubscription = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `${backendURL}/payments/active-subscription`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getAccessToken()}`,
+          },
+        }
+      );
+
+      if (response.status === 401) {
+        handleUnauthorized();
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Active Subscription:", data);
+      setActiveSubscription(data);
+    } catch (err) {
+      console.error("Error fetching active subscription:", err);
+    }
+  }, [getAccessToken, handleUnauthorized]);
+
+  useEffect(() => {
+    fetchActiveSubscription();
+  }, [fetchActiveSubscription]);
+
   // Initial data fetch
   useEffect(() => {
     fetchApiKeys();
@@ -338,7 +373,9 @@ const Apikeys = () => {
                 <tr>
                   <th>API Key</th>
                   <th>Created At</th>
-                  <th>Last Used</th>
+                  <th>Remaining Days</th>
+                  <th>Active Plan</th>
+                  <th>Remaining API Requests</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -381,11 +418,24 @@ const Apikeys = () => {
                           <span>{formatDate(apiKey.created_at)}</span>
                         </div>
                       </td>
+                      <td className="apikeys-days-display">
+                        <div className="">
+                          {/* <HiCalendar /> */}
+                          <span className="apikeys-days-display">
+                            {/* {formatDate(apiKey.last_used_at) || "Never"} */}
+                            {activeSubscription?.days_remaining || " "}
+                          </span>
+                        </div>
+                      </td>
                       <td className="apikeys-date-cell">
-                        <div className="apikeys-date-display">
-                          <HiCalendar />
-                          <span>
-                            {formatDate(apiKey.last_used_at) || "Never"}
+                        {activeSubscription?.plan?.name || "Free Plan"}
+                      </td>
+                       <td className="apikeys-days-display">
+                        <div className="">
+                          {/* <HiCalendar /> */}
+                          <span className="">
+                            {/* {formatDate(apiKey.last_used_at) || "Never"} */}
+                            {activeSubscription?.remaining_api_requests || " "}
                           </span>
                         </div>
                       </td>
@@ -394,6 +444,7 @@ const Apikeys = () => {
                           Active
                         </span>
                       </td>
+                     
                       <td className="apikeys-actions-cell">
                         <button
                           onClick={() => setShowDeleteModal(keyId)}

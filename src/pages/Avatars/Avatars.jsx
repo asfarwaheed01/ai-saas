@@ -1886,7 +1886,13 @@
 
 // export default Avatars;
 
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import StreamingAvatar, {
   AvatarQuality,
   StreamingEvents,
@@ -1898,6 +1904,7 @@ import AuthModal from "../../components/HomePage/AuthModal/AuthModal";
 import WhiteLogo from "../../../src/assets/logo todo 1.png";
 import { Link } from "react-router-dom";
 import { FaMicrophone } from "react-icons/fa";
+import { useAuth } from "../../providers/AuthContext";
 
 const Avatars = () => {
   const [isSessionActive, setIsSessionActive] = useState(false);
@@ -1923,6 +1930,9 @@ const Avatars = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("eng");
   const [errors, setErrors] = useState({});
+  const [activeSubscription, setActiveSubscription] = useState(null);
+
+  const { getAccessToken, logout } = useAuth();
 
   const videoRef = useRef(null);
   const avatarRef = useRef(null);
@@ -1939,7 +1949,10 @@ const Avatars = () => {
     it: "Italian",
     fr: "French",
   };
-
+  const languages = useMemo(() => {
+    const avatar = availableAvatars.find((av) => av.id === selectedAvatar);
+    return avatar?.languages || [];
+  }, [selectedAvatar]);
   useEffect(() => {
     if (
       availableAvatars.length > 0 &&
@@ -2302,6 +2315,44 @@ const Avatars = () => {
     }
   };
 
+  const handleUnauthorized = useCallback(() => {
+    logout();
+  }, [logout]);
+
+  const fetchActiveSubscription = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `${backendURL}/payments/active-subscription`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getAccessToken()}`,
+          },
+        }
+      );
+
+      if (response.status === 401) {
+        handleUnauthorized();
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Active Subscription:", data);
+      setActiveSubscription(data);
+    } catch (err) {
+      console.error("Error fetching active subscription:", err);
+    }
+  }, [getAccessToken, handleUnauthorized]);
+
+  useEffect(() => {
+    fetchActiveSubscription();
+  }, [fetchActiveSubscription]);
+
   if (!isSessionActive) {
     return (
       <div className="avatars-page">
@@ -2341,7 +2392,7 @@ const Avatars = () => {
               </div>
 
               <div className="form-content">
-                <div className="input-group">
+                {/* <div className="input-group">
                   <label htmlFor="category-select" className="input-label">
                     Choose Category
                   </label>
@@ -2366,6 +2417,59 @@ const Avatars = () => {
                   {errors.category && (
                     <p className="error-text">{errors.category}</p>
                   )}
+                </div> */}
+
+                <div className="input-group">
+                  <label htmlFor="category-select" className="input-label">
+                    Choose Category
+                  </label>
+                  <select
+                    id="category-select"
+                    value={selectedOption}
+                    onChange={(e) => setSelectedOption(e.target.value)}
+                    className="avatar-select"
+                    disabled={isLoading}
+                    required
+                  >
+                    <option value="">Select Category</option>
+
+                    {(() => {
+                      // 🔹 If no plan is active → default to free plan (beauty only)
+                      const allowed = activeSubscription?.plan?.allowed_domains
+                        ?.split(",")
+                        ?.map((d) => d.trim()) || ["beauty"]; // Default free plan access
+
+                      const categories = [
+                        {
+                          value: "therapy",
+                          label: "Mental health coaching/therapy counseling",
+                        },
+                        { value: "beauty", label: "Beauty consulting" },
+                        {
+                          value: "consultation",
+                          label: "Pharmaceutical consultancy",
+                        },
+                        { value: "medical", label: "Medical consultation" },
+                      ];
+
+                      return categories.map((cat) => {
+                        const isAllowed = allowed.includes(cat.value);
+                        return (
+                          <option
+                            key={cat.value}
+                            value={cat.value}
+                            disabled={!isAllowed}
+                          >
+                            {cat.label} {!isAllowed ? "🔒" : ""}
+                          </option>
+                        );
+                      });
+                    })()}
+                  </select>
+
+                  {errors.category && (
+                    <p className="error-text">{errors.category}</p>
+                  )}
                 </div>
 
                 <div className="form-alignment">
@@ -2382,6 +2486,7 @@ const Avatars = () => {
                     >
                       <option value="male">Male</option>
                       <option value="female">Female</option>
+                      <option value="binary">Non-binary</option>
                     </select>
                   </div>
                   <div className="input-group">
@@ -2414,13 +2519,18 @@ const Avatars = () => {
                       disabled={isLoading}
                     >
                       <option value="">Select Language</option>
-                      {availableAvatars
+                      {/* {availableAvatars
                         .find((av) => av.id === selectedAvatar)
                         ?.languages.map((lang) => (
                           <option key={lang} value={lang}>
                             {LANGUAGE_LABELS[lang] || lang.toUpperCase()}
                           </option>
-                        ))}
+                        ))} */}
+                      {languages.map((lang) => (
+                        <option key={lang} value={lang}>
+                          {LANGUAGE_LABELS[lang] || lang.toUpperCase()}
+                        </option>
+                      ))}
                     </select>
                     {errors.lang && <p className="error-text">{errors.lang}</p>}
                   </div>

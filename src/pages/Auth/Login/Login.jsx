@@ -50,10 +50,21 @@ const Login = () => {
 
       const data = await response.json();
 
+      // if (!response.ok) {
+      //   throw new Error(
+      //     data.message || `${isLogin ? "Login" : "Signup"} failed`
+      //   );
+      // }
+
       if (!response.ok) {
-        throw new Error(
-          data.message || `${isLogin ? "Login" : "Signup"} failed`
-        );
+        let apiError =
+          data.error ||
+          (Array.isArray(data.non_field_errors)
+            ? data.non_field_errors.join(", ")
+            : data.non_field_errors) ||
+          `${isLogin ? "Login" : "Signup"} failed`;
+
+        throw new Error(apiError);
       }
 
       // Check if we have the expected response format

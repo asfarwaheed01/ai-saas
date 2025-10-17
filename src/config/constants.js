@@ -58,6 +58,16 @@ export const getToken = () => {
 
 export const AVATAR_IDS = [
   {
+    binary: {
+      african_american: [
+        {
+          id: "cc2984a6003a4d5194eb58a4ad570337",
+          name: "Marcus",
+          age: "Young",
+          languages: ["eng", "it", "fr"],
+        },
+      ],
+    },
     male: {
       asian: [
         // {
@@ -101,12 +111,12 @@ export const AVATAR_IDS = [
           languages: ["eng", "it", "fr"],
         },
         // { id: "1734569600", name: "Anthony" },
-        {
-          id: "cc2984a6003a4d5194eb58a4ad570337",
-          name: "Marcus",
-          age: "Young",
-          languages: ["eng", "it", "fr"],
-        },
+        // {
+        //   id: "cc2984a6003a4d5194eb58a4ad570337",
+        //   name: "Marcus",
+        //   age: "Young",
+        //   languages: ["eng", "it", "fr"],
+        // },
       ],
     },
     female: {

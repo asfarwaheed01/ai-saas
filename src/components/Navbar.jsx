@@ -207,6 +207,15 @@ const Navbar = () => {
                   >
                     Dashboard
                   </Link> */}
+                  {user?.is_superuser && (
+                    <Link
+                      to="/dashboard"
+                      className="dropdown-item"
+                      onClick={() => setIsUserDropdownOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                  )}
                   <Link
                     to={ROUTES.avatars.path}
                     className="dropdown-item"
