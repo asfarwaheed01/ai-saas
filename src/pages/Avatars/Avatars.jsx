@@ -2213,16 +2213,14 @@ const Avatars = () => {
     };
   };
 
-  // Signature generation function
-  const generatePluginSignature = async (payload) => {
-    const secretKey = "a4687fee-afdd-407a-a8c0-493b0c6972fc";
+  const generateSignature = async (domain, apiKey) => {
+    const secretKey = "a4687fee-afdd-407a-a8c0-493b0c6972fc"; // correct key
+    const payload = domain; // correct format
 
-    // Convert strings to ArrayBuffers
     const enc = new TextEncoder();
     const keyData = enc.encode(secretKey);
     const payloadData = enc.encode(payload);
 
-    // Import the key for HMAC-SHA256
     const cryptoKey = await window.crypto.subtle.importKey(
       "raw",
       keyData,
@@ -2231,20 +2229,15 @@ const Avatars = () => {
       ["sign"]
     );
 
-    // Generate the HMAC signature
     const signatureBuffer = await window.crypto.subtle.sign(
       "HMAC",
       cryptoKey,
       payloadData
     );
 
-    // Convert the signature to hex string
-    const signatureArray = Array.from(new Uint8Array(signatureBuffer));
-    const hexSignature = signatureArray
+    return Array.from(new Uint8Array(signatureBuffer))
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
-
-    return hexSignature;
   };
 
   const handleSubmit = async (e) => {
@@ -2263,18 +2256,32 @@ const Avatars = () => {
       formData.append("domain", selectedOption);
       formData.append("text_query", inputToSend);
       formData.append("lang", selectedLanguage);
-      // formData.append("artificizen:todopharma_avatars:${selectedOption}:1.0.0")
 
-      const payload = `artificizen:todopharma_avatars:${selectedOption}:1.0.0`;
-      const signature = await generatePluginSignature(payload);
+      // const payload = `artificizen:todopharma_avatars:${selectedOption}:1.0.0`;
+      // const signature = await generatePluginSignature(payload);
+
+      // const response = await fetch(`${backendURL}/agents/generate-response/`, {
+      //   method: "POST",
+      //   headers: {
+      //     // "X-API-Key": "pk_16c7ab4cb3564aa4811dda3180bbcb41",
+      //     "X-API-Key": "pk_b2cfcca7353942b58dc479dfb0a90014",
+      //     "X-SIGNATURE": signature,
+      //     // "290825050c59759b465c778334f5bcfcdff4fde8f9824dda72417b3d931fe203",
+      //     "X-Plugin_ID": payload,
+      //   },
+      //   body: formData,
+      // });
+      // const apiKey = "pk_16c7ab4cb3564aa4811dda3180bbcb41";
+      const apiKey = "pk_16c7ab4cb3564aa4811dda3180bbcb41";
+      const domain = selectedOption;
+
+      const signature = await generateSignature(domain, apiKey);
 
       const response = await fetch(`${backendURL}/agents/generate-response/`, {
         method: "POST",
         headers: {
-          // "X-API-Key": "pk_16c7ab4cb3564aa4811dda3180bbcb41",
-          "X-API-Key": "pk_b2cfcca7353942b58dc479dfb0a90014",
-          "X-SIGNATURE":
-            "290825050c59759b465c778334f5bcfcdff4fde8f9824dda72417b3d931fe203",
+          "X-API-KEY": apiKey,
+          "X-SIGNATURE": signature,
         },
         body: formData,
       });
