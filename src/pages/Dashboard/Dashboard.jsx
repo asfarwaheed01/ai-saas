@@ -360,7 +360,7 @@ const Dashboard = () => {
                   </div>
                   <h3>{lang.lang.toUpperCase()}</h3>
                   <span className="usage-badge">
-                    Recent Usage: {lang.recent_usage}
+                    Last 30 days Usage: {lang.recent_usage}
                   </span>
                 </div>
 
@@ -376,7 +376,7 @@ const Dashboard = () => {
                   ></div>
                   <div className="progress-inner">
                     <span>{lang.avg_length.toFixed(1)}</span>
-                    <p className="progress-inner-color">Avg</p>
+                    <p className="progress-inner-color">Avg len</p>
                   </div>
                 </div>
 
