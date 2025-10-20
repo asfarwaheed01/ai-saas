@@ -29,6 +29,20 @@ const Dashboard = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = data.slice(startIndex, startIndex + itemsPerPage);
 
+  // Pagination for "Users Near Limit"
+  const usersNearLimit =
+    avatarInteraction?.api_usage_stats?.users_near_limit || [];
+
+  const [currentUserPage, setCurrentUserPage] = useState(1);
+  const usersPerPage = 5;
+
+  const totalUserPages = Math.ceil(usersNearLimit.length / usersPerPage);
+  const startUserIndex = (currentUserPage - 1) * usersPerPage;
+  const currentUsers = usersNearLimit.slice(
+    startUserIndex,
+    startUserIndex + usersPerPage
+  );
+
   // API Headers with memoization
   const apiHeaders = useMemo(
     () => ({
@@ -300,7 +314,7 @@ const Dashboard = () => {
         </div>
       </div>
       {/* ===== Users Near Limit ===== */}
-      <div className="dashboard-section">
+      {/* <div className="dashboard-section">
         <h2>⚠️ Users Near Limit</h2>
         <div className="table-container">
           <table>
@@ -340,7 +354,71 @@ const Dashboard = () => {
             </tbody>
           </table>
         </div>
+      </div> */}
+      {/* ===== Users Near Limit ===== */}
+      <div className="dashboard-section">
+        <h2>⚠️ Users Near Limit</h2>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Plan Name</th>
+                <th>Usage (%)</th>
+                <th>Remaining Requests</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentUsers.length > 0 ? (
+                currentUsers.map((user, i) => (
+                  <tr
+                    key={i}
+                    style={{
+                      backgroundColor:
+                        user.usage_percentage > 80 ? "#ecfbffff" : "inherit",
+                    }}
+                  >
+                    <td>{user.user_id}</td>
+                    <td>{user.username}</td>
+                    <td>{user.plan_name}</td>
+                    <td>{user.usage_percentage}%</td>
+                    <td>{user.remaining_requests}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5}>No users near limit</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+
+          {/* Pagination for Users Near Limit */}
+          {usersNearLimit.length > usersPerPage && (
+            <div className="pagination">
+              <button
+                onClick={() => setCurrentUserPage((p) => Math.max(p - 1, 1))}
+                disabled={currentUserPage === 1}
+              >
+                Previous
+              </button>
+              <span>
+                Page {currentUserPage} of {totalUserPages}
+              </span>
+              <button
+                onClick={() =>
+                  setCurrentUserPage((p) => Math.min(p + 1, totalUserPages))
+                }
+                disabled={currentUserPage === totalUserPages}
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </div>
       </div>
+
       {/* ===== Language Usage Stats ===== */}
       <div className="dashboard-section">
         <h2 className="section-heading">🌍 Language Usage Insights</h2>
