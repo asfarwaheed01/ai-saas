@@ -1,6 +1,8 @@
 export const ROUTES = {
   home: { path: "/", name: "Home" },
   login: { path: "/login", name: "Login" },
+  forgotPassword: { path: "/forgot-password", name: "Forgot Password" },
+  resetPassword: { path: "/reset-password", name: "Reset Password" },
   services: { path: "/services", name: "Services" },
   contact: { path: "/contact-us", name: "Contact Us" },
   docs: { path: "/docs", name: "Documents" },

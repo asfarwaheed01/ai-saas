@@ -23,9 +23,8 @@ const AgentProcessVideo = () => {
       <div className="docs-page-header">
         <h1 className="docs-page-title">Process Video</h1>
         <p className="docs-page-description">
-          Upload a video file and extract its highest quality frame for analysis
-          using a vision-language model. This endpoint returns both the frame
-          quality score and an AI-powered analysis of the frame content.
+          Analyze video content for face detection, skin analysis, and generate
+          personalized recommendations.
         </p>
       </div>
 
@@ -48,22 +47,21 @@ const AgentProcessVideo = () => {
           <p className="docs-endpoint-description">
             This endpoint allows you to upload a video file for analysis. The
             API processes the video to extract the highest quality frame,
-            analyzes it using a vision-language model (such as Gemini), and
-            returns both a quality score for the selected frame and an
-            AI-powered analysis of its content.
+            analyzes it using an AI-based visual analysis engine, and returns
+            both a quality score for the selected frame and an AI-powered
+            analysis of its content.
           </p>
 
           <div className="docs-alert docs-alert-info">
             <FaInfoCircle className="docs-alert-icon" />
             <div className="docs-alert-content">
               <div className="docs-alert-title">
-                Vision-Language Model Integration
+                AI-based Visual Analysis Engine
               </div>
               <p className="docs-alert-message">
-                This endpoint leverages advanced vision-language models to
-                analyze the extracted frame, providing insights that can be used
-                for content categorization, object detection, and scene
-                understanding.
+                This endpoint leverages advanced AI models to analyze the
+                extracted frame, providing insights that can be used for content
+                categorization, object detection, and scene understanding.
               </p>
             </div>
           </div>
@@ -186,7 +184,7 @@ const AgentProcessVideo = () => {
                           <td>
                             <code>object</code>
                           </td>
-                          <td>Output from the vision-language model</td>
+                          <td>Output from the advanced AI model</td>
                         </tr>
                         <tr>
                           <td>video_info</td>
@@ -291,10 +289,10 @@ const AgentProcessVideo = () => {
                       <div className="docs-alert-title">Analysis Content</div>
                       <p className="docs-alert-message">
                         The content of the <code>analysis</code> object will
-                        vary depending on the specific vision-language model
-                        used and the content of the video frame. It typically
-                        includes descriptive text about what was detected in the
-                        frame.
+                        vary depending on the specific AI-based visual analysis
+                        engine used and the content of the video frame. It
+                        typically includes descriptive text about what was
+                        detected in the frame.
                       </p>
                     </div>
                   </div>

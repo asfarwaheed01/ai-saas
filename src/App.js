@@ -36,6 +36,8 @@ import GetOrganizationContext from "./pages/Documents/GetOrganizationalContext/G
 import CreateOrganizationContext from "./pages/Documents/CreateOrganizationContext/CreateOrganizationContext";
 import UpdateOrganizationContext from "./pages/Documents/UpdateOrganizationContext/UpdateOrganizationContext";
 import DeleteOrganizationContext from "./pages/Documents/DeleteOrganizationContext/DeleteOrganizationContext";
+import ResetPassword from "./pages/Auth/Login/ResetPassword";
+import ForgotPassword from "./pages/Auth/Login/ForgotPassword";
 
 function App() {
   return (
@@ -57,6 +59,22 @@ function App() {
           element={
             <MainLayout>
               <Login />
+            </MainLayout>
+          }
+        />
+        <Route
+          path={ROUTES.forgotPassword.path}
+          element={
+            <MainLayout>
+              <ForgotPassword />
+            </MainLayout>
+          }
+        />
+        <Route
+          path={ROUTES.resetPassword.path}
+          element={
+            <MainLayout>
+              <ResetPassword />
             </MainLayout>
           }
         />
@@ -306,9 +324,9 @@ function App() {
           path={ROUTES.organization.path}
           element={
             // <ProtectedRoute>
-              <DocsLayout>
-                <OrganizationContext />
-              </DocsLayout>
+            <DocsLayout>
+              <OrganizationContext />
+            </DocsLayout>
             // </ProtectedRoute>
           }
         />

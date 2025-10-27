@@ -76,7 +76,7 @@ export const AVATAR_IDS = [
         //   age: "Young",
         //   languages: ["eng", "it"],
         // },
-        {
+        { 
           id: "Wayne_20240711",
           name: "Wayne",
           age: "Intermediate",

@@ -75,7 +75,9 @@ const Navbar = () => {
     (location.pathname === "/login" ||
       location.pathname === "/signup" ||
       location.pathname === "/payment-success" ||
-      location.pathname === "/payment-fail") &&
+      location.pathname === "/payment-fail" ||
+      location.pathname === "/forgot-password" ||
+      location.pathname === "/reset-password") &&
     !isScrolled;
 
   return (

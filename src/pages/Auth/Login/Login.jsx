@@ -234,6 +234,21 @@ const Login = () => {
           </p>
         </div>
 
+          {/* ✅ Forgot Password link */}
+  {isLogin && (
+    <div className="forgot-password">
+      <button
+        type="button"
+        onClick={() => navigate("/forgot-password")}
+        className="forgot-password-link"
+        disabled={isLoading}
+      >
+        Forgot Password?
+      </button>
+    </div>
+  )}
+
+
         <div className="login-footer">
           <p>Secure • Fast • Reliable</p>
         </div>

@@ -177,6 +177,7 @@
 /* Additional component styles */
 .docs-card {
   background-color: #fff;
+  color: #05b1bd;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   padding: 24px;

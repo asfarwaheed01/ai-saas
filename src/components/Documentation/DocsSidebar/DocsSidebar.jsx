@@ -67,7 +67,7 @@ const API_SECTIONS = [
   },
   {
     id: "agent",
-    title: "Agent API",
+    title: "Facial Recognition",
     icon: <FaRobot />,
     path: "/docs/agent",
     items: [
@@ -83,34 +83,34 @@ const API_SECTIONS = [
       },
     ],
   },
-  {
-    id: "organization-context",
-    title: "Organizational Context",
-    icon: <GrOrganization />,
-    path: "/docs/organizational-context",
-    items: [
-      {
-        id: "get-organization",
-        title: "Retrive Organization Details",
-        path: "/docs/organizational-context/retrieve",
-      },
-      {
-        id: "create-organization",
-        title: "Create Organization Details",
-        path: "/docs/organizational-context/create",
-      },
-      {
-        id: "update-organization",
-        title: "Update Organization Details",
-        path: "/docs/organizational-context/update",
-      },
-      {
-        id: "delete-organization",
-        title: "Delete organization Details",
-        path: "/docs/organizational-context/delete",
-      },
-    ],
-  },
+  // {
+  //   id: "organization-context",
+  //   title: "Organizational Context",
+  //   icon: <GrOrganization />,
+  //   path: "/docs/organizational-context",
+  //   items: [
+  //     {
+  //       id: "get-organization",
+  //       title: "Retrive Organization Details",
+  //       path: "/docs/organizational-context/retrieve",
+  //     },
+  //     {
+  //       id: "create-organization",
+  //       title: "Create Organization Details",
+  //       path: "/docs/organizational-context/create",
+  //     },
+  //     {
+  //       id: "update-organization",
+  //       title: "Update Organization Details",
+  //       path: "/docs/organizational-context/update",
+  //     },
+  //     {
+  //       id: "delete-organization",
+  //       title: "Delete organization Details",
+  //       path: "/docs/organizational-context/delete",
+  //     },
+  //   ],
+  // },
   // {
   //   id: "payments",
   //   title: "Payments API",
