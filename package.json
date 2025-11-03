@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@heygen/streaming-avatar": "^2.0.14",
+    "@sendgrid/mail": "^8.1.6",
     "@stripe/stripe-js": "^7.9.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",

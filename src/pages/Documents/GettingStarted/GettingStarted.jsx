@@ -35,13 +35,13 @@ const GettingStarted = () => {
             documents for information retrieval
           </li>
           <li>
-            <strong>Agent API:</strong> Process videos and generate
+            <strong>Facial Recognition API:</strong> Process videos and generate
             conversational responses
           </li>
-          <li>
+          {/* <li>
             <strong>Payments API:</strong> Manage subscription plans and handle
             payments
-          </li>
+          </li> */}
         </ul>
       </div>
 
@@ -223,13 +223,13 @@ Accept: application/json`}
             upload and query your documents
           </li>
           <li>
-            Explore the <strong>Agent API</strong> to see how to process videos
-            and generate conversational responses
+            Explore the <strong>Facial Recognition API</strong> to see how to
+            process videos and generate conversational responses
           </li>
-          <li>
+          {/* <li>
             Learn about the <strong>Payments API</strong> to manage subscription
             plans
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

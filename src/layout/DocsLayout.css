@@ -1,4 +1,4 @@
-/* DocsLayout.css */
+DocsLayout.css
 .docs-layout {
   display: flex;
   min-height: 100vh;
@@ -14,7 +14,20 @@
 
 .docs-container {
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto !important;
+  margin-top: 50px !important;
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+  .docs-container {
+    max-width: 600px;
+  }
+  .docs-content {
+    flex: 1;
+    margin-left: 0px !important;
+    padding: 0px !important;
+    transition: margin-left 0.3s ease;
+  }
 }
 
 /* Responsive adjustments */
@@ -113,7 +126,7 @@
 
 .docs-endpoint-method.put {
   background-color: #a8f9ff;
-  color: #05b1bd
+  color: #05b1bd;
 }
 
 .docs-endpoint-method.delete {
@@ -303,4 +316,35 @@
 .docs-response-object pre {
   margin: 0;
   white-space: pre-wrap;
+}
+
+.mobile-menu-btn {
+  position: fixed !important;
+  top: 15px;
+  left: 15px;
+  background: #05b1bd;
+  color: white;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 5000 !important; /* stays above sidebar */
+  display: none;
+  /* transition: background 0.2s ease; */
+}
+
+.mobile-menu-btn:hover {
+  background: #04939e;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+.mobile-menu-btn.scrolled {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
 }

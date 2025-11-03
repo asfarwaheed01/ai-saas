@@ -1,6 +1,7 @@
 .contact-wrapper {
   background-color: #f9f9f9;
-  padding: 60px 20px;
+  padding: 60px 0px;
+  /* margin-top: 1000px; */
 }
 
 .contact-container {
@@ -8,7 +9,11 @@
   margin: 0 auto;
   background-color: white;
   border-radius: 8px;
-  padding: 40px !important;
+  /* padding: 40px !important; */
+  padding-top: 40px !important;
+  padding-left: 40px !important;
+  padding-right: 55px !important;
+  padding-bottom: 40px !important;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
@@ -38,7 +43,10 @@
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 12px;
+  /* padding: 12px; */
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;

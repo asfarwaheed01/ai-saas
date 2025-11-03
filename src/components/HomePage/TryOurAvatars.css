@@ -31,12 +31,30 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
+  padding-left: 20px;
   align-items: center;
   min-height: 500px;
 }
 
+@media (max-width: 500px) {
+  .content-wrapper-try {
+    padding-left: 5px !important;
+    gap: 0px !important;
+    grid-template-columns: 1fr !important;
+  }
+  .visual-content{
+    /* display: none !important; */
+  }
+}
+@media (max-width: 768px) {
+  .content-wrapper-try {
+    gap: 20px !important;
+  }
+}
+
 .text-content {
   color: white;
+  width: 100%;
 }
 
 .section-title {

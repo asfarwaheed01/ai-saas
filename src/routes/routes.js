@@ -66,7 +66,7 @@ export const ROUTES = {
   },
 
   // Payments API routes
-  docsPayments: { path: "/docs/payments", name: "Payments API" },
+  // docsPayments: { path: "/docs/payments", name: "Payments API" },
   docsCreateSubscription: {
     path: "/docs/payments/create-subscription",
     name: "Create Subscription",

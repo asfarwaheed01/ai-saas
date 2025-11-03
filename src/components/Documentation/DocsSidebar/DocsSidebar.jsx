@@ -11,6 +11,7 @@ import {
   FaChevronDown,
   FaChevronRight,
   FaPlus,
+  FaTimes,
 } from "react-icons/fa";
 import { GrOrganization } from "react-icons/gr";
 import "./Sidebar.css";
@@ -151,8 +152,10 @@ const API_SECTIONS = [
   // },
 ];
 
-const Sidebar = () => {
+// const Sidebar = () => {
+const Sidebar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
+
   const [expandedSections, setExpandedSections] = useState(
     API_SECTIONS.map((section) =>
       // Auto-expand the section if the current path includes it
@@ -178,57 +181,53 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="docs-sidebar">
-      <div>
-        <Link to={ROUTES.home.path}>
-          <img src={Logo} alt="TODO AI Logo" className="docs-logo" />
-        </Link>
-      </div>
-      <div className="docs-sidebar-header">
-        <FaBook className="docs-sidebar-logo" />
-        <h1>API Documentation</h1>
-      </div>
+    <>
+      {isOpen && (
+        <div
+          className="sidebar-overlay active"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
 
-      <nav className="docs-sidebar-nav">
-        {/* Home link */}
-        <div className="docs-sidebar-main-links">
-          <Link
-            to={ROUTES.home.path}
-            className={`docs-sidebar-link ${
-              location.pathname === ROUTES.home.path ? "active" : ""
-            }`}
-          >
-            Home
+      {/* <aside className="docs-sidebar"> */}
+      <aside className={`docs-sidebar ${isOpen ? "open" : ""}`}>
+        <button className="sidebar-close-btn" onClick={() => setIsOpen(false)}>
+          <FaTimes />
+        </button>
+        <div>
+          <Link to={ROUTES.home.path}>
+            <img src={Logo} alt="TODO AI Logo" className="docs-logo" />
           </Link>
         </div>
+        <div className="docs-sidebar-header">
+          <FaBook className="docs-sidebar-logo" />
+          <h1>API Documentation</h1>
+        </div>
 
-        {/* API documentation sections */}
-        <div className="docs-sidebar-sections">
-          {API_SECTIONS.map((section, index) => (
-            <div key={section.id} className="docs-sidebar-section">
-              {section.items.length === 0 ? (
-                /* Getting Started - Direct Link with no dropdown */
-                <Link
-                  to={section.path}
-                  className={`docs-sidebar-section-header ${
-                    location.pathname.includes(section.path) ? "active" : ""
-                  }`}
-                >
-                  <div className="docs-sidebar-section-icon">
-                    {section.icon}
-                  </div>
-                  <span className="docs-sidebar-section-title">
-                    {section.title}
-                  </span>
-                </Link>
-              ) : (
-                /* Other sections with dropdowns */
-                <>
-                  <div
+        <nav className="docs-sidebar-nav">
+          {/* Home link */}
+          <div className="docs-sidebar-main-links">
+            <Link
+              to={ROUTES.home.path}
+              className={`docs-sidebar-link ${
+                location.pathname === ROUTES.home.path ? "active" : ""
+              }`}
+            >
+              Home
+            </Link>
+          </div>
+
+          {/* API documentation sections */}
+          <div className="docs-sidebar-sections">
+            {API_SECTIONS.map((section, index) => (
+              <div key={section.id} className="docs-sidebar-section">
+                {section.items.length === 0 ? (
+                  /* Getting Started - Direct Link with no dropdown */
+                  <Link
+                    to={section.path}
                     className={`docs-sidebar-section-header ${
                       location.pathname.includes(section.path) ? "active" : ""
                     }`}
-                    onClick={() => handleSectionClick(section, index)}
                   >
                     <div className="docs-sidebar-section-icon">
                       {section.icon}
@@ -236,39 +235,56 @@ const Sidebar = () => {
                     <span className="docs-sidebar-section-title">
                       {section.title}
                     </span>
-                    <div className="docs-sidebar-section-arrow">
-                      {expandedSections[index] ? (
-                        <FaChevronDown />
-                      ) : (
-                        <FaChevronRight />
-                      )}
+                  </Link>
+                ) : (
+                  /* Other sections with dropdowns */
+                  <>
+                    <div
+                      className={`docs-sidebar-section-header ${
+                        location.pathname.includes(section.path) ? "active" : ""
+                      }`}
+                      onClick={() => handleSectionClick(section, index)}
+                    >
+                      <div className="docs-sidebar-section-icon">
+                        {section.icon}
+                      </div>
+                      <span className="docs-sidebar-section-title">
+                        {section.title}
+                      </span>
+                      <div className="docs-sidebar-section-arrow">
+                        {expandedSections[index] ? (
+                          <FaChevronDown />
+                        ) : (
+                          <FaChevronRight />
+                        )}
+                      </div>
                     </div>
-                  </div>
 
-                  <div
-                    className={`docs-sidebar-section-items ${
-                      expandedSections[index] ? "expanded" : ""
-                    }`}
-                  >
-                    {section.items.map((item) => (
-                      <Link
-                        key={item.id}
-                        to={item.path}
-                        className={`docs-sidebar-item ${
-                          location.pathname === item.path ? "active" : ""
-                        }`}
-                      >
-                        {item.title}
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          ))}
-        </div>
-      </nav>
-    </aside>
+                    <div
+                      className={`docs-sidebar-section-items ${
+                        expandedSections[index] ? "expanded" : ""
+                      }`}
+                    >
+                      {section.items.map((item) => (
+                        <Link
+                          key={item.id}
+                          to={item.path}
+                          className={`docs-sidebar-item ${
+                            location.pathname === item.path ? "active" : ""
+                          }`}
+                        >
+                          {item.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </nav>
+      </aside>
+    </>
   );
 };
 

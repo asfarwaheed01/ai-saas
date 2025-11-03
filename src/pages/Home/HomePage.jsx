@@ -116,7 +116,7 @@ const HomePage = () => {
               },
               {
                 icon: <FaCheckCircle />,
-                text: "Vertical machine learning models for pharma, beauty, and medical domains",
+                text: "Machine learning models for pharma, beauty, and medical domains",
               },
               {
                 icon: <FaCheckCircle />,

@@ -323,6 +323,20 @@
   .image-section {
     margin-top: 0px;
   }
+  .image-section img {
+    height: 150px !important;
+  }
+}
+@media (max-width: 768px) {
+  .image-section img {
+    height: 400px !important;
+  }
+}
+
+@media (max-width: 426px) {
+  .image-section img {
+    height: 160px !important;
+  }
 }
 
 .feature-main {
