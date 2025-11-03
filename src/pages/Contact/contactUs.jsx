@@ -1,13 +1,6 @@
 import React from "react";
 import "./contact.css";
 
-//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
-
-// const sgMail = require('@sendgrid/mail');
-// sgMail.setApiKey(
-//   "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"
-// );
-
 const ContactUs = () => {
   return (
     <div className="contact-wrapper space-top background">
