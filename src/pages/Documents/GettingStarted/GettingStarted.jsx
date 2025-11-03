@@ -18,6 +18,22 @@ const GettingStarted = () => {
           help you get started with our APIs and show you how to integrate them
           into your applications.
         </p>
+        <section className="live-api-section container-xlarge">
+          <h2 className="api-heading">Developer API</h2>
+
+          <div className="api-box">
+            <pre className="api-code">
+              {`const url = https://saas.todopharma.com/
+  {
+    auth: {
+      token: 'your_api_key_here'
+    },
+  }
+`}
+            </pre>
+            <div className="tooltip">Access Developer API 🔒</div>
+          </div>
+        </section>
       </div>
 
       <div className="docs-section">
