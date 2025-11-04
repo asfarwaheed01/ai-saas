@@ -75,7 +75,8 @@ const GettingStarted = () => {
         </h2>
         <p>
           All API requests require authentication using API keys. You should
-          include your API key in the Authorization header of each request.
+          include your API key and Signature key in the Authorization header of
+          each request.
         </p>
 
         <div className="docs-alert docs-alert-warning">
@@ -96,6 +97,7 @@ const GettingStarted = () => {
           </div>
           <pre>
             {`Authorization: Bearer YOUR_API_KEY
+-H "X-Signature: $SIGNATURE" 
 Content-Type: application/json
 Accept: application/json`}
           </pre>
@@ -116,6 +118,7 @@ Accept: application/json`}
             {`curl -X GET \\
   https://api.example.com/api/documents/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "X-Signature: $SIGNATURE" 
   -H "Content-Type: application/json"`}
           </pre>
         </div>

@@ -695,6 +695,40 @@ fetch('https://api.example.com/api/agents/process-video/', {
           </div>
         </div>
       </div>
+
+      <h3 className="docs-subsection-title">Signature Creation</h3>
+      {/* <p>Calculate signature (empty payload)</p> */}
+
+      <div className="docs-code">
+        <div className="docs-code-header">
+          <span>Example Request</span>
+          <button className="docs-code-copy">Copy</button>
+        </div>
+        <pre>
+          {/* {`curl -X GET \\
+  https://api.example.com/api/knowledge-base/docs/ \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json"`} */}
+          {`SECRET_KEY="your_secret_key"
+DOMAIN="beauty"
+SIGNATURE=$(echo -n "$DOMAIN" | openssl dgst -sha256 -hmac "$SECRET_KEY" | awk '{print $2}')
+
+//In Python
+domain = "beauty"
+signature = hmac.new(
+    SECRET_KEY.encode('utf-8'),
+    domain.encode('utf-8'),
+    hashlib.sha256
+).hexdigest()
+
+# Headers
+headers = {
+    "X-API-Key": "pk_your_api_key",
+    "X-Signature": signature
+}
+`}
+        </pre>
+      </div>
     </div>
   );
 };
