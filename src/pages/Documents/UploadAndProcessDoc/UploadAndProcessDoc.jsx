@@ -506,13 +506,20 @@ fetch('https://api.example.com/api/knowledge-base/docs/', {
                 Your CSV or Excel files should be structured with clear column
                 headers:
               </p>
+              <p>
+                Product Name,Category, Description, Price Anti-Aging
+                Serum,Skincare,Advanced formula for reducing wrinkles,49.99
+                Moisturizing Cream,Skincare,Deep hydration for all skin
+                types,29.99 Vitamin C Serum,Skincare,Brightening serum with
+                antioxidants,39.99
+              </p>
 
-              <pre className="">
+              {/* <pre className="">
                 {`Product Name,Category,Description,Price
 Anti-Aging Serum,Skincare,Advanced formula for reducing wrinkles,49.99
 Moisturizing Cream,Skincare,Deep hydration for all skin types,29.99
 Vitamin C Serum,Skincare,Brightening serum with antioxidants,39.99`}
-              </pre>
+              </pre> */}
 
               <p className="">The system will automatically:</p>
               <ol className="list-decimal">
