@@ -45,10 +45,14 @@ const ListDocumentsPage = () => {
               <button className="docs-code-copy">Copy</button>
             </div>
             <pre>
-              {`curl -X GET \\
+              {/* {`curl -X GET \\
   https://api.example.com/api/knowledge-base/docs/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json"`}
+  -H "Content-Type: application/json"`} */}
+              {`curl -X GET https://saas.todopharma.com/api/knowledge-base/docs/ 
+  -H "X-API-Key: pk_abc123def456" 
+  -H "X-Signature: $SIGNATURE"
+`}
             </pre>
           </div>
 
@@ -112,17 +116,80 @@ const ListDocumentsPage = () => {
                           <td>Total size of all documents (KB)</td>
                         </tr>
                         <tr>
-                          <td>domains</td>
+                          <td>domains[]</td>
                           <td>
-                            <code>list</code>
+                            <code>arr</code>
                           </td>
                           <td>List of domain-specific file info</td>
+                        </tr>
+                        <tr>
+                          <td>domains[].domain</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>Domain Name</td>
+                        </tr>
+                        <tr>
+                          <td>domains[].files[]</td>
+                          <td>
+                            <code>arr</code>
+                          </td>
+                          <td>Array of file objects</td>
+                        </tr>
+                        <tr>
+                          <td>domains[].files[].file_name</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>Original filename</td>
+                        </tr>
+                        <tr>
+                          <td>domains[].files[].id</td>
+                          <td>
+                            <code>int</code>
+                          </td>
+                          <td>Document Id</td>
+                        </tr>
+                        <tr>
+                          <td>domains[].files[].uploaded_at</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>ISO 8601 timestamp</td>
+                        </tr>
+                        <tr>
+                          <td>domains[].files[].s3_paths</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>s3 storage path</td>
+                        </tr>
+                        <tr>
+                          <td>domains[].files[].size_kb</td>
+                          <td>
+                            <code>float</code>
+                          </td>
+                          <td>File size in kilo bytes</td>
+                        </tr>
+                        <tr>
+                          <td>domains[].total_files</td>
+                          <td>
+                            <code>int</code>
+                          </td>
+                          <td>Files in this domain</td>
+                        </tr>
+                        <tr>
+                          <td>domains[]total_size_kb</td>
+                          <td>
+                            <code>float</code>
+                          </td>
+                          <td>Total size for this domain</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
 
-                  <h4 className="docs-response-title">Domain Object</h4>
+                  {/* <h4 className="docs-response-title">Domain Object</h4>
                   <div className="docs-table">
                     <table>
                       <thead>
@@ -227,7 +294,7 @@ const ListDocumentsPage = () => {
                         </tr>
                       </tbody>
                     </table>
-                  </div>
+                  </div> */}
 
                   <div className="docs-code">
                     <div className="docs-code-header">
@@ -237,23 +304,46 @@ const ListDocumentsPage = () => {
                     <pre>
                       {`{
   "total_domains": 2,
-  "total_documents": 5,
-  "total_size_kb": 1234.56,
+  "total_documents": 8,
+  "total_size_kb": 2450.75,
   "domains": [
     {
-      "domain": "pharma",
+      "domain": "beauty",
       "files": [
         {
-          "file_name": "file1.csv",
-          "document_id": "123",
-          "uploaded_at": "2024-05-01T12:34:56.789Z",
-          "size_kb": 56.78,
-          "domain": "pharma",
-          "s3_path": "s3://bucket/documents/user_1/pharma/file1.csv"
+          "file_name": "product_catalog.csv",
+          "id": 42,
+          "uploaded_at": "2024-10-24T09:15:00Z",
+          "domain": "beauty",
+          "s3_path": "s3://bucket/documents/uuid.csv",
+          "size_kb": 350.5
+        },
+        {
+          "file_name": "treatment_guide.xlsx",
+          "id": 43,
+          "uploaded_at": "2024-10-24T10:20:00Z",
+          "domain": "beauty",
+          "s3_path": "s3://bucket/documents/uuid.xlsx",
+          "size_kb": 125.25
+        }
+      ],
+      "total_files": 2,
+      "total_size_kb": 475.75
+    },
+    {
+      "domain": "healthcare",
+      "files": [
+        {
+          "file_name": "medical_products.csv",
+          "id": 44,
+          "uploaded_at": "2024-10-24T11:00:00Z",
+          "domain": "healthcare",
+          "s3_path": "s3://bucket/documents/uuid.csv",
+          "size_kb": 1975.0
         }
       ],
       "total_files": 1,
-      "total_size_kb": 56.78
+      "total_size_kb": 1975.0
     }
   ]
 }`}

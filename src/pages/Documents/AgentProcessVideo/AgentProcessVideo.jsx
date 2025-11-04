@@ -85,6 +85,28 @@ const AgentProcessVideo = () => {
               </thead>
               <tbody>
                 <tr>
+                  <td>domain</td>
+                  <td>
+                    <code>string</code>
+                  </td>
+                  <td>
+                    <span className="docs-badge docs-badge-required">
+                      Required
+                    </span>
+                  </td>
+                  <td> Your organization's domain identifier </td>
+                </tr>
+                <tr>
+                  <td>lang</td>
+                  <td>
+                    <code>string</code>
+                  </td>
+                  <td>
+                    <span className="docs-badge">Not Required</span>
+                  </td>
+                  <td>Language code (eng, it, fr). Default: eng</td>
+                </tr>
+                <tr>
                   <td>video_file</td>
                   <td>
                     <code>file</code>
@@ -94,7 +116,7 @@ const AgentProcessVideo = () => {
                       Required
                     </span>
                   </td>
-                  <td>Video file (formats allowed by system config)</td>
+                  <td>Video file for analysis (webm, mp4, etc.)</td>
                 </tr>
               </tbody>
             </table>
@@ -113,24 +135,38 @@ const AgentProcessVideo = () => {
 
           <div className="docs-code">
             <div className="docs-code-header">
-              <span>Example Request</span>
+              <span>Example Requests</span>
               <button
                 className="docs-code-copy"
+                //               onClick={() =>
+                //                 copyToClipboard(`curl -X POST \\
+                // https://api.example.com/api/agents/process-video/ \\
+                // -H "Authorization: Bearer YOUR_API_KEY" \\
+                // -F "video_file=@/path/to/your/video.mp4"`)
+                //               }
                 onClick={() =>
-                  copyToClipboard(`curl -X POST \\
-  https://api.example.com/api/agents/process-video/ \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -F "video_file=@/path/to/your/video.mp4"`)
+                  copyToClipboard(`curl -X POST https://saas.todopharma.com/api/agents/process-video/ 
+  -H "X-API-Key: pk_abc123def456" 
+  -H "X-Signature: $SIGNATURE" 
+  -F "domain=beauty" 
+  -F "lang=eng" 
+  -F "video_file=@/path/to/video.webm"`)
                 }
               >
                 Copy
               </button>
             </div>
             <pre>
-              {`curl -X POST \\
+              {/* {`curl -X POST \\
   https://api.example.com/api/agents/process-video/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
-  -F "video_file=@/path/to/your/video.mp4"`}
+  -F "video_file=@/path/to/your/video.mp4"`} */}
+              {`curl -X POST https://saas.todopharma.com/api/agents/process-video/ 
+  -H "X-API-Key: pk_abc123def456" 
+  -H "X-Signature: $SIGNATURE" 
+  -F "domain=beauty" 
+  -F "lang=eng" 
+  -F "video_file=@/path/to/video.webm"`}
             </pre>
           </div>
 
@@ -173,33 +209,73 @@ const AgentProcessVideo = () => {
                       </thead>
                       <tbody>
                         <tr>
-                          <td>quality_score</td>
+                          <td>analysis.status</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>Processing status (success/failure)</td>
+                        </tr>
+                        <tr>
+                          <td>analysis.analysis</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>AI-generated analysis of face/skin</td>
+                        </tr>
+                        <tr>
+                          <td>analysis.skin_analysis</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>Detailed skin analysis results</td>
+                        </tr>
+                        <tr>
+                          <td>analysis.rag_query</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>Context from knowledge base</td>
+                        </tr>
+                        <tr>
+                          <td>analysis.timestamp</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>ISO 8601 timestamp</td>
+                        </tr>
+                        <tr>
+                          <td>video_info.fps</td>
                           <td>
                             <code>float</code>
                           </td>
-                          <td>Quality score of the best frame</td>
+                          <td>Frames per second</td>
                         </tr>
                         <tr>
-                          <td>analysis</td>
+                          <td>video_info.frame_count</td>
                           <td>
-                            <code>object</code>
+                            <code>integer</code>
                           </td>
-                          <td>Output from the advanced AI model</td>
+                          <td>Total frames in video</td>
                         </tr>
                         <tr>
-                          <td>video_info</td>
+                          <td>video_info.width</td>
                           <td>
-                            <code>object</code>
+                            <code>integer</code>
                           </td>
+                          <td>Video width in pixels</td>
+                        </tr>
+                        <tr>
+                          <td>video_info.height</td>
                           <td>
-                            Video metadata (fps, frame count, width, height)
+                            <code>integer</code>
                           </td>
+                          <td>Video height in pixels</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
 
-                  <h4 className="docs-response-title">video_info Object</h4>
+                  {/* <h4 className="docs-response-title">video_info Object</h4>
                   <div className="docs-table">
                     <table>
                       <thead>
@@ -240,7 +316,7 @@ const AgentProcessVideo = () => {
                         </tr>
                       </tbody>
                     </table>
-                  </div>
+                  </div> */}
 
                   <div className="docs-code">
                     <div className="docs-code-header">
@@ -248,18 +324,35 @@ const AgentProcessVideo = () => {
                       <button
                         className="docs-code-copy"
                         onClick={() =>
+                          //                           copyToClipboard(`{
+                          //   "quality_score": 123.45,
+                          //   "analysis": {
+                          //     "skin_analysis": "...",
+                          //     "rag_query": "..."
+                          //   },
+                          //   "video_info": {
+                          //     "fps": 30.0,
+                          //     "frame_count": 450,
+                          //     "width": 1920,
+                          //     "height": 1080
+                          //   }
+                          // }`)
                           copyToClipboard(`{
-  "quality_score": 123.45,
   "analysis": {
-    "skin_analysis": "...",
-    "rag_query": "..."
+    "status": "success",
+    "analysis": "Based on the video analysis, your skin appears to be combination type with slight dryness in the T-zone. We recommend using a gentle moisturizer and staying hydrated.",
+    "skin_analysis": "Detailed skin analysis results including texture, tone, and specific concerns identified.",
+    "rag_query": "Additional context retrieved from knowledge base",
+    "timestamp": "2024-10-24T10:35:00Z"
   },
   "video_info": {
     "fps": 30.0,
     "frame_count": 450,
-    "width": 1920,
-    "height": 1080
-  }
+    "width": 1280,
+    "height": 720
+  },
+  "domain": "beauty",
+  "user_id": 123
 }`)
                         }
                       >
@@ -267,7 +360,7 @@ const AgentProcessVideo = () => {
                       </button>
                     </div>
                     <pre>
-                      {`{
+                      {/* {`{
   "quality_score": 123.45,
   "analysis": {
     "skin_analysis": "...",
@@ -279,6 +372,23 @@ const AgentProcessVideo = () => {
     "width": 1920,
     "height": 1080
   }
+}`} */}
+                      {`{
+  "analysis": {
+    "status": "success",
+    "analysis": "Based on the video analysis, your skin appears to be combination type with slight dryness in the T-zone. We recommend using a gentle moisturizer and staying hydrated.",
+    "skin_analysis": "Detailed skin analysis results including texture, tone, and specific concerns identified.",
+    "rag_query": "Additional context retrieved from knowledge base",
+    "timestamp": "2024-10-24T10:35:00Z"
+  },
+  "video_info": {
+    "fps": 30.0,
+    "frame_count": 450,
+    "width": 1280,
+    "height": 720
+  },
+  "domain": "beauty",
+  "user_id": 123
 }`}
                     </pre>
                   </div>
@@ -306,10 +416,11 @@ const AgentProcessVideo = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">400: Bad Request</div>
+                      <div className="docs-alert-title">
+                        400: Domain is required
+                      </div>
                       <p className="docs-alert-message">
-                        No video file provided, file too large, or unsupported
-                        file type
+                        Missing domain parameter
                       </p>
                     </div>
                   </div>
@@ -317,9 +428,11 @@ const AgentProcessVideo = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">400: Bad Request</div>
+                      <div className="docs-alert-title">
+                        400: Invalid Language Parameter
+                      </div>
                       <p className="docs-alert-message">
-                        Could not open or process video
+                        Language must be eng, it or fr
                       </p>
                     </div>
                   </div>
@@ -327,9 +440,45 @@ const AgentProcessVideo = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">500: Server Error</div>
+                      <div className="docs-alert-title">
+                        400: Invalid Video file
+                      </div>
                       <p className="docs-alert-message">
-                        Unexpected server error
+                        Video format not supported or corrupted
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        400: Couldnot open Video File
+                      </div>
+                      <p className="docs-alert-message">
+                        Video cannot be processed
+                      </p>
+                    </div>
+                  </div>
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        401: Authentication failed
+                      </div>
+                      <p className="docs-alert-message">
+                        Invalid API key or signature
+                      </p>
+                    </div>
+                  </div>
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        500: Internal server error
+                      </div>
+                      <p className="docs-alert-message">
+                        Server-side processing error
                       </p>
                     </div>
                   </div>

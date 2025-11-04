@@ -7,6 +7,7 @@ import {
   FaFileAudio,
   FaLanguage,
   FaListAlt,
+  FaKey,
 } from "react-icons/fa";
 import "../index.css";
 
@@ -24,8 +25,8 @@ const AgentConversationalResponse = () => {
       <div className="docs-page-header">
         <h1 className="docs-page-title">Generate Conversational Response</h1>
         <p className="docs-page-description">
-          This endpoint accepts a text query or an audio file, retrieves
-          relevant context from your knowledge base, and generates a
+          This endpoint accepts a text query or an audio file, language,
+          retrieves relevant context from your knowledge base, and generates a
           sales-oriented, conversational response in Italian using advanced
           language models like Groq and OpenAI.
         </p>
@@ -50,10 +51,9 @@ const AgentConversationalResponse = () => {
           <p className="docs-endpoint-description">
             This endpoint provides AI-generated conversational responses to
             customer inquiries. It can accept either text input or audio files
-            (which are transcribed using OpenAI Whisper). The system retrieves
-            relevant product information from the specified domain, and then
-            generates a natural, sales-oriented response in Italian using
-            advanced language models (Groq/OpenAI).
+            with language parameter. The system retrieves relevant product
+            information from the specified domain, and then generates a natural,
+            sales-oriented response in Italian using advanced language models.
           </p>
 
           <div className="docs-alert docs-alert-info">
@@ -61,11 +61,11 @@ const AgentConversationalResponse = () => {
             <div className="docs-alert-content">
               <div className="docs-alert-title">Multilingual Support</div>
               <p className="docs-alert-message">
-                While the system is optimized for Italian responses, it can
-                understand queries in other languages and translate them
-                internally. However, the responses will always be generated in
-                Italian to maintain consistency for your Italian-speaking
-                customer base.
+                While the system is optimized for Italian, French, and English
+                responses, it can understand queries in other languages and
+                translate them internally. However, the responses will always be
+                generated in the detected or preferred language to maintain
+                consistency for your multilingual customer base.
               </p>
             </div>
           </div>
@@ -98,7 +98,19 @@ const AgentConversationalResponse = () => {
                       Required
                     </span>
                   </td>
-                  <td>Domain/category for retrieval (e.g., "cosmetici")</td>
+                  <td>Your organization's domain identifier</td>
+                </tr>
+                <tr>
+                  <td>lang</td>
+                  <td>
+                    <code>string</code>
+                  </td>
+                  <td>
+                    <span className="docs-badge docs-badge-optional">
+                      Optional*
+                    </span>
+                  </td>
+                  <td>Language code (eng, it, fr). Default: eng</td>
                 </tr>
                 <tr>
                   <td>text_query</td>
@@ -110,7 +122,7 @@ const AgentConversationalResponse = () => {
                       Optional*
                     </span>
                   </td>
-                  <td>Customer's question/query (in Italian)</td>
+                  <td>Text query from user</td>
                 </tr>
                 <tr>
                   <td>audio_file</td>
@@ -122,7 +134,7 @@ const AgentConversationalResponse = () => {
                       Optional*
                     </span>
                   </td>
-                  <td>Audio file for speech-to-text (WAV, etc.)</td>
+                  <td>Audio file containing user query</td>
                 </tr>
               </tbody>
             </table>
@@ -156,28 +168,40 @@ const AgentConversationalResponse = () => {
                     <button
                       className="docs-code-copy"
                       onClick={() =>
-                        copyToClipboard(`curl -X POST \\
-  https://api.example.com/api/agents/generate-response/ \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "domain": "cosmetici",
-    "text_query": "Ho bisogno di una crema per pelle secca"
-  }'`)
+                        //                       copyToClipboard(`curl -X POST \\
+                        // https://api.example.com/api/agents/generate-response/ \\
+                        // -H "Authorization: Bearer YOUR_API_KEY" \\
+                        // -H "Content-Type: application/json" \\
+                        // -d '{
+                        //   "domain": "cosmetici",
+                        //   "text_query": "Ho bisogno di una crema per pelle secca"
+                        // }'`)
+                        copyToClipboard(`curl -X POST https://saas.todopharma.com/api/agents/generate-response/ 
+  -H "X-API-Key: pk_abc123def456" 
+  -H "X-Signature: $SIGNATURE" 
+  -F "domain=beauty" 
+  -F "lang=eng" 
+  -F "text_query=What beauty treatments do you offer?"`)
                       }
                     >
                       Copy
                     </button>
                   </div>
                   <pre>
-                    {`curl -X POST \\
+                    {/* {`curl -X POST \\
   https://api.example.com/api/agents/generate-response/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
     "domain": "cosmetici",
     "text_query": "Ho bisogno di una crema per pelle secca"
-  }'`}
+  }'`} */}
+                    {`curl -X POST https://saas.todopharma.com/api/agents/generate-response/ 
+  -H "X-API-Key: pk_abc123def456" 
+  -H "X-Signature: $SIGNATURE" 
+  -F "domain=beauty" 
+  -F "lang=eng" 
+  -F "text_query=What beauty treatments do you offer?"`}
                   </pre>
                 </div>
 
@@ -188,10 +212,12 @@ const AgentConversationalResponse = () => {
                     <button
                       className="docs-code-copy"
                       onClick={() =>
-                        copyToClipboard(`curl -X POST \\
-  https://api.example.com/api/agents/generate-response/ \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -F "domain=cosmetici" \\
+                        copyToClipboard(`curl -X POST 
+  https://api.example.com/api/agents/generate-response/ 
+  -H "Authorization: Bearer YOUR_API_KEY" 
+  -H "X-Signature: $SIGNATURE" 
+  -F "domain=cosmetici" 
+  -F "lang=eng"
   -F "audio_file=@/path/to/your/audio.wav"`)
                       }
                     >
@@ -199,10 +225,12 @@ const AgentConversationalResponse = () => {
                     </button>
                   </div>
                   <pre>
-                    {`curl -X POST \\
-  https://api.example.com/api/agents/generate-response/ \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -F "domain=cosmetici" \\
+                    {`curl -X POST 
+  https://api.example.com/api/agents/generate-response/ 
+  -H "Authorization: Bearer YOUR_API_KEY"
+  -H "X-Signature: $SIGNATURE"  
+  -F "domain=cosmetici" 
+  -F "lang=eng"
   -F "audio_file=@/path/to/your/audio.wav"`}
                   </pre>
                 </div>
@@ -253,21 +281,49 @@ const AgentConversationalResponse = () => {
                           <td>
                             <code>string</code>
                           </td>
-                          <td>AI-generated, conversational answer (Italian)</td>
+                          <td>AI-generated response text</td>
                         </tr>
                         <tr>
-                          <td>metadata</td>
+                          <td>metadata.query</td>
                           <td>
-                            <code>object</code>
+                            <code>string</code>
                           </td>
-                          <td>Metadata about the interaction</td>
+                          <td>Original user query</td>
                         </tr>
                         <tr>
-                          <td>documents</td>
+                          <td>metadata.documents_used</td>
                           <td>
-                            <code>array</code>
+                            <code>integer</code>
                           </td>
-                          <td>List of relevant product documents (parsed)</td>
+                          <td>Number of knowledge base documents referenced</td>
+                        </tr>
+                        <tr>
+                          <td>metadata.context_length</td>
+                          <td>
+                            <code>integer</code>
+                          </td>
+                          <td>Total context length used</td>
+                        </tr>
+                        <tr>
+                          <td>metadata.domain</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>Domain identifier</td>
+                        </tr>
+                        <tr>
+                          <td>metadata.user_id</td>
+                          <td>
+                            <code>integer</code>
+                          </td>
+                          <td>User ID</td>
+                        </tr>
+                        <tr>
+                          <td>metadata.interaction_timestamp</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>ISO 8601 timestamp</td>
                         </tr>
                       </tbody>
                     </table>
@@ -290,6 +346,13 @@ const AgentConversationalResponse = () => {
                             <code>string</code>
                           </td>
                           <td>Final query used</td>
+                        </tr>
+                        <tr>
+                          <td>lang</td>
+                          <td>
+                            <code>string</code>
+                          </td>
+                          <td>Languages are eng, it and fr</td>
                         </tr>
                         <tr>
                           <td>documents_used</td>
@@ -393,9 +456,11 @@ const AgentConversationalResponse = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">400: Bad Request</div>
+                      <div className="docs-alert-title">
+                        400: Invalid language parameter
+                      </div>
                       <p className="docs-alert-message">
-                        Neither text_query nor audio_file provided
+                        Language must be eng, it and fr
                       </p>
                     </div>
                   </div>
@@ -403,9 +468,9 @@ const AgentConversationalResponse = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">400: Bad Request</div>
+                      <div className="docs-alert-title">400: Missing Input</div>
                       <p className="docs-alert-message">
-                        Audio transcription failed
+                        Must provide either text query or audio_file
                       </p>
                     </div>
                   </div>
@@ -413,9 +478,47 @@ const AgentConversationalResponse = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">500: Server Error</div>
+                      <div className="docs-alert-title">
+                        400: Both Input provided
+                      </div>
                       <p className="docs-alert-message">
-                        Unexpected server error
+                        Cannot provide both text_query and audio_file
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        400: unable to transcript audio
+                      </div>
+                      <p className="docs-alert-message">
+                        Audio file could not be processed
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        401: Authentication Failed
+                      </div>
+                      <p className="docs-alert-message">
+                        Invalid API key or signature
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        500: Internal server error
+                      </div>
+                      <p className="docs-alert-message">
+                        Server Side processing error
                       </p>
                     </div>
                   </div>
@@ -482,10 +585,12 @@ async function generateResponse(domain, textQuery) {
       method: 'POST',
       headers: {
         'Authorization': \`Bearer \${apiKey}\`,
+         -H "X-Signature: $SIGNATURE" 
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         domain: domain,
+        lang: language,
         text_query: textQuery
       })
     });
@@ -562,10 +667,12 @@ async function generateResponse(domain, textQuery) {
       method: 'POST',
       headers: {
         'Authorization': \`Bearer \${apiKey}\`,
+        -H "X-Signature: $SIGNATURE"
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         domain: domain,
+        lang: language,
         text_query: textQuery
       })
     });
@@ -654,6 +761,7 @@ async function uploadAudioAndGetResponse(domain, audioFile) {
   
   const formData = new FormData();
   formData.append('domain', domain);
+  formData.append('lang', lang);
   formData.append('audio_file', audioFile);
   
   try {
@@ -661,6 +769,7 @@ async function uploadAudioAndGetResponse(domain, audioFile) {
       method: 'POST',
       headers: {
         'Authorization': \`Bearer \${apiKey}\`
+        -H "X-Signature: $SIGNATURE" 
         // Note: Do not set Content-Type header for FormData
       },
       body: formData
@@ -758,6 +867,7 @@ async function uploadAudioAndGetResponse(domain, audioFile) {
       method: 'POST',
       headers: {
         'Authorization': \`Bearer \${apiKey}\`
+        -H "X-Signature: $SIGNATURE" 
         // Note: Do not set Content-Type header for FormData
       },
       body: formData
@@ -835,6 +945,123 @@ stopButton.addEventListener('click', () => {
     stopButton.disabled = true;
   }
 });`}
+              </pre>
+            </div>
+          </div>
+        </div>
+
+        <div className="docs-card">
+          <div className="docs-card-title">
+            <FaKey /> Generate Signature Example
+          </div>
+          <div className="docs-card-content">
+            <p>Here's an example of how to make signature key:</p>
+
+            <div className="docs-code">
+              <div className="docs-code-header">
+                <span>JavaScript Signature Creation Example</span>
+                <button
+                  className="docs-code-copy"
+                  onClick={() =>
+                    copyToClipboard(`import crypto from "crypto";
+import fetch from "node-fetch"; // install via npm install node-fetch
+
+// 🔐 Your API credentials
+const API_KEY = "YOUR_API_KEY";
+const SECRET_KEY = "YOUR_SECRET_KEY";
+
+// 🧠 The API endpoint
+const API_URL = "https://api.aicustomerservice.io/v1/chat";
+
+// 📨 The request payload
+const body = {
+  question: "Where is my order?",
+  language: "it", // Italian
+};
+
+// 🔑 1. Convert body to JSON
+const bodyString = JSON.stringify(body);
+
+// 🔒 2. Create HMAC-SHA256 signature
+const signature = crypto
+  .createHmac("sha256", SECRET_KEY)
+  .update(bodyString)
+  .digest("hex");
+
+// 🌐 3. Send POST request with both Authorization and Signature headers
+async function sendRequest() {
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        Authorization: Bearer <API_KEY>,
+        Signature: signature,
+        "Content-Type": "application/json",
+      },
+      body: bodyString,
+    });
+
+    const data = await response.json();
+    console.log("✅ AI Response:", data.response);
+  } catch (error) {
+    console.error("❌ Error:", error);
+  }
+}
+
+sendRequest();
+`)
+                  }
+                >
+                  Copy
+                </button>
+              </div>
+              <pre>
+                {`import crypto from "crypto";
+import fetch from "node-fetch"; // install via npm install node-fetch
+
+// 🔐 Your API credentials
+const API_KEY = "YOUR_API_KEY";
+const SECRET_KEY = "YOUR_SECRET_KEY";
+
+// 🧠 The API endpoint
+const API_URL = "https://api.aicustomerservice.io/v1/chat";
+
+// 📨 The request payload
+const body = {
+  question: "Where is my order?",
+  language: "it", // Italian
+};
+
+// 🔑 1. Convert body to JSON
+const bodyString = JSON.stringify(body);
+
+// 🔒 2. Create HMAC-SHA256 signature
+const signature = crypto
+  .createHmac("sha256", SECRET_KEY)
+  .update(bodyString)
+  .digest("hex");
+
+// 🌐 3. Send POST request with both Authorization and Signature headers
+async function sendRequest() {
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        Authorization: Bearer <API_KEY>,
+        Signature: signature,
+        "Content-Type": "application/json",
+      },
+      body: bodyString,
+    });
+
+    const data = await response.json();
+    console.log("✅ AI Response:", data.response);
+  } catch (error) {
+    console.error("❌ Error:", error);
+  }
+}
+
+sendRequest();`}
               </pre>
             </div>
           </div>

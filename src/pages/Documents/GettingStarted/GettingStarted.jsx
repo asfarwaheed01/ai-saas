@@ -16,10 +16,11 @@ const GettingStarted = () => {
         <p className="docs-page-description">
           Welcome to the AI Customer Service API Documentation. This guide will
           help you get started with our APIs and show you how to integrate them
-          into your applications.
+          into your applications. Here's the{" "}
+          <span className="text-color">Base URL:</span>
         </p>
         <section className="live-api-section container-xlarge">
-          <h2 className="api-heading">Developer API</h2>
+          <h2 className="api-heading">Developer's API</h2>
 
           <div className="api-box">
             <pre className="api-code">
@@ -41,18 +42,25 @@ const GettingStarted = () => {
           <FaRocket /> Introduction
         </h2>
         <p>
-          Our API provides a comprehensive set of endpoints for building
+          {/* Our API provides a comprehensive set of endpoints for building
           AI-powered customer service applications. The API is organized into
-          several sections:
+          several sections: */}
+          Welcome to the AI Customer Service API! Our platform provides two
+          powerful AI-driven services that you can easily integrate into your
+          applications:
         </p>
         <ul className="docs-list">
           <li>
-            <strong>Knowledge Base API:</strong> Upload, manage, and query
-            documents for information retrieval
+            <strong>Knowledge Base API:</strong> Document management and
+            retrieval for context-aware responses
           </li>
           <li>
-            <strong>Facial Recognition API:</strong> Process videos and generate
-            conversational responses
+            <strong>AI Agent API:</strong> Intelligent conversational AI with
+            multi-language support and video analysis
+          </li>
+          <li className="supported-lang">
+            <strong>Supported Languages:</strong> English (eng), Italian (it),
+            French (fr)
           </li>
           {/* <li>
             <strong>Payments API:</strong> Manage subscription plans and handle
@@ -239,8 +247,8 @@ Accept: application/json`}
             upload and query your documents
           </li>
           <li>
-            Explore the <strong>Facial Recognition API</strong> to see how to
-            process videos and generate conversational responses
+            Explore the <strong>AI Agent API</strong> to see how to process
+            videos and generate conversational responses
           </li>
           {/* <li>
             Learn about the <strong>Payments API</strong> to manage subscription

@@ -1329,3 +1329,7 @@ section .button {
     font-size: 11px;
   }
 }
+
+.text-color {
+  color: #05b1bd;
+}

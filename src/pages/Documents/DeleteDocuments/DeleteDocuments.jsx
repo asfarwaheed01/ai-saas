@@ -36,7 +36,8 @@ const DeleteDocuments = () => {
 
           <div className="docs-endpoint-meta">
             <span className="docs-endpoint-auth">
-              <FaShieldAlt /> Authentication Required (admin only)
+              <FaShieldAlt /> Authentication Required (admin only) | API key
+              Required
             </span>
           </div>
 
@@ -68,6 +69,7 @@ const DeleteDocuments = () => {
                 <tr>
                   <th>Name</th>
                   <th>Type</th>
+                  <th>Required</th>
                   <th>Description</th>
                 </tr>
               </thead>
@@ -77,14 +79,24 @@ const DeleteDocuments = () => {
                   <td>
                     <code>int</code>
                   </td>
-                  <td>Document ID to delete</td>
+                  <td>
+                    <span className="docs-badge docs-badge-required">
+                      Required
+                    </span>
+                  </td>
+                  <td>Document ID (from URL path)</td>
                 </tr>
                 <tr>
                   <td>domain</td>
                   <td>
                     <code>string</code>
                   </td>
-                  <td>Domain/category of document</td>
+                  <td>
+                    <span className="docs-badge docs-badge-required">
+                      Required
+                    </span>
+                  </td>
+                  <td>Domain name (from URL path)</td>
                 </tr>
               </tbody>
             </table>
@@ -99,9 +111,12 @@ const DeleteDocuments = () => {
               <button className="docs-code-copy">Copy</button>
             </div>
             <pre>
-              {`curl -X DELETE \\
+              {/* {`curl -X DELETE \\
   https://api.example.com/api/knowledge-base/docs/delete/123/pharma/ \\
-  -H "Authorization: Bearer YOUR_API_KEY"`}
+  -H "Authorization: Bearer YOUR_API_KEY"`} */}
+              {`curl -X DELETE https://saas.todopharma.com/api/knowledge-base/docs/delete/<DOCUMENT_ID>/<DOMAIN>/
+  -H "X-API-Key: pk_abc123def456" 
+  -H "X-Signature: $SIGNATURE"`}
             </pre>
           </div>
 
@@ -148,7 +163,7 @@ const DeleteDocuments = () => {
                           <td>
                             <code>string</code>
                           </td>
-                          <td>Result message</td>
+                          <td>Detailed deletion status</td>
                         </tr>
                         <tr>
                           <td>deleted_vectors_count</td>
@@ -216,9 +231,11 @@ const DeleteDocuments = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">403: Forbidden</div>
+                      <div className="docs-alert-title">
+                        404: Document not found
+                      </div>
                       <p className="docs-alert-message">
-                        Only admin users are allowed to delete documents
+                        Document doesnot exsist or already deleted
                       </p>
                     </div>
                   </div>
@@ -226,9 +243,9 @@ const DeleteDocuments = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">400: Bad Request</div>
+                      <div className="docs-alert-title">404: No Permission</div>
                       <p className="docs-alert-message">
-                        Domain does not exist in allowed domains
+                        User doesnot own this document
                       </p>
                     </div>
                   </div>
@@ -236,9 +253,11 @@ const DeleteDocuments = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">404: Not Found</div>
+                      <div className="docs-alert-title">
+                        500: Failed to delete embeddings
+                      </div>
                       <p className="docs-alert-message">
-                        No embeddings found and S3 object not found
+                        Vector database error
                       </p>
                     </div>
                   </div>
@@ -246,9 +265,11 @@ const DeleteDocuments = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">500: Server Error</div>
+                      <div className="docs-alert-title">
+                        500: Unexpected error
+                      </div>
                       <p className="docs-alert-message">
-                        Failed to delete embeddings / Unexpected error
+                        Server-side processing error
                       </p>
                     </div>
                   </div>

@@ -73,7 +73,7 @@ const UploadAndProcessDoc = () => {
                       Required
                     </span>
                   </td>
-                  <td>CSV or Excel file to be processed</td>
+                  <td>Your organization's domain identifier</td>
                 </tr>
                 <tr>
                   <td>domain</td>
@@ -85,7 +85,38 @@ const UploadAndProcessDoc = () => {
                       Required
                     </span>
                   </td>
-                  <td>Domain/category name for organizing the document</td>
+                  <td>CSV or Excel file to upload (max 2.5 MB)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="docs-table">
+            <h4 className="docs-response-title">Supported File Parameters</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Format</th>
+                  <th>Extension</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>csv</td>
+                  <td>
+                    <code>.csv</code>
+                  </td>
+
+                  <td>Comma-separated values</td>
+                </tr>
+                <tr>
+                  <td>Excel</td>
+                  <td>
+                    <code>.xls | .xlsx</code>
+                  </td>
+
+                  <td>Microsoft Excel spreadsheet</td>
                 </tr>
               </tbody>
             </table>
@@ -97,11 +128,16 @@ const UploadAndProcessDoc = () => {
               <button className="docs-code-copy">Copy</button>
             </div>
             <pre>
-              {`curl -X POST \\
+              {/* {`curl -X POST \\
   https://api.example.com/api/knowledge-base/docs/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -F "file=@/path/to/your/document.csv" \\
-  -F "domain=pharma"`}
+  -F "domain=pharma"`} */}
+              {`curl -X POST https://saas.todopharma.com/api/knowledge-base/docs/ 
+  -H "X-API-Key: pk_abc123def456" 
+  -H "X-Signature: $SIGNATURE" 
+  -F "domain=beauty" 
+  -F "file=@/path/to/product_catalog.csv"`}
             </pre>
           </div>
 
@@ -167,20 +203,13 @@ const UploadAndProcessDoc = () => {
                           <td>
                             <code>int</code>
                           </td>
-                          <td>ID of the created Document</td>
-                        </tr>
-                        <tr>
-                          <td>stats</td>
-                          <td>
-                            <code>object</code>
-                          </td>
-                          <td>Processing statistics</td>
+                          <td>Unique document ID (use for deletion)</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
 
-                  <h4 className="docs-response-title">Stats Object</h4>
+                  {/* <h4 className="docs-response-title">Stats Object</h4>
                   <div className="docs-table">
                     <table>
                       <thead>
@@ -214,7 +243,7 @@ const UploadAndProcessDoc = () => {
                         </tr>
                       </tbody>
                     </table>
-                  </div>
+                  </div> */}
 
                   <div className="docs-code">
                     <div className="docs-code-header">
@@ -258,9 +287,75 @@ const UploadAndProcessDoc = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">400: Bad Request</div>
+                      <div className="docs-alert-title">
+                        400: No domain specified
+                      </div>
+                      <p className="docs-alert-message">No domain parameter</p>
+                    </div>
+                  </div>
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        400: No file uploaded
+                      </div>
                       <p className="docs-alert-message">
-                        No domain specified / No file uploaded
+                        Missing File In request
+                      </p>
+                    </div>
+                  </div>
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        400: Only one file uploaded at a time
+                      </div>
+                      <p className="docs-alert-message">
+                        Multiple files detected
+                      </p>
+                    </div>
+                  </div>
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        400: File size exceeds the 2.5mb limit
+                      </div>
+                      <p className="docs-alert-message">
+                        File is larger than 2.5mb
+                      </p>
+                    </div>
+                  </div>
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        400: Domain access denied
+                      </div>
+                      <p className="docs-alert-message">
+                        User doesnot have access to this domain
+                      </p>
+                    </div>
+                  </div>
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        400: Pdf upload limit exceeded
+                      </div>
+                      <p className="docs-alert-message">
+                        Reached maximum uploads for your plan
+                      </p>
+                    </div>
+                  </div>
+                  <div className="docs-alert docs-alert-error">
+                    <FaExclamationCircle className="docs-alert-icon" />
+                    <div className="docs-alert-content">
+                      <div className="docs-alert-title">
+                        401: Authentication failed
+                      </div>
+                      <p className="docs-alert-message">
+                        Invalid API key or signature
                       </p>
                     </div>
                   </div>
@@ -268,9 +363,11 @@ const UploadAndProcessDoc = () => {
                   <div className="docs-alert docs-alert-error">
                     <FaExclamationCircle className="docs-alert-icon" />
                     <div className="docs-alert-content">
-                      <div className="docs-alert-title">500: Server Error</div>
+                      <div className="docs-alert-title">
+                        500: Failed to upload file
+                      </div>
                       <p className="docs-alert-message">
-                        Failed to upload file / Error processing document
+                        Server Side processing error
                       </p>
                     </div>
                   </div>
@@ -348,7 +445,7 @@ fetch('https://api.example.com/api/knowledge-base/docs/', {
           </div>
         </div>
 
-        <div className="docs-card">
+        {/* <div className="docs-card">
           <div className="docs-card-title">
             <FaInfoCircle /> Best Practices
           </div>
@@ -378,6 +475,53 @@ fetch('https://api.example.com/api/knowledge-base/docs/', {
                 knowledge base
               </li>
             </ul>
+          </div>
+        </div> */}
+        <div className="docs-card">
+          <div className="docs-card-title">
+            <FaInfoCircle />
+            Best Practices
+          </div>
+
+          <div className="docs-card-content">
+            <div className="docs-list">
+              <h4 className="text-color-practices">Processing Notes</h4>
+              <ul className="list-disc">
+                <li>Files are processed asynchronously in the background.</li>
+                <li>
+                  The document is immediately available but full vectorization
+                  may take a few minutes.
+                </li>
+                <li>Only CSV and Excel formats are supported.</li>
+                <li>Maximum file size is 2.5 MB.</li>
+                <li>
+                  Each row in the file is processed as a separate data point.
+                </li>
+              </ul>
+            </div>
+
+            <div className="docs-list">
+              <h4 className="text-color-practices">CSV/Excel File Structure</h4>
+              <p className="">
+                Your CSV or Excel files should be structured with clear column
+                headers:
+              </p>
+
+              <pre className="">
+                {`Product Name,Category,Description,Price
+Anti-Aging Serum,Skincare,Advanced formula for reducing wrinkles,49.99
+Moisturizing Cream,Skincare,Deep hydration for all skin types,29.99
+Vitamin C Serum,Skincare,Brightening serum with antioxidants,39.99`}
+              </pre>
+
+              <p className="">The system will automatically:</p>
+              <ol className="list-decimal">
+                <li>Read all columns and rows</li>
+                <li>Create structured text from each row</li>
+                <li>Generate embeddings for semantic search</li>
+                <li>Store metadata for each data point</li>
+              </ol>
+            </div>
           </div>
         </div>
       </div>
