@@ -68,7 +68,7 @@ const API_SECTIONS = [
   },
   {
     id: "agent",
-    title: "Facial Recognition",
+    title: "Agent API",
     icon: <FaRobot />,
     path: "/docs/agent",
     items: [
