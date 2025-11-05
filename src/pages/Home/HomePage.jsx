@@ -449,7 +449,8 @@ const HomePage = () => {
 
         <div
           className="api-box"
-          onClick={() => navigate("/docs/getting-started")}
+          // onClick={() => navigate("/docs/getting-started")}
+          onClick={() => navigate("/docs/api-keys")}
         >
           <pre className="api-code">
             {`const url = https://saas.todopharma.com/
@@ -460,7 +461,7 @@ const HomePage = () => {
   }
 `}
           </pre>
-          <div className="tooltip">Access Developer API 🔒</div>
+          <div className="tooltip">Access Developer API </div>
         </div>
       </section>
     </>

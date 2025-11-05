@@ -12,13 +12,16 @@ import {
   FaWordpress,
 } from "react-icons/fa";
 import "./Services.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import { FaCloudArrowDown } from "react-icons/fa6";
 import { useAuth } from "../../providers/AuthContext";
+import AuthPopup from "../../components/AuthPopUp";
 
 const Services = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [showAuthPopup, setShowAuthPopup] = useState(false);
 
   const handleClick = () => {
     navigate(ROUTES.docsGettingStarted.path);
@@ -216,9 +219,17 @@ const Services = () => {
   const [showDownloadPopup, setShowDownloadPopup] = useState(false);
   const { user } = useAuth();
 
+  // const handleShowPopup = (pkg) => {
+  //   if (!user) {
+  //     navigate(ROUTES.login.path);
+  //     return;
+  //   }
+  //   setSelectedPackage(pkg);
+  //   setShowDownloadPopup(true);
+  // };
   const handleShowPopup = (pkg) => {
     if (!user) {
-      navigate(ROUTES.login.path);
+      setShowAuthPopup(true);
       return;
     }
     setSelectedPackage(pkg);
@@ -236,9 +247,17 @@ const Services = () => {
   const shopifyPluginLink = "https://example.com/shopify-plugin.zip";
   // const wordpressPluginLink = "https://example.com/wordpress-plugin.zip";
 
+  // const handleDownloadPlugins = (link) => {
+  //   if (!user) {
+  //     navigate(ROUTES.login.path);
+  //     return;
+  //   }
+  //   window.open(link, "_blank");
+  // };
+
   const handleDownloadPlugins = (link) => {
     if (!user) {
-      navigate(ROUTES.login.path);
+      setShowAuthPopup(true);
       return;
     }
     window.open(link, "_blank");
@@ -476,11 +495,24 @@ const Services = () => {
               href="https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin.zip"
               download
             > */}
-            <a
+            {/* <a
               onClick={(e) => {
                 e.preventDefault();
                 if (!user) {
                   navigate(ROUTES.login.path);
+                  return;
+                }
+                window.open(
+                  "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin.zip",
+                  "_blank"
+                );
+              }}
+            > */}
+            <Link
+              onClick={(e) => {
+                e.preventDefault();
+                if (!user) {
+                  setShowAuthPopup(true);
                   return;
                 }
                 window.open(
@@ -493,7 +525,16 @@ const Services = () => {
                 <FaWordpress className="icon" /> Download WordPress Plugin{" "}
                 <FaDownload />
               </button>
-            </a>
+            </Link>
+            {showAuthPopup && (
+              <AuthPopup
+                onClose={() => setShowAuthPopup(false)}
+                redirectPath={location.pathname}
+                onSuccess={() => {
+                  setShowAuthPopup(false);
+                }}
+              />
+            )}
           </div>
         </div>
       </div>

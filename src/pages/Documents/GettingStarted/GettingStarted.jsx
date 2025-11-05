@@ -7,8 +7,10 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 import "./GettingStarted.css";
+import { useNavigate } from "react-router-dom";
 
 const GettingStarted = () => {
+  const navigate = useNavigate();
   return (
     <div className="docs-page">
       <div className="docs-page-header">
@@ -22,7 +24,7 @@ const GettingStarted = () => {
         <section className="live-api-section container-xlarge">
           <h2 className="api-heading">Developer's API</h2>
 
-          <div className="api-box">
+          <div className="api-box" onClick={() => navigate("/docs/api-keys")}>
             <pre className="api-code">
               {`const url = https://saas.todopharma.com/
   {
@@ -32,7 +34,7 @@ const GettingStarted = () => {
   }
 `}
             </pre>
-            <div className="tooltip">Access Developer API 🔒</div>
+            <div className="tooltip">Access Developer API </div>
           </div>
         </section>
       </div>
