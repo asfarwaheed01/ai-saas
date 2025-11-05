@@ -454,9 +454,9 @@
 }
 
 /* Highlight matching passwords */
-input:valid {
+/* input:valid {
   border-color: #05b1bd;
-}
+} */
 
 /* Disabled button look */
 .login-submit-btn:disabled {
