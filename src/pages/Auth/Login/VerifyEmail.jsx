@@ -5,26 +5,33 @@ import "./VerifyEmail.css";
 const VerifyEmail = () => {
   const { token } = useParams();
   const navigate = useNavigate();
-  const [status, setStatus] = useState("loading"); // "loading", "success", "error"
+  const [status, setStatus] = useState("loading");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     const verifyEmail = async () => {
       try {
         const response = await fetch(
-          `https://saas.todopharma.com/api/users/verify-email/${token}/`
+          "https://saas.todopharma.com/api/users/verify-email/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token }),
+          }
         );
+
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.error || "Verification failed");
+          throw new Error(data.detail || data.error || "Verification failed");
         }
 
-        // ✅ On success
         setStatus("success");
         setMessage("Your email has been successfully verified!");
 
-        // Save email temporarily to localStorage so Login page can prefill it
+        // Optional: store verified email if API returns it
         if (data.email) {
           localStorage.setItem("verified_email", data.email);
         }
@@ -39,7 +46,7 @@ const VerifyEmail = () => {
       }
     };
 
-    verifyEmail();
+    if (token) verifyEmail();
   }, [token, navigate]);
 
   return (
