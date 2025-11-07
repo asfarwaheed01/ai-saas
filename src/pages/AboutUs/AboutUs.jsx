@@ -708,7 +708,7 @@ const AboutUs = () => {
           ready to change the way millions of people experience beauty, pharma
           and medical consultancy.
         </p>
-        <Link to="/pricing-plans" className="btn">
+        <Link to="/services" className="btn">
           Get Started Today
         </Link>
       </div>

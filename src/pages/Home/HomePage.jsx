@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Slider2 from "../../components/carousel";
 import { FaCheckCircle } from "react-icons/fa";
 import Card from "../../components/card";
@@ -6,21 +6,65 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 // import Test from "../../image/test.jpg";
 import Image1 from "../../assets/1.jpeg";
 import Image2 from "../../assets/2.jpeg";
-import Image3 from "../../assets/3.png";
+// import Image3 from "../../assets/3.png";
 import Image4 from "../../assets/4.jpeg";
+import Image5 from "../../assets/african.png";
+import Image6 from "../../assets/shawn.png";
 import Slider from "../../components/slider";
 import TryOurAvatars from "../../components/HomePage/TryOurAvatars";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../providers/AuthContext";
+import { backendURL } from "../../config/constants";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [hasApiKey, setHasApiKey] = useState(false);
+  const { getAccessToken, logout } = useAuth();
+
+  const fetchApiKeyStatus = useCallback(async () => {
+    try {
+      const response = await fetch(`${backendURL}/users/api-keys/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getAccessToken()}`,
+        },
+      });
+
+      if (response.status === 401) {
+        logout();
+        setHasApiKey(false);
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setHasApiKey(!!data.has_api_key); // true if user has key
+    } catch (err) {
+      console.error("Error checking API key:", err);
+    }
+  }, [getAccessToken, logout]);
+
+  useEffect(() => {
+    fetchApiKeyStatus();
+  }, [fetchApiKeyStatus]);
+
+  const handleClick = () => {
+    if (!hasApiKey) {
+      navigate("/docs/api-keys");
+    }
+  };
+
   return (
     <>
       <section>
         <div className="background">
           <div className="container-medium">
             <h1 className="heading-xlarge">
-              Artificial Intelligence Redefining the Future of{" "}
+              AI <span>that transforms the Future of </span>
               <span className="text-highlight-gradient">Health</span>,{" "}
               <span className="text-highlight-gradient">Beauty </span>
               and <span className="text-highlight-gradient">Wellness</span>
@@ -30,13 +74,16 @@ const HomePage = () => {
           </div>
           <div className="container-small">
             <p className="small-text">
-              TODO AI is redefining health, beauty, and wellness with
+              {/* TODO AI is redefining health, beauty, and wellness with
               intelligent, personalized, and empathetic solutions powered by
-              advanced artificial intelligence for global impact and growth.
+              advanced artificial intelligence for global impact and growth. */}
+              TODO AI is revolutionizing how we experience healthcare, beauty,
+              and wellness with intelligent, personalized, and empathetic
+              solutions powered by cutting-edge artificial intelligence.
             </p>
           </div>
           <div className="button-center">
-            <Link to="/pricing-plans">
+            <Link to="/services">
               <button className="button button-large">
                 <span className="button-text">Get started for FREE</span>
                 <span className="arrow-icon">
@@ -58,21 +105,64 @@ const HomePage = () => {
             </button>
           </div>
           <h1 className="heading-xlarge-section2">
-            Redefining Customer Experience with Ultra-Realistic Virtual Avatars
+            {/* Redefining Customer Experience with Ultra-Realistic Virtual Avatars */}
+            A new customer experience through ultra-realistic virtual avatars
           </h1>
         </div>
         <div className="container-small">
           <p className="extra-small-text">
-            TODO AI combines ultra-realistic avatars, advanced facial
+            {/* TODO AI combines ultra-realistic avatars, advanced facial
             recognition, and NLP-driven conversations to deliver personalized,
             empathetic interactions. With no-code training, SaaS modules, and
             real-time learning, businesses can easily adapt the AI to their
             domain. From clinics and pharmacies to beauty centers, our platform
             brings intelligent, human-like consultants to both digital and
-            physical worlds.
+            physical worlds. */}
+            A new customer experience through ultra-realistic virtual avatars
+            TODO AI blends hyper-realistic avatars, advanced facial recognition,
+            and conversational AI to enable highly personalized and empathetic
+            interactions. Thanks to a no-code interface, SaaS modules, and
+            continuous learning, businesses can fully adapt the assistant to
+            their sector. From e-commerce platforms to pharmacies, clinics, and
+            beauty centers, our solution brings intelligent digital consultants
+            into both physical and digital environments.
           </p>
         </div>
         <section className="container-xlarge">
+          <Card
+            imagePosition="left"
+            innerBackground="lightblue"
+            imageUrl={Image6}
+            buttonLabel="OUR AVATARS"
+            title="Two types of avatars for every environment"
+            bullets={[
+              {
+                // icon: <FaCheckCircle />,
+                text: "TODO AI offers two distinct avatar solutions designed to fit both digital and physical contexts.",
+              },
+              {
+                // icon: <FaCheckCircle />,
+                text: "Cloud Avatars (for e-commerce and digital platforms): Tailored for online stores and mobile applications in the Beauty and Pharma sectors. These avatars are installed directly on the client’s domain via API or plugins for CMS platforms such as Shopify and WordPress.",
+              },
+              {
+                // icon: <FaCheckCircle />,
+                text: "The AI learns autonomously by combining vertical machine learning models with real user interactions, continuously adapting to the language and context of each brand.",
+              },
+              {
+                // icon: <FaCheckCircle />,
+                text: "Local Avatars (for physical stores and professional environments): Designed for pharmacies, beauty centers, clinics, and medical offices, these avatars act as digital consultants in-store.",
+              },
+              {
+                // icon: <FaCheckCircle />,
+                text: "Training is manual and simple — professionals can upload their own texts and information directly into the system, and the AI automatically learns from the provided content.",
+              },
+              {
+                // icon: <FaCheckCircle />,
+                text: "Installation takes place through our Windows application, which can run on a computer or interactive totem inside the store.",
+              },
+            ]}
+          />
+
           {/* Image on right */}
           <Card
             imagePosition="right"
@@ -140,7 +230,7 @@ const HomePage = () => {
             imagePosition="right"
             innerBackground="lightblue"
             buttonLabel="SUBSCRIPTION ACCESS"
-            imageUrl={Image3}
+            imageUrl={Image5}
             title="SaaS Platform"
             description="TODO AI is offered in SaaS mode with flexible monthly subscriptions, providing access to powerful modules and APIs."
             bullets={[
@@ -212,9 +302,16 @@ const HomePage = () => {
         <div className="container-xlarge">
           <Card
             imageUrl={Image1}
-            title="Intelligent Contextual Interaction"
+            // title="Intelligent Contextual Interaction"
+            title="Smart, contextual interactions that guide every customer journey"
             buttonLabel="Smart Assistant"
-            description="TODO AI’s contextual engine analyzes the user’s face to detect skin type, visible signs, and imperfections, then suggests personalized products such as skincare, medical solutions, or supplements. By understanding habits and preferences through natural dialogue, the assistant accompanies users throughout the entire purchasing journey, boosting both satisfaction and conversion. Every interaction is processed by the NLP engine to continuously optimize responses, improve performance, and fine-tune the assistant’s tone."
+            // description="TODO AI’s contextual engine analyzes the user’s face to detect skin type, visible signs, and imperfections, then suggests personalized products such as skincare, medical solutions, or supplements. By understanding habits and preferences through natural dialogue, the assistant accompanies users throughout the entire purchasing journey, boosting both satisfaction and conversion. Every interaction is processed by the NLP engine to continuously optimize responses, improve performance, and fine-tune the assistant’s tone."
+            description="The TODO AI contextual engine analyzes the user’s face to detect skin type, visible
+conditions, or imperfections, and recommends tailored products such as skincare, medical
+solutions, or supplements. Through natural conversations, the assistant learns user habits
+and preferences and supports them throughout the buying journey. Each interaction is used
+to improve the assistant’s tone, performance, and relevance in real time.
+"
             topIcon={<FaCheckCircle />}
             variant="description"
             innerBackground="lightblue"
@@ -222,18 +319,81 @@ const HomePage = () => {
           <Card
             imageUrl={Image2}
             imagePosition="right"
-            title="AI Avatars in the Physical World"
+            // title="AI Avatars in the Physical World"
+            title="AI avatars that go beyond the screen"
             buttonLabel="REAL USE CASES"
-            description="TODO AI extends beyond digital platforms into the physical world. Our avatars can be installed in stores, pharmacies, clinics, and beauty centers through interactive life-size totems powered by Unreal Engine 5, or on Windows/Mac screens with touch and voice interaction. Local licenses also support fully offline and protected solutions. Real-world use cases include hospitals and clinics, where the Medical Consultant guides patients through facilities; pharmacies, where the Pharmacist Consultant assists with product recommendations; and beauty centers or spas, where the Beauty Consultant welcomes customers and suggests tailored treatments."
+            // description="TODO AI extends beyond digital platforms into the physical world. Our avatars can be installed in stores, pharmacies, clinics, and beauty centers through interactive life-size totems powered by Unreal Engine 5, or on Windows/Mac screens with touch and voice interaction. Local licenses also support fully offline and protected solutions. Real-world use cases include hospitals and clinics, where the Medical Consultant guides patients through facilities; pharmacies, where the Pharmacist Consultant assists with product recommendations; and beauty centers or spas, where the Beauty Consultant welcomes customers and suggests tailored treatments."
+            description={
+              <>
+                TODO AI bridges digital and physical touchpoints. Our avatars
+                can be deployed in pharmacies, clinics, stores, and beauty
+                centers through life-size interactive totems or on Windows/Mac
+                devices with touch or voice interaction. Offline and private
+                license options are also available.
+                <br />
+                <strong>Real-world use cases include:</strong>
+                <br />
+                Medical consultants guiding patients in hospitals or clinics
+                <br />
+                Virtual pharmacists assisting with product selection
+                <br />
+                Beauty consultants welcoming clients and recommending
+                personalized treatments
+              </>
+            }
             topIcon={<FaCheckCircle />}
             variant="description"
             innerBackground="pink"
           />
           <Card
-            imageUrl={Image3}
-            title="No-Code Personalized Training"
+            imageUrl={Image6}
+            // title="No-Code Personalized Training"
+            title="Personalization made easy, no code required"
             buttonLabel="TRAIN YOUR AI"
-            description="At the core of TODO AI’s flexibility is a powerful no-code training dashboard that makes personalization simple and accessible. Businesses can paste texts, upload descriptions, or import relevant information, and the system automatically generates a structured dataset that adapts to their specific domain. Content can be organized by topic, category, or priority, while the AI continuously learns and fine-tunes responses to match the company’s language, customers, and market. For premium users, we even enable the creation of a fully personalized avatar that replicates the professional’s own face and voice."
+            // description="At the core of TODO AI’s flexibility is a powerful no-code training dashboard that makes personalization simple and accessible. Businesses can paste texts, upload descriptions, or import relevant information, and the system automatically generates a structured dataset that adapts to their specific domain. Content can be organized by topic, category, or priority, while the AI continuously learns and fine-tunes responses to match the company’s language, customers, and market. For premium users, we even enable the creation of a fully personalized avatar that replicates the professional’s own face and voice."
+            description={
+              <>
+                At the heart of <strong>TODO AI</strong> lies a powerful{" "}
+                <strong>no-code training dashboard</strong> that allows avatars
+                to be trained easily and comprehensively, both for the Cloud and
+                Local versions.
+                <br />
+                <br />
+                <strong>Cloud Learning</strong> (for e-commerce and digital
+                platforms)
+                <br />
+                Avatars installed on websites and mobile applications learn
+                autonomously from the domain and from real user interactions.
+                Through our vertical machine learning models, the AI analyzes
+                language, tone, and audience behavior to progressively adapt to
+                each brand’s context and continuously improve its responses.
+                Every interaction helps make the assistant increasingly
+                accurate, empathetic, and consistent with the company’s
+                identity.
+                <br />
+                <br />
+                <strong>Local Learning</strong> (for physical stores and
+                professional environments)
+                <br />
+                Avatars installed in pharmacies, beauty centers, clinics, and
+                medical offices are trained manually through the no-code
+                dashboard. Professionals can upload texts, descriptions, or
+                documents, and the system automatically converts them into a
+                structured, learning-ready dataset. Content can be organized by
+                topic, category, or priority, allowing for fast, controlled, and
+                fully customizable training.
+                <br />
+                <br />
+                <strong>Real-world use cases include:</strong>
+                <br />
+                Medical consultants guiding patients in hospitals or clinics
+                <br />
+                Virtual pharmacists assisting with product selection
+                <br />
+                Beauty consultants welcoming clients and recommending
+                personalized treatments
+              </>
+            }
             topIcon={<FaCheckCircle />}
             variant="description"
             innerBackground="lightblue"
@@ -339,16 +499,20 @@ const HomePage = () => {
           {/* First Column - Heading */}
           <div className="column-left">
             <h2 className="column-heading">
-              Built on the foundations of AI ethics and security
+              {/* Built on the foundations of AI ethics and security */}
+              Built on ethics, privacy, and security
             </h2>
           </div>
 
           {/* Second Column - Description + Button */}
           <div className="column-right">
             <p className="column-description">
-              People first, always. TODO AI is designed for secure, ethical, and
+              {/* People first, always. TODO AI is designed for secure, ethical, and
               GDPR-compliant use of artificial intelligence in health, beauty,
-              and wellness.
+              and wellness. */}
+              TODO AI is developed with strict ethical and privacy-first
+              principles, ensuring secure and GDPR-compliant AI applications in
+              the healthcare, beauty, and wellness industries.
             </p>
             {/* <button className="button button-medium button-sec4">
               <span className="button-text">Learn more</span>
@@ -449,8 +613,9 @@ const HomePage = () => {
 
         <div
           className="api-box"
+          onClick={handleClick}
           // onClick={() => navigate("/docs/getting-started")}
-          onClick={() => navigate("/docs/api-keys")}
+          // onClick={() => navigate("/docs/api-keys")}
         >
           <pre className="api-code">
             {`const url = https://saas.todopharma.com/
@@ -461,7 +626,8 @@ const HomePage = () => {
   }
 `}
           </pre>
-          <div className="tooltip">Access Developer API </div>
+          {/* <div className="tooltip">Access Developer API </div> */}
+          {!hasApiKey && <div className="tooltip">Access Developer API</div>}
         </div>
       </section>
     </>

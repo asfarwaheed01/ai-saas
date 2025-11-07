@@ -38,6 +38,8 @@ import UpdateOrganizationContext from "./pages/Documents/UpdateOrganizationConte
 import DeleteOrganizationContext from "./pages/Documents/DeleteOrganizationContext/DeleteOrganizationContext";
 import ResetPassword from "./pages/Auth/Login/ResetPassword";
 import ForgotPassword from "./pages/Auth/Login/ForgotPassword";
+import ChangePassword from "./pages/Auth/Login/ChangePassword";
+import VerifyEmail from "./pages/Auth/Login/VerifyEmail";
 
 function App() {
   return (
@@ -50,6 +52,15 @@ function App() {
           element={
             <MainLayout>
               <HomePage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path={ROUTES.VerifyEmail.path}
+          element={
+            <MainLayout>
+              <VerifyEmail />
             </MainLayout>
           }
         />
@@ -75,6 +86,14 @@ function App() {
           element={
             <MainLayout>
               <ResetPassword />
+            </MainLayout>
+          }
+        />
+        <Route
+          path={ROUTES.changePassword.path}
+          element={
+            <MainLayout>
+              <ChangePassword />
             </MainLayout>
           }
         />

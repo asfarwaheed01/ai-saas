@@ -1,3 +1,5 @@
+import VerifyEmail from "../pages/Auth/Login/VerifyEmail";
+
 export const ROUTES = {
   home: { path: "/", name: "Home" },
   login: { path: "/login", name: "Login" },
@@ -8,6 +10,16 @@ export const ROUTES = {
   docs: { path: "/docs", name: "Documents" },
   avatars: { path: "/avatars", name: "Avatars" },
   aboutUs: { path: "/about-us", name: "About Us" },
+  manageSubscription: {
+    path: "/manage-subscription",
+    name: "Manage Subscription",
+  },
+  changePassword: {
+    path: "/change-password",
+    name: "Change Password",
+  },
+  VerifyEmail: { path: "/verify-email/:token", name: "Verify Email" },
+
   // Documentation sections
   docsGettingStarted: {
     path: "/docs/getting-started",

@@ -58,7 +58,6 @@ const PricingPlans = () => {
   const [showAuthPopup, setShowAuthPopup] = useState(false); // ✅ popup state
   const location = useLocation();
 
-
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
   // Handle unauthorized errors
@@ -356,6 +355,8 @@ const PricingPlans = () => {
                       Cancel Subscription
                     </button>
                   ) : plan.name.toLowerCase() === "free" ? null : (
+
+                    
                     <button
                       className="subscribe-btn"
                       onClick={() => handleSubscribe(plan)}

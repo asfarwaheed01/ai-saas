@@ -177,3 +177,11 @@
 .icon-down {
   padding-top: 0px;
 }
+
+.user-name.white-text {
+  color: white;
+}
+
+.user-name.black-text {
+  color: black;
+}

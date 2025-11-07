@@ -18,11 +18,23 @@ const TryOurAvatars = () => {
       <div className="container-medium">
         <div className="content-wrapper-try">
           <div className="text-content">
-            <h2 className="section-title">Transform Your Digital Presence</h2>
+            <h2 className="section-title">
+              Bring your digital identity to life
+            </h2>
             <p className="section-subtitle">
-              Create stunning, personalized avatars that represent the real you.
+              {/* Create stunning, personalized avatars that represent the real you.
               Our AI-powered technology brings your digital identity to life
-              with incredible detail and authenticity.
+              with incredible detail and authenticity. */}
+              Our AI technology brings them to life with realistic detail and
+              expressive authenticity, ready to interact across every channel.
+              <br />
+              You can choose yourself or allow your users to select from a wide
+              range of predefined avatars, available in different genders,
+              ethnicities, and categories to best fit your brand or audience.
+              <br />
+              For those seeking an exclusive and fully customized experience,
+              TODO AI creates personalized avatars modeled on the client’s image
+              and identity through a dedicated tailor made package.
             </p>
             <div className="features-list">
               <div className="feature-item-try">

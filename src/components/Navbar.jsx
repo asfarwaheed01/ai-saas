@@ -77,6 +77,8 @@ const Navbar = () => {
       location.pathname === "/payment-success" ||
       location.pathname === "/payment-fail" ||
       location.pathname === "/forgot-password" ||
+      location.pathname === "/change-password" ||
+      location.pathname.startsWith("/verify-email/") ||
       location.pathname === "/reset-password") &&
     !isScrolled;
 
@@ -105,7 +107,7 @@ const Navbar = () => {
         {/* Navbar Links */}
         <ul
           className={`navbar-links ${isMobileMenuOpen ? "active" : ""} ${
-            isAuthPage ? "white-links" : "black-links"
+            !isMobileMenuOpen && isAuthPage ? "white-links" : "black-links"
           }`}
         >
           <li className="navbar-item">
@@ -153,6 +155,20 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="navbar-item mobile-only">
+                <Link
+                  to={ROUTES.manageSubscription.path}
+                  onClick={closeMobileMenu}
+                >
+                  Manage Subscription
+                </Link>
+              </li>
+              <li className="navbar-item mobile-only">
+                <Link to={ROUTES.changePassword.path} onClick={closeMobileMenu}>
+                  Change Password
+                </Link>
+              </li>
+
+              <li className="navbar-item mobile-only">
                 <Link to="/" onClick={handleLogout}>
                   Logout
                 </Link>
@@ -181,7 +197,17 @@ const Navbar = () => {
           {isAuthenticated ? (
             <div className="user-info dropdown">
               <div className="user-display" onClick={toggleUserDropdown}>
-                <span className="user-name">{user?.name || user?.email}</span>
+                {/* <span className="user-name">{user?.name || user?.email}</span> */}
+                <span
+                  className={`user-name ${
+                    !isMobileMenuOpen && isAuthPage
+                      ? "white-text"
+                      : "black-text"
+                  }`}
+                >
+                  {user?.name || user?.email}
+                </span>
+
                 <div className="user-avatar">
                   {user?.avatar ? (
                     <img src={user.avatar} alt="User avatar" />
@@ -224,6 +250,20 @@ const Navbar = () => {
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
                     Try out Avatars
+                  </Link>
+                  <Link
+                    to={ROUTES.manageSubscription.path}
+                    className="dropdown-item"
+                    onClick={() => setIsUserDropdownOpen(false)}
+                  >
+                    Manage Subscription
+                  </Link>
+                  <Link
+                    to={ROUTES.changePassword.path}
+                    className="dropdown-item"
+                    onClick={() => setIsUserDropdownOpen(false)}
+                  >
+                    Change Password
                   </Link>
                   <Link to="/" className="dropdown-item" onClick={handleLogout}>
                     <HiLogout className="icon-down" /> Logout

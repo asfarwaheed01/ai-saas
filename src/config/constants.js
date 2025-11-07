@@ -76,10 +76,16 @@ export const AVATAR_IDS = [
         //   age: "Young",
         //   languages: ["eng", "it"],
         // },
-        { 
-          id: "Wayne_20240711",
-          name: "Wayne",
-          age: "Intermediate",
+        // {
+        //   id: "Wayne_20240711",
+        //   name: "Wayne",
+        //   age: "Intermediate",
+        //   languages: ["eng", "it", "fr"],
+        // },
+        {
+          id: "Graham_Chair_Sitting_public",
+          name: "Graham (Chair)",
+          age: "Young",
           languages: ["eng", "it", "fr"],
         },
       ],
@@ -90,12 +96,12 @@ export const AVATAR_IDS = [
           age: "Young",
           languages: ["eng", "it", "fr"],
         },
-        {
-          id: "Graham_Chair_Sitting_public",
-          name: "Graham (Chair)",
-          age: "Young",
-          languages: ["eng", "it", "fr"],
-        },
+        // {
+        //   id: "Graham_Chair_Sitting_public",
+        //   name: "Graham (Chair)",
+        //   age: "Young",
+        //   languages: ["eng", "it", "fr"],
+        // },
         {
           id: "Bryan_FitnessCoach_public",
           name: "Bryan (Fitness Coach)",
