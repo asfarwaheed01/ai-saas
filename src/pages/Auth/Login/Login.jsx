@@ -51,12 +51,6 @@ const Login = () => {
       });
 
       const data = await response.json();
-      setPopupMessage(
-        data.message || data.detail || "Signup completed. Check Your Email!"
-      );
-      setShowVerificationPopup(true);
-      // Optional: auto-hide popup after a few seconds
-      setTimeout(() => setShowVerificationPopup(false), 5000);
 
       if (!response.ok) {
         let apiErrorMessage = "";
@@ -100,6 +94,12 @@ const Login = () => {
         setIsLogin(true); // switch to login view
         setError(""); // clear any previous errors
         setShowVerificationPopup(true); // 👈 show popup
+        setPopupMessage(
+          data.message || data.detail || "Signup completed. Check Your Email!"
+        );
+        // setShowVerificationPopup(true);
+        // Optional: auto-hide popup after a few seconds
+        setTimeout(() => setShowVerificationPopup(false), 5000);
         // alert("Account created successfully! Please sign in.");
       }
     } catch (error) {
