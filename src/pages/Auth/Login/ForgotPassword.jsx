@@ -142,6 +142,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css"; // Reuse same styles for consistency
 import { backendURL } from "../../../config/constants";
 import { MdOutlineLockReset } from "react-icons/md";
+import { ROUTES } from "../../../routes/routes";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -176,7 +177,7 @@ const ForgotPassword = () => {
           "If an account with this email exists, a password reset link has been sent."
       );
       setEmail("");
-      navigate("/reset-password");
+      navigate(ROUTES.resetPassword.path);
     } catch (err) {
       console.error(err);
       setError(err.message || "Something went wrong. Please try again.");
