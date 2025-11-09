@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { backendURL } from "../../../config/constants";
@@ -15,6 +15,10 @@ const Login = () => {
     password: "",
   });
   const [error, setError] = useState("");
+
+  // ✅ New state for popup
+  const [showVerificationPopup, setShowVerificationPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,6 +51,12 @@ const Login = () => {
       });
 
       const data = await response.json();
+      setPopupMessage(
+        data.message || data.detail || "Signup completed. Check Your Email!"
+      );
+      setShowVerificationPopup(true);
+      // Optional: auto-hide popup after a few seconds
+      setTimeout(() => setShowVerificationPopup(false), 5000);
 
       if (!response.ok) {
         let apiErrorMessage = "";
@@ -89,6 +99,7 @@ const Login = () => {
         setFormData({ username: "", email: "", password: "" });
         setIsLogin(true); // switch to login view
         setError(""); // clear any previous errors
+        setShowVerificationPopup(true); // 👈 show popup
         // alert("Account created successfully! Please sign in.");
       }
     } catch (error) {
@@ -98,6 +109,14 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+
+  // ✅ Hide popup automatically after 10 seconds
+  useEffect(() => {
+    if (showVerificationPopup) {
+      const timer = setTimeout(() => setShowVerificationPopup(false), 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [showVerificationPopup]);
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -201,6 +220,14 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {showVerificationPopup && (
+        <div className="popup-overlay">
+          <div className="popup-card">
+            <h3>📧 {popupMessage.includes("fail") ? "Error" : "Success"}</h3>
+            <p>{popupMessage}</p>
+          </div>
+        </div>
+      )}
       <div className="login-background">
         <div className="floating-shapes">
           <div className="shape shape-1"></div>

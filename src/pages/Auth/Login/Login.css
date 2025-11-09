@@ -470,9 +470,56 @@
   transition: transform 0.2s ease;
 }
 
-.success-message{
-text-align: center;
-margin-top: -15
-px !important;
-margin-bottom: 10px;
+.success-message {
+  text-align: center;
+  margin-top: -15 px !important;
+  margin-bottom: 10px;
+}
+
+/* Popup styles */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup-card {
+  background: #fff;
+  color: #333;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.4s ease;
+}
+
+.popup-card h3 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
