@@ -85,8 +85,8 @@ const ChangePassword = () => {
       const response = await fetch(`${backendURL}/users/reset-password/`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          apiHeaders,
+          //   "Content-Type": "application/json",
+          ...apiHeaders,
         },
         body: JSON.stringify({
           old_password: formData.currentPassword,

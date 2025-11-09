@@ -183,6 +183,7 @@ const Apikeys = () => {
           return newSet;
         });
         setSuccess("API key deleted successfully!");
+        await fetchApiKeys(); //new
         clearMessages();
       } catch (err) {
         console.error("Error deleting API key:", err);
@@ -430,7 +431,7 @@ const Apikeys = () => {
                       <td className="apikeys-date-cell">
                         {activeSubscription?.plan?.name || "Free Plan"}
                       </td>
-                       <td className="apikeys-days-display">
+                      <td className="apikeys-days-display">
                         <div className="">
                           {/* <HiCalendar /> */}
                           <span className="">
@@ -444,7 +445,7 @@ const Apikeys = () => {
                           Active
                         </span>
                       </td>
-                     
+
                       <td className="apikeys-actions-cell">
                         <button
                           onClick={() => setShowDeleteModal(keyId)}
