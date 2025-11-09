@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"; // reuse same styles for consistent UI
 import { backendURL } from "../../../config/constants";
+import { useAuth } from "../../../providers/AuthContext";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const ChangePassword = () => {
     label: "",
     color: "",
   });
+  const { getAccessToken, logout } = useAuth();
 
   // ✅ Function to check password strength
   const getPasswordStrength = (password) => {
@@ -55,6 +57,14 @@ const ChangePassword = () => {
     }
   };
 
+  const apiHeaders = useMemo(
+    () => ({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getAccessToken()}`,
+    }),
+    [getAccessToken]
+  );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,14 +82,14 @@ const ChangePassword = () => {
 
     try {
       // ✅ Adjust to match your actual backend route
-      const response = await fetch(`${backendURL}/users/change-password/`, {
+      const response = await fetch(`${backendURL}/users/reset-password/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // assuming JWT auth
+          apiHeaders,
         },
         body: JSON.stringify({
-          current_password: formData.currentPassword,
+          old_password: formData.currentPassword,
           new_password: formData.newPassword,
         }),
       });

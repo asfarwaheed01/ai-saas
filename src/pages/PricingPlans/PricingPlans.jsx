@@ -355,8 +355,6 @@ const PricingPlans = () => {
                       Cancel Subscription
                     </button>
                   ) : plan.name.toLowerCase() === "free" ? null : (
-
-                    
                     <button
                       className="subscribe-btn"
                       onClick={() => handleSubscribe(plan)}

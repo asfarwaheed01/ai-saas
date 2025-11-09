@@ -155,6 +155,11 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="navbar-item mobile-only">
+                <Link to={ROUTES.apiKeys.path} onClick={closeMobileMenu}>
+                  Create API key
+                </Link>
+              </li>
+              <li className="navbar-item mobile-only">
                 <Link
                   to={ROUTES.manageSubscription.path}
                   onClick={closeMobileMenu}
@@ -250,6 +255,13 @@ const Navbar = () => {
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
                     Try out Avatars
+                  </Link>
+                  <Link
+                    to={ROUTES.apiKeys.path}
+                    className="dropdown-item"
+                    onClick={() => setIsUserDropdownOpen(false)}
+                  >
+                    Create API key
                   </Link>
                   <Link
                     to={ROUTES.manageSubscription.path}

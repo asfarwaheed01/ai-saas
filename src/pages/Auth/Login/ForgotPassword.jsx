@@ -158,7 +158,7 @@ const ForgotPassword = () => {
 
     try {
       // ✅ Corrected endpoint according to your backend spec
-      const response = await fetch(`${backendURL}/users/password-reset/`, {
+      const response = await fetch(`${backendURL}/users/forget-password/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

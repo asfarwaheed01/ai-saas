@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./VerifyEmail.css";
+import { backendURL } from "../../../config/constants";
 
 const VerifyEmail = () => {
   const { token } = useParams();
@@ -12,7 +13,7 @@ const VerifyEmail = () => {
     const verifyEmail = async () => {
       try {
         const response = await fetch(
-          "https://saas.todopharma.com/api/users/verify-email/",
+          `${backendURL}/users/verify-email/`,
           {
             method: "POST",
             headers: {

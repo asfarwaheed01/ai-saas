@@ -40,6 +40,7 @@ import ResetPassword from "./pages/Auth/Login/ResetPassword";
 import ForgotPassword from "./pages/Auth/Login/ForgotPassword";
 import ChangePassword from "./pages/Auth/Login/ChangePassword";
 import VerifyEmail from "./pages/Auth/Login/VerifyEmail";
+import ManageSubscription from "./pages/ManageSubscriptions/ManageSubscription";
 
 function App() {
   return (
@@ -52,6 +53,15 @@ function App() {
           element={
             <MainLayout>
               <HomePage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path={ROUTES.manageSubscription.path}
+          element={
+            <MainLayout>
+              <ManageSubscription />
             </MainLayout>
           }
         />
