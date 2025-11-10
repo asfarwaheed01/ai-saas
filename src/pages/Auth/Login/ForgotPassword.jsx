@@ -137,7 +137,7 @@
 
 // export default ForgotPassword;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"; // Reuse same styles for consistency
 import { backendURL } from "../../../config/constants";
@@ -150,12 +150,14 @@ const ForgotPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [popup, setPopup] = useState({ show: false, type: "", message: "" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
     setMessage("");
+    setPopup({ show: false, type: "", message: "" });
 
     try {
       // ✅ Corrected endpoint according to your backend spec
@@ -172,19 +174,43 @@ const ForgotPassword = () => {
       }
 
       // ✅ Match the API’s actual expected response
-      setMessage(
-        data.message ||
-          "If an account with this email exists, a password reset link has been sent."
-      );
+      // setMessage(
+      //   data.message ||
+      //     "If an account with this email exists, a password reset link has been sent."
+      // );
+      // ✅ Show success popup
+      setPopup({
+        show: true,
+        type: "success",
+        message: data.message || "Password reset email sent successfully",
+      });
       setEmail("");
-      navigate(ROUTES.resetPassword.path);
+      setTimeout(() => {
+        navigate(ROUTES.resetPassword.path);
+      }, 10000);
+      // navigate(ROUTES.resetPassword.path);
     } catch (err) {
       console.error(err);
-      setError(err.message || "Something went wrong. Please try again.");
+      // setError(err.message || "Something went wrong. Please try again.");
+      setPopup({
+        show: true,
+        type: "error",
+        message: err.message || "Something went wrong. Please try again.",
+      });
     } finally {
       setIsLoading(false);
     }
   };
+
+  // Auto-hide popup after 10 seconds
+  useEffect(() => {
+    if (popup.show) {
+      const timer = setTimeout(() => {
+        setPopup({ show: false, type: "", message: "" });
+      }, 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [popup]);
 
   return (
     <div className="login-container">
@@ -276,6 +302,18 @@ const ForgotPassword = () => {
           </p>
         </div>
       </div>
+      {/* ✅ Center Popup */}
+      {popup.show && (
+        <div className="popup-overlay">
+          <div
+            className={`popup-center-box ${
+              popup.type === "success" ? "popup-success" : "popup-error"
+            }`}
+          >
+            <p>{popup.message}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
