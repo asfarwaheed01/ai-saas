@@ -553,3 +553,10 @@
     transform: scaleY(1.2);
   }
 }
+
+.credits-warning {
+  color: #ef4444; /* red */
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}

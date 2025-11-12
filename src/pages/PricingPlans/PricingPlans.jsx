@@ -57,6 +57,8 @@ const PricingPlans = () => {
   const [activeSubscription, setActiveSubscription] = useState(null);
   const [showAuthPopup, setShowAuthPopup] = useState(false); // ✅ popup state
   const location = useLocation();
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -173,6 +175,16 @@ const PricingPlans = () => {
 
       if (response.status === 401) {
         handleUnauthorized();
+        return;
+      }
+
+      // ✅ If API returns 400, show popup instead of throwing error
+      if (response.status === 400) {
+        const data = await response.json();
+        setErrorMessage(
+          data?.error || "Something went wrong while subscribing."
+        );
+        setShowErrorPopup(true);
         return;
       }
 
@@ -315,12 +327,70 @@ const PricingPlans = () => {
         //     </div>
         //   ))}
         // </div>
+        // <div className="pricing-cards">
+        //   {plans.map((plan, index) => {
+        //     // const isActive = activeSubscription?.plan?.id
+        //     const isActive =
+        //       activeSubscription?.is_subscribed === true &&
+        //       activeSubscription?.plan?.id === plan.id;
+        //     return (
+        //       <div className="pricing-card" key={plan.id || index}>
+        //         <div className="test">
+        //           <p className="plan-name">{plan.name}</p>
+        //           <div className="plan-price">
+        //             <span className="price">€{plan.price}</span>
+        //             <span className="per">/MESE</span>
+        //           </div>
+        //         </div>
+        //         <div className="pricing-card-spacing">
+        //           <h3 className="plan-subtitle">{plan.description}</h3>
+        //           <ul className="plan-features">
+        //             <li>
+        //               <FaCheckCircle className="icon included-icon" /> API
+        //               Requests: {plan.api_requests}
+        //             </li>
+        //             <li>
+        //               <FaCheckCircle className="icon included-icon" /> PDF
+        //               Uploads: {plan.pdf_uploads}
+        //             </li>
+        //             <li>
+        //               <FaCheckCircle className="icon included-icon" /> Domains:{" "}
+        //               {plan.allowed_domains}
+        //             </li>
+        //           </ul>
+
+        //           {isActive ? (
+        //             <button
+        //               className="subscribe-btn"
+        //               onClick={handleCancelSubscription}
+        //             >
+        //               Cancel Subscription
+        //             </button>
+        //           ) : plan.name.toLowerCase() === "free" ? null : (
+        //             <button
+        //               className="subscribe-btn"
+        //               onClick={() => handleSubscribe(plan)}
+        //             >
+        //               Subscribe
+        //             </button>
+        //           )}
+        //         </div>
+        //       </div>
+        //     );
+        //   })}
+        // </div>
         <div className="pricing-cards">
           {plans.map((plan, index) => {
-            // const isActive = activeSubscription?.plan?.id
             const isActive =
               activeSubscription?.is_subscribed === true &&
               activeSubscription?.plan?.id === plan.id;
+
+            const isFreePlan = plan.name.toLowerCase() === "free";
+            const isExpired =
+              isFreePlan &&
+              activeSubscription?.plan?.id === plan.id &&
+              activeSubscription?.remaining_api_requests === 0;
+
             return (
               <div className="pricing-card" key={plan.id || index}>
                 <div className="test">
@@ -330,6 +400,7 @@ const PricingPlans = () => {
                     <span className="per">/MESE</span>
                   </div>
                 </div>
+
                 <div className="pricing-card-spacing">
                   <h3 className="plan-subtitle">{plan.description}</h3>
                   <ul className="plan-features">
@@ -347,14 +418,32 @@ const PricingPlans = () => {
                     </li>
                   </ul>
 
-                  {isActive ? (
+                  {/* ✅ Button logic starts here */}
+                  {isFreePlan ? (
+                    isExpired ? (
+                      <button className="subscribe-btn expired" disabled>
+                        Expired
+                      </button>
+                    ) : activeSubscription?.plan?.id === plan.id ? (
+                      <button className="subscribe-btn subscribed" disabled>
+                        Subscribed
+                      </button>
+                    ) : (
+                      <button
+                        className="subscribe-btn"
+                        onClick={() => handleSubscribe(plan)}
+                      >
+                        Subscribe
+                      </button>
+                    )
+                  ) : isActive ? (
                     <button
-                      className="subscribe-btn"
+                      className="subscribe-btn cancel"
                       onClick={handleCancelSubscription}
                     >
                       Cancel Subscription
                     </button>
-                  ) : plan.name.toLowerCase() === "free" ? null : (
+                  ) : (
                     <button
                       className="subscribe-btn"
                       onClick={() => handleSubscribe(plan)}
@@ -373,6 +462,15 @@ const PricingPlans = () => {
           onClose={() => setShowAuthPopup(false)}
           redirectPath={location.pathname}
         />
+      )}
+
+      {showErrorPopup && (
+        <div className="error-popup-overlay">
+          <div className="error-popup-box">
+            <p>{errorMessage}</p>
+            <button onClick={() => setShowErrorPopup(false)}>OK</button>
+          </div>
+        </div>
       )}
     </div>
   );

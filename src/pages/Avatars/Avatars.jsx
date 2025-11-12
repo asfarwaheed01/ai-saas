@@ -1931,6 +1931,12 @@ const Avatars = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("eng");
   const [errors, setErrors] = useState({});
   const [activeSubscription, setActiveSubscription] = useState(null);
+  const [languages, setLanguages] = useState([]);
+  const [isLanguagesLoading, setIsLanguagesLoading] = useState(false);
+
+  const [userPlan, setUserPlan] = useState(null);
+  const [isPlanLoading, setIsPlanLoading] = useState(false);
+  const [remainingRequests, setRemainingRequests] = useState(null);
 
   const { getAccessToken, logout } = useAuth();
 
@@ -1944,15 +1950,49 @@ const Avatars = () => {
   let apiKey = process.env.REACT_APP_HEYGEN_API_KEY;
   console.log(apiKey, "API KEY");
 
-  const LANGUAGE_LABELS = {
-    eng: "English",
-    it: "Italian",
-    fr: "French",
+  const fetchSupportedLanguages = async () => {
+    try {
+      setIsLanguagesLoading(true);
+      const response = await fetch(`${backendURL}/agents/supported-languages/`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to fetch languages");
+      }
+
+      if (Array.isArray(data.details)) {
+        setLanguages(data.details);
+      } else {
+        console.warn("Unexpected response format:", data);
+        setLanguages([]);
+      }
+    } catch (error) {
+      console.error("Error fetching supported languages:", error);
+      setLanguages([]);
+    } finally {
+      setIsLanguagesLoading(false);
+    }
   };
-  const languages = useMemo(() => {
-    const avatar = availableAvatars.find((av) => av.id === selectedAvatar);
-    return avatar?.languages || [];
-  }, [selectedAvatar]);
+
+  useEffect(() => {
+    fetchSupportedLanguages();
+  }, []);
+
+  const handleLanguageChange = (e) => {
+    setSelectedLanguage(e.target.value);
+    fetchSupportedLanguages(); // refresh list when language changes
+  };
+
+  // const LANGUAGE_LABELS = {
+  //   eng: "English",
+  //   it: "Italian",
+  //   fr: "French",
+  // };
+  // const languages = useMemo(() => {
+  //   const avatar = availableAvatars.find((av) => av.id === selectedAvatar);
+  //   return avatar?.languages || [];
+  // }, [selectedAvatar]);
+
   useEffect(() => {
     if (
       availableAvatars.length > 0 &&
@@ -1983,6 +2023,53 @@ const Avatars = () => {
     setUserToken(token);
     setShowAuthModal(false);
   };
+
+  const fetchUserPlan = async () => {
+    try {
+      setIsPlanLoading(true);
+
+      const apiKey = "pk_16c7ab4cb3564aa4811dda3180bbcb41"; // your API key
+      const payload = ""; // empty payload for signature
+      const signature = await generateSignature(payload, apiKey);
+
+      const response = await fetch(
+        `${backendURL}/agents/generate-response/access`,
+        {
+          method: "GET",
+          headers: {
+            "X-API-KEY": apiKey,
+            "X-SIGNATURE": signature,
+          },
+        }
+      );
+
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      if (!response.ok) {
+        const message =
+          data?.error || `Request failed with status ${response.status}`;
+        console.error("❌ API Error:", message);
+        return;
+      }
+
+      console.log("✅ User Plan Response:", data);
+      setUserPlan(data); // store user plan/credits
+      setRemainingRequests(data.remaining_api_requests ?? 0); // store remaining requests
+    } catch (err) {
+      console.error("❌ Error fetching user plan:", err);
+    } finally {
+      setIsPlanLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserPlan();
+  }, []);
 
   // Helper function to fetch access token
   const fetchAccessToken = async () => {
@@ -2566,7 +2653,7 @@ const Avatars = () => {
                   </div>
                 </div>
                 <div className="form-alignment">
-                  <div className="input-group">
+                  {/* <div className="input-group">
                     <label htmlFor="language-select" className="input-label">
                       Language
                     </label>
@@ -2578,19 +2665,39 @@ const Avatars = () => {
                       disabled={isLoading}
                     >
                       <option value="">Select Language</option>
-                      {/* {availableAvatars
-                        .find((av) => av.id === selectedAvatar)
-                        ?.languages.map((lang) => (
-                          <option key={lang} value={lang}>
-                            {LANGUAGE_LABELS[lang] || lang.toUpperCase()}
-                          </option>
-                        ))} */}
+                     
                       {languages.map((lang) => (
                         <option key={lang} value={lang}>
                           {LANGUAGE_LABELS[lang] || lang.toUpperCase()}
                         </option>
                       ))}
                     </select>
+                    {errors.lang && <p className="error-text">{errors.lang}</p>}
+                  </div> */}
+
+                  <div className="input-group">
+                    <label htmlFor="language-select" className="input-label">
+                      Language
+                    </label>
+                    <select
+                      id="language-select"
+                      value={selectedLanguage}
+                      onChange={(e) => setSelectedLanguage(e.target.value)}
+                      className="avatar-select"
+                      disabled={isLoading || isLanguagesLoading}
+                    >
+                      <option value="">Select Language</option>
+                      {isLanguagesLoading ? (
+                        <option disabled>Loading...</option>
+                      ) : (
+                        languages.map((lang) => (
+                          <option key={lang.code} value={lang.code}>
+                            {lang.name}
+                          </option>
+                        ))
+                      )}
+                    </select>
+
                     {errors.lang && <p className="error-text">{errors.lang}</p>}
                   </div>
 
@@ -2643,9 +2750,17 @@ const Avatars = () => {
                   </div>
                 </div>
 
+                {remainingRequests === 0 && (
+                  <p className="credits-warning">
+                    ⚠️ Your API credits are finished. Please upgrade your plan
+                    to continue.
+                  </p>
+                )}
+
                 <button
                   onClick={initializeAvatarSession}
-                  disabled={isLoading}
+                  // disabled={isLoading}
+                  disabled={isLoading || remainingRequests === 0}
                   className={`start-session-btn ${isLoading ? "loading" : ""}`}
                 >
                   {isLoading ? (

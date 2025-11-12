@@ -167,3 +167,64 @@
 .pricing-card-spacing {
   padding: 30px 20px;
 }
+
+.subscribe-btn.subscribed {
+  background-color: #05b1bd;
+  color: white;
+  cursor: default;
+}
+
+.subscribe-btn.expired {
+  background-color: #dc3545;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+.subscribe-btn.cancel {
+  background-color: #05b1bd;
+  color: white;
+}
+
+.error-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.error-popup-box {
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.error-popup-box p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.error-popup-box button {
+  background-color: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.error-popup-box button:hover {
+  background-color: #e84142;
+}
