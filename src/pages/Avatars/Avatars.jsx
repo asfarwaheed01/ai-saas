@@ -1942,6 +1942,8 @@ const Avatars = () => {
     apiKey: null,
     secretKey: null,
   });
+  // Add state for API key missing popup
+  const [showKeyMissingPopup, setShowKeyMissingPopup] = useState(false);
 
   const { getAccessToken, logout } = useAuth();
 
@@ -1951,10 +1953,40 @@ const Avatars = () => {
   const streamRef = useRef(null);
   const formRef = useRef(null);
   const transcriptRef = useRef(""); // To store the transcript
+  const popupTimerRef = useRef(null); // Ref for popup timer
 
   let apiKey = process.env.REACT_APP_HEYGEN_API_KEY;
   console.log(apiKey, "API KEY");
 
+  // // Fetch user API keys
+  // const fetchUserApiKeys = async () => {
+  //   try {
+  //     const token = getAccessToken();
+  //     if (!token) return;
+
+  //     const response = await fetch(`${backendURL}/users/api-keys/`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       console.log("User API Keys:", data);
+
+  //       if (data.has_api_key && data.api_key && data.secret_key) {
+  //         setUserApiKeys({
+  //           apiKey: data.api_key,
+  //           secretKey: data.secret_key,
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching user API keys:", error);
+  //   }
+  // };
   // Fetch user API keys
   const fetchUserApiKeys = async () => {
     try {
@@ -1978,6 +2010,19 @@ const Avatars = () => {
             apiKey: data.api_key,
             secretKey: data.secret_key,
           });
+          // Hide popup if it was showing
+          setShowKeyMissingPopup(false);
+          // Clear any existing timer
+          if (popupTimerRef.current) {
+            clearTimeout(popupTimerRef.current);
+          }
+        } else {
+          // Show popup if no API keys
+          setShowKeyMissingPopup(true);
+          // Auto-hide after 10 seconds
+          popupTimerRef.current = setTimeout(() => {
+            setShowKeyMissingPopup(false);
+          }, 10000);
         }
       }
     } catch (error) {
@@ -2211,6 +2256,15 @@ const Avatars = () => {
       if (!validateFields()) return;
       if (!isAuthenticated) {
         setShowAuthModal(true);
+        return;
+      }
+      // Check if user has API keys
+      if (!userApiKeys.apiKey || !userApiKeys.secretKey) {
+        setShowKeyMissingPopup(true);
+        // Auto-hide after 10 seconds
+        popupTimerRef.current = setTimeout(() => {
+          setShowKeyMissingPopup(false);
+        }, 10000);
         return;
       }
       setIsLoading(true);
@@ -2590,6 +2644,37 @@ const Avatars = () => {
         </div>
 
         <div className="grid-pattern"></div>
+        {/* API Key Missing Popup */}
+        {showKeyMissingPopup && (
+          <div className="api-key-popup-overlay">
+            <div className="api-key-popup">
+              <div className="popup-header">
+                <h3>API Key Required</h3>
+                <button
+                  className="popup-close"
+                  onClick={() => setShowKeyMissingPopup(false)}
+                >
+                  ×
+                </button>
+              </div>
+              <div className="popup-content">
+                <p>
+                  You have no API key and secret key. Please generate keys from
+                  the <strong>Create API Key</strong> option in the user's
+                  account dropdown.
+                </p>
+              </div>
+              <div className="popup-footer">
+                <button
+                  className="popup-button"
+                  onClick={() => setShowKeyMissingPopup(false)}
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         <Link to="/">
           <img
             src={WhiteLogo}
