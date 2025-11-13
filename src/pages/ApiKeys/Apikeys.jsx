@@ -373,6 +373,7 @@ const Apikeys = () => {
               <thead>
                 <tr>
                   <th>API Key</th>
+                  <th>Secret Key</th>
                   <th>Created At</th>
                   <th>Remaining Days</th>
                   <th>Active Plan</th>
@@ -385,7 +386,12 @@ const Apikeys = () => {
                 {apiKeys.map((apiKey) => {
                   const keyId = apiKey.id || apiKey.key || apiKey.api_key;
                   const keyValue = apiKey.key || apiKey.api_key || keyId;
+                  const secretValue =
+                    apiKey.secret_key || apiKey.secret || "N/A"; // 👈 secret key fallback
                   const isVisible = visibleKeys.has(keyId);
+                  const isVisibleSecret = visibleKeys.has(`secret-${keyId}`);
+                  const isCopiedSecret = copiedKey === `secret-${keyId}`;
+
                   const isCopied = copiedKey === keyId;
 
                   return (
@@ -409,6 +415,38 @@ const Apikeys = () => {
                               title="Copy to clipboard"
                             >
                               {isCopied ? <HiCheck /> : <HiClipboard />}
+                            </button>
+                          </div>
+                        </div>
+                      </td>
+                      {/* SECRET KEY COLUMN 👇 */}
+                      <td className="apikeys-key-cell">
+                        <div className="apikeys-key-display">
+                          <code className="apikeys-key-value">
+                            {isVisibleSecret
+                              ? secretValue
+                              : maskApiKey(secretValue)}
+                          </code>
+                          <div className="apikeys-key-actions">
+                            <button
+                              onClick={() =>
+                                toggleKeyVisibility(`secret-${keyId}`)
+                              }
+                              className="apikeys-icon-btn"
+                              title={
+                                isVisibleSecret ? "Hide secret" : "Show secret"
+                              }
+                            >
+                              {isVisibleSecret ? <HiEyeOff /> : <HiEye />}
+                            </button>
+                            <button
+                              onClick={() =>
+                                copyToClipboard(secretValue, `secret-${keyId}`)
+                              }
+                              className="apikeys-icon-btn"
+                              title="Copy to clipboard"
+                            >
+                              {isCopiedSecret ? <HiCheck /> : <HiClipboard />}
                             </button>
                           </div>
                         </div>

@@ -1938,6 +1938,11 @@ const Avatars = () => {
   const [isPlanLoading, setIsPlanLoading] = useState(false);
   const [remainingRequests, setRemainingRequests] = useState(null);
 
+  const [userApiKeys, setUserApiKeys] = useState({
+    apiKey: null,
+    secretKey: null,
+  });
+
   const { getAccessToken, logout } = useAuth();
 
   const videoRef = useRef(null);
@@ -1949,6 +1954,42 @@ const Avatars = () => {
 
   let apiKey = process.env.REACT_APP_HEYGEN_API_KEY;
   console.log(apiKey, "API KEY");
+
+  // Fetch user API keys
+  const fetchUserApiKeys = async () => {
+    try {
+      const token = getAccessToken();
+      if (!token) return;
+
+      const response = await fetch(`${backendURL}/users/api-keys/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("User API Keys:", data);
+
+        if (data.has_api_key && data.api_key && data.secret_key) {
+          setUserApiKeys({
+            apiKey: data.api_key,
+            secretKey: data.secret_key,
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching user API keys:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchUserApiKeys();
+    }
+  }, [isAuthenticated]);
 
   const fetchSupportedLanguages = async () => {
     try {
@@ -2022,14 +2063,21 @@ const Avatars = () => {
     setIsAuthenticated(true);
     setUserToken(token);
     setShowAuthModal(false);
+    // Fetch API keys after successful authentication
+    fetchUserApiKeys();
   };
 
   const fetchUserPlan = async () => {
     try {
       setIsPlanLoading(true);
-
-      const apiKey = "pk_16c7ab4cb3564aa4811dda3180bbcb41"; // your API key
-      const payload = ""; // empty payload for signature
+      if (!userApiKeys.apiKey) {
+        console.error("User API key not available");
+        return;
+      }
+      const apiKey = userApiKeys.apiKey;
+      // const apiKey = "pk_16c7ab4cb3564aa4811dda3180bbcb41";
+      // empty payload for signature
+      const payload = "";
       const signature = await generateSignature(payload, apiKey);
 
       const response = await fetch(
@@ -2301,7 +2349,8 @@ const Avatars = () => {
   };
 
   const generateSignature = async (domain, apiKey) => {
-    const secretKey = "a4687fee-afdd-407a-a8c0-493b0c6972fc"; // correct key
+    // const secretKey = "a4687fee-afdd-407a-a8c0-493b0c6972fc";
+    const secretKey = userApiKeys.secretKey;
     const payload = domain; // correct format
 
     const enc = new TextEncoder();
@@ -2359,7 +2408,10 @@ const Avatars = () => {
       //   body: formData,
       // });
       // const apiKey = "pk_16c7ab4cb3564aa4811dda3180bbcb41";
-      const apiKey = "pk_16c7ab4cb3564aa4811dda3180bbcb41";
+      // const apiKey = "pk_16c7ab4cb3564aa4811dda3180bbcb41";
+      // Use user's API key and secret key from API response
+      const apiKey = userApiKeys.apiKey;
+
       const domain = selectedOption;
 
       const signature = await generateSignature(domain, apiKey);

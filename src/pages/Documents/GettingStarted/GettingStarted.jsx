@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaRocket,
   FaKey,
@@ -8,9 +8,39 @@ import {
 } from "react-icons/fa";
 import "./GettingStarted.css";
 import { useNavigate } from "react-router-dom";
+import { backendURL } from "../../../config/constants";
 
 const GettingStarted = () => {
+  const [languages, setLanguages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  // Fetch supported languages
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`${backendURL}/agents/supported-languages/`);
+        // "https://saas.todopharma.com/api/agents/supported-languages/"
+        if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
+        const data = await res.json();
+
+        // Expected format: { details: [{ code: "eng", name: "English" }, ...] }
+        if (Array.isArray(data.details)) {
+          setLanguages(data.details);
+        } else {
+          setLanguages([]);
+        }
+      } catch (err) {
+        console.error("Error fetching languages:", err);
+        setError("Failed to load supported languages.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLanguages();
+  }, []);
   return (
     <div className="docs-page">
       <div className="docs-page-header">
@@ -60,9 +90,29 @@ const GettingStarted = () => {
             <strong>AI Agent API:</strong> Intelligent conversational AI with
             multi-language support and video analysis
           </li>
-          <li className="supported-lang">
+          {/* <li className="supported-lang">
             <strong>Supported Languages:</strong> English (eng), Italian (it),
             French (fr)
+          </li> */}
+          <li className="supported-lang">
+            <strong>Supported Languages:</strong>{" "}
+            {loading ? (
+              <span>Loading...</span>
+            ) : error ? (
+              <span className="error-text">{error}</span>
+            ) : languages.length > 0 ? (
+              languages.map((lang, index) => (
+                <span key={lang.code}>
+                  {lang.name}
+                  {index < languages.length - 1 && ", "}
+                </span>
+              ))
+            ) : (
+              <span>
+                English, Italian, French, Spanish, German, Portuguese, Arabic,
+                Chinese (Simplified), Polish
+              </span>
+            )}
           </li>
           {/* <li>
             <strong>Payments API:</strong> Manage subscription plans and handle
