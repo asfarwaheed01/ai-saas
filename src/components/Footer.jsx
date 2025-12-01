@@ -1,8 +1,8 @@
 import React from "react";
 import "./Footer.css";
 // import Logo from "../../public/images/logo.jpeg";
-import { FaSquareXTwitter } from "react-icons/fa6";
-import { FaLinkedin } from "react-icons/fa";
+import { FaInstagram, FaSquareXTwitter } from "react-icons/fa6";
+import { FaFacebookSquare, FaLinkedin } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io";
 import { Link } from "react-router-dom";
 
@@ -70,10 +70,38 @@ const Footer = () => {
         <hr></hr>
         <div className="footer-end">
           <div>{new Date().getFullYear()} Todo Ai. All rights reserved.</div>
-          <div className="icons-gap">
+          {/* <div className="icons-gap">
             <FaSquareXTwitter />
             <FaLinkedin />
             <IoLogoYoutube />
+          </div> */}
+          <div className="icons-gap">
+            {/* Facebook */}
+            <a
+              href="https://www.facebook.com/share/16phs4wjHX/?mibextid=wwXIfr"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebookSquare color="white" />
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href="https://www.linkedin.com/company/todo-group-s-r-l/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin color="white" />
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/todopharma.it?igsh=cWFxYTl5MDJvYzBr"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram color="white" />
+            </a>
           </div>
         </div>
       </section>
