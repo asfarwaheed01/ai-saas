@@ -114,6 +114,7 @@ export const ROUTES = {
   },
   // Dashboard routes
   dashboard: { path: "/dashboard", name: "Dashboard" },
+  users: { path: "/dashboard/users", name: "User Info" },
   organization: { path: "/docs/organization", name: "Organization" },
   apiKeys: { path: "/docs/api-keys", name: "API Keys" },
 

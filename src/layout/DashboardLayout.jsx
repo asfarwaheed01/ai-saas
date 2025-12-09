@@ -7,6 +7,7 @@ import {
   HiKey,
   HiChevronDown,
   HiLogout,
+  HiUsers,
 } from "react-icons/hi";
 import { BsPersonArmsUp } from "react-icons/bs";
 import "./DashboardLayout.css";
@@ -20,6 +21,11 @@ const DASHBOARD_ROUTES = {
     path: ROUTES.dashboard.path,
     name: ROUTES.dashboard.name,
     icon: HiHome,
+  },
+  users: {
+    path: ROUTES.users.path,
+    name: ROUTES.users.name,
+    icon: HiUsers,
   },
   organization: {
     path: "/dashboard/organization",
@@ -51,6 +57,11 @@ const DashboardLayout = ({ children }) => {
       icon: DASHBOARD_ROUTES.dashboard.icon,
       label: DASHBOARD_ROUTES.dashboard.name,
       href: DASHBOARD_ROUTES.dashboard.path,
+    },
+    {
+      icon: DASHBOARD_ROUTES.users.icon,
+      label: DASHBOARD_ROUTES.users.name,
+      href: DASHBOARD_ROUTES.users.path,
     },
     // {
     //   icon: DASHBOARD_ROUTES.organization.icon,

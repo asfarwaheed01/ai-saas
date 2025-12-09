@@ -41,7 +41,7 @@ import ForgotPassword from "./pages/Auth/Login/ForgotPassword";
 import ChangePassword from "./pages/Auth/Login/ChangePassword";
 import VerifyEmail from "./pages/Auth/Login/VerifyEmail";
 import ManageSubscription from "./pages/ManageSubscriptions/ManageSubscription";
-
+import Users from "./pages/Users/User";
 function App() {
   return (
     <>
@@ -345,6 +345,16 @@ function App() {
             <ProtectedRoute adminOnly>
               <DashboardLayout>
                 <Dashboard />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.users.path}
+          element={
+            <ProtectedRoute adminOnly>
+              <DashboardLayout>
+                <Users />
               </DashboardLayout>
             </ProtectedRoute>
           }
