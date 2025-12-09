@@ -92,14 +92,21 @@ const ManageSubscription = () => {
               <FaCalendarAlt className="icon" />
               <span>
                 <strong>Start Date:</strong>{" "}
-                {new Date(subscription.start_date).toLocaleDateString()}
+                {/* {new Date(subscription.start_date).toLocaleDateString()} */}
+                {subscription.start_date
+                  ? new Date(subscription.start_date).toLocaleDateString()
+                  : "N/A"}
               </span>
             </div>
             <div className="detail-item">
               <FaClock className="icon" />
               <span>
                 <strong>Expiry Date:</strong>{" "}
-                {new Date(subscription.expiry_date).toLocaleDateString()}
+                {/* {new Date(subscription.expiry_date).toLocaleDateString() ||
+                  "N/A"} */}
+                {subscription.expiry_date
+                  ? new Date(subscription.expiry_date).toLocaleDateString()
+                  : "N/A"}
               </span>
             </div>
             <div className="detail-item">
