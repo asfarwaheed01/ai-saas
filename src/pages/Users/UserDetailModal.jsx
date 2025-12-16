@@ -76,7 +76,12 @@ const UserDetailModal = ({ user, onClose }) => {
               value={plan_info.plan_name}
               highlight
             />
-            <DetailItem label="Status" value={plan_info.status} />
+            {/* <DetailItem label="Status" value={plan_info.status} /> */}
+            <DetailItem
+              label="Status"
+              value={plan_info.status ? "Active" : "Inactive"}
+            />
+
             <DetailItem label="Price" value={plan_info.plan_price} />
             <DetailItem label="Subscribed" value={plan_info.is_subscribed} />
             <DetailItem label="Start Date" value={plan_info.start_date} />
