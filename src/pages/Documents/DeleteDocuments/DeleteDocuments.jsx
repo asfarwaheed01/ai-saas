@@ -19,7 +19,7 @@ const DeleteDocuments = () => {
           Delete Document Embeddings and S3 File
         </h1>
         <p className="docs-page-description">
-          This endpoint allows admin users to delete all vector embeddings for a
+          This endpoint allows users to delete all vector embeddings for a
           document and its corresponding S3 file. The database record is
           retained for reference.
         </p>
@@ -36,18 +36,17 @@ const DeleteDocuments = () => {
 
           <div className="docs-endpoint-meta">
             <span className="docs-endpoint-auth">
-              <FaShieldAlt /> Authentication Required (admin only) | API key
-              Required
+              <FaShieldAlt /> Authentication Required | API key Required
             </span>
           </div>
 
           <div className="docs-alert docs-alert-warning">
             <FaExclamationCircle className="docs-alert-icon" />
             <div className="docs-alert-content">
-              <div className="docs-alert-title">Admin Privileges Required</div>
+              <div className="docs-alert-title">User Privileges Required</div>
               <p className="docs-alert-message">
-                This endpoint is restricted to admin users only. Regular users
-                cannot delete documents or their embeddings.
+                This endpoint is restricted to users only. Regular users cannot
+                delete documents or their embeddings.
               </p>
             </div>
           </div>
@@ -282,7 +281,7 @@ const DeleteDocuments = () => {
                     <pre>
                       {`{
   "error": "Forbidden",
-  "message": "Only admin users are allowed to delete documents",
+  "message": "Only users are allowed to delete documents",
   "status": 403
 }`}
                     </pre>

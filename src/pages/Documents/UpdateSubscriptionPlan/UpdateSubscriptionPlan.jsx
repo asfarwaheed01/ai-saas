@@ -25,9 +25,9 @@ const UpdateSubscriptionPlan = () => {
       <div className="docs-page-header">
         <h1 className="docs-page-title">Update Subscription Plan</h1>
         <p className="docs-page-description">
-          This endpoint allows admin users to update existing subscription
-          plans. Use this to modify plan details, pricing, or resource limits
-          after they have been created.
+          This endpoint allows users to update existing subscription plans. Use
+          this to modify plan details, pricing, or resource limits after they
+          have been created.
         </p>
       </div>
 
@@ -40,17 +40,17 @@ const UpdateSubscriptionPlan = () => {
 
           <div className="docs-endpoint-meta">
             <span className="docs-endpoint-auth">
-              <FaShieldAlt /> Authentication Required (admin only)
+              <FaShieldAlt /> Authentication Required
             </span>
           </div>
 
           <div className="docs-alert docs-alert-warning">
             <FaExclamationCircle className="docs-alert-icon" />
             <div className="docs-alert-content">
-              <div className="docs-alert-title">Admin Privileges Required</div>
+              <div className="docs-alert-title">User Privileges Required</div>
               <p className="docs-alert-message">
-                This endpoint is restricted to admin users only. Regular users
-                cannot modify subscription plans.
+                This endpoint is restricted to users only. Regular users cannot
+                modify subscription plans.
               </p>
             </div>
           </div>
@@ -195,7 +195,7 @@ const UpdateSubscriptionPlan = () => {
                 onClick={() =>
                   copyToClipboard(`curl -X PUT \\
   https://api.example.com/api/subscription-plans/ \\
-  -H "Authorization: Bearer YOUR_ADMIN_API_KEY" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
     "id": "uuid-1234...",
@@ -211,7 +211,7 @@ const UpdateSubscriptionPlan = () => {
             <pre>
               {`curl -X PUT \\
   https://api.example.com/api/subscription-plans/ \\
-  -H "Authorization: Bearer YOUR_ADMIN_API_KEY" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
     "id": "uuid-1234...",
@@ -317,7 +317,7 @@ const UpdateSubscriptionPlan = () => {
                     <div className="docs-alert-content">
                       <div className="docs-alert-title">403: Forbidden</div>
                       <p className="docs-alert-message">
-                        Only admin users can edit plans
+                        Only users can edit plans
                       </p>
                     </div>
                   </div>
@@ -425,7 +425,7 @@ const UpdateSubscriptionPlan = () => {
                   onClick={() =>
                     copyToClipboard(`// Function to update a subscription plan
 async function updateSubscriptionPlan(planId, updateData) {
-  const apiKey = 'YOUR_ADMIN_API_KEY';
+  const apiKey = 'YOUR_API_KEY';
   const url = 'https://api.example.com/api/subscription-plans/';
   
   // Ensure the ID is included in the update data
@@ -505,7 +505,7 @@ document.getElementById('update-plan-form').addEventListener('submit', async (ev
               <pre>
                 {`// Function to update a subscription plan
 async function updateSubscriptionPlan(planId, updateData) {
-  const apiKey = 'YOUR_ADMIN_API_KEY';
+  const apiKey = 'YOUR_API_KEY';
   const url = 'https://api.example.com/api/subscription-plans/';
   
   // Ensure the ID is included in the update data

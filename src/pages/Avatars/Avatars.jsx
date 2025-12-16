@@ -1933,6 +1933,8 @@ const Avatars = () => {
   const [activeSubscription, setActiveSubscription] = useState(null);
   const [languages, setLanguages] = useState([]);
   const [isLanguagesLoading, setIsLanguagesLoading] = useState(false);
+  const [showAccessErrorPopup, setShowAccessErrorPopup] = useState(false);
+  const [accessErrorMessage, setAccessErrorMessage] = useState("");
 
   const [userPlan, setUserPlan] = useState(null);
   const [isPlanLoading, setIsPlanLoading] = useState(false);
@@ -2160,9 +2162,9 @@ const Avatars = () => {
     }
   };
 
-  useEffect(() => {
-    fetchUserPlan();
-  }, []);
+  // useEffect(() => {
+  //   fetchUserPlan();
+  // }, []);
 
   // Helper function to fetch access token
   const fetchAccessToken = async () => {
@@ -2270,6 +2272,45 @@ const Avatars = () => {
       setIsLoading(true);
       setConnectionStatus("connecting");
       setStreamReady(false);
+
+      // 🔥 STEP 1 — Check quota BEFORE starting session
+      const signature = await generateSignature("", userApiKeys.apiKey);
+
+      const planRes = await fetch(
+        `${backendURL}/agents/generate-response/access`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+            "X-API-KEY": userApiKeys.apiKey,
+            "X-SIGNATURE": signature,
+          },
+        }
+      );
+
+      let planData;
+      try {
+        planData = await planRes.json();
+      } catch {
+        planData = {};
+      }
+      if (!planRes.ok) {
+        const errorMsg =
+          planData?.error ||
+          planData?.message ||
+          planData?.detail ||
+          "Your usage limit has been reached. Please upgrade your plan.";
+
+        setAccessErrorMessage(errorMsg);
+        setShowAccessErrorPopup(true);
+
+        popupTimerRef.current = setTimeout(() => {
+          setShowAccessErrorPopup(false);
+        }, 10000);
+
+        setIsLoading(false);
+        return; // STOP
+      }
 
       console.log("🚀 Starting avatar session...");
 
@@ -2675,6 +2716,33 @@ const Avatars = () => {
             </div>
           </div>
         )}
+        {/* Access Error Popup */}
+        {showAccessErrorPopup && (
+          <div className="api-key-popup-overlay">
+            <div className="api-key-popup">
+              <div className="popup-header">
+                <h3>Access Error</h3>
+                <button
+                  className="popup-close"
+                  onClick={() => setShowAccessErrorPopup(false)}
+                >
+                  ×
+                </button>
+              </div>
+              <div className="popup-content">
+                <p>{accessErrorMessage}</p>
+              </div>
+              <div className="popup-footer">
+                <button
+                  className="popup-button"
+                  onClick={() => setShowAccessErrorPopup(false)}
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         <Link to="/">
           <img
             src={WhiteLogo}
@@ -2947,7 +3015,6 @@ const Avatars = () => {
       </div>
     );
   }
-
   return (
     <div className="avatars-page active-session">
       <div className="fullscreen-video-container">
@@ -3032,5 +3099,4 @@ const Avatars = () => {
     </div>
   );
 };
-
 export default Avatars;

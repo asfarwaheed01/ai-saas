@@ -25,7 +25,7 @@ const CreateSubscriptionPlan = () => {
       <div className="docs-page-header">
         <h1 className="docs-page-title">Create Subscription Plan</h1>
         <p className="docs-page-description">
-          This endpoint allows admin users to create new subscription plans with
+          This endpoint allows users to create new subscription plans with
           various limitations and features. These plans can later be purchased
           by users through the payment system.
         </p>
@@ -40,16 +40,16 @@ const CreateSubscriptionPlan = () => {
 
           <div className="docs-endpoint-meta">
             <span className="docs-endpoint-auth">
-              <FaShieldAlt /> Authentication Required (admin only)
+              <FaShieldAlt /> Authentication Required
             </span>
           </div>
 
           <div className="docs-alert docs-alert-warning">
             <FaExclamationCircle className="docs-alert-icon" />
             <div className="docs-alert-content">
-              <div className="docs-alert-title">Admin Privileges Required</div>
+              <div className="docs-alert-title">User Privileges Required</div>
               <p className="docs-alert-message">
-                This endpoint is restricted to admin users only. Regular users
+                This endpoint is restricted to users only. Regular users
                 cannot create subscription plans.
               </p>
             </div>
@@ -344,7 +344,7 @@ const CreateSubscriptionPlan = () => {
                     <div className="docs-alert-content">
                       <div className="docs-alert-title">403: Forbidden</div>
                       <p className="docs-alert-message">
-                        Only admin users can create plans
+                        Users can create plans
                       </p>
                     </div>
                   </div>
@@ -365,7 +365,7 @@ const CreateSubscriptionPlan = () => {
                         onClick={() =>
                           copyToClipboard(`{
   "error": "Forbidden",
-  "message": "Only admin users can create plans",
+  "message": " users can create plans",
   "status": 403
 }`)
                         }
@@ -376,7 +376,7 @@ const CreateSubscriptionPlan = () => {
                     <pre>
                       {`{
   "error": "Forbidden",
-  "message": "Only admin users can create plans",
+  "message": " users can create plans",
   "status": 403
 }`}
                     </pre>
@@ -446,7 +446,7 @@ const CreateSubscriptionPlan = () => {
                   onClick={() =>
                     copyToClipboard(`// Function to create a subscription plan
 async function createSubscriptionPlan(planData) {
-  const apiKey = 'YOUR_ADMIN_API_KEY';
+  const apiKey = 'YOUR_API_KEY';
   const url = 'https://api.example.com/api/subscription-plans/';
   
   try {
@@ -483,7 +483,7 @@ const planData = {
   priority: 1
 };
 
-// Admin panel submission handler
+// panel submission handler
 document.getElementById('create-plan-form').addEventListener('submit', async (event) => {
   event.preventDefault();
   
@@ -511,7 +511,7 @@ document.getElementById('create-plan-form').addEventListener('submit', async (ev
               <pre>
                 {`// Function to create a subscription plan
 async function createSubscriptionPlan(planData) {
-  const apiKey = 'YOUR_ADMIN_API_KEY';
+  const apiKey = 'YOUR_API_KEY';
   const url = 'https://api.example.com/api/subscription-plans/';
   
   try {
@@ -548,7 +548,7 @@ const planData = {
   priority: 1
 };
 
-// Admin panel submission handler
+//  panel submission handler
 document.getElementById('create-plan-form').addEventListener('submit', async (event) => {
   event.preventDefault();
   

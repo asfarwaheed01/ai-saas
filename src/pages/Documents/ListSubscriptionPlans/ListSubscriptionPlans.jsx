@@ -25,7 +25,7 @@ const ListSubscriptionPlans = () => {
       <div className="docs-page-header">
         <h1 className="docs-page-title">List Subscription Plans</h1>
         <p className="docs-page-description">
-          This endpoint allows admin users to retrieve a list of all available
+          This endpoint allows users to retrieve a list of all available
           subscription plans. Use this to view and manage the plans available to
           your users.
         </p>
@@ -40,16 +40,16 @@ const ListSubscriptionPlans = () => {
 
           <div className="docs-endpoint-meta">
             <span className="docs-endpoint-auth">
-              <FaShieldAlt /> Authentication Required (admin only)
+              <FaShieldAlt /> Authentication Required
             </span>
           </div>
 
           <div className="docs-alert docs-alert-warning">
             <FaExclamationCircle className="docs-alert-icon" />
             <div className="docs-alert-content">
-              <div className="docs-alert-title">Admin Privileges Required</div>
+              <div className="docs-alert-title">User Privileges Required</div>
               <p className="docs-alert-message">
-                This endpoint is restricted to admin users only. Regular users
+                This endpoint is restricted to users only. Regular users
                 cannot access the list of subscription plans.
               </p>
             </div>
@@ -60,7 +60,7 @@ const ListSubscriptionPlans = () => {
             This endpoint retrieves all available subscription plans from the
             system. It returns an array of plan objects, each containing details
             such as name, price, allowed API requests, and other configuration
-            options. This is useful for admin dashboards to display and manage
+            options. This is useful for dashboards to display and manage
             available plans.
           </p>
 
@@ -75,7 +75,7 @@ const ListSubscriptionPlans = () => {
                 onClick={() =>
                   copyToClipboard(`curl -X GET \\
   https://api.example.com/api/subscription-plans/ \\
-  -H "Authorization: Bearer YOUR_ADMIN_API_KEY"`)
+  -H "Authorization: Bearer YOUR_API_KEY"`)
                 }
               >
                 Copy
@@ -84,7 +84,7 @@ const ListSubscriptionPlans = () => {
             <pre>
               {`curl -X GET \\
   https://api.example.com/api/subscription-plans/ \\
-  -H "Authorization: Bearer YOUR_ADMIN_API_KEY"`}
+  -H "Authorization: Bearer YOUR_API_KEY"`}
             </pre>
           </div>
 
@@ -276,7 +276,7 @@ const ListSubscriptionPlans = () => {
                     <div className="docs-alert-content">
                       <div className="docs-alert-title">403: Forbidden</div>
                       <p className="docs-alert-message">
-                        Only admin users can access the list
+                        Only users can access the list
                       </p>
                     </div>
                   </div>
@@ -289,7 +289,7 @@ const ListSubscriptionPlans = () => {
                         onClick={() =>
                           copyToClipboard(`{
   "error": "Forbidden",
-  "message": "Only admin users can access the list",
+  "message": "Only users can access the list",
   "status": 403
 }`)
                         }
@@ -300,7 +300,7 @@ const ListSubscriptionPlans = () => {
                     <pre>
                       {`{
   "error": "Forbidden",
-  "message": "Only admin users can access the list",
+  "message": "Only users can access the list",
   "status": 403
 }`}
                     </pre>
@@ -335,7 +335,7 @@ const ListSubscriptionPlans = () => {
                   onClick={() =>
                     copyToClipboard(`// Function to fetch subscription plans
 async function getSubscriptionPlans() {
-  const apiKey = 'YOUR_ADMIN_API_KEY';
+  const apiKey = 'YOUR_API_KEY';
   const url = 'https://api.example.com/api/subscription-plans/';
   
   try {
@@ -399,8 +399,8 @@ function renderPlansTable(plans) {
   });
 }
 
-// Initialize the admin dashboard
-async function initializeAdminDashboard() {
+// Initialize the dashboard
+async function initializeDashboard() {
   try {
     const loadingIndicator = document.getElementById('loading-indicator');
     loadingIndicator.style.display = 'block';
@@ -417,7 +417,7 @@ async function initializeAdminDashboard() {
 }
 
 // Call the initialization function when the page loads
-window.addEventListener('DOMContentLoaded', initializeAdminDashboard);`)
+window.addEventListener('DOMContentLoaded', initializeDashboard);`)
                   }
                 >
                   Copy
@@ -426,7 +426,7 @@ window.addEventListener('DOMContentLoaded', initializeAdminDashboard);`)
               <pre>
                 {`// Function to fetch subscription plans
 async function getSubscriptionPlans() {
-  const apiKey = 'YOUR_ADMIN_API_KEY';
+  const apiKey = 'YOUR_API_KEY';
   const url = 'https://api.example.com/api/subscription-plans/';
   
   try {
@@ -490,8 +490,8 @@ function renderPlansTable(plans) {
   });
 }
 
-// Initialize the admin dashboard
-async function initializeAdminDashboard() {
+// Initialize the dashboard
+async function initializeDashboard() {
   try {
     const loadingIndicator = document.getElementById('loading-indicator');
     loadingIndicator.style.display = 'block';
@@ -508,7 +508,7 @@ async function initializeAdminDashboard() {
 }
 
 // Call the initialization function when the page loads
-window.addEventListener('DOMContentLoaded', initializeAdminDashboard);`}
+window.addEventListener('DOMContentLoaded', initializeDashboard);`}
               </pre>
             </div>
           </div>
@@ -521,7 +521,7 @@ window.addEventListener('DOMContentLoaded', initializeAdminDashboard);`}
           <div className="docs-card-content">
             <p>
               While the endpoint doesn't directly support filtering, you can
-              implement client-side filtering to help admins find specific
+              implement client-side filtering to help find specific
               plans:
             </p>
 
@@ -647,7 +647,7 @@ document.getElementById('filter-by-price').addEventListener('click', () => {
           <div className="docs-card-content">
             <p>
               While plans are already sorted by priority, you might want to
-              implement additional sorting options for your admin interface:
+              implement additional sorting options for your interface:
             </p>
 
             <div className="docs-code">

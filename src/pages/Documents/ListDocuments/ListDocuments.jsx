@@ -11,7 +11,7 @@ const ListDocumentsPage = () => {
       <div className="docs-page-header">
         <h1 className="docs-page-title">List Uploaded Documents</h1>
         <p className="docs-page-description">
-          Retrieve all uploaded documents for the authenticated admin user,
+          Retrieve all uploaded documents for the authenticated user,
           grouped by domain. Returns S3 metadata, file info, and summary stats.
         </p>
       </div>
@@ -25,14 +25,14 @@ const ListDocumentsPage = () => {
 
           <div className="docs-endpoint-meta">
             <span className="docs-endpoint-auth">
-              <FaInfo /> Authentication Required (admin only)
+              <FaInfo /> Authentication Required
             </span>
           </div>
 
           <h3 className="docs-subsection-title">Description</h3>
           <p className="docs-endpoint-description">
             This endpoint retrieves all uploaded documents for the authenticated
-            admin user, grouped by domain. It returns S3 metadata, file
+            user, grouped by domain. It returns S3 metadata, file
             information, and summary statistics.
           </p>
 
@@ -361,7 +361,7 @@ const ListDocumentsPage = () => {
                     <div className="docs-alert-content">
                       <div className="docs-alert-title">403: Forbidden</div>
                       <p className="docs-alert-message">
-                        Only admin users can view uploaded documents
+                        Only users can view uploaded documents
                       </p>
                     </div>
                   </div>
@@ -384,7 +384,7 @@ const ListDocumentsPage = () => {
                     <pre>
                       {`{
   "error": "Forbidden",
-  "message": "Only admin users can view uploaded documents",
+  "message": "Only users can view uploaded documents",
   "status": 403
 }`}
                     </pre>

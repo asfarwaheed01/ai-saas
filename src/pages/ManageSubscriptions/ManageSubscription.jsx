@@ -127,7 +127,7 @@ const ManageSubscription = () => {
               <FaCheckCircle className="icon" />
               <span>
                 <strong>Status:</strong>{" "}
-                {subscription.is_subscribed ? (
+                {subscription.status ? (
                   <span className="active-status">Active</span>
                 ) : (
                   <span className="inactive-status">Inactive</span>
