@@ -367,6 +367,11 @@
   .users-table-section {
     padding: 0.5rem;
   }
+  .users-search-container {
+    margin-top: 12px;
+    max-width: 250px;
+    margin-bottom: 20px;
+  }
 }
 
 /* Pagination Styles */
@@ -528,4 +533,38 @@
 
 .confirm-btn-confirm:hover {
   background-color: #b91c1c;
+}
+
+.users-search-container {
+  margin-top: 12px;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.users-search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 14px;
+}
+
+.users-search-input:focus {
+  border-color: #05b1bd;
+}
+
+.users-stats {
+  display: flex;
+  /* justify-content: flex-end; */
+  text-align: center;
+  gap: 16px;
+  /* margin-bottom: 12px; */
+  font-size: 20px;
+  color: #05b1bd;
+}
+.users-flex-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

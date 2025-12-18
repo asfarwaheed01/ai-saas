@@ -12,6 +12,7 @@ const Users = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { getAccessToken, logout } = useAuth();
 
@@ -152,17 +153,36 @@ const Users = () => {
     );
   };
 
+  const filteredResults = useMemo(() => {
+    if (!usersData?.results) return [];
+
+    if (!searchTerm.trim()) return usersData.results;
+
+    const term = searchTerm.toLowerCase();
+
+    return usersData.results.filter((user) => {
+      const username = user.basic_info?.username?.toLowerCase() || "";
+      const email = user.basic_info?.email?.toLowerCase() || "";
+
+      return username.includes(term) || email.includes(term);
+    });
+  }, [usersData, searchTerm]);
+
   const itemsPerPage = 10;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = usersData?.results?.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
+  // const currentItems = usersData?.results?.slice(
+  //   indexOfFirstItem,
+  //   indexOfLastItem
+  // );
 
-  const totalPages = usersData?.results
-    ? Math.ceil(usersData.results.length / itemsPerPage)
-    : 0;
+  // const totalPages = usersData?.results
+  //   ? Math.ceil(usersData.results.length / itemsPerPage)
+  //   : 0;
+
+  const currentItems = filteredResults.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
@@ -172,11 +192,35 @@ const Users = () => {
 
   return (
     <div className="users-container">
+      <div className="users-flex-stats">
       <div className="users-header-section">
         <h1 className="users-title">User Management</h1>
         <p className="users-subtitle">
           View and manage user details and subscriptions.
         </p>
+      </div>
+       {usersData && (
+        <div className="users-stats">
+          <span>
+            <strong>Total Users:</strong> {usersData.count}
+          </span>
+        </div>
+      )}
+      </div>
+
+     
+
+      <div className="users-search-container">
+        <input
+          type="text"
+          placeholder="Search by username or email..."
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1); // reset pagination on search
+          }}
+          className="users-search-input"
+        />
       </div>
 
       <div className="users-table-section">

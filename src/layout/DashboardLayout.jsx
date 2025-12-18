@@ -27,6 +27,11 @@ const DASHBOARD_ROUTES = {
     name: ROUTES.users.name,
     icon: HiUsers,
   },
+  pendingUsers: {
+    path: ROUTES.pendingUsers.path,
+    name: ROUTES.pendingUsers.name,
+    icon: HiUsers,
+  },
   organization: {
     path: "/dashboard/organization",
     name: "Organization",
@@ -62,6 +67,11 @@ const DashboardLayout = ({ children }) => {
       icon: DASHBOARD_ROUTES.users.icon,
       label: DASHBOARD_ROUTES.users.name,
       href: DASHBOARD_ROUTES.users.path,
+    },
+    {
+      icon: DASHBOARD_ROUTES.pendingUsers.icon,
+      label: DASHBOARD_ROUTES.pendingUsers.name,
+      href: DASHBOARD_ROUTES.pendingUsers.path,
     },
     // {
     //   icon: DASHBOARD_ROUTES.organization.icon,

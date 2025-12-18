@@ -42,6 +42,7 @@ import ChangePassword from "./pages/Auth/Login/ChangePassword";
 import VerifyEmail from "./pages/Auth/Login/VerifyEmail";
 import ManageSubscription from "./pages/ManageSubscriptions/ManageSubscription";
 import Users from "./pages/Users/User";
+import PendingUsers from "./pages/Users/PendingUsers";
 function App() {
   return (
     <>
@@ -355,6 +356,16 @@ function App() {
             <ProtectedRoute adminOnly>
               <DashboardLayout>
                 <Users />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path={ROUTES.pendingUsers.path}
+          element={
+            <ProtectedRoute adminOnly>
+              <DashboardLayout>
+                <PendingUsers />
               </DashboardLayout>
             </ProtectedRoute>
           }
