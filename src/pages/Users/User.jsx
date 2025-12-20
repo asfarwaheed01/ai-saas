@@ -335,7 +335,8 @@ const Users = () => {
                 <tr>
                   <th>Username</th>
                   <th>Email</th>
-                  <th>Joined / Last Login</th>
+                  <th>Joined</th>
+                  <th>Last Login</th>
                   <th>Active Plan</th>
                   <th>Status</th>
                   <th>Action</th>
@@ -356,10 +357,16 @@ const Users = () => {
                       <TableCellWithTooltip content={user.basic_info.email} />
                     </td>
                     <td>
-                      {formatDate(user.basic_info.date_joined)} <br />
-                      <span className="text-sm text-gray-500">
+                      {formatDate(user.basic_info.date_joined)}
+                      {/* <span className="text-sm text-gray-500">
                         {formatDate(user.basic_info.last_login)}
-                      </span>
+                      </span> */}
+                    </td>
+                    <td>
+                      {/* {formatDate(user.basic_info.date_joined)} <br /> */}
+                      {/* <span className="text-sm text-gray-500"> */}
+                      {formatDate(user.basic_info.last_login)}
+                      {/* </span> */}
                     </td>
                     <td>
                       {user.plan_info?.plan_name &&
