@@ -10,6 +10,7 @@ const PendingUsers = () => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [deletingUserId, setDeletingUserId] = useState(null);
 
   const { getAccessToken, logout } = useAuth();
 
@@ -26,14 +27,90 @@ const PendingUsers = () => {
     logout();
   }, [logout]);
 
+  const deletePendingUser = async (userId) => {
+    try {
+      setDeletingUserId(userId);
+
+      const response = await fetch(
+        `${backendURL}/users/pending-users/${userId}/`,
+        {
+          method: "DELETE",
+          headers: apiHeaders,
+        }
+      );
+
+      if (response.status === 401) {
+        handleUnauthorized();
+        return;
+      }
+
+      // ✅ API returns 204 on success
+      if (response.status === 204) {
+        // remove user from UI without refetch
+        setUsersData((prev) => ({
+          ...prev,
+          count: prev.count - 1,
+          results: prev.results.filter((u) => u.id !== userId),
+        }));
+
+        alert("User deleted successfully"); // or toast
+      } else {
+        throw new Error("Failed to delete user");
+      }
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert("Failed to delete user");
+    } finally {
+      setDeletingUserId(null);
+    }
+  };
+
   /* ---------------- FETCH PENDING USERS ---------------- */
+  // const fetchPendingUsers = useCallback(async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     setError(null);
+
+  //     const response = await fetch(
+  //       `${backendURL}/analytics/pending-users/?page=1`,
+  //       {
+  //         method: "GET",
+  //         headers: apiHeaders,
+  //       }
+  //     );
+
+  //     if (response.status === 401) {
+  //       handleUnauthorized();
+  //       return;
+  //     }
+
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+
+  //     const data = await response.json();
+  //     setUsersData(data);
+  //   } catch (err) {
+  //     console.error("Error fetching pending users:", err);
+  //     setError("Failed to load pending users. Please try again.");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }, [apiHeaders, handleUnauthorized]);
   const fetchPendingUsers = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
 
+      const params = new URLSearchParams();
+      params.append("page", "1");
+
+      if (searchTerm.trim()) {
+        params.append("search", searchTerm.trim());
+      }
+
       const response = await fetch(
-        `${backendURL}/analytics/pending-users/?page=1`,
+        `${backendURL}/analytics/pending-users/?${params.toString()}`,
         {
           method: "GET",
           headers: apiHeaders,
@@ -46,7 +123,7 @@ const PendingUsers = () => {
       }
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error("Failed to fetch pending users");
       }
 
       const data = await response.json();
@@ -57,7 +134,7 @@ const PendingUsers = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [apiHeaders, handleUnauthorized]);
+  }, [apiHeaders, handleUnauthorized, searchTerm]);
 
   useEffect(() => {
     fetchPendingUsers();
@@ -98,17 +175,15 @@ const PendingUsers = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  //   const currentItems = usersData?.results?.slice(
-  //     indexOfFirstItem,
-  //     indexOfLastItem
-  //   );
-
-  //   const totalPages = usersData?.results
-  //     ? Math.ceil(usersData.results.length / itemsPerPage)
-  //     : 0;
   const currentItems = filteredResults.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
+  // const currentItems =
+  //   usersData?.results?.slice(indexOfFirstItem, indexOfLastItem) || [];
+
+  // const totalPages = usersData
+  //   ? Math.ceil(usersData.results.length / itemsPerPage)
+  //   : 0;
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
@@ -145,6 +220,16 @@ const PendingUsers = () => {
           }}
           className="users-search-input"
         />
+        {/* <input
+          type="text"
+          placeholder="Search by username or email..."
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1);
+          }}
+          className="users-search-input"
+        /> */}
       </div>
 
       <div className="users-table-section">
@@ -167,6 +252,7 @@ const PendingUsers = () => {
                   <th>Created At</th>
                   <th>Timezone</th>
                   <th>Status</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -186,6 +272,23 @@ const PendingUsers = () => {
                       <span className="status-badge status-inactive">
                         {user.is_expired ? "Expired" : "Pending"}
                       </span>
+                    </td>
+                    <td>
+                      <button
+                        className="delete-btn"
+                        disabled={deletingUserId === user.id}
+                        onClick={() => {
+                          // if (
+                          //   window.confirm(
+                          //     "Are you sure you want to delete this user?"
+                          //   )
+                          // ) {
+                          deletePendingUser(user.id);
+                          // }
+                        }}
+                      >
+                        {deletingUserId === user.id ? "Deleting..." : "Delete"}
+                      </button>
                     </td>
                   </tr>
                 ))}

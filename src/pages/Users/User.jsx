@@ -34,17 +34,64 @@ const Users = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [userToDeactivate, setUserToDeactivate] = useState(null);
+  const [statusFilter, setStatusFilter] = useState("Active"); // Active | Inactive
+  const [searchInput, setSearchInput] = useState("");
+  const [actionMessage, setActionMessage] = useState(null);
 
+  // const fetchUsers = useCallback(async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     setError(null);
+
+  //     // Always fetch page 1 as it contains all data (or backend doesn't support other pages)
+  //     const response = await fetch(`${backendURL}/analytics/users/?page=1`, {
+  //       method: "GET",
+  //       headers: apiHeaders,
+  //     });
+
+  //     if (response.status === 401) {
+  //       handleUnauthorized();
+  //       return;
+  //     }
+
+  //     if (!response.ok) {
+  //       console.error(
+  //         "API Error:",
+  //         response.status,
+  //         response.statusText,
+  //         await response.text()
+  //       );
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+
+  //     const data = await response.json();
+  //     setUsersData(data);
+  //   } catch (err) {
+  //     console.error("Error fetching users:", err);
+  //     setError("Failed to load users. Please try again.");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }, [apiHeaders, handleUnauthorized]);
   const fetchUsers = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
 
-      // Always fetch page 1 as it contains all data (or backend doesn't support other pages)
-      const response = await fetch(`${backendURL}/analytics/users/?page=1`, {
-        method: "GET",
-        headers: apiHeaders,
-      });
+      const params = new URLSearchParams();
+      params.append("page", "1");
+      params.append("status", statusFilter);
+      if (searchInput.trim()) {
+        params.append("search", searchInput.trim());
+      }
+
+      const response = await fetch(
+        `${backendURL}/analytics/users/?${params.toString()}`,
+        {
+          method: "GET",
+          headers: apiHeaders,
+        }
+      );
 
       if (response.status === 401) {
         handleUnauthorized();
@@ -52,28 +99,52 @@ const Users = () => {
       }
 
       if (!response.ok) {
-        console.error(
-          "API Error:",
-          response.status,
-          response.statusText,
-          await response.text()
-        );
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error("Failed to fetch users");
       }
 
       const data = await response.json();
       setUsersData(data);
     } catch (err) {
-      console.error("Error fetching users:", err);
-      setError("Failed to load users. Please try again.");
+      console.error(err);
+      setError("Failed to load users");
     } finally {
       setIsLoading(false);
     }
-  }, [apiHeaders, handleUnauthorized]);
+  }, [apiHeaders, handleUnauthorized, statusFilter, searchInput]);
 
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
+
+  const handleReactivate = async (userId) => {
+    try {
+      const response = await fetch(
+        `${backendURL}/users/reactivate/${userId}/`,
+        {
+          method: "PUT",
+          headers: apiHeaders,
+        }
+      );
+
+      if (response.status === 401) {
+        handleUnauthorized();
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error("Failed to reactivate user");
+      }
+
+      setActionMessage("User reactivated successfully!");
+      fetchUsers();
+
+      setTimeout(() => setActionMessage(null), 3000);
+    } catch (err) {
+      console.error(err);
+      setActionMessage("Failed to reactivate user");
+      setTimeout(() => setActionMessage(null), 3000);
+    }
+  };
 
   const handleUserClick = (user) => {
     setSelectedUser(user);
@@ -193,24 +264,22 @@ const Users = () => {
   return (
     <div className="users-container">
       <div className="users-flex-stats">
-      <div className="users-header-section">
-        <h1 className="users-title">User Management</h1>
-        <p className="users-subtitle">
-          View and manage user details and subscriptions.
-        </p>
-      </div>
-       {usersData && (
-        <div className="users-stats">
-          <span>
-            <strong>Total Users:</strong> {usersData.count}
-          </span>
+        <div className="users-header-section">
+          <h1 className="users-title">User Management</h1>
+          <p className="users-subtitle">
+            View and manage user details and subscriptions.
+          </p>
         </div>
-      )}
+        {usersData && (
+          <div className="users-stats">
+            <span>
+              <strong>Total Users:</strong> {usersData.count}
+            </span>
+          </div>
+        )}
       </div>
 
-     
-
-      <div className="users-search-container">
+      {/* <div className="users-search-container">
         <input
           type="text"
           placeholder="Search by username or email..."
@@ -221,6 +290,24 @@ const Users = () => {
           }}
           className="users-search-input"
         />
+      </div> */}
+      <div className="users-search-filter">
+        <input
+          type="text"
+          placeholder="Search by username or email..."
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          className="users-search-input"
+        />
+
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="users-status-dropdown"
+        >
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
       </div>
 
       <div className="users-table-section">
@@ -239,6 +326,10 @@ const Users = () => {
           </div>
         ) : (
           <div className="users-table-container">
+            {actionMessage && (
+              <div className="success-message">{actionMessage}</div>
+            )}
+
             <table className="users-table">
               <thead>
                 <tr>
@@ -287,13 +378,33 @@ const Users = () => {
                         {user.plan_info?.status || "Inactive"}
                       </span>
                     </td>
-                    <td>
+                    {/* <td>
                       <button
                         className="deactivate-btn"
                         onClick={(e) => handleDeactivateClick(e, user)}
                       >
                         Deactivate
                       </button>
+                    </td> */}
+                    <td>
+                      {statusFilter === "Active" ? (
+                        <button
+                          className="deactivate-btn"
+                          onClick={(e) => handleDeactivateClick(e, user)}
+                        >
+                          Deactivate
+                        </button>
+                      ) : (
+                        <button
+                          className="activate-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleReactivate(user.basic_info.id);
+                          }}
+                        >
+                          Activate
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
