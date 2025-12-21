@@ -11,6 +11,8 @@ const PendingUsers = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [deletingUserId, setDeletingUserId] = useState(null);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   const { getAccessToken, logout } = useAuth();
 
@@ -26,6 +28,19 @@ const PendingUsers = () => {
   const handleUnauthorized = useCallback(() => {
     logout();
   }, [logout]);
+
+  const handleConfirmDelete = () => {
+    if (selectedUserId) {
+      deletePendingUser(selectedUserId);
+    }
+    setShowConfirm(false);
+    setSelectedUserId(null);
+  };
+
+  const handleCancelDelete = () => {
+    setShowConfirm(false);
+    setSelectedUserId(null);
+  };
 
   const deletePendingUser = async (userId) => {
     try {
@@ -52,8 +67,6 @@ const PendingUsers = () => {
           count: prev.count - 1,
           results: prev.results.filter((u) => u.id !== userId),
         }));
-
-        alert("User deleted successfully"); // or toast
       } else {
         throw new Error("Failed to delete user");
       }
@@ -193,34 +206,35 @@ const PendingUsers = () => {
 
   /* ---------------- RENDER ---------------- */
   return (
-    <div className="users-container">
-      <div className="users-flex-stats">
-        <div className="users-header-section">
-          <h1 className="users-title">Pending Users</h1>
-          <p className="users-subtitle">
-            Users who have registered but not yet activated.
-          </p>
-        </div>
-        {usersData && (
-          <div className="users-stats">
-            <span>
-              <strong>Total Users:</strong> {usersData.count}
-            </span>
+    <>
+      <div className="users-container">
+        <div className="users-flex-stats">
+          <div className="users-header-section">
+            <h1 className="users-title">Pending Users</h1>
+            <p className="users-subtitle">
+              Users who have registered but not yet activated.
+            </p>
           </div>
-        )}
-      </div>
-      <div className="users-search-container">
-        <input
-          type="text"
-          placeholder="Search by username or email..."
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1); // reset pagination on search
-          }}
-          className="users-search-input"
-        />
-        {/* <input
+          {usersData && (
+            <div className="users-stats">
+              <span>
+                <strong>Total Users:</strong> {usersData.count}
+              </span>
+            </div>
+          )}
+        </div>
+        <div className="users-search-container">
+          <input
+            type="text"
+            placeholder="Search by username or email..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1); // reset pagination on search
+            }}
+            className="users-search-input"
+          />
+          {/* <input
           type="text"
           placeholder="Search by username or email..."
           value={searchTerm}
@@ -230,97 +244,112 @@ const PendingUsers = () => {
           }}
           className="users-search-input"
         /> */}
-      </div>
+        </div>
 
-      <div className="users-table-section">
-        {isLoading ? (
-          <div className="loader-center">
-            <FaSpinner className="animate-spin text-blue-500 text-3xl" />
-          </div>
-        ) : error ? (
-          <div className="dashboard-error">
-            <p>{error}</p>
-            <button onClick={fetchPendingUsers}>Retry</button>
-          </div>
-        ) : (
-          <div className="users-table-container">
-            <table className="users-table">
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Created At</th>
-                  <th>Timezone</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems?.map((user) => (
-                  <tr key={user.id}>
-                    <td>
-                      <TableCellWithTooltip content={user.username} />
-                    </td>
-                    <td>
-                      <TableCellWithTooltip content={user.email} />
-                    </td>
-                    <td>
-                      {formatDateTime(user.created_date, user.created_time)}
-                    </td>
-                    <td>{user.timezone || "-"}</td>
-                    <td>
-                      <span className="status-badge status-inactive">
-                        {user.is_expired ? "Expired" : "Pending"}
-                      </span>
-                    </td>
-                    <td>
-                      <button
-                        className="delete-btn"
-                        disabled={deletingUserId === user.id}
-                        onClick={() => {
-                          // if (
-                          //   window.confirm(
-                          //     "Are you sure you want to delete this user?"
-                          //   )
-                          // ) {
-                          deletePendingUser(user.id);
-                          // }
-                        }}
-                      >
-                        {deletingUserId === user.id ? "Deleting..." : "Delete"}
-                      </button>
-                    </td>
+        <div className="users-table-section">
+          {isLoading ? (
+            <div className="loader-center">
+              <FaSpinner className="animate-spin text-blue-500 text-3xl" />
+            </div>
+          ) : error ? (
+            <div className="dashboard-error">
+              <p>{error}</p>
+              <button onClick={fetchPendingUsers}>Retry</button>
+            </div>
+          ) : (
+            <div className="users-table-container">
+              <table className="users-table">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Created At</th>
+                    <th>Timezone</th>
+                    <th>Status</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                </thead>
+                <tbody>
+                  {currentItems?.map((user) => (
+                    <tr key={user.id}>
+                      <td>
+                        <TableCellWithTooltip content={user.username} />
+                      </td>
+                      <td>
+                        <TableCellWithTooltip content={user.email} />
+                      </td>
+                      <td>
+                        {formatDateTime(user.created_date, user.created_time)}
+                      </td>
+                      <td>{user.timezone || "-"}</td>
+                      <td>
+                        <span className="status-badge status-inactive">
+                          {user.is_expired ? "Expired" : "Pending"}
+                        </span>
+                      </td>
+                      <td>
+                        <button
+                          className="delete-btn"
+                          disabled={deletingUserId === user.id}
+                          onClick={() => {
+                            setSelectedUserId(user.id);
+                            setShowConfirm(true);
+                          }}
+                        >
+                          {deletingUserId === user.id
+                            ? "Deleting..."
+                            : "Delete"}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
 
-        {/* Pagination */}
-        {!isLoading && !error && usersData?.results?.length > 0 && (
-          <div className="pagination-container">
-            <button
-              className="pagination-btn"
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            <span className="pagination-info">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              className="pagination-btn"
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
-          </div>
-        )}
+          {/* Pagination */}
+          {!isLoading && !error && usersData?.results?.length > 0 && (
+            <div className="pagination-container">
+              <button
+                className="pagination-btn"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <span className="pagination-info">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                className="pagination-btn"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+      {showConfirm && (
+        <div className="popup-overlay">
+          <div className="popup-card">
+            <h3>Delete User</h3>
+            <p>Are you sure you want to delete this user?</p>
+
+            <div className="popup-actions">
+              <button className="btn-cancel" onClick={handleCancelDelete}>
+                Cancel
+              </button>
+              <button className="btn-delete" onClick={handleConfirmDelete}>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

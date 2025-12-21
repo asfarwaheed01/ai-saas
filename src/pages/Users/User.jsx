@@ -338,7 +338,7 @@ const Users = () => {
                   <th>Joined</th>
                   <th>Last Login</th>
                   <th>Active Plan</th>
-                  <th>Status</th>
+                  <th>Plan Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
