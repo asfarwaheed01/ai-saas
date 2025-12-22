@@ -11,8 +11,8 @@ const ListDocumentsPage = () => {
       <div className="docs-page-header">
         <h1 className="docs-page-title">List Uploaded Documents</h1>
         <p className="docs-page-description">
-          Retrieve all uploaded documents for the authenticated user,
-          grouped by domain. Returns S3 metadata, file info, and summary stats.
+          Retrieve all uploaded documents for the authenticated user, grouped by
+          domain. Returns S3 metadata, file info, and summary stats.
         </p>
       </div>
 
@@ -32,8 +32,8 @@ const ListDocumentsPage = () => {
           <h3 className="docs-subsection-title">Description</h3>
           <p className="docs-endpoint-description">
             This endpoint retrieves all uploaded documents for the authenticated
-            user, grouped by domain. It returns S3 metadata, file
-            information, and summary statistics.
+            user, grouped by domain. It returns S3 metadata, file information,
+            and summary statistics.
           </p>
 
           <h3 className="docs-subsection-title">Request</h3>
@@ -49,7 +49,7 @@ const ListDocumentsPage = () => {
   https://api.example.com/api/knowledge-base/docs/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json"`} */}
-              {`curl -X GET https://saas.todopharma.com/api/knowledge-base/docs/ 
+              {`curl -X GET https://saas.todoai.com/api/knowledge-base/docs/ 
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE"
 `}

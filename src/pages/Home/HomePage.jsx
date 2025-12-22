@@ -618,7 +618,7 @@ to improve the assistant’s tone, performance, and relevance in real time.
           // onClick={() => navigate("/docs/api-keys")}
         >
           <pre className="api-code">
-            {`const url = https://saas.todopharma.com/
+            {`const url = https://saas.todoai.com/
   {
     auth: {
       token: 'your_api_key_here'

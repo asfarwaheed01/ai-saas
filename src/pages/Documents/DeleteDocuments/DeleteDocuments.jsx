@@ -113,7 +113,7 @@ const DeleteDocuments = () => {
               {/* {`curl -X DELETE \\
   https://api.example.com/api/knowledge-base/docs/delete/123/pharma/ \\
   -H "Authorization: Bearer YOUR_API_KEY"`} */}
-              {`curl -X DELETE https://saas.todopharma.com/api/knowledge-base/docs/delete/<DOCUMENT_ID>/<DOMAIN>/
+              {`curl -X DELETE https://saas.todoai.com/api/knowledge-base/docs/delete/<DOCUMENT_ID>/<DOMAIN>/
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE"`}
             </pre>

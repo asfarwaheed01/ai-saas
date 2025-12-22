@@ -176,7 +176,7 @@ const AgentConversationalResponse = () => {
                         //   "domain": "cosmetici",
                         //   "text_query": "Ho bisogno di una crema per pelle secca"
                         // }'`)
-                        copyToClipboard(`curl -X POST https://saas.todopharma.com/api/agents/generate-response/ 
+                        copyToClipboard(`curl -X POST https://saas.todoai.com/api/agents/generate-response/ 
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE" 
   -F "domain=beauty" 
@@ -196,7 +196,7 @@ const AgentConversationalResponse = () => {
     "domain": "cosmetici",
     "text_query": "Ho bisogno di una crema per pelle secca"
   }'`} */}
-                    {`curl -X POST https://saas.todopharma.com/api/agents/generate-response/ 
+                    {`curl -X POST https://saas.todoai.com/api/agents/generate-response/ 
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE" 
   -F "domain=beauty" 

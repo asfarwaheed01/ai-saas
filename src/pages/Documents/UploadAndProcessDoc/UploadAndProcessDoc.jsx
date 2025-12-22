@@ -133,7 +133,7 @@ const UploadAndProcessDoc = () => {
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -F "file=@/path/to/your/document.csv" \\
   -F "domain=pharma"`} */}
-              {`curl -X POST https://saas.todopharma.com/api/knowledge-base/docs/ 
+              {`curl -X POST https://saas.todoai.com/api/knowledge-base/docs/ 
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE" 
   -F "domain=beauty" 

@@ -145,7 +145,7 @@ const AgentProcessVideo = () => {
                 // -F "video_file=@/path/to/your/video.mp4"`)
                 //               }
                 onClick={() =>
-                  copyToClipboard(`curl -X POST https://saas.todopharma.com/api/agents/process-video/ 
+                  copyToClipboard(`curl -X POST https://saas.todoai.com/api/agents/process-video/ 
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE" 
   -F "domain=beauty" 
@@ -161,7 +161,7 @@ const AgentProcessVideo = () => {
   https://api.example.com/api/agents/process-video/ \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -F "video_file=@/path/to/your/video.mp4"`} */}
-              {`curl -X POST https://saas.todopharma.com/api/agents/process-video/ 
+              {`curl -X POST https://saas.todoai.com/api/agents/process-video/ 
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE" 
   -F "domain=beauty" 
