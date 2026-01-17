@@ -45,6 +45,11 @@ const UploadAndProcessDoc = () => {
             with the document ID included in its metadata.
           </p>
 
+          <p>
+            <strong className="supported-color">Domains Allowed:</strong>{" "}
+            Therapy, Beauty, Consultation, Medical
+          </p>
+
           <h3 className="docs-subsection-title">Request</h3>
           <p>
             This endpoint accepts <code>multipart/form-data</code> content type

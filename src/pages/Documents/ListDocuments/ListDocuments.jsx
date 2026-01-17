@@ -36,6 +36,11 @@ const ListDocumentsPage = () => {
             and summary statistics.
           </p>
 
+            <p>
+              <strong className="supported-color">Domains Allowed:</strong>{" "}
+              Therapy, Beauty, Consultation, Medical
+            </p>
+
           <h3 className="docs-subsection-title">Request</h3>
           <p>No input parameters are required for this endpoint.</p>
 

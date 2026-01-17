@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaExclamationCircle,
   FaInfoCircle,
@@ -10,15 +10,45 @@ import {
   FaKey,
 } from "react-icons/fa";
 import "../index.css";
+import { backendURL } from "../../../config/constants";
 
 const AgentConversationalResponse = () => {
   const [showResponse, setShowResponse] = useState(true);
   const [showError, setShowError] = useState(false);
+  const [languages, setLanguages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
     // In a real app, you would show a toast or notification here
   };
+
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`${backendURL}/agents/supported-languages/`);
+        // "https://saas.todopharma.com/api/agents/supported-languages/"
+        if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
+        const data = await res.json();
+
+        // Expected format: { details: [{ code: "eng", name: "English" }, ...] }
+        if (Array.isArray(data.details)) {
+          setLanguages(data.details);
+        } else {
+          setLanguages([]);
+        }
+      } catch (err) {
+        console.error("Error fetching languages:", err);
+        setError("Failed to load supported languages.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLanguages();
+  }, []);
 
   return (
     <div className="docs-page">
@@ -61,11 +91,35 @@ const AgentConversationalResponse = () => {
             <div className="docs-alert-content">
               <div className="docs-alert-title">Multilingual Support</div>
               <p className="docs-alert-message">
-                While the system is optimized for Italian, French, and English
+                While the system is optimized for{" "}
+                <span className="supported-lang">
+                  {loading ? (
+                    <span>Loading...</span>
+                  ) : error ? (
+                    <span className="error-text">{error}</span>
+                  ) : languages.length > 0 ? (
+                    languages.map((lang, index) => (
+                      <span key={lang.code}>
+                        {lang.name}
+                        {index < languages.length - 1 && ", "}
+                      </span>
+                    ))
+                  ) : (
+                    <span>
+                      English, Italian, French, Spanish, German, Portuguese,
+                      Arabic, Chinese (Simplified), Polish
+                    </span>
+                  )}
+                </span>
                 responses, it can understand queries in other languages and
                 translate them internally. However, the responses will always be
                 generated in the detected or preferred language to maintain
                 consistency for your multilingual customer base.
+              </p>
+
+              <p>
+                <strong className="supported-color">Domains Allowed:</strong>{" "}
+                Therapy, Beauty, Consultation, Medical
               </p>
             </div>
           </div>
@@ -98,7 +152,7 @@ const AgentConversationalResponse = () => {
                       Required
                     </span>
                   </td>
-                  <td>Your organization's domain identifier</td>
+                  <td>included therapy, beauty, consultation and medical</td>
                 </tr>
                 <tr>
                   <td>lang</td>
@@ -110,7 +164,26 @@ const AgentConversationalResponse = () => {
                       Optional*
                     </span>
                   </td>
-                  <td>Language code (eng, it, fr). Default: eng</td>
+                  <td>
+                    {loading ? (
+                      <span>Loading...</span>
+                    ) : error ? (
+                      <span className="error-text">{error}</span>
+                    ) : languages.length > 0 ? (
+                      languages.map((lang, index) => (
+                        <span key={lang.code}>
+                          {lang.name}
+                          {index < languages.length - 1 && ", "}
+                        </span>
+                      ))
+                    ) : (
+                      <span>
+                        English, Italian, French, Spanish, German, Portuguese,
+                        Arabic, Chinese (Simplified), Polish
+                      </span>
+                    )}{" "}
+                    (Default English)
+                  </td>
                 </tr>
                 <tr>
                   <td>text_query</td>
@@ -1073,10 +1146,6 @@ sendRequest();`}
           </div>
           <div className="docs-card-content">
             <ul className="docs-list">
-              <li>
-                <strong>Domain Selection:</strong> Choose the most relevant
-                domain for your query to ensure the best product recommendations
-              </li>
               <li>
                 <strong>Query Clarity:</strong> For text queries, be as specific
                 as possible to get the most relevant responses

@@ -42,6 +42,10 @@
   color: #05b1bd;
 }
 
+.supported-color {
+  color: #05b1bd !important;
+}
+
 .docs-subsection-title {
   font-size: 18px;
   font-weight: 600;

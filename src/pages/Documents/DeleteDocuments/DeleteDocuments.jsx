@@ -61,6 +61,11 @@ const DeleteDocuments = () => {
             previously stored.
           </p>
 
+          <p>
+            <strong className="supported-color">Domains Allowed:</strong>{" "}
+            Therapy, Beauty, Consultation, Medical
+          </p>
+
           <h3 className="docs-subsection-title">Path Parameters</h3>
           <div className="docs-table">
             <table>

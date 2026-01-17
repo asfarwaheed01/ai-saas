@@ -298,12 +298,20 @@ Accept: application/json`}
         </p>
         <ul className="docs-list">
           <li>
-            Check out the <strong>Knowledge Base API</strong> to learn how to
-            upload and query your documents
+            Check out the{" "}
+            <strong
+              onClick={() => navigate("/docs/knowledge-base/list-documents")}
+            >
+              Knowledge Base API
+            </strong>{" "}
+            to learn how to upload and query your documents
           </li>
           <li>
-            Explore the <strong>AI Agent API</strong> to see how to process
-            videos and generate conversational responses
+            Explore the{" "}
+            <strong onClick={() => navigate("/docs/agent/process-video")}>
+              AI Agent API
+            </strong>{" "}
+            to see how to process videos and generate conversational responses
           </li>
           {/* <li>
             Learn about the <strong>Payments API</strong> to manage subscription

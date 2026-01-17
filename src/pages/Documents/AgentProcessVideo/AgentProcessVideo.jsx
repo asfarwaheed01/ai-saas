@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaVideo,
   FaExclamationCircle,
@@ -8,10 +8,40 @@ import {
   FaCog,
 } from "react-icons/fa";
 import "../index.css";
+import { backendURL } from "../../../config/constants";
 
 const AgentProcessVideo = () => {
   const [showResponse, setShowResponse] = useState(true);
   const [showError, setShowError] = useState(false);
+  const [languages, setLanguages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`${backendURL}/agents/supported-languages/`);
+        // "https://saas.todopharma.com/api/agents/supported-languages/"
+        if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
+        const data = await res.json();
+
+        // Expected format: { details: [{ code: "eng", name: "English" }, ...] }
+        if (Array.isArray(data.details)) {
+          setLanguages(data.details);
+        } else {
+          setLanguages([]);
+        }
+      } catch (err) {
+        console.error("Error fetching languages:", err);
+        setError("Failed to load supported languages.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLanguages();
+  }, []);
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
@@ -50,6 +80,32 @@ const AgentProcessVideo = () => {
             analyzes it using an AI-based visual analysis engine, and returns
             both a quality score for the selected frame and an AI-powered
             analysis of its content.
+          </p>
+
+          <p className="supported-lang">
+            <strong className="supported-color">Supported Languages:</strong>{" "}
+            {loading ? (
+              <span>Loading...</span>
+            ) : error ? (
+              <span className="error-text">{error}</span>
+            ) : languages.length > 0 ? (
+              languages.map((lang, index) => (
+                <span key={lang.code}>
+                  {lang.name}
+                  {index < languages.length - 1 && ", "}
+                </span>
+              ))
+            ) : (
+              <span>
+                English, Italian, French, Spanish, German, Portuguese, Arabic,
+                Chinese (Simplified), Polish
+              </span>
+            )}
+          </p>
+
+          <p>
+            <strong className="supported-color">Domains Allowed:</strong>{" "}
+            Therapy, Beauty, Consultation, Medical
           </p>
 
           <div className="docs-alert docs-alert-info">
@@ -94,7 +150,7 @@ const AgentProcessVideo = () => {
                       Required
                     </span>
                   </td>
-                  <td> Your organization's domain identifier </td>
+                  <td> included therapy, beauty, consultation and medical </td>
                 </tr>
                 <tr>
                   <td>lang</td>
@@ -104,7 +160,26 @@ const AgentProcessVideo = () => {
                   <td>
                     <span className="docs-badge">Not Required</span>
                   </td>
-                  <td>Language code (eng, it, fr). Default: eng</td>
+                  <td>
+                    {loading ? (
+                      <span>Loading...</span>
+                    ) : error ? (
+                      <span className="error-text">{error}</span>
+                    ) : languages.length > 0 ? (
+                      languages.map((lang, index) => (
+                        <span key={lang.code}>
+                          {lang.name}
+                          {index < languages.length - 1 && ", "}
+                        </span>
+                      ))
+                    ) : (
+                      <span>
+                        English, Italian, French, Spanish, German, Portuguese,
+                        Arabic, Chinese (Simplified), Polish
+                      </span>
+                    )}{" "}
+                    (Default English)
+                  </td>
                 </tr>
                 <tr>
                   <td>video_file</td>
@@ -125,7 +200,7 @@ const AgentProcessVideo = () => {
           <h4 className="docs-response-title">Validation Rules</h4>
           <ul className="docs-list">
             <li>
-              File must not exceed the configured maximum upload size of 50 MB
+              File must not exceed the configured maximum upload size of 5 MB
             </li>
             <li>
               File type must be one of the allowed video types: 'video/webm',
@@ -647,8 +722,8 @@ fetch('https://api.example.com/api/agents/process-video/', {
           <div className="docs-card-content">
             <ul className="docs-list">
               <li>
-                <strong>File Size:</strong> While the API supports files up to
-                50 MB, smaller files will upload and process faster
+                <strong>File Size:</strong> While the API supports files up to 5
+                MB, smaller files will upload and process faster
               </li>
               <li>
                 <strong>Video Quality:</strong> Higher quality videos generally
