@@ -119,7 +119,7 @@ const AgentConversationalResponse = () => {
 
               <p>
                 <strong className="supported-color">Domains Allowed:</strong>{" "}
-                Therapy, Beauty, Consultation, Medical
+                therapy,beauty,consultation,medical
               </p>
             </div>
           </div>
@@ -152,7 +152,7 @@ const AgentConversationalResponse = () => {
                       Required
                     </span>
                   </td>
-                  <td>included therapy, beauty, consultation and medical</td>
+                  <td>included therapy,beauty,consultation,medical</td>
                 </tr>
                 <tr>
                   <td>lang</td>

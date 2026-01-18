@@ -47,7 +47,7 @@ const UploadAndProcessDoc = () => {
 
           <p>
             <strong className="supported-color">Domains Allowed:</strong>{" "}
-            Therapy, Beauty, Consultation, Medical
+            therapy,beauty,consultation,medical
           </p>
 
           <h3 className="docs-subsection-title">Request</h3>

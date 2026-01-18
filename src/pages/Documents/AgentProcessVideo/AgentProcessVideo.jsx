@@ -105,7 +105,7 @@ const AgentProcessVideo = () => {
 
           <p>
             <strong className="supported-color">Domains Allowed:</strong>{" "}
-            Therapy, Beauty, Consultation, Medical
+            therapy,beauty,consultation,medical
           </p>
 
           <div className="docs-alert docs-alert-info">
@@ -150,7 +150,7 @@ const AgentProcessVideo = () => {
                       Required
                     </span>
                   </td>
-                  <td> included therapy, beauty, consultation and medical </td>
+                  <td> included therapy,beauty,consultation,medical </td>
                 </tr>
                 <tr>
                   <td>lang</td>
