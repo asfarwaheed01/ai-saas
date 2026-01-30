@@ -1917,11 +1917,12 @@ const Avatars = () => {
   const [selectedAge, setSelectedAge] = useState("Intermediate");
   const availableAvatars =
     AVATAR_IDS[0][selectedGender]?.[selectedEthnicity]?.filter(
-      (av) => !selectedAge || av.age.toLowerCase() === selectedAge.toLowerCase()
+      (av) =>
+        !selectedAge || av.age.toLowerCase() === selectedAge.toLowerCase(),
     ) || [];
 
   const [selectedAvatar, setSelectedAvatar] = useState(
-    availableAvatars.length > 0 ? availableAvatars[0].id : ""
+    availableAvatars.length > 0 ? availableAvatars[0].id : "",
   );
   const [streamReady, setStreamReady] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -2135,7 +2136,7 @@ const Avatars = () => {
             "X-API-KEY": apiKey,
             "X-SIGNATURE": signature,
           },
-        }
+        },
       );
 
       let data;
@@ -2171,7 +2172,7 @@ const Avatars = () => {
     try {
       if (!apiKey) {
         throw new Error(
-          "HeyGen API key not found. Please set REACT_APP_HEYGEN_API_KEY in your environment variables."
+          "HeyGen API key not found. Please set REACT_APP_HEYGEN_API_KEY in your environment variables.",
         );
       }
 
@@ -2182,7 +2183,7 @@ const Avatars = () => {
           headers: {
             "x-api-key": apiKey,
           },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -2285,7 +2286,7 @@ const Avatars = () => {
             "X-API-KEY": userApiKeys.apiKey,
             "X-SIGNATURE": signature,
           },
-        }
+        },
       );
 
       let planData;
@@ -2323,7 +2324,7 @@ const Avatars = () => {
       avatarRef.current.on(StreamingEvents.STREAM_READY, handleStreamReady);
       avatarRef.current.on(
         StreamingEvents.STREAM_DISCONNECTED,
-        handleStreamDisconnected
+        handleStreamDisconnected,
       );
 
       console.log("📡 Event listeners set up");
@@ -2457,13 +2458,13 @@ const Avatars = () => {
       keyData,
       { name: "HMAC", hash: "SHA-256" },
       false,
-      ["sign"]
+      ["sign"],
     );
 
     const signatureBuffer = await window.crypto.subtle.sign(
       "HMAC",
       cryptoKey,
-      payloadData
+      payloadData,
     );
 
     return Array.from(new Uint8Array(signatureBuffer))
@@ -2633,7 +2634,7 @@ const Avatars = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${getAccessToken()}`,
           },
-        }
+        },
       );
 
       if (response.status === 401) {
@@ -2664,7 +2665,7 @@ const Avatars = () => {
 
       // Find Marcus in availableAvatars and auto-select him
       const marcusAvatar = availableAvatars.find(
-        (av) => av.name.toLowerCase() === "marcus"
+        (av) => av.name.toLowerCase() === "marcus",
       );
 
       if (marcusAvatar) {
@@ -2922,7 +2923,7 @@ const Avatars = () => {
                         ...new Set(
                           AVATAR_IDS[0][selectedGender]?.[
                             selectedEthnicity
-                          ]?.map((av) => av.age)
+                          ]?.map((av) => av.age),
                         ),
                       ].map((age) => (
                         <option key={age} value={age}>
