@@ -31,6 +31,7 @@ const Footer = () => {
       heading: "TODO AI",
       items: [
         { label: "VAT number: 09781131215", url: "#" },
+        { label: "Telefono: +3908118920052", url: "#" },
         { label: "support@todoai.ai", url: "mailto:support@todoai.ai" },
       ],
     },
