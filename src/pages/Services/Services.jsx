@@ -522,7 +522,7 @@ const Services = () => {
               }}
             >
               <button className="plugin-button wordpress">
-                <FaWordpress className="icon" /> Download WordPress Plugin{" "}
+                <FaWordpress color="white" className="icon" /> Download WordPress Plugin{" "}
                 <FaDownload />
               </button>
             </Link>
