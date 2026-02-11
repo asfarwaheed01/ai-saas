@@ -43,6 +43,7 @@ import VerifyEmail from "./pages/Auth/Login/VerifyEmail";
 import ManageSubscription from "./pages/ManageSubscriptions/ManageSubscription";
 import Users from "./pages/Users/User";
 import PendingUsers from "./pages/Users/PendingUsers";
+import FloatingContactButton from "./components/FloatingButton/FloatingButtonSupport";
 function App() {
   return (
     <>
@@ -360,7 +361,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path={ROUTES.pendingUsers.path}
           element={
             <ProtectedRoute adminOnly>
@@ -397,6 +398,8 @@ function App() {
         {/* Fallback route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+
+      <FloatingContactButton />
     </>
   );
 }
