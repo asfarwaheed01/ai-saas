@@ -219,14 +219,6 @@ const Services = () => {
   const [showDownloadPopup, setShowDownloadPopup] = useState(false);
   const { user } = useAuth();
 
-  // const handleShowPopup = (pkg) => {
-  //   if (!user) {
-  //     navigate(ROUTES.login.path);
-  //     return;
-  //   }
-  //   setSelectedPackage(pkg);
-  //   setShowDownloadPopup(true);
-  // };
   const handleShowPopup = (pkg) => {
     if (!user) {
       setShowAuthPopup(true);
@@ -244,16 +236,7 @@ const Services = () => {
     window.open(selectedPackage.downloadLink, "_blank");
   };
 
-  const shopifyPluginLink = "https://example.com/shopify-plugin.zip";
-  // const wordpressPluginLink = "https://example.com/wordpress-plugin.zip";
-
-  // const handleDownloadPlugins = (link) => {
-  //   if (!user) {
-  //     navigate(ROUTES.login.path);
-  //     return;
-  //   }
-  //   window.open(link, "_blank");
-  // };
+  const shopifyPluginLink = "https://shopify.todopharma.com";
 
   const handleDownloadPlugins = (link) => {
     if (!user) {
@@ -284,7 +267,6 @@ const Services = () => {
                 ))}
               </ul>
             </div>
-            {/* <button className="service-button">Learn More</button> */}
           </div>
         ))}
       </div>
@@ -301,79 +283,6 @@ const Services = () => {
               integration
             </p>
           </div>
-
-          {/* <div className="desktop-app-content">
-            <div className="app-info">
-              <div className="app-feature">
-                <FaRobot className="feature-icon" />
-                <div className="feature-content">
-                  <h3>AI-Powered Desktop Client</h3>
-                  <p>
-                    Full-featured desktop application with advanced AI
-                    capabilities and local processing power.
-                  </p>
-                </div>
-              </div>
-
-              <div className="app-feature">
-                <FaShieldAlt className="feature-icon" />
-                <div className="feature-content">
-                  <h3>Secure & Private</h3>
-                  <p>
-                    Enhanced security with local data processing and encrypted
-                    communications.
-                  </p>
-                </div>
-              </div>
-
-              <div className="app-feature">
-                <FaChartLine className="feature-icon" />
-                <div className="feature-content">
-                  <h3>Advanced Features</h3>
-                  <p>
-                    Access to premium features, offline capabilities, and
-                    enhanced performance.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="app-download">
-              <div className="download-card">
-                <div className="download-header">
-                  <FaDownload className="download-icon" />
-                  <h3>Download Desktop App</h3>
-                </div>
-                <p>Get access to our complete desktop application package:</p>
-                <ul className="download-features">
-                  <li>Windows Desktop Application</li>
-                  <li>macOS Desktop Application</li>
-                  <li>Installation Guides & Documentation</li>
-                  <li>Configuration & Setup Files</li>
-                </ul>
-                <button
-                  className="download-button"
-                  onClick={handleDownloadPlugin}
-                >
-                  <FaDownload />
-                  Download Desktop App
-                  <FaExternalLinkAlt className="external-icon" />
-                </button>
-                <p className="download-note">
-                  <small>
-                    Access our Google Drive folder with all desktop app
-                    resources
-                  </small>
-                </p>
-              </div>
-            </div>
-          </div> */}
-          {/* <div className="desktop-app-section"> */}
-          {/* <div className="desktop-app-container"> */}
-          {/* <div className="desktop-app-header">
-                <h2>Download Packages</h2>
-                <p>Select a package to view its details and download</p>
-              </div> */}
 
           <div className="desktop-app-content new-layout">
             {/* Left column - Buttons */}
@@ -483,31 +392,6 @@ const Services = () => {
               <FaDownload />
             </button>
 
-            {/* <button
-              className="plugin-button wordpress"
-              onClick={() => handleDownloadPlugins(wordpressPluginLink)}
-            >
-              <FaWordpress className="icon" /> Download WordPress Plugin{" "}
-              <FaDownload />
-            </button> */}
-            {/* <a
-            
-              href="https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin.zip"
-              download
-            > */}
-            {/* <a
-              onClick={(e) => {
-                e.preventDefault();
-                if (!user) {
-                  navigate(ROUTES.login.path);
-                  return;
-                }
-                window.open(
-                  "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin.zip",
-                  "_blank"
-                );
-              }}
-            > */}
             <Link
               onClick={(e) => {
                 e.preventDefault();
@@ -516,14 +400,15 @@ const Services = () => {
                   return;
                 }
                 window.open(
-                  "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin.zip",
-                  "_blank"
+                  // "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin.zip",
+                  "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin-updated.zip",
+                  "_blank",
                 );
               }}
             >
               <button className="plugin-button wordpress">
-                <FaWordpress color="white" className="icon" /> Download WordPress Plugin{" "}
-                <FaDownload />
+                <FaWordpress color="white" className="icon" /> Download
+                WordPress Plugin <FaDownload />
               </button>
             </Link>
             {showAuthPopup && (
@@ -538,58 +423,6 @@ const Services = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="mobile-apps-section">
-        <div className="mobile-apps-container">
-          <h2 className="mobile-apps-title">Download Our Mobile Apps</h2>
-          <p className="mobile-apps-subtitle">
-            Get our AI-powered applications directly on your smartphone with
-            full functionality, security, and seamless updates.
-          </p>
-
-          <div className="mobile-apps-grid">
-            <div className="mobile-app-card android">
-              <h3>Android Version</h3>
-              <p>
-                Install the Android version for smooth integration and instant
-                access to all features.
-              </p>
-              <button
-                className="mobile-app-btn android"
-                onClick={() =>
-                  window.open(
-                    "https://example.com/todopharma-android.apk",
-                    "_blank"
-                  )
-                }
-              >
-                <FaCloudArrowDown className="icon" />
-                Download Mobile App
-              </button>
-            </div>
-
-            <div className="mobile-app-card ios">
-              <h3>iOS Version</h3>
-              <p>
-                Download the iOS app for an optimized iPhone and iPad experience
-                with full security.
-              </p>
-              <button
-                className="mobile-app-btn ios"
-                onClick={() =>
-                  window.open(
-                    "https://example.com/todopharma-ios.ipa",
-                    "_blank"
-                  )
-                }
-              >
-                <FaCloudArrowDown className="icon" />
-                Download iOS App
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
 
       <div className="services-cta">
         <div className="cta-content">
