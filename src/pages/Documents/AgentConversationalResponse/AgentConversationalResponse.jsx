@@ -241,14 +241,7 @@ const AgentConversationalResponse = () => {
                     <button
                       className="docs-code-copy"
                       onClick={() =>
-                        //                       copyToClipboard(`curl -X POST \\
-                        // https://api.example.com/api/agents/generate-response/ \\
-                        // -H "Authorization: Bearer YOUR_API_KEY" \\
-                        // -H "Content-Type: application/json" \\
-                        // -d '{
-                        //   "domain": "cosmetici",
-                        //   "text_query": "Ho bisogno di una crema per pelle secca"
-                        // }'`)
+                        //
                         copyToClipboard(`curl -X POST https://saas.todoai.com/api/agents/generate-response/ 
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE" 
@@ -261,14 +254,6 @@ const AgentConversationalResponse = () => {
                     </button>
                   </div>
                   <pre>
-                    {/* {`curl -X POST \\
-  https://api.example.com/api/agents/generate-response/ \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "domain": "cosmetici",
-    "text_query": "Ho bisogno di una crema per pelle secca"
-  }'`} */}
                     {`curl -X POST https://saas.todoai.com/api/agents/generate-response/ 
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE" 

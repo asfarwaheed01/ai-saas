@@ -213,12 +213,6 @@ const AgentProcessVideo = () => {
               <span>Example Requests</span>
               <button
                 className="docs-code-copy"
-                //               onClick={() =>
-                //                 copyToClipboard(`curl -X POST \\
-                // https://api.example.com/api/agents/process-video/ \\
-                // -H "Authorization: Bearer YOUR_API_KEY" \\
-                // -F "video_file=@/path/to/your/video.mp4"`)
-                //               }
                 onClick={() =>
                   copyToClipboard(`curl -X POST https://saas.todoai.com/api/agents/process-video/ 
   -H "X-API-Key: pk_abc123def456" 
@@ -232,10 +226,6 @@ const AgentProcessVideo = () => {
               </button>
             </div>
             <pre>
-              {/* {`curl -X POST \\
-  https://api.example.com/api/agents/process-video/ \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -F "video_file=@/path/to/your/video.mp4"`} */}
               {`curl -X POST https://saas.todoai.com/api/agents/process-video/ 
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE" 
@@ -350,68 +340,12 @@ const AgentProcessVideo = () => {
                     </table>
                   </div>
 
-                  {/* <h4 className="docs-response-title">video_info Object</h4>
-                  <div className="docs-table">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Field</th>
-                          <th>Type</th>
-                          <th>Description</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>fps</td>
-                          <td>
-                            <code>float</code>
-                          </td>
-                          <td>Frames per second</td>
-                        </tr>
-                        <tr>
-                          <td>frame_count</td>
-                          <td>
-                            <code>int</code>
-                          </td>
-                          <td>Total number of frames</td>
-                        </tr>
-                        <tr>
-                          <td>width</td>
-                          <td>
-                            <code>int</code>
-                          </td>
-                          <td>Frame width (pixels)</td>
-                        </tr>
-                        <tr>
-                          <td>height</td>
-                          <td>
-                            <code>int</code>
-                          </td>
-                          <td>Frame height (pixels)</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div> */}
-
                   <div className="docs-code">
                     <div className="docs-code-header">
                       <span>Example Response</span>
                       <button
                         className="docs-code-copy"
                         onClick={() =>
-                          //                           copyToClipboard(`{
-                          //   "quality_score": 123.45,
-                          //   "analysis": {
-                          //     "skin_analysis": "...",
-                          //     "rag_query": "..."
-                          //   },
-                          //   "video_info": {
-                          //     "fps": 30.0,
-                          //     "frame_count": 450,
-                          //     "width": 1920,
-                          //     "height": 1080
-                          //   }
-                          // }`)
                           copyToClipboard(`{
   "analysis": {
     "status": "success",
@@ -435,19 +369,6 @@ const AgentProcessVideo = () => {
                       </button>
                     </div>
                     <pre>
-                      {/* {`{
-  "quality_score": 123.45,
-  "analysis": {
-    "skin_analysis": "...",
-    "rag_query": "..."
-  },
-  "video_info": {
-    "fps": 30.0,
-    "frame_count": 450,
-    "width": 1920,
-    "height": 1080
-  }
-}`} */}
                       {`{
   "analysis": {
     "status": "success",

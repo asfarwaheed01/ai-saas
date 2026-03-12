@@ -133,11 +133,6 @@ const UploadAndProcessDoc = () => {
               <button className="docs-code-copy">Copy</button>
             </div>
             <pre>
-              {/* {`curl -X POST \\
-  https://api.example.com/api/knowledge-base/docs/ \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -F "file=@/path/to/your/document.csv" \\
-  -F "domain=pharma"`} */}
               {`curl -X POST https://saas.todoai.com/api/knowledge-base/docs/ 
   -H "X-API-Key: pk_abc123def456" 
   -H "X-Signature: $SIGNATURE" 
@@ -213,42 +208,6 @@ const UploadAndProcessDoc = () => {
                       </tbody>
                     </table>
                   </div>
-
-                  {/* <h4 className="docs-response-title">Stats Object</h4>
-                  <div className="docs-table">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Field</th>
-                          <th>Type</th>
-                          <th>Description</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>total_rows</td>
-                          <td>
-                            <code>int</code>
-                          </td>
-                          <td>Total rows in the file</td>
-                        </tr>
-                        <tr>
-                          <td>processed_rows</td>
-                          <td>
-                            <code>int</code>
-                          </td>
-                          <td>Number of rows processed</td>
-                        </tr>
-                        <tr>
-                          <td>failed_rows</td>
-                          <td>
-                            <code>int</code>
-                          </td>
-                          <td>Number of rows failed</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div> */}
 
                   <div className="docs-code">
                     <div className="docs-code-header">
@@ -450,38 +409,6 @@ fetch('https://api.example.com/api/knowledge-base/docs/', {
           </div>
         </div>
 
-        {/* <div className="docs-card">
-          <div className="docs-card-title">
-            <FaInfoCircle /> Best Practices
-          </div>
-          <div className="docs-card-content">
-            <ul className="docs-list">
-              <li>
-                <strong>File Format:</strong> Ensure your CSV or Excel files
-                have proper headers and are formatted consistently
-              </li>
-              <li>
-                <strong>Domain Naming:</strong> Use clear, consistent domain
-                names to organize your documents (e.g., "pharma", "finance",
-                "retail")
-              </li>
-              <li>
-                <strong>Large Files:</strong> For very large files, consider
-                splitting them into smaller chunks to improve processing
-                reliability
-              </li>
-              <li>
-                <strong>Error Handling:</strong> Always check the response for
-                failed rows and examine why they might have failed
-              </li>
-              <li>
-                <strong>Domain Consistency:</strong> Using the same domain for
-                related documents will improve search results when querying the
-                knowledge base
-              </li>
-            </ul>
-          </div>
-        </div> */}
         <div className="docs-card">
           <div className="docs-card-title">
             <FaInfoCircle />
@@ -519,12 +446,7 @@ fetch('https://api.example.com/api/knowledge-base/docs/', {
                 antioxidants,39.99
               </p>
 
-              {/* <pre className="">
-                {`Product Name,Category,Description,Price
-Anti-Aging Serum,Skincare,Advanced formula for reducing wrinkles,49.99
-Moisturizing Cream,Skincare,Deep hydration for all skin types,29.99
-Vitamin C Serum,Skincare,Brightening serum with antioxidants,39.99`}
-              </pre> */}
+            
 
               <p className="">The system will automatically:</p>
               <ol className="list-decimal">

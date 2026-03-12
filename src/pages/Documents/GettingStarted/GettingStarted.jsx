@@ -74,9 +74,6 @@ const GettingStarted = () => {
           <FaRocket /> Introduction
         </h2>
         <p>
-          {/* Our API provides a comprehensive set of endpoints for building
-          AI-powered customer service applications. The API is organized into
-          several sections: */}
           Welcome to the AI Customer Service API! Our platform provides two
           powerful AI-driven services that you can easily integrate into your
           applications:
@@ -90,10 +87,7 @@ const GettingStarted = () => {
             <strong>AI Agent API:</strong> Intelligent conversational AI with
             multi-language support and video analysis
           </li>
-          {/* <li className="supported-lang">
-            <strong>Supported Languages:</strong> English (eng), Italian (it),
-            French (fr)
-          </li> */}
+
           <li className="supported-lang">
             <strong>Supported Languages:</strong>{" "}
             {loading ? (
@@ -313,10 +307,6 @@ Accept: application/json`}
             </strong>{" "}
             to see how to process videos and generate conversational responses
           </li>
-          {/* <li>
-            Learn about the <strong>Payments API</strong> to manage subscription
-            plans
-          </li> */}
         </ul>
       </div>
     </div>

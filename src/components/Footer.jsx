@@ -71,13 +71,8 @@ const Footer = () => {
         <hr></hr>
         <div className="footer-end">
           <div>{new Date().getFullYear()} Todo Ai. All rights reserved.</div>
-          {/* <div className="icons-gap">
-            <FaSquareXTwitter />
-            <FaLinkedin />
-            <IoLogoYoutube />
-          </div> */}
+
           <div className="icons-gap">
-            {/* Facebook */}
             <a
               href="https://www.facebook.com/share/16phs4wjHX/?mibextid=wwXIfr"
               target="_blank"
