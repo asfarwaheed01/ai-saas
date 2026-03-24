@@ -92,7 +92,7 @@ const Footer = () => {
 
             {/* Instagram */}
             <a
-              href="https://www.instagram.com/todopharma.it?igsh=cWFxYTl5MDJvYzBr"
+              href="https://www.instagram.com/todopharmaai?igsh=cWFxYTl5MDJvYzBr"
               target="_blank"
               rel="noopener noreferrer"
             >
