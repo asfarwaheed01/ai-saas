@@ -236,7 +236,7 @@ const Services = () => {
     window.open(selectedPackage.downloadLink, "_blank");
   };
 
-  const shopifyPluginLink = "https://shopify.todopharma.com";
+  const shopifyPluginLink = "https://storeapp.todopharma.com";
 
   const handleDownloadPlugins = (link) => {
     if (!user) {
