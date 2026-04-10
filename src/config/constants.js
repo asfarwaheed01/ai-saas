@@ -1,5 +1,3 @@
-// export const backendURL = "http://51.21.148.115:8001/api";
-// export const backendURL = "https://backend.todopharma.com/api";
 export const backendURL = "https://saas.todopharma.com/api";
 
 export const getToken = () => {
@@ -8,49 +6,110 @@ export const getToken = () => {
 };
 
 // export const AVATAR_IDS = [
-//   { id: "Wayne_20240711", name: "Wayne" },
-//   { id: "eb0a8cc8046f476da551a5559fbb5c82", name: "Avatar 1" },
-//   { id: "cc2984a6003a4d5194eb58a4ad570337", name: "Avatar 2" },
-//   { id: "336b72634e644335ad40bd56462fc780", name: "Avatar 3" },
-//   { id: "37f4d912aa564663a1cf8d63acd0e1ab", name: "Avatar 4" },
-//   { id: "ef08039a41354ed5a20565db899373f3", name: "Avatar 5" },
-//   { id: "73c84e2b886940099c5793b085150f2f", name: "Avatar 6" },
-// ];
-
-// export const AVATAR_IDS = [
 //   {
+//     binary: {
+//       african_american: [
+//         {
+//           id: "cc2984a6003a4d5194eb58a4ad570337",
+//           name: "Marcus",
+//           age: "Young",
+//           languages: ["eng", "it", "fr"],
+//         },
+//       ],
+//     },
 //     male: {
-//       asian: ["Pedro_ProfessionalLook2_public": "Pedro (Professional)", "Wayne_20240711": "Wayne"],
+//       asian: [
+//         {
+//           id: "Graham_Chair_Sitting_public",
+//           name: "Graham (Chair)",
+//           age: "Young",
+//           languages: ["eng", "it", "fr"],
+//         },
+//       ],
 //       hispanic: [
-//         "eb0a8cc8046f476da551a5559fbb5c82": "Graham (Sitting)",
-//         "Graham_Chair_Sitting_public": "Graham (Chair)",
-//         "Bryan_FitnessCoach_public": "Bryan (Fitness Coach)",
+//         {
+//           id: "eb0a8cc8046f476da551a5559fbb5c82",
+//           name: "Graham (Sitting)",
+//           age: "Young",
+//           languages: ["eng", "it", "fr"],
+//         },
+
+//         {
+//           id: "Bryan_FitnessCoach_public",
+//           name: "Bryan (Fitness Coach)",
+//           age: "Young",
+//           languages: ["eng", "it", "fr"],
+//         },
 //       ],
 //       african_american: [
-//         "Anthony_Chair_Sitting_public": "Anthony (Sitting)",
-//         "1734569600": "Anthony",
-//         "cc2984a6003a4d5194eb58a4ad570337": "Marcus",
+//         {
+//           id: "Anthony_Chair_Sitting_public",
+//           name: "Anthony (Sitting)",
+//           age: "Intermediate",
+//           languages: ["eng", "it", "fr"],
+//         },
 //       ],
 //     },
 //     female: {
 //       asian: [
-//         "336b72634e644335ad40bd56462fc780": "Maya",
-//         "Alessandra_Chair_Sitting_public": "Alessandra (Sitting)",
-//         "Marianne_Chair_Sitting_public": "Marianne (Sitting)",
-//         "eaf798c86e35400a8288f93beba66aca": "Luna",
-//         "Rika_Chair_Sitting_public": "Rika (Sitting)",
-//         "058e99d3b3954c52b0732eb4f1dce0d5": "Hana",
+//         {
+//           id: "336b72634e644335ad40bd56462fc780",
+//           name: "Maya",
+//           age: "Young",
+//           languages: ["eng", "it", "fr"],
+//         },
+//         {
+//           id: "Alessandra_Chair_Sitting_public",
+//           name: "Alessandra (Sitting)",
+//           age: "Young",
+//           languages: ["eng", "it", "fr"],
+//         },
+//         {
+//           id: "Marianne_Chair_Sitting_public",
+//           name: "Marianne (Sitting)",
+//           age: "Intermediate",
+//           languages: ["eng", "it", "fr"],
+//         },
+//         {
+//           id: "Rika_Chair_Sitting_public",
+//           name: "Rika (Sitting)",
+//           age: "Intermediate",
+//           languages: ["eng", "it", "fr"],
+//         },
 //       ],
 //       hispanic: [
-//         "37f4d912aa564663a1cf8d63acd0e1ab": "Sofia",
-//         "ef08039a41354ed5a20565db899373f3": "Isabella",
-//         "Ann_Therapist_public": "Ann (Therapist)",
-//         "Anastasia_Chair_Sitting_public": "Anastasia (Sitting)",
-//         "1734569600",
+//         {
+//           id: "37f4d912aa564663a1cf8d63acd0e1ab",
+//           name: "Sofia",
+//           age: "Young",
+//           languages: ["eng", "it", "fr"],
+//         },
+//         {
+//           id: "Ann_Therapist_public",
+//           name: "Ann (Therapist)",
+//           age: "Intermediate",
+//           languages: ["eng", "it", "fr"],
+//         },
+//         {
+//           id: "Anastasia_Chair_Sitting_public",
+//           name: "Anastasia (Sitting)",
+//           age: "Old",
+//           languages: ["eng", "it", "fr"],
+//         },
 //       ],
 //       african_american: [
-//         "73c84e2b886940099c5793b085150f2f": "Aaliyah",
-//         "Amina_Chair_Sitting_public": "Amina (Sitting),
+//         {
+//           id: "73c84e2b886940099c5793b085150f2f",
+//           name: "Aaliyah",
+//           age: "Young",
+//           languages: ["eng", "it", "fr"],
+//         },
+//         {
+//           id: "Amina_Chair_Sitting_public",
+//           name: "Amina (Sitting)",
+//           age: "Intermediate",
+//           languages: ["eng", "it", "fr"],
+//         },
 //       ],
 //     },
 //   },
@@ -58,135 +117,51 @@ export const getToken = () => {
 
 export const AVATAR_IDS = [
   {
-    binary: {
-      african_american: [
-        {
-          id: "cc2984a6003a4d5194eb58a4ad570337",
-          name: "Marcus",
-          age: "Young",
-          languages: ["eng", "it", "fr"],
-        },
-      ],
-    },
     male: {
       asian: [
-        // {
-        //   id: "Pedro_ProfessionalLook2_public",
-        //   name: "Pedro (Professional)",
-        //   age: "Young",
-        //   languages: ["eng", "it"],
-        // },
-        // {
-        //   id: "Wayne_20240711",
-        //   name: "Wayne",
-        //   age: "Intermediate",
-        //   languages: ["eng", "it", "fr"],
-        // },
         {
-          id: "Graham_Chair_Sitting_public",
-          name: "Graham (Chair)",
+          id: "49d91f1c-41c0-4c90-a28f-079c8fe4d618",
+          name: "Asian Male",
           age: "Young",
+          voice_id: "51afbab6-7af4-473b-95fc-6ce26aac8bb1",
           languages: ["eng", "it", "fr"],
         },
       ],
       hispanic: [
         {
-          id: "eb0a8cc8046f476da551a5559fbb5c82",
-          name: "Graham (Sitting)",
+          id: "1a2c53b6-8cc4-43b0-8e4c-a6edf356664f",
+          name: "Hispanic Male",
           age: "Young",
-          languages: ["eng", "it", "fr"],
-        },
-        // {
-        //   id: "Graham_Chair_Sitting_public",
-        //   name: "Graham (Chair)",
-        //   age: "Young",
-        //   languages: ["eng", "it", "fr"],
-        // },
-        {
-          id: "Bryan_FitnessCoach_public",
-          name: "Bryan (Fitness Coach)",
-          age: "Young",
+          voice_id: "98a984cd-5f25-49b1-8844-2195c3d50e0f",
           languages: ["eng", "it", "fr"],
         },
       ],
       african_american: [
         {
-          id: "Anthony_Chair_Sitting_public",
-          name: "Anthony (Sitting)",
-          age: "Intermediate",
+          id: "a809ffc2-641a-474c-9b21-66c0b68124ca",
+          name: "African Male",
+          age: "Young",
+          voice_id: "c466083f-30f0-465b-a836-0b77abfe7956",
           languages: ["eng", "it", "fr"],
         },
-        // { id: "1734569600", name: "Anthony" },
-        // {
-        //   id: "cc2984a6003a4d5194eb58a4ad570337",
-        //   name: "Marcus",
-        //   age: "Young",
-        //   languages: ["eng", "it", "fr"],
-        // },
       ],
     },
     female: {
       asian: [
         {
-          id: "336b72634e644335ad40bd56462fc780",
-          name: "Maya",
+          id: "ced1ac4b-62c1-418e-8ce8-bb381f73e1f6",
+          name: "Asian Female",
           age: "Young",
+          voice_id: "c84af063-5ce2-4370-8ef8-dcd0ef903d43",
           languages: ["eng", "it", "fr"],
         },
-        {
-          id: "Alessandra_Chair_Sitting_public",
-          name: "Alessandra (Sitting)",
-          age: "Young",
-          languages: ["eng", "it", "fr"],
-        },
-        {
-          id: "Marianne_Chair_Sitting_public",
-          name: "Marianne (Sitting)",
-          age: "Intermediate",
-          languages: ["eng", "it", "fr"],
-        },
-        // { id: "eaf798c86e35400a8288f93beba66aca", name: "Luna" },
-        {
-          id: "Rika_Chair_Sitting_public",
-          name: "Rika (Sitting)",
-          age: "Intermediate",
-          languages: ["eng", "it", "fr"],
-        },
-        // { id: "058e99d3b3954c52b0732eb4f1dce0d5", name: "Hana" },
       ],
       hispanic: [
         {
-          id: "37f4d912aa564663a1cf8d63acd0e1ab",
-          name: "Sofia",
+          id: "d2b5f90d-03d4-48f2-aea7-995c8742568e",
+          name: "Hispanic Female",
           age: "Young",
-          languages: ["eng", "it", "fr"],
-        },
-        // { id: "ef08039a41354ed5a20565db899373f3", name: "Isabella" },
-        {
-          id: "Ann_Therapist_public",
-          name: "Ann (Therapist)",
-          age: "Intermediate",
-          languages: ["eng", "it", "fr"],
-        },
-        {
-          id: "Anastasia_Chair_Sitting_public",
-          name: "Anastasia (Sitting)",
-          age: "Old",
-          languages: ["eng", "it", "fr"],
-        },
-        // { id: "1734569600", name: "Maria" },
-      ],
-      african_american: [
-        {
-          id: "73c84e2b886940099c5793b085150f2f",
-          name: "Aaliyah",
-          age: "Young",
-          languages: ["eng", "it", "fr"],
-        },
-        {
-          id: "Amina_Chair_Sitting_public",
-          name: "Amina (Sitting)",
-          age: "Intermediate",
+          voice_id: "4f3b1e99-b580-4f05-9b67-a5f585be0232",
           languages: ["eng", "it", "fr"],
         },
       ],

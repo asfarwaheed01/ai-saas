@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@heygen/liveavatar-web-sdk": "^0.0.13",
     "@heygen/streaming-avatar": "^2.1.0",
     "@sendgrid/mail": "^8.1.6",
     "@stripe/stripe-js": "^7.9.0",

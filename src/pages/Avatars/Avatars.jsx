@@ -1,15 +1,5 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
-import StreamingAvatar, {
-  AvatarQuality,
-  StreamingEvents,
-  TaskType,
-} from "@heygen/streaming-avatar";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { LiveAvatarSession, SessionEvent } from "@heygen/liveavatar-web-sdk";
 import "./AvatarsPage.css";
 import { AVATAR_IDS, backendURL } from "../../config/constants";
 import AuthModal from "../../components/HomePage/AuthModal/AuthModal";
@@ -17,6 +7,64 @@ import WhiteLogo from "../../../src/assets/logo todo 1.png";
 import { Link } from "react-router-dom";
 import { FaMicrophone } from "react-icons/fa";
 import { useAuth } from "../../providers/AuthContext";
+
+const LANGUAGE_CODE_MAP = {
+  eng: "en",
+  ita: "it",
+  it: "it",
+  fra: "fr",
+  fr: "fr",
+  spa: "es",
+  es: "es",
+  deu: "de",
+  de: "de",
+  por: "pt",
+  pt: "pt",
+  zho: "zh",
+  zh: "zh",
+  jpn: "ja",
+  ja: "ja",
+  kor: "ko",
+  ko: "ko",
+  ara: "ar",
+  ar: "ar",
+  rus: "ru",
+  ru: "ru",
+  hin: "hi",
+  hi: "hi",
+  pol: "pl",
+  pl: "pl",
+  nld: "nl",
+  nl: "nl",
+  tur: "tr",
+  tr: "tr",
+  swe: "sv",
+  sv: "sv",
+  nor: "no",
+  no: "no",
+  dan: "da",
+  da: "da",
+  fin: "fi",
+  fi: "fi",
+  hun: "hu",
+  hu: "hu",
+  ces: "cs",
+  cs: "cs",
+  ron: "ro",
+  ro: "ro",
+  ukr: "uk",
+  uk: "uk",
+  vie: "vi",
+  vi: "vi",
+  tha: "th",
+  th: "th",
+  ind: "id",
+  id: "id",
+  msa: "ms",
+  ms: "ms",
+};
+
+const toIso2 = (code) => LANGUAGE_CODE_MAP[code] || code;
 
 const Avatars = () => {
   const [isSessionActive, setIsSessionActive] = useState(false);
@@ -26,7 +74,8 @@ const Avatars = () => {
   const [connectionStatus, setConnectionStatus] = useState("disconnected");
   const [selectedGender, setSelectedGender] = useState("male");
   const [selectedEthnicity, setSelectedEthnicity] = useState("asian");
-  const [selectedAge, setSelectedAge] = useState("Intermediate");
+  const [selectedAge, setSelectedAge] = useState("Young");
+
   const availableAvatars =
     AVATAR_IDS[0][selectedGender]?.[selectedEthnicity]?.filter(
       (av) =>
@@ -48,32 +97,25 @@ const Avatars = () => {
   const [isLanguagesLoading, setIsLanguagesLoading] = useState(false);
   const [showAccessErrorPopup, setShowAccessErrorPopup] = useState(false);
   const [accessErrorMessage, setAccessErrorMessage] = useState("");
-
-  const [userPlan, setUserPlan] = useState(null);
-  const [isPlanLoading, setIsPlanLoading] = useState(false);
   const [remainingRequests, setRemainingRequests] = useState(null);
 
   const [userApiKeys, setUserApiKeys] = useState({
     apiKey: null,
     secretKey: null,
   });
-  // Add state for API key missing popup
   const [showKeyMissingPopup, setShowKeyMissingPopup] = useState(false);
 
   const { getAccessToken, logout } = useAuth();
 
   const videoRef = useRef(null);
   const avatarRef = useRef(null);
-  const sessionDataRef = useRef(null);
-  const streamRef = useRef(null);
   const formRef = useRef(null);
-  const transcriptRef = useRef(""); // To store the transcript
-  const popupTimerRef = useRef(null); // Ref for popup timer
+  const transcriptRef = useRef("");
+  const popupTimerRef = useRef(null);
 
-  let apiKey = process.env.REACT_APP_HEYGEN_API_KEY;
-  console.log(apiKey, "API KEY");
-
+  // ─────────────────────────────────────────────
   // Fetch user API keys
+  // ─────────────────────────────────────────────
   const fetchUserApiKeys = async () => {
     try {
       const token = getAccessToken();
@@ -92,23 +134,15 @@ const Avatars = () => {
         console.log("User API Keys:", data);
 
         if (data.has_api_key && data.api_key && data.secret_key) {
-          setUserApiKeys({
-            apiKey: data.api_key,
-            secretKey: data.secret_key,
-          });
-          // Hide popup if it was showing
+          setUserApiKeys({ apiKey: data.api_key, secretKey: data.secret_key });
           setShowKeyMissingPopup(false);
-          // Clear any existing timer
-          if (popupTimerRef.current) {
-            clearTimeout(popupTimerRef.current);
-          }
+          if (popupTimerRef.current) clearTimeout(popupTimerRef.current);
         } else {
-          // Show popup if no API keys
           setShowKeyMissingPopup(true);
-          // Auto-hide after 10 seconds
-          popupTimerRef.current = setTimeout(() => {
-            setShowKeyMissingPopup(false);
-          }, 10000);
+          popupTimerRef.current = setTimeout(
+            () => setShowKeyMissingPopup(false),
+            10000,
+          );
         }
       }
     } catch (error) {
@@ -117,20 +151,26 @@ const Avatars = () => {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
-      fetchUserApiKeys();
-    }
+    if (isAuthenticated) fetchUserApiKeys();
   }, [isAuthenticated]);
 
+  useEffect(() => {
+    if (selectedEthnicity === "african_american") {
+      setSelectedGender("male");
+    }
+  }, [selectedEthnicity]);
+
+  // ─────────────────────────────────────────────
+  // Fetch supported languages
+  // ─────────────────────────────────────────────
   const fetchSupportedLanguages = async () => {
     try {
       setIsLanguagesLoading(true);
       const response = await fetch(`${backendURL}/agents/supported-languages/`);
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok)
         throw new Error(data.error || "Failed to fetch languages");
-      }
 
       if (Array.isArray(data.details)) {
         setLanguages(data.details);
@@ -150,11 +190,9 @@ const Avatars = () => {
     fetchSupportedLanguages();
   }, []);
 
-  const handleLanguageChange = (e) => {
-    setSelectedLanguage(e.target.value);
-    fetchSupportedLanguages(); // refresh list when language changes
-  };
-
+  // ─────────────────────────────────────────────
+  // Sync selected avatar when filters change
+  // ─────────────────────────────────────────────
   useEffect(() => {
     if (
       availableAvatars.length > 0 &&
@@ -170,7 +208,9 @@ const Avatars = () => {
     selectedAge,
   ]);
 
-  // Check authentication status on component mount
+  // ─────────────────────────────────────────────
+  // Check auth on mount
+  // ─────────────────────────────────────────────
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
@@ -179,348 +219,18 @@ const Avatars = () => {
     }
   }, []);
 
-  // Handle authentication success
   const handleAuthSuccess = (token) => {
     setIsAuthenticated(true);
     setUserToken(token);
     setShowAuthModal(false);
-    // Fetch API keys after successful authentication
     fetchUserApiKeys();
   };
 
-  const fetchUserPlan = async () => {
-    try {
-      setIsPlanLoading(true);
-      if (!userApiKeys.apiKey) {
-        console.error("User API key not available");
-        return;
-      }
-      const apiKey = userApiKeys.apiKey;
-      // const apiKey = "pk_16c7ab4cb3564aa4811dda3180bbcb41";
-      // empty payload for signature
-      const payload = "";
-      const signature = await generateSignature(payload, apiKey);
-
-      const response = await fetch(
-        `${backendURL}/agents/generate-response/access`,
-        {
-          method: "GET",
-          headers: {
-            "X-API-KEY": apiKey,
-            "X-SIGNATURE": signature,
-          },
-        },
-      );
-
-      let data;
-      try {
-        data = await response.json();
-      } catch {
-        data = {};
-      }
-
-      if (!response.ok) {
-        const message =
-          data?.error || `Request failed with status ${response.status}`;
-        console.error("❌ API Error:", message);
-        return;
-      }
-
-      console.log("✅ User Plan Response:", data);
-      setUserPlan(data); // store user plan/credits
-      setRemainingRequests(data.remaining_api_requests ?? 0); // store remaining requests
-    } catch (err) {
-      console.error("❌ Error fetching user plan:", err);
-    } finally {
-      setIsPlanLoading(false);
-    }
-  };
-
-  // useEffect(() => {
-  //   fetchUserPlan();
-  // }, []);
-
-  // Helper function to fetch access token
-  const fetchAccessToken = async () => {
-    try {
-      if (!apiKey) {
-        throw new Error(
-          "HeyGen API key not found. Please set REACT_APP_HEYGEN_API_KEY in your environment variables.",
-        );
-      }
-
-      const response = await fetch(
-        "https://api.heygen.com/v1/streaming.create_token",
-        {
-          method: "POST",
-          headers: {
-            "x-api-key": apiKey,
-          },
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch token: ${response.statusText}`);
-      }
-
-      const { data } = await response.json();
-      return data.token;
-    } catch (error) {
-      console.error("Error fetching access token:", error);
-      throw error;
-    }
-  };
-
-  // Apply stream to video when both are ready
-  useEffect(() => {
-    if (streamRef.current && videoRef.current && isSessionActive) {
-      console.log("🎬 Applying stream to video element");
-      videoRef.current.srcObject = streamRef.current;
-      videoRef.current.onloadedmetadata = () => {
-        console.log("📺 Video metadata loaded, starting playback");
-        videoRef.current.play().catch((error) => {
-          console.error("❌ Video play error:", error);
-        });
-      };
-      setConnectionStatus("connected");
-      setStreamReady(true);
-    }
-  }, [streamRef.current, isSessionActive]);
-
-  // Handle when avatar stream is ready
-  const handleStreamReady = (event) => {
-    console.log("🎥 Stream ready event received");
-    console.log("Stream detail:", event.detail);
-
-    if (event.detail) {
-      console.log("✅ Storing stream reference");
-      streamRef.current = event.detail;
-    } else {
-      console.error("❌ No stream in event.detail");
-      setConnectionStatus("error");
-    }
-  };
-
-  // Handle stream disconnection
-  const handleStreamDisconnected = () => {
-    console.log("🔌 Stream disconnected");
-    if (videoRef.current) {
-      videoRef.current.srcObject = null;
-    }
-    streamRef.current = null;
-    setIsSessionActive(false);
-    setStreamReady(false);
-    setConnectionStatus("disconnected");
-  };
-
-  const validateFields = () => {
-    const newErrors = {};
-
-    if (!selectedOption) newErrors.category = "Category is required.";
-    if (!selectedGender) newErrors.gender = "Gender is required.";
-    if (!selectedEthnicity) newErrors.ethnicity = "Ethnicity is required.";
-    if (!selectedAvatar) newErrors.avatar = "Avatar is required.";
-    if (!selectedAge) newErrors.age = "Age is required.";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  // Initialize streaming avatar session
-  const initializeAvatarSession = async () => {
-    try {
-      if (!validateFields()) return;
-      if (!isAuthenticated) {
-        setShowAuthModal(true);
-        return;
-      }
-      // Check if user has API keys
-      if (!userApiKeys.apiKey || !userApiKeys.secretKey) {
-        setShowKeyMissingPopup(true);
-        // Auto-hide after 10 seconds
-        popupTimerRef.current = setTimeout(() => {
-          setShowKeyMissingPopup(false);
-        }, 10000);
-        return;
-      }
-      setIsLoading(true);
-      setConnectionStatus("connecting");
-      setStreamReady(false);
-
-      // 🔥 STEP 1 — Check quota BEFORE starting session
-      const signature = await generateSignature("", userApiKeys.apiKey);
-
-      const planRes = await fetch(
-        `${backendURL}/agents/generate-response/access`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${getAccessToken()}`,
-            "X-API-KEY": userApiKeys.apiKey,
-            "X-SIGNATURE": signature,
-          },
-        },
-      );
-
-      let planData;
-      try {
-        planData = await planRes.json();
-      } catch {
-        planData = {};
-      }
-      if (!planRes.ok) {
-        const errorMsg =
-          planData?.error ||
-          planData?.message ||
-          planData?.detail ||
-          "Your usage limit has been reached. Please upgrade your plan.";
-
-        setAccessErrorMessage(errorMsg);
-        setShowAccessErrorPopup(true);
-
-        popupTimerRef.current = setTimeout(() => {
-          setShowAccessErrorPopup(false);
-        }, 10000);
-
-        setIsLoading(false);
-        return; // STOP
-      }
-
-      console.log("🚀 Starting avatar session...");
-
-      const token = await fetchAccessToken();
-      console.log("🎫 Token received");
-
-      avatarRef.current = new StreamingAvatar({ token });
-      console.log("🤖 Avatar instance created");
-
-      avatarRef.current.on(StreamingEvents.STREAM_READY, handleStreamReady);
-      avatarRef.current.on(
-        StreamingEvents.STREAM_DISCONNECTED,
-        handleStreamDisconnected,
-      );
-
-      console.log("📡 Event listeners set up");
-
-      sessionDataRef.current = await avatarRef.current.createStartAvatar({
-        quality: AvatarQuality.High,
-        avatarName: selectedAvatar,
-      });
-
-      console.log("✅ Avatar session created:", sessionDataRef.current);
-      setIsSessionActive(true);
-    } catch (error) {
-      console.error("❌ Error initializing avatar session:", error);
-      setConnectionStatus("error");
-      alert(`Failed to start avatar session: ${error.message}`);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // End the avatar session
-  const terminateAvatarSession = async () => {
-    try {
-      setIsLoading(true);
-
-      if (avatarRef.current && sessionDataRef.current) {
-        await avatarRef.current.stopAvatar();
-      }
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = null;
-      }
-
-      avatarRef.current = null;
-      sessionDataRef.current = null;
-      streamRef.current = null;
-      setIsSessionActive(false);
-      setStreamReady(false);
-      setConnectionStatus("disconnected");
-    } catch (error) {
-      console.error("Error terminating avatar session:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const [isListening, setIsListening] = useState(false);
-
-  useEffect(() => {
-    if (
-      !("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
-    ) {
-      console.error("Speech Recognition not supported in this browser.");
-    }
-  }, []);
-
-  const recognitionRef = useRef(null);
-
-  const startListening = () => {
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      alert("Speech recognition not supported in this browser.");
-      return;
-    }
-
-    if (isListening && recognitionRef.current) {
-      recognitionRef.current.stop();
-      return;
-    }
-
-    const recognition = new SpeechRecognition();
-    // recognition.lang = selectedLanguage === "eng" ? "en-US" : "it-IT"; // Adjust based on selectedLanguage
-    recognition.continuous = true; // Allow continuous speech
-    recognition.interimResults = true; // Show interim results for real-time feedback
-
-    recognitionRef.current = recognition;
-    transcriptRef.current = ""; // Reset transcript
-    setUserInput(""); // Clear input
-    setIsListening(true);
-    recognition.start();
-
-    recognition.onresult = (event) => {
-      let interimTranscript = "";
-      let finalTranscript = "";
-
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-          finalTranscript += event.results[i][0].transcript + " ";
-        } else {
-          interimTranscript += event.results[i][0].transcript;
-        }
-      }
-
-      transcriptRef.current = finalTranscript.trim();
-      // setUserInput(finalTranscript + interimTranscript);
-      // console.log("🎙️ Transcript:", finalTranscript + interimTranscript);
-    };
-
-    recognition.onerror = (event) => {
-      console.error("Speech recognition error:", event.error);
-      setIsListening(false);
-      recognitionRef.current = null;
-    };
-
-    recognition.onend = async () => {
-      console.log("Speech recognition ended.");
-      setIsListening(false);
-      recognitionRef.current = null;
-
-      const transcript = transcriptRef.current;
-      if (transcript) {
-        // setUserInput(transcript);
-        await handleSubmit({ preventDefault: () => {} });
-      }
-    };
-  };
-
-  const generateSignature = async (domain, apiKey) => {
-    // const secretKey = "a4687fee-afdd-407a-a8c0-493b0c6972fc";
+  // ─────────────────────────────────────────────
+  // HMAC Signature
+  // ─────────────────────────────────────────────
+  const generateSignature = async (payload, apiKey) => {
     const secretKey = userApiKeys.secretKey;
-    const payload = domain; // correct format
 
     const enc = new TextEncoder();
     const keyData = enc.encode(secretKey);
@@ -545,6 +255,297 @@ const Avatars = () => {
       .join("");
   };
 
+  // ─────────────────────────────────────────────
+  // Handle stream disconnection
+  // ─────────────────────────────────────────────
+  const handleStreamDisconnected = () => {
+    console.log("🔌 Stream disconnected");
+    if (videoRef.current) videoRef.current.srcObject = null;
+    avatarRef.current = null;
+    setIsSessionActive(false);
+    setStreamReady(false);
+    setConnectionStatus("disconnected");
+  };
+
+  // ─────────────────────────────────────────────
+  // Validate form fields
+  // ─────────────────────────────────────────────
+  const validateFields = () => {
+    const newErrors = {};
+    if (!selectedOption) newErrors.category = "Category is required.";
+    if (!selectedGender) newErrors.gender = "Gender is required.";
+    if (!selectedEthnicity) newErrors.ethnicity = "Ethnicity is required.";
+    if (!selectedAvatar) newErrors.avatar = "Avatar is required.";
+    if (!selectedAge) newErrors.age = "Age is required.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // ─────────────────────────────────────────────
+  // Initialize avatar session
+  // ─────────────────────────────────────────────
+  const initializeAvatarSession = async () => {
+    try {
+      if (!validateFields()) return;
+
+      if (!isAuthenticated) {
+        setShowAuthModal(true);
+        return;
+      }
+
+      if (!userApiKeys.apiKey || !userApiKeys.secretKey) {
+        setShowKeyMissingPopup(true);
+        popupTimerRef.current = setTimeout(
+          () => setShowKeyMissingPopup(false),
+          10000,
+        );
+        return;
+      }
+
+      setIsLoading(true);
+      setConnectionStatus("connecting");
+      setStreamReady(false);
+
+      // STEP 1 — Check quota BEFORE starting session
+      const quotaSignature = await generateSignature("", userApiKeys.apiKey);
+      const planRes = await fetch(
+        `${backendURL}/agents/generate-response/access`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+            "X-API-KEY": userApiKeys.apiKey,
+            "X-SIGNATURE": quotaSignature,
+          },
+        },
+      );
+
+      let planData;
+      try {
+        planData = await planRes.json();
+      } catch {
+        planData = {};
+      }
+
+      if (!planRes.ok) {
+        const errorMsg =
+          planData?.error ||
+          planData?.message ||
+          planData?.detail ||
+          "Your usage limit has been reached. Please upgrade your plan.";
+        setAccessErrorMessage(errorMsg);
+        setShowAccessErrorPopup(true);
+        popupTimerRef.current = setTimeout(
+          () => setShowAccessErrorPopup(false),
+          10000,
+        );
+        setIsLoading(false);
+        return;
+      }
+
+      console.log("🚀 Starting avatar session...");
+
+      // STEP 2 — Get voice_id from selected avatar
+      const selectedAvatarData = availableAvatars.find(
+        (av) => av.id === selectedAvatar,
+      );
+      const voiceId = selectedAvatarData?.voice_id || "";
+
+      // STEP 3 — Convert language code to ISO 639-1 (2-letter)
+      // LiveAvatar API requires "en" not "eng", "it" not "ita", etc.
+      const isoLanguage = toIso2(selectedLanguage);
+      console.log(
+        `🌐 Language: ${selectedLanguage} → ${isoLanguage} (sent to LiveAvatar)`,
+      );
+
+      // STEP 4 — Get session token from backend
+      const sessionSignature = await generateSignature("", userApiKeys.apiKey);
+      const sessionRes = await fetch(
+        `${backendURL}/agents/generate-heygen-session/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-API-Key": userApiKeys.apiKey,
+            "X-Signature": sessionSignature,
+          },
+          body: JSON.stringify({
+            mode: "FULL",
+            avatar_id: selectedAvatar,
+            avatar_persona: {
+              voice_id: voiceId,
+              language: isoLanguage, // ✅ ISO 639-1: "en" not "eng"
+            },
+          }),
+        },
+      );
+
+      let sessionData;
+      try {
+        sessionData = await sessionRes.json();
+      } catch {
+        sessionData = {};
+      }
+
+      if (!sessionRes.ok) {
+        throw new Error(
+          sessionData?.error ||
+            sessionData?.message ||
+            `Session creation failed (${sessionRes.status})`,
+        );
+      }
+
+      console.log("✅ Session data received:", sessionData);
+
+      // Extract token — handle different response shapes
+      const token =
+        sessionData?.session_token ||
+        sessionData?.token ||
+        sessionData?.data?.token ||
+        sessionData?.data?.session_token ||
+        sessionData?.data?.livekit_client_token;
+
+      if (!token) {
+        throw new Error(
+          "No session token in backend response: " +
+            JSON.stringify(sessionData),
+        );
+      }
+
+      console.log("🎫 Session token received");
+
+      // STEP 5 — Initialize LiveAvatarSession and start
+      avatarRef.current = new LiveAvatarSession(token);
+
+      avatarRef.current.on(SessionEvent.SESSION_STREAM_READY, () => {
+        console.log("🎥 Stream ready — attaching to video element");
+        if (videoRef.current) {
+          avatarRef.current.attach(videoRef.current);
+          // ✅ Force unmute + volume after attach
+          videoRef.current.muted = false;
+          videoRef.current.volume = 1.0;
+
+          videoRef.current.play().catch((err) => {
+            console.warn("Autoplay blocked:", err);
+          });
+        }
+        setStreamReady(true);
+        setConnectionStatus("connected");
+      });
+
+      avatarRef.current.on(SessionEvent.SESSION_END, () => {
+        console.log("🔌 Session ended by server");
+        handleStreamDisconnected();
+      });
+      setIsSessionActive(true);
+      await avatarRef.current.start();
+      console.log("✅ Avatar session started successfully");
+      setIsSessionActive(true);
+    } catch (error) {
+      console.error("❌ Error initializing avatar session:", error);
+      setConnectionStatus("error");
+      alert(`Failed to start avatar session: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // ─────────────────────────────────────────────
+  // Terminate avatar session
+  // ─────────────────────────────────────────────
+  const terminateAvatarSession = async () => {
+    try {
+      setIsLoading(true);
+
+      if (avatarRef.current) {
+        await avatarRef.current.stop();
+        console.log("🛑 Session stopped");
+      }
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = null;
+      }
+
+      avatarRef.current = null;
+      setIsSessionActive(false);
+      setStreamReady(false);
+      setConnectionStatus("disconnected");
+    } catch (error) {
+      console.error("Error terminating avatar session:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // ─────────────────────────────────────────────
+  // Speech recognition
+  // ─────────────────────────────────────────────
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef(null);
+
+  useEffect(() => {
+    if (
+      !("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
+    ) {
+      console.error("Speech Recognition not supported in this browser.");
+    }
+  }, []);
+
+  const startListening = () => {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Speech recognition not supported in this browser.");
+      return;
+    }
+
+    if (isListening && recognitionRef.current) {
+      recognitionRef.current.stop();
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    recognitionRef.current = recognition;
+    transcriptRef.current = "";
+    setUserInput("");
+    setIsListening(true);
+    recognition.start();
+
+    recognition.onresult = (event) => {
+      let finalTranscript = "";
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          finalTranscript += event.results[i][0].transcript + " ";
+        }
+      }
+      transcriptRef.current = finalTranscript.trim();
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+      setIsListening(false);
+      recognitionRef.current = null;
+    };
+
+    recognition.onend = async () => {
+      console.log("Speech recognition ended.");
+      setIsListening(false);
+      recognitionRef.current = null;
+
+      const transcript = transcriptRef.current;
+      if (transcript) {
+        await handleSubmit({ preventDefault: () => {} });
+      }
+    };
+  };
+
+  // ─────────────────────────────────────────────
+  // Handle submit — send to backend & avatar.repeat()
+  // ─────────────────────────────────────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
     const inputToSend = userInput.trim() || transcriptRef.current;
@@ -560,13 +561,10 @@ const Avatars = () => {
       const formData = new FormData(formRef.current);
       formData.append("domain", selectedOption);
       formData.append("text_query", inputToSend);
-      formData.append("lang", selectedLanguage);
+      formData.append("lang", selectedLanguage); // backend uses its own lang codes
 
       const apiKey = userApiKeys.apiKey;
-
-      const domain = selectedOption;
-
-      const signature = await generateSignature(domain, apiKey);
+      const signature = await generateSignature(selectedOption, apiKey);
 
       const response = await fetch(`${backendURL}/agents/generate-response/`, {
         method: "POST",
@@ -577,9 +575,6 @@ const Avatars = () => {
         body: formData,
       });
 
-      //organizational context wala krna ha ab bas
-
-      // Always parse JSON — even on error
       let data;
       try {
         data = await response.json();
@@ -587,7 +582,6 @@ const Avatars = () => {
         data = {};
       }
 
-      // Handle API errors (like 402)
       if (!response.ok) {
         const message =
           data?.error ||
@@ -595,10 +589,9 @@ const Avatars = () => {
           `Request failed with status ${response.status}`;
         alert(message);
         console.error("❌ API Error:", message);
-        return; // Stop here
+        return;
       }
 
-      // Success flow
       console.log("✅ API Response:", data);
 
       if (!avatarRef.current) {
@@ -611,17 +604,8 @@ const Avatars = () => {
         return;
       }
 
-      // await avatarRef.current.speak({
-      //   text: data.response,
-      //   task_type: TaskType.REPEAT,
-      // });
-      if (avatarRef.current && data.response) {
-        console.log("Making avatar speak:", data.response);
-        await avatarRef.current.speak({
-          text: data.response,
-          task_type: TaskType.REPEAT,
-        });
-      }
+      console.log("🗣 Making avatar speak:", data.response);
+      await avatarRef.current.repeat(data.response);
 
       setUserInput("");
       transcriptRef.current = "";
@@ -633,7 +617,6 @@ const Avatars = () => {
     }
   };
 
-  // Handle Enter key press in input
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -641,15 +624,61 @@ const Avatars = () => {
     }
   };
 
-  // Cleanup on component unmount
+  // ─────────────────────────────────────────────
+  // Cleanup on unmount
+  // ─────────────────────────────────────────────
   useEffect(() => {
     return () => {
-      if (avatarRef.current && sessionDataRef.current) {
-        terminateAvatarSession();
+      if (avatarRef.current) {
+        avatarRef.current.stop().catch(() => {});
       }
+      if (popupTimerRef.current) clearTimeout(popupTimerRef.current);
     };
   }, []);
 
+  // ─────────────────────────────────────────────
+  // Active subscription
+  // ─────────────────────────────────────────────
+  const handleUnauthorized = useCallback(() => {
+    logout();
+  }, [logout]);
+
+  const fetchActiveSubscription = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `${backendURL}/payments/active-subscription`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getAccessToken()}`,
+          },
+        },
+      );
+
+      if (response.status === 401) {
+        handleUnauthorized();
+        return;
+      }
+
+      if (!response.ok)
+        throw new Error(`HTTP error! status: ${response.status}`);
+
+      const data = await response.json();
+      console.log("Active Subscription:", data);
+      setActiveSubscription(data);
+    } catch (err) {
+      console.error("Error fetching active subscription:", err);
+    }
+  }, [getAccessToken, handleUnauthorized]);
+
+  useEffect(() => {
+    fetchActiveSubscription();
+  }, [fetchActiveSubscription]);
+
+  // ─────────────────────────────────────────────
+  // Status helpers
+  // ─────────────────────────────────────────────
   const getStatusColor = () => {
     switch (connectionStatus) {
       case "connected":
@@ -676,60 +705,6 @@ const Avatars = () => {
     }
   };
 
-  const handleUnauthorized = useCallback(() => {
-    logout();
-  }, [logout]);
-
-  const fetchActiveSubscription = useCallback(async () => {
-    try {
-      const response = await fetch(
-        `${backendURL}/payments/active-subscription`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getAccessToken()}`,
-          },
-        },
-      );
-
-      if (response.status === 401) {
-        handleUnauthorized();
-        return;
-      }
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log("Active Subscription:", data);
-      setActiveSubscription(data);
-    } catch (err) {
-      console.error("Error fetching active subscription:", err);
-    }
-  }, [getAccessToken, handleUnauthorized]);
-
-  useEffect(() => {
-    fetchActiveSubscription();
-  }, [fetchActiveSubscription]);
-
-  useEffect(() => {
-    if (selectedGender === "binary") {
-      setSelectedEthnicity("african_american");
-      setSelectedAge("Young");
-
-      // Find Marcus in availableAvatars and auto-select him
-      const marcusAvatar = availableAvatars.find(
-        (av) => av.name.toLowerCase() === "marcus",
-      );
-
-      if (marcusAvatar) {
-        setSelectedAvatar(marcusAvatar.id);
-      }
-    }
-  }, [selectedGender, availableAvatars]);
-
   if (!isSessionActive) {
     return (
       <div className="avatars-page">
@@ -742,6 +717,7 @@ const Avatars = () => {
         </div>
 
         <div className="grid-pattern"></div>
+
         {/* API Key Missing Popup */}
         {showKeyMissingPopup && (
           <div className="api-key-popup-overlay">
@@ -773,6 +749,7 @@ const Avatars = () => {
             </div>
           </div>
         )}
+
         {/* Access Error Popup */}
         {showAccessErrorPopup && (
           <div className="api-key-popup-overlay">
@@ -800,6 +777,7 @@ const Avatars = () => {
             </div>
           </div>
         )}
+
         <Link to="/">
           <img
             src={WhiteLogo}
@@ -809,6 +787,7 @@ const Avatars = () => {
             className="avatar-logo"
           />
         </Link>
+
         <div className="container-medium">
           <div className="start-form-container">
             <div className="start-form">
@@ -827,6 +806,7 @@ const Avatars = () => {
               </div>
 
               <div className="form-content">
+                {/* Category */}
                 <div className="input-group">
                   <label htmlFor="category-select" className="input-label">
                     Choose Category
@@ -840,12 +820,10 @@ const Avatars = () => {
                     required
                   >
                     <option value="">Select Category</option>
-
                     {(() => {
-                      // 🔹 If no plan is active → default to free plan (beauty only)
                       const allowed = activeSubscription?.plan?.allowed_domains
                         ?.split(",")
-                        ?.map((d) => d.trim()) || ["beauty"]; // Default free plan access
+                        ?.map((d) => d.trim()) || ["beauty"];
 
                       const categories = [
                         {
@@ -874,18 +852,18 @@ const Avatars = () => {
                       });
                     })()}
                   </select>
-
                   {errors.category && (
                     <p className="error-text">{errors.category}</p>
                   )}
                 </div>
 
+                {/* Gender + Ethnicity */}
                 <div className="form-alignment">
                   <div className="input-group">
                     <label htmlFor="gender-select" className="input-label">
                       Select Gender
                     </label>
-                    <select
+                    {/* <select
                       id="gender-select"
                       value={selectedGender}
                       onChange={(e) => setSelectedGender(e.target.value)}
@@ -894,9 +872,25 @@ const Avatars = () => {
                     >
                       <option value="male">Male</option>
                       <option value="female">Female</option>
-                      <option value="binary">Non-binary</option>
+                    </select> */}
+                    <select
+                      id="gender-select"
+                      value={selectedGender}
+                      onChange={(e) => setSelectedGender(e.target.value)}
+                      className="avatar-select"
+                      disabled={isLoading}
+                    >
+                      <option value="male">Male</option>
+                      <option
+                        value="female"
+                        disabled={selectedEthnicity === "african_american"}
+                      >
+                        Female{" "}
+                        {selectedEthnicity === "african_american" ? "🔒" : ""}
+                      </option>
                     </select>
                   </div>
+
                   <div className="input-group">
                     <label htmlFor="ethnicity-select" className="input-label">
                       Ethnicity
@@ -914,6 +908,8 @@ const Avatars = () => {
                     </select>
                   </div>
                 </div>
+
+                {/* Language + Age */}
                 <div className="form-alignment">
                   <div className="input-group">
                     <label htmlFor="language-select" className="input-label">
@@ -937,7 +933,6 @@ const Avatars = () => {
                         ))
                       )}
                     </select>
-
                     {errors.lang && <p className="error-text">{errors.lang}</p>}
                   </div>
 
@@ -969,6 +964,7 @@ const Avatars = () => {
                   </div>
                 </div>
 
+                {/* Avatar */}
                 <div className="form-alignment">
                   <div className="input-group">
                     <label htmlFor="avatar-select" className="input-label">
@@ -987,6 +983,9 @@ const Avatars = () => {
                         </option>
                       ))}
                     </select>
+                    {errors.avatar && (
+                      <p className="error-text">{errors.avatar}</p>
+                    )}
                   </div>
                 </div>
 
@@ -999,7 +998,6 @@ const Avatars = () => {
 
                 <button
                   onClick={initializeAvatarSession}
-                  // disabled={isLoading}
                   disabled={isLoading || remainingRequests === 0}
                   className={`start-session-btn ${isLoading ? "loading" : ""}`}
                 >
@@ -1050,6 +1048,10 @@ const Avatars = () => {
       </div>
     );
   }
+
+  // ─────────────────────────────────────────────
+  // RENDER — Active Session
+  // ─────────────────────────────────────────────
   return (
     <div className="avatars-page active-session">
       <div className="fullscreen-video-container">
@@ -1058,13 +1060,12 @@ const Avatars = () => {
           className="fullscreen-avatar-video"
           autoPlay
           playsInline
-          muted={false}
         />
 
         {!streamReady && (
           <div className="loading-overlay">
             <div className="loading-content">
-              <span className="loading-spinner large"></span>
+              {/* <span className="loading-spinner large"></span> */}
               <h3>Connecting to Avatar...</h3>
               <p>Please wait while we establish the connection</p>
             </div>
@@ -1077,7 +1078,7 @@ const Avatars = () => {
           <div className="chat-section">
             <form onSubmit={handleSubmit} ref={formRef}>
               <div className="input-container">
-                {/* <div className="textarea-wrapper"> */}
+                {/* <div> */}
                 <textarea
                   value={userInput}
                   onChange={(e) => setUserInput(e.target.value)}
@@ -1087,6 +1088,7 @@ const Avatars = () => {
                   disabled={!streamReady || isListening}
                   rows={2}
                 />
+
                 {isListening && (
                   <div className="voice-wave-overlay">
                     <div className="voice-wave-container">
@@ -1118,20 +1120,20 @@ const Avatars = () => {
                 >
                   Send
                 </button>
+                <button
+                  onClick={terminateAvatarSession}
+                  disabled={isLoading}
+                  className="end-session-btn"
+                >
+                  {isLoading ? "Ending..." : "End Session"}
+                </button>
               </div>
             </form>
-
-            <button
-              onClick={terminateAvatarSession}
-              disabled={isLoading}
-              className="end-session-btn"
-            >
-              {isLoading ? "Ending..." : "End Session"}
-            </button>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 export default Avatars;
