@@ -272,17 +272,17 @@
   z-index: 4;
 }
 
-.chat-section {
+/* .chat-section {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
+} */
 
-.input-container {
+/* .input-container {
   display: flex;
   gap: 16px;
   align-items: flex-end;
-}
+} */
 
 .fullscreen-chat-input {
   flex: 1;
@@ -365,7 +365,7 @@
 .speak-icon {
   font-size: 1.5rem;
 }
-.mic-btn {
+/* .mic-btn {
   background: transparent;
   border: none;
   padding: 0;
@@ -374,7 +374,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
-}
+} */
 
 .end-session-btn {
   align-self: center;
@@ -440,11 +440,11 @@
     font-size: 2rem;
   }
 
-  .input-container {
+  /* .input-container {
     flex-direction: column;
     align-items: stretch;
     padding: 15px;
-  }
+  } */
 
   .fullscreen-speak-btn {
     justify-content: center;
@@ -665,4 +665,65 @@
 
 .popup-button:hover {
   background-color: #04919c;
+}
+
+/* ── Active Session: bottom controls ── */
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* remove old gap since end-session is now inline */
+}
+
+.input-container {
+  display: flex;
+  gap: 12px;
+  align-items: center; /* vertically center everything in one row */
+  flex-wrap: nowrap; /* desktop: keep single row */
+}
+
+.mic-btn {
+  background: transparent;
+  border: none;
+  padding: 0 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .input-container {
+    flex-wrap: wrap;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .fullscreen-chat-input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mic-btn {
+    flex-shrink: 0;
+  }
+
+  .action-buttons {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .fullscreen-speak-btn,
+  .end-session-btn {
+    flex: 1;
+    justify-content: center;
+  }
 }

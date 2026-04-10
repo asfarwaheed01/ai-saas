@@ -400,7 +400,7 @@ const Services = () => {
                   return;
                 }
                 window.open(
-                  "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin-updated-v4.zip",
+                  "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin-updated-v5.zip",
                   "_blank",
                 );
               }}

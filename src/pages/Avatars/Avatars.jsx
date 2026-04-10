@@ -1078,7 +1078,6 @@ const Avatars = () => {
           <div className="chat-section">
             <form onSubmit={handleSubmit} ref={formRef}>
               <div className="input-container">
-                {/* <div> */}
                 <textarea
                   value={userInput}
                   onChange={(e) => setUserInput(e.target.value)}
@@ -1100,7 +1099,6 @@ const Avatars = () => {
                     </div>
                   </div>
                 )}
-                {/* </div> */}
 
                 <button
                   type="button"
@@ -1113,20 +1111,25 @@ const Avatars = () => {
                   </span>
                 </button>
 
-                <button
-                  type="submit"
-                  className="fullscreen-speak-btn"
-                  disabled={!streamReady || !userInput.trim() || isSpeaking}
-                >
-                  Send
-                </button>
-                <button
-                  onClick={terminateAvatarSession}
-                  disabled={isLoading}
-                  className="end-session-btn"
-                >
-                  {isLoading ? "Ending..." : "End Session"}
-                </button>
+                {/* ✅ Both action buttons grouped together */}
+                <div className="action-buttons">
+                  <button
+                    type="submit"
+                    className="fullscreen-speak-btn"
+                    disabled={!streamReady || !userInput.trim() || isSpeaking}
+                  >
+                    Send
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={terminateAvatarSession}
+                    disabled={isLoading}
+                    className="end-session-btn"
+                  >
+                    {isLoading ? "Ending..." : "End Session"}
+                  </button>
+                </div>
               </div>
             </form>
           </div>
