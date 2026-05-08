@@ -84,83 +84,13 @@ const API_SECTIONS = [
       },
     ],
   },
-  // {
-  //   id: "organization-context",
-  //   title: "Organizational Context",
-  //   icon: <GrOrganization />,
-  //   path: "/docs/organizational-context",
-  //   items: [
-  //     {
-  //       id: "get-organization",
-  //       title: "Retrive Organization Details",
-  //       path: "/docs/organizational-context/retrieve",
-  //     },
-  //     {
-  //       id: "create-organization",
-  //       title: "Create Organization Details",
-  //       path: "/docs/organizational-context/create",
-  //     },
-  //     {
-  //       id: "update-organization",
-  //       title: "Update Organization Details",
-  //       path: "/docs/organizational-context/update",
-  //     },
-  //     {
-  //       id: "delete-organization",
-  //       title: "Delete organization Details",
-  //       path: "/docs/organizational-context/delete",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: "payments",
-  //   title: "Payments API",
-  //   icon: <FaCreditCard />,
-  //   path: "/docs/payments",
-  //   items: [
-  //     {
-  //       id: "create-subscription",
-  //       title: "Create Subscription Plan",
-  //       path: "/docs/payments/create-subscription",
-  //     },
-  //     {
-  //       id: "list-subscriptions",
-  //       title: "List Subscription Plans",
-  //       path: "/docs/payments/list-subscriptions",
-  //     },
-  //     {
-  //       id: "update-subscription",
-  //       title: "Update Subscription Plan",
-  //       path: "/docs/payments/update-subscription",
-  //     },
-  //     {
-  //       id: "stripe-payment",
-  //       title: "Create Stripe Payment Session",
-  //       path: "/docs/payments/stripe-payment",
-  //     },
-  //     {
-  //       id: "cancel-subscription",
-  //       title: "Cancel Subscription",
-  //       path: "/docs/payments/cancel-subscription",
-  //     },
-  //     {
-  //       id: "active-subscription",
-  //       title: "Get Active Subscription",
-  //       path: "/docs/payments/active-subscription",
-  //     },
-  //   ],
-  // },
 ];
 
-// const Sidebar = () => {
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
 
   const [expandedSections, setExpandedSections] = useState(
-    API_SECTIONS.map((section) =>
-      // Auto-expand the section if the current path includes it
-      location.pathname.includes(section.path)
-    )
+    API_SECTIONS.map((section) => location.pathname.includes(section.path)),
   );
 
   const toggleSection = (index) => {
@@ -170,13 +100,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   };
 
   const handleSectionClick = (section, index) => {
-    // For Getting Started (which has no items), navigate directly to its path
     if (section.items.length === 0) {
-      // No toggle needed, it's a direct link
       return;
     }
 
-    // For other sections with dropdown items, toggle the dropdown
     toggleSection(index);
   };
 

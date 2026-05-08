@@ -22,7 +22,7 @@ const Users = () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${getAccessToken()}`,
     }),
-    [getAccessToken]
+    [getAccessToken],
   );
 
   // Handle unauthorized errors
@@ -38,41 +38,6 @@ const Users = () => {
   const [searchInput, setSearchInput] = useState("");
   const [actionMessage, setActionMessage] = useState(null);
 
-  // const fetchUsers = useCallback(async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     setError(null);
-
-  //     // Always fetch page 1 as it contains all data (or backend doesn't support other pages)
-  //     const response = await fetch(`${backendURL}/analytics/users/?page=1`, {
-  //       method: "GET",
-  //       headers: apiHeaders,
-  //     });
-
-  //     if (response.status === 401) {
-  //       handleUnauthorized();
-  //       return;
-  //     }
-
-  //     if (!response.ok) {
-  //       console.error(
-  //         "API Error:",
-  //         response.status,
-  //         response.statusText,
-  //         await response.text()
-  //       );
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-
-  //     const data = await response.json();
-  //     setUsersData(data);
-  //   } catch (err) {
-  //     console.error("Error fetching users:", err);
-  //     setError("Failed to load users. Please try again.");
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }, [apiHeaders, handleUnauthorized]);
   const fetchUsers = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -90,7 +55,7 @@ const Users = () => {
         {
           method: "GET",
           headers: apiHeaders,
-        }
+        },
       );
 
       if (response.status === 401) {
@@ -123,7 +88,7 @@ const Users = () => {
         {
           method: "PUT",
           headers: apiHeaders,
-        }
+        },
       );
 
       if (response.status === 401) {
@@ -189,16 +154,13 @@ const Users = () => {
       setIsConfirmModalOpen(false);
       setUserToDeactivate(null);
 
-      // Refresh the list to show updated status
       fetchUsers();
 
-      // Clear message after 3 seconds
       setTimeout(() => setSuccessMessage(null), 3000);
     } catch (err) {
       console.error("Error deactivating user:", err);
       setErrorMessage(`Error: ${err.message}`);
-      setIsConfirmModalOpen(false); // Close modal to show error on main screen or keep open?
-      // Let's close it and show error on main screen for now as per plan
+      setIsConfirmModalOpen(false);
     }
   };
 
@@ -242,14 +204,6 @@ const Users = () => {
   const itemsPerPage = 10;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentItems = usersData?.results?.slice(
-  //   indexOfFirstItem,
-  //   indexOfLastItem
-  // );
-
-  // const totalPages = usersData?.results
-  //   ? Math.ceil(usersData.results.length / itemsPerPage)
-  //   : 0;
 
   const currentItems = filteredResults.slice(indexOfFirstItem, indexOfLastItem);
 
@@ -279,18 +233,6 @@ const Users = () => {
         )}
       </div>
 
-      {/* <div className="users-search-container">
-        <input
-          type="text"
-          placeholder="Search by username or email..."
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1); // reset pagination on search
-          }}
-          className="users-search-input"
-        />
-      </div> */}
       <div className="users-search-filter">
         <input
           type="text"
@@ -356,15 +298,8 @@ const Users = () => {
                     <td>
                       <TableCellWithTooltip content={user.basic_info.email} />
                     </td>
+                    <td>{formatDate(user.basic_info.date_joined)}</td>
                     <td>
-                      {formatDate(user.basic_info.date_joined)}
-                      {/* <span className="text-sm text-gray-500">
-                        {formatDate(user.basic_info.last_login)}
-                      </span> */}
-                    </td>
-                    <td>
-                      {/* {formatDate(user.basic_info.date_joined)} <br /> */}
-                      {/* <span className="text-sm text-gray-500"> */}
                       {formatDate(user.basic_info.last_login)}
                       {/* </span> */}
                     </td>
@@ -385,14 +320,7 @@ const Users = () => {
                         {user.plan_info?.status || "Inactive"}
                       </span>
                     </td>
-                    {/* <td>
-                      <button
-                        className="deactivate-btn"
-                        onClick={(e) => handleDeactivateClick(e, user)}
-                      >
-                        Deactivate
-                      </button>
-                    </td> */}
+
                     <td>
                       {statusFilter === "Active" ? (
                         <button

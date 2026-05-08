@@ -41,10 +41,9 @@ const Apikeys = () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${getAccessToken()}`,
     }),
-    [getAccessToken]
+    [getAccessToken],
   );
 
-  // Clear messages after timeout
   const clearMessages = useCallback(() => {
     setTimeout(() => {
       setError(null);
@@ -52,12 +51,10 @@ const Apikeys = () => {
     }, 5000);
   }, []);
 
-  // Handle unauthorized errors
   const handleUnauthorized = useCallback(() => {
     logout();
   }, [logout]);
 
-  // Fetch API keys
   const fetchApiKeys = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -77,15 +74,6 @@ const Apikeys = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      //     const data = await response.json();
-      //     setApiKeys(Array.isArray(data) ? data : []);
-      //   } catch (err) {
-      //     console.error("Error fetching API keys:", err);
-      //     setError("Failed to load API keys. Please try again.");
-      //   } finally {
-      //     setIsLoading(false);
-      //   }
-      // }, [apiHeaders, handleUnauthorized]);
       const data = await response.json();
       const apiKeysArray = data.has_api_key ? [data] : [];
       setApiKeys(apiKeysArray);
@@ -124,7 +112,7 @@ const Apikeys = () => {
         throw new Error(
           errorData.error ||
             errorData.message ||
-            `HTTP error! status: ${response.status}`
+            `HTTP error! status: ${response.status}`,
         );
       }
 
@@ -169,12 +157,12 @@ const Apikeys = () => {
           throw new Error(
             errorData.error ||
               errorData.message ||
-              `HTTP error! status: ${response.status}`
+              `HTTP error! status: ${response.status}`,
           );
         }
 
         setApiKeys((prev) =>
-          prev.filter((key) => (key.id || key.key) !== keyId)
+          prev.filter((key) => (key.id || key.key) !== keyId),
         );
         setShowDeleteModal(null);
         setVisibleKeys((prev) => {
@@ -193,7 +181,7 @@ const Apikeys = () => {
         setIsDeleting(null);
       }
     },
-    [apiHeaders, handleUnauthorized, clearMessages]
+    [apiHeaders, handleUnauthorized, clearMessages],
   );
 
   // Toggle key visibility
@@ -222,7 +210,7 @@ const Apikeys = () => {
         clearMessages();
       }
     },
-    [clearMessages]
+    [clearMessages],
   );
 
   // Format date
@@ -240,7 +228,7 @@ const Apikeys = () => {
     if (!key) return "";
     if (key.length <= 8) return "*".repeat(key.length);
     return `${key.substring(0, 4)}${"*".repeat(key.length - 8)}${key.substring(
-      key.length - 4
+      key.length - 4,
     )}`;
   }, []);
 
@@ -254,7 +242,7 @@ const Apikeys = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${getAccessToken()}`,
           },
-        }
+        },
       );
 
       if (response.status === 401) {
@@ -554,28 +542,13 @@ const Apikeys = () => {
         </div>
       )}
 
-      {/* {showAuthPopup && (
-        <AuthPopup
-          onClose={() => setShowAuthPopup(false)}
-          redirectPath={location.pathname}
-        />
-      )}
       {showAuthPopup && (
         <AuthPopup
           onClose={() => setShowAuthPopup(false)}
+          redirectPath={location.pathname}
           onSuccess={() => {
             setShowAuthPopup(false);
             fetchApiKeys();
-          }}
-        />
-      )} */}
-      {showAuthPopup && (
-        <AuthPopup
-          onClose={() => setShowAuthPopup(false)}
-          redirectPath={location.pathname}
-          onSuccess={() => {
-            setShowAuthPopup(false);
-            fetchApiKeys(); // refresh after successful login
           }}
         />
       )}

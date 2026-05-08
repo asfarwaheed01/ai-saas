@@ -145,11 +145,6 @@ const Navbar = () => {
           {/* Mobile-only user menu items */}
           {isAuthenticated && (
             <>
-              {/* <li className="navbar-item mobile-only">
-                <Link to={ROUTES.dashboard.path} onClick={closeMobileMenu}>
-                  Dashboard
-                </Link>
-              </li> */}
               <li className="navbar-item mobile-only">
                 <Link to={ROUTES.avatars.path} onClick={closeMobileMenu}>
                   Try out Avatars
@@ -234,13 +229,6 @@ const Navbar = () => {
 
               {isUserDropdownOpen && (
                 <div className="navbar-dropdown-menu">
-                  {/* <Link
-                    to={ROUTES.dashboard.path}
-                    className="dropdown-item"
-                    onClick={() => setIsUserDropdownOpen(false)}
-                  >
-                    Dashboard
-                  </Link> */}
                   {user?.is_superuser && (
                     <Link
                       to="/dashboard"

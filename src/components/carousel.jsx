@@ -104,13 +104,6 @@ const Slider2 = () => {
                 <h3 className="slider-2-title">{card.title}</h3>
                 <p className="slider-2-desc">{card.description}</p>
               </div>
-              {/* <button className="slider-2-btn">{card.buttonText}</button> */}
-              {/* <button className=" button-medium button-sec4 slider-2-btn">
-                <span className="button-text">Learn more</span>
-                <span className="arrow-icon">
-                  <IoIosArrowRoundForward />
-                </span>
-              </button> */}
             </div>
           </div>
         </div>

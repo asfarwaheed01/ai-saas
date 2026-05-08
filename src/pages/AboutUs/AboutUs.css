@@ -3,8 +3,9 @@
   max-width: 1200px;
   margin: 0 auto;
   color: #333;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
   /* background-image: url("../../../public//images/background-2.jpg");
   background-size: cover;
@@ -68,8 +69,9 @@
   max-width: 1200px;
   margin: 0 auto;
   color: #333;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .hero {
@@ -353,19 +355,17 @@
 }
 
 .features-container {
-  margin: 0 auto; /* centers the container */
-  overflow: hidden; /* hides scrollbars outside container */
+  margin: 0 auto;
+  overflow: hidden;
   position: relative;
   margin-top: 30px;
   margin-bottom: 50px;
-  /* background-color: rgb(223, 244, 248); */
   padding: 40px;
 }
 
 .features-scroll {
   display: flex;
   gap: 30px;
-  /* no overflow here, the container controls it */
   animation: scrollFeatures 20s linear infinite;
 }
 
@@ -378,7 +378,6 @@
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Auto scroll animation */
 @keyframes scrollFeatures {
   0% {
     transform: translateX(0);
@@ -388,11 +387,9 @@
   }
 }
 
-/* main two column container */
 .saas-container {
   display: flex;
   gap: 40px;
-  /* align-items: flex-start; */
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
@@ -403,12 +400,11 @@
   font-weight: 700;
 }
 
-/* left column image */
 .saas-image {
   flex: 1 1 50%;
-  display: flex; /* NEW */
-  justify-content: center; /* horizontal center */
-  align-items: center; /* vertical center */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .saas-image img {
@@ -419,18 +415,16 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* right column content */
 .saas-content {
   flex: 1 1 55%;
 }
 
-/* grid inside the right column */
 .saas-content .tech-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* two columns on large screens */
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-top: 25px;
-  justify-items: center; /* center-align cards horizontally */
+  justify-items: center;
 }
 
 .saas-content .tech-item {
@@ -439,7 +433,7 @@
   border-radius: 8px;
   text-align: center;
   width: 100%;
-  max-width: 250px; /* optional to control width */
+  max-width: 250px;
 }
 
 .saas-content .tech-item i {
@@ -453,22 +447,21 @@
   margin-bottom: 10px;
 }
 
-/* responsive behavior */
 @media (max-width: 992px) {
   .saas-container {
-    flex-direction: column; /* stack image and content */
+    flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
   .saas-content .tech-grid {
-    grid-template-columns: repeat(2, 1fr); /* still 2 columns on medium */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 576px) {
   .saas-content .tech-grid {
-    grid-template-columns: 1fr; /* 1 column on mobile */
+    grid-template-columns: 1fr;
   }
 }
 
@@ -507,7 +500,7 @@
   gap: 40px;
   align-items: center;
   justify-content: center;
-  text-align: left; /* left-align the text inside columns */
+  text-align: left;
 }
 
 .avatar-points {
@@ -559,7 +552,9 @@
   border-right: 4px solid #05b1bd;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .feature-card:hover {
@@ -699,7 +694,6 @@
 .roadmap-section {
   display: flex;
   gap: 40px;
-  /* align-items: flex-start; */
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
@@ -709,12 +703,10 @@
   color: #05b1bd !important;
 }
 
-/* Left column (content) */
 .roadmap-content-column {
   flex: 1 1 60%;
 }
 
-/* Right column (image) */
 .roadmap-image-column {
   flex: 1 1 40%;
   display: flex;

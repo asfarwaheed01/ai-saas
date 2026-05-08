@@ -22,7 +22,7 @@ const PendingUsers = () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${getAccessToken()}`,
     }),
-    [getAccessToken]
+    [getAccessToken],
   );
 
   const handleUnauthorized = useCallback(() => {
@@ -51,7 +51,7 @@ const PendingUsers = () => {
         {
           method: "DELETE",
           headers: apiHeaders,
-        }
+        },
       );
 
       if (response.status === 401) {
@@ -78,38 +78,6 @@ const PendingUsers = () => {
     }
   };
 
-  /* ---------------- FETCH PENDING USERS ---------------- */
-  // const fetchPendingUsers = useCallback(async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     setError(null);
-
-  //     const response = await fetch(
-  //       `${backendURL}/analytics/pending-users/?page=1`,
-  //       {
-  //         method: "GET",
-  //         headers: apiHeaders,
-  //       }
-  //     );
-
-  //     if (response.status === 401) {
-  //       handleUnauthorized();
-  //       return;
-  //     }
-
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-
-  //     const data = await response.json();
-  //     setUsersData(data);
-  //   } catch (err) {
-  //     console.error("Error fetching pending users:", err);
-  //     setError("Failed to load pending users. Please try again.");
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }, [apiHeaders, handleUnauthorized]);
   const fetchPendingUsers = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -127,7 +95,7 @@ const PendingUsers = () => {
         {
           method: "GET",
           headers: apiHeaders,
-        }
+        },
       );
 
       if (response.status === 401) {
@@ -179,7 +147,7 @@ const PendingUsers = () => {
     return usersData.results.filter(
       (user) =>
         user.username?.toLowerCase().includes(term) ||
-        user.email?.toLowerCase().includes(term)
+        user.email?.toLowerCase().includes(term),
     );
   }, [usersData, searchTerm]);
 
@@ -191,12 +159,6 @@ const PendingUsers = () => {
   const currentItems = filteredResults.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
-  // const currentItems =
-  //   usersData?.results?.slice(indexOfFirstItem, indexOfLastItem) || [];
-
-  // const totalPages = usersData
-  //   ? Math.ceil(usersData.results.length / itemsPerPage)
-  //   : 0;
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
@@ -204,7 +166,6 @@ const PendingUsers = () => {
     }
   };
 
-  /* ---------------- RENDER ---------------- */
   return (
     <>
       <div className="users-container">
@@ -230,20 +191,10 @@ const PendingUsers = () => {
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
-              setCurrentPage(1); // reset pagination on search
+              setCurrentPage(1);
             }}
             className="users-search-input"
           />
-          {/* <input
-          type="text"
-          placeholder="Search by username or email..."
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="users-search-input"
-        /> */}
         </div>
 
         <div className="users-table-section">

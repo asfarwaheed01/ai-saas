@@ -1,7 +1,5 @@
 .verify-email-container {
-  min-height: calc(
-    100vh - 140px
-  ); /* adjust based on your navbar + footer height */
+  min-height: calc(100vh - 140px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +11,7 @@
 }
 
 .login-background {
-  position: fixed; /* fixed instead of absolute to stay behind everything */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;

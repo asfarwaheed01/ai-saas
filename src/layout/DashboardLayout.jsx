@@ -37,11 +37,7 @@ const DASHBOARD_ROUTES = {
     name: "Organization",
     icon: HiOfficeBuilding,
   },
-  // apiKeys: {
-  //   path: "/docs/api-keys",
-  //   name: "API Keys",
-  //   icon: HiKey,
-  // },
+
   avatar: {
     path: "/avatars",
     name: "Try out Avatars",
@@ -73,16 +69,7 @@ const DashboardLayout = ({ children }) => {
       label: DASHBOARD_ROUTES.pendingUsers.name,
       href: DASHBOARD_ROUTES.pendingUsers.path,
     },
-    // {
-    //   icon: DASHBOARD_ROUTES.organization.icon,
-    //   label: DASHBOARD_ROUTES.organization.name,
-    //   href: DASHBOARD_ROUTES.organization.path,
-    // },
-    // {
-    //   icon: DASHBOARD_ROUTES.apiKeys.icon,
-    //   label: DASHBOARD_ROUTES.apiKeys.name,
-    //   href: DASHBOARD_ROUTES.apiKeys.path,
-    // },
+
     {
       icon: DASHBOARD_ROUTES.avatar.icon,
       label: DASHBOARD_ROUTES.avatar.name,

@@ -374,24 +374,17 @@ function App() {
         <Route
           path={ROUTES.organization.path}
           element={
-            // <ProtectedRoute>
             <DocsLayout>
               <OrganizationContext />
             </DocsLayout>
-            // </ProtectedRoute>
           }
         />
         <Route
           path={ROUTES.apiKeys.path}
           element={
-            // <DashboardLayout>
-            //   <Apikeys />
-            // </DashboardLayout>
-            // <ProtectedRoute>
             <DocsLayout>
               <Apikeys />
             </DocsLayout>
-            // </ProtectedRoute>
           }
         />
 

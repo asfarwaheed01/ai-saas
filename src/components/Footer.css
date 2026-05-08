@@ -10,10 +10,8 @@
 }
 
 .footer-background {
-  /* background-color: #0d0f2c; */
-  background-color: #036A71;
+  background-color: #036a71;
 
-  /* background: linear-gradient(135deg, #e8f7f8, #05b1bd); */
   color: white;
   padding: 40px 0;
 }

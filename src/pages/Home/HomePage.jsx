@@ -3,10 +3,8 @@ import Slider2 from "../../components/carousel";
 import { FaCheckCircle } from "react-icons/fa";
 import Card from "../../components/card";
 import { IoIosArrowRoundForward } from "react-icons/io";
-// import Test from "../../image/test.jpg";
 import Image1 from "../../assets/1.png";
 import Image2 from "../../assets/2.png";
-// import Image3 from "../../assets/3.png";
 import Image4 from "../../assets/4.png";
 import Image5 from "../../assets/5.png";
 import Image6 from "../../assets/6.png";
@@ -68,15 +66,10 @@ const HomePage = () => {
               <span className="text-highlight-gradient">Health</span>,{" "}
               <span className="text-highlight-gradient">Beauty </span>
               and <span className="text-highlight-gradient">Wellness</span>
-              {/* Create studio-quality videos with realistic talking{" "}
-              <span className="text-highlight-gradient">AI avatars.</span> */}
             </h1>
           </div>
           <div className="container-small">
             <p className="small-text">
-              {/* TODO AI is redefining health, beauty, and wellness with
-              intelligent, personalized, and empathetic solutions powered by
-              advanced artificial intelligence for global impact and growth. */}
               TODO AI is revolutionizing how we experience healthcare, beauty,
               and wellness with intelligent, personalized, and empathetic
               solutions powered by cutting-edge artificial intelligence.
@@ -105,19 +98,11 @@ const HomePage = () => {
             </button>
           </div>
           <h1 className="heading-xlarge-section2">
-            {/* Redefining Customer Experience with Ultra-Realistic Virtual Avatars */}
             A new customer experience through ultra-realistic virtual avatars
           </h1>
         </div>
         <div className="container-small">
           <p className="extra-small-text">
-            {/* TODO AI combines ultra-realistic avatars, advanced facial
-            recognition, and NLP-driven conversations to deliver personalized,
-            empathetic interactions. With no-code training, SaaS modules, and
-            real-time learning, businesses can easily adapt the AI to their
-            domain. From clinics and pharmacies to beauty centers, our platform
-            brings intelligent, human-like consultants to both digital and
-            physical worlds. */}
             A new customer experience through ultra-realistic virtual avatars
             TODO AI blends hyper-realistic avatars, advanced facial recognition,
             and conversational AI to enable highly personalized and empathetic
@@ -137,27 +122,21 @@ const HomePage = () => {
             title="Two types of avatars for every environment"
             bullets={[
               {
-                // icon: <FaCheckCircle />,
                 text: "TODO AI offers two distinct avatar solutions designed to fit both digital and physical contexts.",
               },
               {
-                // icon: <FaCheckCircle />,
                 text: "Cloud Avatars (for e-commerce and digital platforms): Tailored for online stores and mobile applications in the Beauty and Pharma sectors. These avatars are installed directly on the client’s domain via API or plugins for CMS platforms such as Shopify and WordPress.",
               },
               {
-                // icon: <FaCheckCircle />,
                 text: "The AI learns autonomously by combining vertical machine learning models with real user interactions, continuously adapting to the language and context of each brand.",
               },
               {
-                // icon: <FaCheckCircle />,
                 text: "Local Avatars (for physical stores and professional environments): Designed for pharmacies, beauty centers, clinics, and medical offices, these avatars act as digital consultants in-store.",
               },
               {
-                // icon: <FaCheckCircle />,
                 text: "Training is manual and simple — professionals can upload their own texts and information directly into the system, and the AI automatically learns from the provided content.",
               },
               {
-                // icon: <FaCheckCircle />,
                 text: "Installation takes place through our Windows application, which can run on a computer or interactive totem inside the store.",
               },
             ]}
@@ -302,10 +281,8 @@ const HomePage = () => {
         <div className="container-xlarge">
           <Card
             imageUrl={Image1}
-            // title="Intelligent Contextual Interaction"
             title="Smart, contextual interactions that guide every customer journey"
             buttonLabel="Smart Assistant"
-            // description="TODO AI’s contextual engine analyzes the user’s face to detect skin type, visible signs, and imperfections, then suggests personalized products such as skincare, medical solutions, or supplements. By understanding habits and preferences through natural dialogue, the assistant accompanies users throughout the entire purchasing journey, boosting both satisfaction and conversion. Every interaction is processed by the NLP engine to continuously optimize responses, improve performance, and fine-tune the assistant’s tone."
             description="The TODO AI contextual engine analyzes the user’s face to detect skin type, visible
 conditions, or imperfections, and recommends tailored products such as skincare, medical
 solutions, or supplements. Through natural conversations, the assistant learns user habits
@@ -319,10 +296,8 @@ to improve the assistant’s tone, performance, and relevance in real time.
           <Card
             imageUrl={Image2}
             imagePosition="right"
-            // title="AI Avatars in the Physical World"
             title="AI avatars that go beyond the screen"
             buttonLabel="REAL USE CASES"
-            // description="TODO AI extends beyond digital platforms into the physical world. Our avatars can be installed in stores, pharmacies, clinics, and beauty centers through interactive life-size totems powered by Unreal Engine 5, or on Windows/Mac screens with touch and voice interaction. Local licenses also support fully offline and protected solutions. Real-world use cases include hospitals and clinics, where the Medical Consultant guides patients through facilities; pharmacies, where the Pharmacist Consultant assists with product recommendations; and beauty centers or spas, where the Beauty Consultant welcomes customers and suggests tailored treatments."
             description={
               <>
                 TODO AI bridges digital and physical touchpoints. Our avatars
@@ -347,10 +322,8 @@ to improve the assistant’s tone, performance, and relevance in real time.
           />
           <Card
             imageUrl={Image6}
-            // title="No-Code Personalized Training"
             title="Personalization made easy, no code required"
             buttonLabel="TRAIN YOUR AI"
-            // description="At the core of TODO AI’s flexibility is a powerful no-code training dashboard that makes personalization simple and accessible. Businesses can paste texts, upload descriptions, or import relevant information, and the system automatically generates a structured dataset that adapts to their specific domain. Content can be organized by topic, category, or priority, while the AI continuously learns and fine-tunes responses to match the company’s language, customers, and market. For premium users, we even enable the creation of a fully personalized avatar that replicates the professional’s own face and voice."
             description={
               <>
                 At the heart of <strong>TODO AI</strong> lies a powerful{" "}
@@ -496,30 +469,18 @@ to improve the assistant’s tone, performance, and relevance in real time.
           <span className="button-text">ENTERPRISE READY</span>
         </button>
         <div className="two-column-wrapper">
-          {/* First Column - Heading */}
           <div className="column-left">
             <h2 className="column-heading">
-              {/* Built on the foundations of AI ethics and security */}
               Built on ethics, privacy, and security
             </h2>
           </div>
 
-          {/* Second Column - Description + Button */}
           <div className="column-right">
             <p className="column-description">
-              {/* People first, always. TODO AI is designed for secure, ethical, and
-              GDPR-compliant use of artificial intelligence in health, beauty,
-              and wellness. */}
               TODO AI is developed with strict ethical and privacy-first
               principles, ensuring secure and GDPR-compliant AI applications in
               the healthcare, beauty, and wellness industries.
             </p>
-            {/* <button className="button button-medium button-sec4">
-              <span className="button-text">Learn more</span>
-              <span className="arrow-icon">
-                <IoIosArrowRoundForward />
-              </span>
-            </button> */}
           </div>
         </div>
 
@@ -597,26 +558,11 @@ to improve the assistant’s tone, performance, and relevance in real time.
           <Slider2 />
         </div>
       </section>
-      {/* <section className="live-api-section container-xlarge">
-        <h2 className="api-heading">Developer's API</h2>
 
-        <div
-          className="api-box"
-          onClick={() => navigate("/docs/getting-started")}
-        >
-          <div className="api-code">https://saas.todopharma.com/</div>
-          <div className="tooltip">Access Developer API →</div>
-        </div>
-      </section> */}
       <section className="live-api-section container-xlarge">
         <h2 className="api-heading">Developer API</h2>
 
-        <div
-          className="api-box"
-          onClick={handleClick}
-          // onClick={() => navigate("/docs/getting-started")}
-          // onClick={() => navigate("/docs/api-keys")}
-        >
+        <div className="api-box" onClick={handleClick}>
           <pre className="api-code">
             {`const url = https://saas.todoai.com/
   {
@@ -626,7 +572,6 @@ to improve the assistant’s tone, performance, and relevance in real time.
   }
 `}
           </pre>
-          {/* <div className="tooltip">Access Developer API </div> */}
           {!hasApiKey && <div className="tooltip">Access Developer API</div>}
         </div>
       </section>

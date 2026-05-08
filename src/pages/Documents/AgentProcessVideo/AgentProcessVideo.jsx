@@ -701,10 +701,6 @@ fetch('https://api.example.com/api/agents/process-video/', {
           <button className="docs-code-copy">Copy</button>
         </div>
         <pre>
-          {/* {`curl -X GET \\
-  https://api.example.com/api/knowledge-base/docs/ \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json"`} */}
           {`SECRET_KEY="your_secret_key"
 DOMAIN="beauty"
 SIGNATURE=$(echo -n "$DOMAIN" | openssl dgst -sha256 -hmac "$SECRET_KEY" | awk '{print $2}')

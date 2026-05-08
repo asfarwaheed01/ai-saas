@@ -40,13 +40,6 @@ const AboutUs = () => {
         </p>
       </div>
 
-      {/* <div className="section">
-        <h2><i className="fas fa-eye"></i> Vision</h2>
-        <p>TODO PHARMA AI is the world's first platform designed to offer intelligent, empathetic and professional advice in the beauty, pharma and medical sectors, both online and in physical stores.</p>
-        <p>We have developed TODO AI, a hybrid artificial intelligence engine, trained on vertical datasets and capable of learning from the customer's domain in real time. Through a network of ultra-realistic avatars, the system takes the advice experience to a new interactive, personalized and autonomous level.</p>
-        <p>In a global context in which user experience and automation become fundamental for success, TODO PHARMA AI is the technological response to the evolution of consumer behavior, today increasingly demanding, fast and digital.</p>
-      </div> */}
-
       <div className="bg-vision">
         <div class="container">
           <div class="text-section">
@@ -78,68 +71,6 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="section">
-        <h2>
-          <i className="fas fa-microchip"></i> Proprietary Technology
-        </h2>
-        <p>
-          TODO AI is a modular system, based on a mixed cloud + local
-          infrastructure that integrates:
-        </p>
-
-        <div className="features">
-          <div className="feature">
-            <h3>
-              <i className="feature-icon fas fa-user"></i> Facial Recognition
-            </h3>
-            <p>For analyzing skin, emotions and expressions.</p>
-          </div>
-
-          <div className="feature">
-            <h3>
-              <i className="feature-icon fas fa-brain"></i> Verticalized ML
-              Models
-            </h3>
-            <p>For the pharma, beauty and medical sectors.</p>
-          </div>
-
-          <div className="feature">
-            <h3>
-              <i className="feature-icon fas fa-sync-alt"></i> Dynamic Training
-            </h3>
-            <p>
-              Each installation learns from products, contents and user
-              behavior.
-            </p>
-          </div>
-
-          <div className="feature">
-            <h3>
-              <i className="feature-icon fas fa-comments"></i> Advanced NLP
-            </h3>
-            <p>With guided, natural and contextual dialogues.</p>
-          </div>
-
-          <div className="feature">
-            <h3>
-              <i className="feature-icon fas fa-code"></i> Adaptive Semantic
-              Engine
-            </h3>
-            <p>
-              Continuously evolving thanks to the data collected (GDPR
-              compliant).
-            </p>
-          </div>
-        </div>
-
-        <p className="feature-summary">
-          Each customer can train their AI assistant directly from a no-code
-          dashboard, simply by posting texts, descriptions and relevant
-          information. The system automatically generates a personalized dataset
-          and updates the answers in real time.
-        </p>
-      </div> */}
 
       <div className="feature-main">
         <p className="feature-main-heading">Proprietary technology</p>
@@ -187,54 +118,6 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="section">
-        <h2>
-          <i className="fas fa-cube"></i> The SaaS Platform
-        </h2>
-        <p>
-          TODO PHARMA AI is available in SaaS mode, with access to modules and
-          APIs via monthly subscription.
-        </p>
-
-        <div className="tech-grid">
-          <div className="tech-item">
-            <i className="fas fa-tachometer-alt"></i>
-            <h3>Intelligent Dashboard</h3>
-            <p>Avatar management, analytics and training</p>
-          </div>
-
-          <div className="tech-item">
-            <i className="fab fa-wordpress"></i>
-            <h3>WordPress Plugin</h3>
-            <p>Seamless integration with WordPress sites</p>
-          </div>
-
-          <div className="tech-item">
-            <i className="fab fa-shopify"></i>
-            <h3>Shopify Plugin</h3>
-            <p>E-commerce integration for Shopify stores</p>
-          </div>
-
-          <div className="tech-item">
-            <i className="fas fa-code"></i>
-            <h3>API + SDK Access</h3>
-            <p>For developers and system integrators</p>
-          </div>
-
-          <div className="tech-item">
-            <i className="fas fa-mobile-alt"></i>
-            <h3>Development Kit</h3>
-            <p>For mobile apps (iOS/Android) and custom web apps</p>
-          </div>
-        </div>
-
-        <p className="platform-summary">
-          The entire ecosystem has been built to be extremely flexible and
-          integrable, suitable for both large enterprise groups and highly
-          specialized local entities.
-        </p>
-      </div> */}
 
       <div className="saas-container">
         {/* LEFT IMAGE */}
@@ -284,112 +167,8 @@ const AboutUs = () => {
               <p>For iOS apps and custom web apps</p>
             </div>
           </div>
-
-          {/* <p className="platform-summary">
-            The entire ecosystem has been built to be extremely flexible and
-            integrable, suitable for both large enterprise groups and highly
-            specialized local entities.
-          </p> */}
         </div>
       </div>
-
-      {/* <div className="section">
-        <h2>
-          <i className="fas fa-user-circle"></i> Ultra-Realistic Virtual Avatars
-        </h2>
-        <p>
-          TODO AI's intelligent assistants are interactive digital avatars
-          designed to simulate real human conversation, with natural voices,
-          lifelike expressions and deep contextual understanding.
-        </p>
-
-        <div className="features">
-          <div className="feature">
-            <h3>
-              <i className="feature-icon fas fa-user-friends"></i> Customizable
-              Appearance
-            </h3>
-            <p>
-              Choose your avatar's ethnicity, age, and gender to match your
-              brand identity.
-            </p>
-          </div>
-
-          <div className="feature">
-            <h3>
-              <i className="feature-icon fas fa-language"></i> Communication
-              Style
-            </h3>
-            <p>
-              Customize vocabulary, tone, and communication style for your
-              target audience.
-            </p>
-          </div>
-
-          <div className="feature">
-            <h3>
-              <i className="feature-icon fas fa-briefcase-medical"></i>{" "}
-              Specialized Categories
-            </h3>
-            <p>
-              Select from beauty expert, mental coach, pharmacist, or medical
-              consultant.
-            </p>
-          </div>
-
-          <div className="feature">
-            <h3>
-              <i className="feature-icon fas fa-portrait"></i> Brand
-              Customization
-            </h3>
-            <p>
-              Activate a customized version with your face or brand for complete
-              personalization.
-            </p>
-          </div>
-        </div>
-      </div> */}
-
-      {/* <div className="avatar-section">
-        <h2 className="avatar-heading">
-          <i className="fas fa-user-circle"></i> Ultra-Realistic Virtual Avatars
-        </h2>
-        <p className="avatar-description">
-          TODO AI's intelligent assistants are interactive digital avatars
-          designed to simulate real human conversation, with natural voices,
-          lifelike expressions and deep contextual understanding.
-        </p>
-
-        <div className="avatar-container">
-          <div className="avatar-points">
-            <ul>
-              <li>
-                <i className="fas fa-user-friends"></i>
-                Customizable Appearance – Choose your avatar's ethnicity, age,
-                and gender.
-              </li>
-              <li>
-                <i className="fas fa-language"></i>
-                Communication Style – Customize vocabulary, tone and style.
-              </li>
-              <li>
-                <i className="fas fa-briefcase-medical"></i>
-                Specialized Categories – Beauty expert, mental coach,
-                pharmacist, medical consultant.
-              </li>
-              <li>
-                <i className="fas fa-portrait"></i>
-                Brand Customization – Activate a customized version with your
-                face or brand.
-              </li>
-            </ul>
-          </div>
-
-          <div className="avatar-image">
-            <img src={Avatar} alt="Ultra Realistic Avatar" />
-          </div>
-        </div>
-      </div> */}
 
       <div className="avatar-section">
         <h2 className="avatar-heading">
@@ -584,61 +363,6 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="section">
-        <h2>
-          <i className="fas fa-road"></i> Roadmap & Next Goals
-        </h2>
-
-        <div className="roadmap">
-          <div className="roadmap-item">
-            <div className="roadmap-icon">
-              <i className="fas fa-check-circle"></i>
-            </div>
-            <div className="roadmap-content">
-              <h3>Completed Modules</h3>
-              <p>
-                All modules completed and in distribution (web, mobile, desktop,
-                physical)
-              </p>
-            </div>
-          </div>
-
-          <div className="roadmap-item">
-            <div className="roadmap-icon">
-              <i className="fas fa-check-circle"></i>
-            </div>
-            <div className="roadmap-content">
-              <h3>Plugin Availability</h3>
-              <p>WordPress and Shopify plugins active on the market</p>
-            </div>
-          </div>
-
-          <div className="roadmap-item">
-            <div className="roadmap-icon">
-              <i className="fas fa-check-circle"></i>
-            </div>
-            <div className="roadmap-content">
-              <h3>Marketplace Integration</h3>
-              <p>Present within the TODO PHARMA marketplace</p>
-            </div>
-          </div>
-
-          <div className="roadmap-item">
-            <div className="roadmap-icon">
-              <i className="fas fa-arrow-circle-right"></i>
-            </div>
-            <div className="roadmap-content">
-              <h3>Next Goals</h3>
-              <p>
-                Strengthening international distribution network, activation of
-                predictive AI modules, extension to nutraceutical and wellness
-                verticals, strategic growth in US, MENA and Asia markets
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> */}
 
       <div className="roadmap-section">
         {/* Left content */}

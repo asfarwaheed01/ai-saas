@@ -1,10 +1,3 @@
-// import React from "react";
-
-// const DeleteOrganizationContext = () => {
-//   return <div>DeleteOrganizationContext</div>;
-// };
-
-// export default DeleteOrganizationContext;
 import React, { useState } from "react";
 import { FaExclamationCircle, FaInfo } from "react-icons/fa";
 import "../index.css";

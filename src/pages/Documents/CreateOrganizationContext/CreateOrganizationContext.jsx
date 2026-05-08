@@ -1,11 +1,3 @@
-// import React from "react";
-
-// const CreateOrganizationContext = () => {
-//   return <div>CreateOrganizationContext</div>;
-// };
-
-// export default CreateOrganizationContext;
-
 import React, { useState } from "react";
 import { FaExclamationCircle, FaInfo } from "react-icons/fa";
 import "../index.css";

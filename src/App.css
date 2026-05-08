@@ -130,7 +130,10 @@ section .button {
   margin: 0 0.25rem;
   cursor: pointer;
   height: 414px;
-  transition: transform 0.3s ease, filter 0.3s ease, border 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease,
+    border 0.3s ease;
 }
 
 /* Image styling */
@@ -149,36 +152,19 @@ section .button {
   filter: brightness(1.2);
   z-index: 10;
   border-radius: 8px !important;
-  /* border: 3px solid white;  */
 }
 
-/* Blur other cards when one is hovered */
 .carousel-container:hover .slider-card {
   filter: blur(4px);
   transform: scale(0.95);
 }
 
-/* Replace with these styles */
-/* .slider-card:not(:hover) {
-  filter: blur(4px);
-  transform: scale(0.95);
-} */
-
-/* Keep this style to ensure the hovered card is not blurred */
-/* .slider-card:hover {
-  filter: none !important;
-  transform: scale(1.05) !important;
-  z-index: 10;
-} */
-
-/* Ensure the hovered card is not blurred */
 .carousel-container .slider-card:hover {
   filter: none;
   transform: scale(1.05);
   border-radius: 8px !important;
 }
 
-/* Adding a gap between cards */
 .slick-list {
   margin: 0 -10px;
   height: 500px;
@@ -189,7 +175,7 @@ section .button {
 }
 
 .slick-slide {
-  padding: 0 10px; /* Gap between cards */
+  padding: 0 10px;
 }
 
 .slider-space {
@@ -203,7 +189,9 @@ section .button {
   width: 100%;
   top: 0;
   z-index: 1000;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .navbar.scrolled {
@@ -286,7 +274,9 @@ section .button {
   display: inline-block;
   padding: 2px;
   transform: rotate(45deg);
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .dropdown-toggle:hover .arrow-down {
@@ -930,7 +920,9 @@ section .button {
   border-bottom-right-radius: 50px;
   padding: 30px;
   background: #f5f8ff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .feature-card-item:hover {

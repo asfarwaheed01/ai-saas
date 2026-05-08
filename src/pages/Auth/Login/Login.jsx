@@ -82,25 +82,20 @@ const Login = () => {
             else navigate("/");
           } else {
             throw new Error(
-              loginResult.error || "Failed to save authentication data"
+              loginResult.error || "Failed to save authentication data",
             );
           }
         }
-      }
-      // ✅ Handle Signup success
-      else {
-        // Signup successful → clear form and redirect to login mode
+      } else {
         setFormData({ username: "", email: "", password: "" });
-        setIsLogin(true); // switch to login view
-        setError(""); // clear any previous errors
-        setShowVerificationPopup(true); // 👈 show popup
+        setIsLogin(true);
+        setError("");
+        setShowVerificationPopup(true);
         setPopupMessage(
-          data.message || data.detail || "Signup completed. Check Your Email!"
+          data.message || data.detail || "Signup completed. Check Your Email!",
         );
-        // setShowVerificationPopup(true);
-        // Optional: auto-hide popup after a few seconds
+
         setTimeout(() => setShowVerificationPopup(false), 5000);
-        // alert("Account created successfully! Please sign in.");
       }
     } catch (error) {
       console.error("Auth error:", error);
@@ -110,107 +105,12 @@ const Login = () => {
     }
   };
 
-  // ✅ Hide popup automatically after 10 seconds
   useEffect(() => {
     if (showVerificationPopup) {
       const timer = setTimeout(() => setShowVerificationPopup(false), 10000);
       return () => clearTimeout(timer);
     }
   }, [showVerificationPopup]);
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsLoading(true);
-  //   setError("");
-
-  //   try {
-  //     const endpoint = isLogin ? "/users/signin/" : "/users/signup/";
-  //     const payload = isLogin
-  //       ? { email: formData.email, password: formData.password }
-  //       : {
-  //           username: formData.username,
-  //           email: formData.email,
-  //           password: formData.password,
-  //         };
-
-  //     const response = await fetch(`${backendURL}${endpoint}`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(payload),
-  //     });
-
-  //     const data = await response.json();
-
-  //     // if (!response.ok) {
-  //     //   throw new Error(
-  //     //     data.message || `${isLogin ? "Login" : "Signup"} failed`
-  //     //   );
-  //     // }
-
-  //     // if (!response.ok) {
-  //     //   let apiError =
-  //     //     data.error ||
-  //     //     (Array.isArray(data.non_field_errors)
-  //     //       ? data.non_field_errors.join(", ")
-  //     //       : data.non_field_errors) ||
-  //     //     `${isLogin ? "Login" : "Signup"} failed`;
-
-  //     //   throw new Error(apiError);
-  //     // }
-  //     if (!response.ok) {
-  //       let apiErrorMessage = "";
-
-  //       if (data.password && Array.isArray(data.password)) {
-  //         apiErrorMessage = data.password.join(" ");
-  //       } else if (data.email && Array.isArray(data.email)) {
-  //         apiErrorMessage = data.email.join(" ");
-  //       } else if (data.username && Array.isArray(data.username)) {
-  //         apiErrorMessage = data.username.join(" ");
-  //       } else if (data.detail) {
-  //         apiErrorMessage = data.detail;
-  //       } else if (data.error) {
-  //         apiErrorMessage = data.error;
-  //       } else if (Array.isArray(data.non_field_errors)) {
-  //         apiErrorMessage = data.non_field_errors.join(", ");
-  //       } else {
-  //         apiErrorMessage = `${isLogin ? "Login" : "Signup"} failed`;
-  //       }
-
-  //       throw new Error(apiErrorMessage);
-  //     }
-
-  //     // Check if we have the expected response format
-  //     if (data.access && data.refresh) {
-  //       // Use the auth context login function
-  //       const loginResult = login(data);
-
-  //       if (loginResult.success) {
-  //         // Reset form
-  //         setFormData({ username: " ", email: " ", password: " " });
-  //         // navigate("/dashboard");
-  //         if (data.is_superuser) {
-  //           navigate("/dashboard");
-  //         } else {
-  //           navigate("/");
-  //         }
-  //       } else {
-  //         throw new Error(
-  //           loginResult.error || "Failed to save authentication data"
-  //         );
-  //       }
-  //     }
-  //     //  else {
-  //     //   throw new Error("Invalid response format from server");
-  //     // }
-  //   } catch (error) {
-  //     console.error("Auth error:", error);
-  //     setError(error.message);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
 
   const toggleMode = () => {
     setIsLogin(!isLogin);

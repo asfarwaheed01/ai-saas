@@ -16,7 +16,6 @@ import "./OrganizationalContext.css";
 import { HiExclamationTriangle } from "react-icons/hi2";
 
 const OrganizationContext = () => {
-  // State management
   const [organizationData, setOrganizationData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -26,20 +25,17 @@ const OrganizationContext = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [editText, setEditText] = useState("");
-  const [isCreatingNew, setIsCreatingNew] = useState(false); // Track if we're creating new
-
+  const [isCreatingNew, setIsCreatingNew] = useState(false);
   const { getAccessToken, logout } = useAuth();
 
-  // API Headers with memoization
   const apiHeaders = useMemo(
     () => ({
       "Content-Type": "application/json",
       Authorization: `Bearer ${getAccessToken()}`,
     }),
-    [getAccessToken]
+    [getAccessToken],
   );
 
-  // Clear messages after timeout
   const clearMessages = useCallback(() => {
     setTimeout(() => {
       setError(null);
@@ -47,12 +43,10 @@ const OrganizationContext = () => {
     }, 5000);
   }, []);
 
-  // Handle unauthorized errors
   const handleUnauthorized = useCallback(() => {
     logout();
   }, [logout]);
 
-  // Fetch organization context
   const fetchOrganizationContext = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -63,7 +57,7 @@ const OrganizationContext = () => {
         {
           method: "GET",
           headers: apiHeaders,
-        }
+        },
       );
 
       if (response.status === 401) {
@@ -71,7 +65,6 @@ const OrganizationContext = () => {
         return;
       }
 
-      // Handle 404 (Not Found) OR empty details as no organization context exists
       if (response.status === 404) {
         setOrganizationData(null);
         setIsLoading(false);
@@ -88,10 +81,9 @@ const OrganizationContext = () => {
       console.log("Details field:", JSON.stringify(data.details));
       console.log(
         "Details empty?",
-        !data.details || data.details.trim() === ""
+        !data.details || data.details.trim() === "",
       );
 
-      // Check if details are empty - treat as no context exists
       if (!data.details || data.details.trim() === "") {
         console.log("Setting organizationData to null - no valid details");
         setOrganizationData(null);
@@ -101,14 +93,12 @@ const OrganizationContext = () => {
       }
     } catch (err) {
       console.error("Error fetching organization context:", err);
-      // Only show error for actual errors, not for missing data
       setError("Failed to load organization context. Please try again.");
     } finally {
       setIsLoading(false);
     }
   }, [apiHeaders, handleUnauthorized]);
 
-  // Create organization context (POST)
   const createOrganizationContext = useCallback(
     async (organizationDetails) => {
       try {
@@ -121,7 +111,7 @@ const OrganizationContext = () => {
             method: "POST",
             headers: apiHeaders,
             body: JSON.stringify({ organization_details: organizationDetails }),
-          }
+          },
         );
 
         if (response.status === 401) {
@@ -134,7 +124,7 @@ const OrganizationContext = () => {
           throw new Error(
             errorData.error ||
               errorData.message ||
-              `HTTP error! status: ${response.status}`
+              `HTTP error! status: ${response.status}`,
           );
         }
 
@@ -145,7 +135,6 @@ const OrganizationContext = () => {
         setSuccess("Organization context created successfully!");
         clearMessages();
 
-        // Fetch the latest data to ensure we have the complete response
         setTimeout(() => {
           fetchOrganizationContext();
         }, 500);
@@ -155,7 +144,7 @@ const OrganizationContext = () => {
         console.error("Error creating organization context:", err);
         setError(
           err.message ||
-            "Failed to create organization context. Please try again."
+            "Failed to create organization context. Please try again.",
         );
         clearMessages();
         throw err;
@@ -163,10 +152,9 @@ const OrganizationContext = () => {
         setIsSaving(false);
       }
     },
-    [apiHeaders, handleUnauthorized, clearMessages]
+    [apiHeaders, handleUnauthorized, clearMessages],
   );
 
-  // Update organization context (PUT)
   const updateOrganizationContext = useCallback(
     async (organizationDetails) => {
       try {
@@ -179,7 +167,7 @@ const OrganizationContext = () => {
             method: "PUT",
             headers: apiHeaders,
             body: JSON.stringify({ organization_details: organizationDetails }),
-          }
+          },
         );
 
         if (response.status === 401) {
@@ -192,7 +180,7 @@ const OrganizationContext = () => {
           throw new Error(
             errorData.error ||
               errorData.message ||
-              `HTTP error! status: ${response.status}`
+              `HTTP error! status: ${response.status}`,
           );
         }
 
@@ -213,7 +201,7 @@ const OrganizationContext = () => {
         console.error("Error updating organization context:", err);
         setError(
           err.message ||
-            "Failed to update organization context. Please try again."
+            "Failed to update organization context. Please try again.",
         );
         clearMessages();
         throw err;
@@ -221,7 +209,7 @@ const OrganizationContext = () => {
         setIsSaving(false);
       }
     },
-    [apiHeaders, handleUnauthorized, clearMessages]
+    [apiHeaders, handleUnauthorized, clearMessages],
   );
 
   // Delete organization context
@@ -235,7 +223,7 @@ const OrganizationContext = () => {
         {
           method: "DELETE",
           headers: apiHeaders,
-        }
+        },
       );
 
       if (response.status === 401) {
@@ -248,7 +236,7 @@ const OrganizationContext = () => {
         throw new Error(
           errorData.error ||
             errorData.message ||
-            `HTTP error! status: ${response.status}`
+            `HTTP error! status: ${response.status}`,
         );
       }
 
@@ -260,7 +248,7 @@ const OrganizationContext = () => {
       console.error("Error deleting organization context:", err);
       setError(
         err.message ||
-          "Failed to delete organization context. Please try again."
+          "Failed to delete organization context. Please try again.",
       );
       clearMessages();
     } finally {
@@ -268,15 +256,13 @@ const OrganizationContext = () => {
     }
   }, [apiHeaders, handleUnauthorized, clearMessages]);
 
-  // Handle edit mode (for existing data)
   const handleEdit = useCallback(() => {
     setEditText(organizationData?.details || "");
     setIsEditing(true);
-    setIsCreatingNew(false); // We're editing existing data
+    setIsCreatingNew(false);
     setError(null);
   }, [organizationData]);
 
-  // Handle save (ALWAYS use POST when no meaningful data exists)
   const handleSave = useCallback(async () => {
     if (!editText.trim()) {
       setError("Organization details cannot be empty.");
@@ -284,7 +270,6 @@ const OrganizationContext = () => {
       return;
     }
 
-    // Check if we have actual organization details (not just empty details)
     const hasValidDetails =
       organizationData &&
       organizationData.details &&
@@ -298,7 +283,6 @@ const OrganizationContext = () => {
     });
 
     try {
-      // Use POST if no valid details exist OR explicitly creating new
       if (!hasValidDetails || isCreatingNew) {
         console.log("Using POST - creating new context");
         await createOrganizationContext(editText);
@@ -308,7 +292,6 @@ const OrganizationContext = () => {
       }
     } catch (err) {
       console.error("Save error:", err);
-      // Error handling is done in the API functions
     }
   }, [
     editText,
@@ -319,7 +302,6 @@ const OrganizationContext = () => {
     clearMessages,
   ]);
 
-  // Handle cancel edit
   const handleCancelEdit = useCallback(() => {
     setIsEditing(false);
     setIsCreatingNew(false);
@@ -327,25 +309,21 @@ const OrganizationContext = () => {
     setError(null);
   }, []);
 
-  // Handle delete confirmation
   const handleDeleteClick = useCallback(() => {
     setShowDeleteModal(true);
   }, []);
 
-  // Handle create new (for new data)
   const handleCreateNew = useCallback(() => {
     setEditText("");
     setIsEditing(true);
-    setIsCreatingNew(true); // We're creating new data
+    setIsCreatingNew(true);
     setError(null);
   }, []);
 
-  // Initial data fetch
   useEffect(() => {
     fetchOrganizationContext();
   }, [fetchOrganizationContext]);
 
-  // Keyboard shortcuts
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (isEditing && e.ctrlKey && e.key === "s") {
@@ -392,7 +370,6 @@ const OrganizationContext = () => {
             <HiRefresh />
             Refresh
           </button>
-          {/* Only show Edit/Delete if data exists with valid details AND not editing */}
           {organizationData &&
             organizationData.details &&
             organizationData.details.trim() !== "" &&
@@ -414,7 +391,6 @@ const OrganizationContext = () => {
                 </button>
               </>
             )}
-          {/* Only show Create New if NO valid details exist AND not editing */}
           {(!organizationData ||
             !organizationData.details ||
             organizationData.details.trim() === "") &&
@@ -430,7 +406,6 @@ const OrganizationContext = () => {
         </div>
       </div>
 
-      {/* Messages */}
       {error && (
         <div className="organization-message organization-message-error">
           <HiExclamationTriangle />
@@ -444,7 +419,6 @@ const OrganizationContext = () => {
         </div>
       )}
 
-      {/* Main Content */}
       <div className="organization-content">
         {isEditing ? (
           <div className="organization-edit-section">
@@ -510,7 +484,7 @@ const OrganizationContext = () => {
               <div className="organization-meta">
                 Last updated:{" "}
                 {new Date(
-                  organizationData.updated_at || Date.now()
+                  organizationData.updated_at || Date.now(),
                 ).toLocaleString()}
               </div>
             </div>

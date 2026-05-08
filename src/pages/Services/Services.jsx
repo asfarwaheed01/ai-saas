@@ -107,18 +107,10 @@ const Services = () => {
     },
   ];
 
-  // const handleDownloadPlugin = () => {
-  //   window.open(
-  //     "https://drive.google.com/drive/folders/1I3Cg35SUA4EaB8LeBnirApIDBsc-w9ep",
-  //     "_blank"
-  //   );
-  // };
-
   const packages = [
     {
       id: "beauty",
       title: "Beauty Salon – €120/month - Try Free for 3 months",
-      // title: "Beauty Salon – Try Free for 3 months",
       description:
         "Specialized in beauty and wellness consultations, enhancing customer experience in salons.",
       features: [
@@ -317,10 +309,6 @@ const Services = () => {
               </div>
 
               <div className="btn-center-download">
-                {/* <button className="download-button" onClick={handleDownload}>
-                  <FaDownload /> Download Now
-                  <FaExternalLinkAlt className="external-icon" />
-                </button> */}
                 <button
                   className="download-button"
                   onClick={() => handleShowPopup(selectedPackage)}
@@ -425,10 +413,8 @@ const Services = () => {
 
       <div className="services-cta">
         <div className="cta-content">
-          {/* <h2>Ready to transform your customer experience?</h2> */}
           <h2>Build with Our API</h2>
           <p>
-            {/* Get started with our AI-powered customer service platform today. */}
             Empower your applications with our AI-driven platform. Explore our
             API documentation to learn how to integrate, automate, and innovate
             with powerful endpoints and developer tools.

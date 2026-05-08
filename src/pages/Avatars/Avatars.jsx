@@ -113,9 +113,6 @@ const Avatars = () => {
   const transcriptRef = useRef("");
   const popupTimerRef = useRef(null);
 
-  // ─────────────────────────────────────────────
-  // Fetch user API keys
-  // ─────────────────────────────────────────────
   const fetchUserApiKeys = async () => {
     try {
       const token = getAccessToken();
@@ -160,9 +157,6 @@ const Avatars = () => {
     }
   }, [selectedEthnicity]);
 
-  // ─────────────────────────────────────────────
-  // Fetch supported languages
-  // ─────────────────────────────────────────────
   const fetchSupportedLanguages = async () => {
     try {
       setIsLanguagesLoading(true);
@@ -190,9 +184,6 @@ const Avatars = () => {
     fetchSupportedLanguages();
   }, []);
 
-  // ─────────────────────────────────────────────
-  // Sync selected avatar when filters change
-  // ─────────────────────────────────────────────
   useEffect(() => {
     if (
       availableAvatars.length > 0 &&
@@ -208,9 +199,6 @@ const Avatars = () => {
     selectedAge,
   ]);
 
-  // ─────────────────────────────────────────────
-  // Check auth on mount
-  // ─────────────────────────────────────────────
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
@@ -226,9 +214,6 @@ const Avatars = () => {
     fetchUserApiKeys();
   };
 
-  // ─────────────────────────────────────────────
-  // HMAC Signature
-  // ─────────────────────────────────────────────
   const generateSignature = async (payload, apiKey) => {
     const secretKey = userApiKeys.secretKey;
 
@@ -255,9 +240,6 @@ const Avatars = () => {
       .join("");
   };
 
-  // ─────────────────────────────────────────────
-  // Handle stream disconnection
-  // ─────────────────────────────────────────────
   const handleStreamDisconnected = () => {
     console.log("🔌 Stream disconnected");
     if (videoRef.current) videoRef.current.srcObject = null;
@@ -267,9 +249,6 @@ const Avatars = () => {
     setConnectionStatus("disconnected");
   };
 
-  // ─────────────────────────────────────────────
-  // Validate form fields
-  // ─────────────────────────────────────────────
   const validateFields = () => {
     const newErrors = {};
     if (!selectedOption) newErrors.category = "Category is required.";
@@ -281,9 +260,6 @@ const Avatars = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // ─────────────────────────────────────────────
-  // Initialize avatar session
-  // ─────────────────────────────────────────────
   const initializeAvatarSession = async () => {
     try {
       if (!validateFields()) return;
@@ -306,7 +282,6 @@ const Avatars = () => {
       setConnectionStatus("connecting");
       setStreamReady(false);
 
-      // STEP 1 — Check quota BEFORE starting session
       const quotaSignature = await generateSignature("", userApiKeys.apiKey);
       const planRes = await fetch(
         `${backendURL}/agents/generate-response/access`,
@@ -345,20 +320,16 @@ const Avatars = () => {
 
       console.log("🚀 Starting avatar session...");
 
-      // STEP 2 — Get voice_id from selected avatar
       const selectedAvatarData = availableAvatars.find(
         (av) => av.id === selectedAvatar,
       );
       const voiceId = selectedAvatarData?.voice_id || "";
 
-      // STEP 3 — Convert language code to ISO 639-1 (2-letter)
-      // LiveAvatar API requires "en" not "eng", "it" not "ita", etc.
       const isoLanguage = toIso2(selectedLanguage);
       console.log(
         `🌐 Language: ${selectedLanguage} → ${isoLanguage} (sent to LiveAvatar)`,
       );
 
-      // STEP 4 — Get session token from backend
       const sessionSignature = await generateSignature("", userApiKeys.apiKey);
       const sessionRes = await fetch(
         `${backendURL}/agents/generate-heygen-session/`,
@@ -374,7 +345,7 @@ const Avatars = () => {
             avatar_id: selectedAvatar,
             avatar_persona: {
               voice_id: voiceId,
-              language: isoLanguage, // ✅ ISO 639-1: "en" not "eng"
+              language: isoLanguage,
             },
           }),
         },
@@ -397,7 +368,6 @@ const Avatars = () => {
 
       console.log("✅ Session data received:", sessionData);
 
-      // Extract token — handle different response shapes
       const token =
         sessionData?.session_token ||
         sessionData?.token ||
@@ -414,7 +384,6 @@ const Avatars = () => {
 
       console.log("🎫 Session token received");
 
-      // STEP 5 — Initialize LiveAvatarSession and start
       avatarRef.current = new LiveAvatarSession(token);
 
       avatarRef.current.on(SessionEvent.SESSION_STREAM_READY, () => {
@@ -450,9 +419,6 @@ const Avatars = () => {
     }
   };
 
-  // ─────────────────────────────────────────────
-  // Terminate avatar session
-  // ─────────────────────────────────────────────
   const terminateAvatarSession = async () => {
     try {
       setIsLoading(true);
@@ -477,9 +443,6 @@ const Avatars = () => {
     }
   };
 
-  // ─────────────────────────────────────────────
-  // Speech recognition
-  // ─────────────────────────────────────────────
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
 
@@ -543,9 +506,6 @@ const Avatars = () => {
     };
   };
 
-  // ─────────────────────────────────────────────
-  // Handle submit — send to backend & avatar.repeat()
-  // ─────────────────────────────────────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
     const inputToSend = userInput.trim() || transcriptRef.current;
@@ -624,9 +584,6 @@ const Avatars = () => {
     }
   };
 
-  // ─────────────────────────────────────────────
-  // Cleanup on unmount
-  // ─────────────────────────────────────────────
   useEffect(() => {
     return () => {
       if (avatarRef.current) {
@@ -636,9 +593,6 @@ const Avatars = () => {
     };
   }, []);
 
-  // ─────────────────────────────────────────────
-  // Active subscription
-  // ─────────────────────────────────────────────
   const handleUnauthorized = useCallback(() => {
     logout();
   }, [logout]);
@@ -676,9 +630,6 @@ const Avatars = () => {
     fetchActiveSubscription();
   }, [fetchActiveSubscription]);
 
-  // ─────────────────────────────────────────────
-  // Status helpers
-  // ─────────────────────────────────────────────
   const getStatusColor = () => {
     switch (connectionStatus) {
       case "connected":
@@ -863,16 +814,7 @@ const Avatars = () => {
                     <label htmlFor="gender-select" className="input-label">
                       Select Gender
                     </label>
-                    {/* <select
-                      id="gender-select"
-                      value={selectedGender}
-                      onChange={(e) => setSelectedGender(e.target.value)}
-                      className="avatar-select"
-                      disabled={isLoading}
-                    >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                    </select> */}
+
                     <select
                       id="gender-select"
                       value={selectedGender}
@@ -1049,9 +991,6 @@ const Avatars = () => {
     );
   }
 
-  // ─────────────────────────────────────────────
-  // RENDER — Active Session
-  // ─────────────────────────────────────────────
   return (
     <div className="avatars-page active-session">
       <div className="fullscreen-video-container">
@@ -1065,7 +1004,6 @@ const Avatars = () => {
         {!streamReady && (
           <div className="loading-overlay">
             <div className="loading-content">
-              {/* <span className="loading-spinner large"></span> */}
               <h3>Connecting to Avatar...</h3>
               <p>Please wait while we establish the connection</p>
             </div>
@@ -1111,7 +1049,6 @@ const Avatars = () => {
                   </span>
                 </button>
 
-                {/* ✅ Both action buttons grouped together */}
                 <div className="action-buttons">
                   <button
                     type="submit"
