@@ -78,6 +78,8 @@ const Navbar = () => {
       location.pathname === "/payment-fail" ||
       location.pathname === "/forgot-password" ||
       location.pathname === "/change-password" ||
+      location.pathname === "/terms&conditons" ||
+      location.pathname === "/privacy-roles&responsibilities" ||
       location.pathname.startsWith("/verify-email/") ||
       location.pathname === ROUTES.resetPassword.path ||
       location.pathname === "/reset-password") &&

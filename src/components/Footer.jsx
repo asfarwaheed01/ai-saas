@@ -24,7 +24,13 @@ const Footer = () => {
           label: "Co-financed by the European Union",
           url: "/informativa_privacy",
         },
-        { label: "Terms & Conditions", url: "#" },
+        { label: "Privacy Policy", url: "/privacy-policy" },
+        { label: "Terms and Conditions of Use", url: "/terms&conditons" },
+        { label: "Cookie Policy", url: "/cookie-policy" },
+        {
+          label: "Privacy Roles and Responsibilities Document",
+          url: "/privacy-roles&responsibilities",
+        },
       ],
     },
     {

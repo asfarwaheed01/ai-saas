@@ -44,6 +44,11 @@ import ManageSubscription from "./pages/ManageSubscriptions/ManageSubscription";
 import Users from "./pages/Users/User";
 import PendingUsers from "./pages/Users/PendingUsers";
 import FloatingContactButton from "./components/FloatingButton/FloatingButtonSupport";
+import PrivacyPolicy from "./pages/FooterPages/PrivacyPolicy/PrivacyPolicy";
+import TermsConditions from "./pages/FooterPages/TermsConditions/TermsConditions";
+import CookiePolicy from "./pages/FooterPages/CookiePolicy/CookiePolicy";
+import PrivacyRoles from "./pages/FooterPages/PrivacyRoles/PrivacyRoles";
+
 function App() {
   return (
     <>
@@ -55,6 +60,42 @@ function App() {
           element={
             <MainLayout>
               <HomePage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path={ROUTES.privacyPolicy.path}
+          element={
+            <MainLayout>
+              <PrivacyPolicy />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path={ROUTES.termsConditions.path}
+          element={
+            <MainLayout>
+              <TermsConditions />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path={ROUTES.cookiePolicy.path}
+          element={
+            <MainLayout>
+              <CookiePolicy />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path={ROUTES.privacyRolesResponsibilities.path}
+          element={
+            <MainLayout>
+              <PrivacyRoles />
             </MainLayout>
           }
         />

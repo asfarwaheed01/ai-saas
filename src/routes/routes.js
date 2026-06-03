@@ -124,6 +124,22 @@ export const ROUTES = {
     path: "/informativa_privacy",
     name: "Co-financed by the eurpeion union",
   },
+  privacyPolicy: {
+    path: "/privacy-policy",
+    name: "Privacy Policy",
+  },
+  termsConditions: {
+    path: "/terms&conditons",
+    name: "Terms & Conditions",
+  },
+  cookiePolicy: {
+    path: "/cookie-policy",
+    name: "Cookie Policy",
+  },
+  privacyRolesResponsibilities: {
+    path: "/privacy-roles&responsibilities",
+    name: "Privacy Roles and Responsibilities Document",
+  },
   success: {
     path: "/payment-success",
     name: "Payment Success",
