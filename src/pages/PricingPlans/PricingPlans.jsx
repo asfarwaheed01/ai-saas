@@ -174,7 +174,6 @@ const PricingPlans = () => {
       const data = await response.json();
       console.log("Cancel Subscription Response:", data);
 
-      // cancel ke baad refresh active subscription
       await fetchActiveSubscription();
     } catch (err) {
       console.error("Error cancelling subscription:", err);
@@ -230,7 +229,7 @@ const PricingPlans = () => {
                   </ul>
 
                   {/* ✅ Button logic starts here */}
-                  {isFreePlan ? (
+                  {/* {isFreePlan ? (
                     isExpired ? (
                       <button className="subscribe-btn expired" disabled>
                         Expired
@@ -261,7 +260,7 @@ const PricingPlans = () => {
                     >
                       Subscribe
                     </button>
-                  )}
+                  )} */}
                 </div>
               </div>
             );
