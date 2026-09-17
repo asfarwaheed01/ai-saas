@@ -282,9 +282,8 @@ const Services = () => {
               {packages.map((pkg) => (
                 <button
                   key={pkg.id}
-                  className={`package-button ${
-                    selectedPackage.id === pkg.id ? "active" : ""
-                  }`}
+                  className={`package-button ${selectedPackage.id === pkg.id ? "active" : ""
+                    }`}
                   onClick={() => setSelectedPackage(pkg)}
                   onMouseEnter={() => setSelectedPackage(pkg)}
                 >
@@ -388,7 +387,7 @@ const Services = () => {
                   return;
                 }
                 window.open(
-                  "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin-updated-v7.zip",
+                  "https://todopharma-ai-bucket.s3.eu-central-1.amazonaws.com/plugins/todopharma-wordpress-plugin-updated-v8.zip",
                   "_blank",
                 );
               }}
