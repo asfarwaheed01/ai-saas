@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaInfoCircle } from "react-icons/fa";
 import "./PricingPlans.css";
 import { useAuth } from "../../providers/AuthContext";
 import { backendURL } from "../../config/constants";
 import { loadStripe } from "@stripe/stripe-js";
 import { data, useLocation } from "react-router-dom";
 import AuthPopup from "../../components/AuthPopUp";
+const EUR_TO_USD_RATE = 1.16; // 1.16 multiplier for proportional 2x scaling (€50=$58, €100=$116, €200=$232)
 
 const PricingPlans = () => {
   const { getAccessToken, logout } = useAuth();
@@ -16,6 +17,39 @@ const PricingPlans = () => {
   const location = useLocation();
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [currency, setCurrency] = useState("EUR");
+
+  // Custom rounding: if decimal portion >= 0.50 -> round up, else round down
+  const roundToWholeNumber = (num) => {
+    const integerPart = Math.floor(num);
+    const decimalPart = num - integerPart;
+    return decimalPart >= 0.5 ? Math.ceil(num) : Math.floor(num);
+  };
+
+  const formatPrice = (euroPrice, selectedCurrency) => {
+    const numericPrice = parseFloat(euroPrice) || 0;
+    if (numericPrice === 0) {
+      return {
+        symbol: selectedCurrency === "USD" ? "$" : "€",
+        amount: 0,
+      };
+    }
+
+    const rawUsdValue = numericPrice * EUR_TO_USD_RATE; // e.g. 50 * 1.16 = 58, 100 * 1.16 = 116, 200 * 1.16 = 232
+    const usdPrice = roundToWholeNumber(rawUsdValue);
+
+    if (selectedCurrency === "USD") {
+      return {
+        symbol: "$",
+        amount: usdPrice,
+      };
+    }
+
+    return {
+      symbol: "€",
+      amount: numericPrice,
+    };
+  };
 
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -186,6 +220,35 @@ const PricingPlans = () => {
         <h1>Pricing Plans</h1>
       </div>
 
+      {/* Notice Banner for Shopify & WordPress users (Info theme, top position) */}
+      <div className="in-app-notice-banner info-theme">
+        <FaInfoCircle className="notice-icon" />
+        <span>
+          <strong>Notice:</strong> Shopify app users and WordPress plugin users must purchase and manage plan subscriptions directly within their respective app/plugin interface.
+        </span>
+      </div>
+
+      {/* Currency Switcher Toggle */}
+      <div className="currency-toggle-container">
+        <span className="currency-label">Currency:</span>
+        <div className="currency-toggle-pill">
+          <button
+            type="button"
+            className={`currency-btn ${currency === "EUR" ? "active" : ""}`}
+            onClick={() => setCurrency("EUR")}
+          >
+            € EUR
+          </button>
+          <button
+            type="button"
+            className={`currency-btn ${currency === "USD" ? "active" : ""}`}
+            onClick={() => setCurrency("USD")}
+          >
+            $ USD
+          </button>
+        </div>
+      </div>
+
       {isLoading ? (
         <p>Loading plans...</p>
       ) : (
@@ -201,13 +264,17 @@ const PricingPlans = () => {
               activeSubscription?.plan?.id === plan.id &&
               activeSubscription?.remaining_api_requests === 0;
 
+            const priceInfo = formatPrice(plan.price, currency);
+
             return (
               <div className="pricing-card" key={plan.id || index}>
                 <div className="test">
                   <p className="plan-name">{plan.name}</p>
                   <div className="plan-price">
-                    <span className="price">€{plan.price}</span>
-                    <span className="per">/MESE</span>
+                    <span className="price">
+                      {priceInfo.symbol}{priceInfo.amount}
+                    </span>
+                    <span className="per">/Month</span>
                   </div>
                 </div>
 
@@ -267,6 +334,7 @@ const PricingPlans = () => {
           })}
         </div>
       )}
+
       {showAuthPopup && (
         <AuthPopup
           onClose={() => setShowAuthPopup(false)}

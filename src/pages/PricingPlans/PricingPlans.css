@@ -15,7 +15,81 @@
 
 .pricing-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
+}
+
+.in-app-notice-banner.info-theme {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #e8f7f8;
+  border: 1px solid #05b1bd;
+  border-left: 5px solid #05b1bd;
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin: 0 auto 30px auto;
+  max-width: 900px;
+  color: #035258;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  box-shadow: 0 2px 8px rgba(5, 177, 189, 0.1);
+}
+
+.notice-icon {
+  font-size: 1.4rem;
+  color: #05b1bd;
+  flex-shrink: 0;
+}
+
+.currency-toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 35px;
+}
+
+.currency-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.currency-toggle-pill {
+  display: inline-flex;
+  background-color: #e8f7f8;
+  border-radius: 30px;
+  padding: 4px;
+  border: 1px solid #b8e6e9;
+}
+
+.currency-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #05b1bd;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.currency-btn.active {
+  background-color: #05b1bd;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(5, 177, 189, 0.3);
+}
+
+.currency-btn:hover:not(.active) {
+  color: #02656c;
+}
+
+.converted-price-subtext {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 4px;
+  font-weight: 500;
 }
 
 .pricing-header h1 {
