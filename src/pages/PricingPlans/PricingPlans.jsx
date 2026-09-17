@@ -19,7 +19,6 @@ const PricingPlans = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [currency, setCurrency] = useState("EUR");
 
-  // Custom rounding: if decimal portion >= 0.50 -> round up, else round down
   const roundToWholeNumber = (num) => {
     const integerPart = Math.floor(num);
     const decimalPart = num - integerPart;
@@ -35,7 +34,7 @@ const PricingPlans = () => {
       };
     }
 
-    const rawUsdValue = numericPrice * EUR_TO_USD_RATE; // e.g. 50 * 1.16 = 58, 100 * 1.16 = 116, 200 * 1.16 = 232
+    const rawUsdValue = numericPrice * EUR_TO_USD_RATE;
     const usdPrice = roundToWholeNumber(rawUsdValue);
 
     if (selectedCurrency === "USD") {
@@ -226,7 +225,9 @@ const PricingPlans = () => {
       <div className="in-app-notice-banner info-theme">
         <FaInfoCircle className="notice-icon" />
         <span>
-          <strong>Notice:</strong> Shopify app users and WordPress plugin users must purchase and manage plan subscriptions directly within their respective app/plugin interface.
+          <strong>Notice:</strong> Shopify app users and WordPress plugin users
+          must purchase and manage plan subscriptions directly within their
+          respective app/plugin interface.
         </span>
       </div>
 
@@ -274,7 +275,8 @@ const PricingPlans = () => {
                   <p className="plan-name">{plan.name}</p>
                   <div className="plan-price">
                     <span className="price">
-                      {priceInfo.symbol}{priceInfo.amount}
+                      {priceInfo.symbol}
+                      {priceInfo.amount}
                     </span>
                     <span className="per">/Month</span>
                   </div>
