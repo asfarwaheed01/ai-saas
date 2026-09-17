@@ -34,7 +34,7 @@ const PricingPlans = () => {
       };
     }
 
-    const rawUsdValue = numericPrice * EUR_TO_USD_RATE; // e.g. 50 * 1.16 = 58, 100 * 1.16 = 116, 200 * 1.16 = 232
+    const rawUsdValue = numericPrice * EUR_TO_USD_RATE;
     const usdPrice = roundToWholeNumber(rawUsdValue);
 
     if (selectedCurrency === "USD") {
