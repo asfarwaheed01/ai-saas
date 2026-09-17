@@ -431,7 +431,6 @@ section .button {
     display: none;
     position: absolute;
     top: 271px;
-    top: calc(100% + 5 reproducedrem);
     left: 0;
     width: 100%;
     background-color: #ffffff;

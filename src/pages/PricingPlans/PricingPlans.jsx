@@ -4,7 +4,7 @@ import "./PricingPlans.css";
 import { useAuth } from "../../providers/AuthContext";
 import { backendURL } from "../../config/constants";
 import { loadStripe } from "@stripe/stripe-js";
-import { data, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AuthPopup from "../../components/AuthPopUp";
 const EUR_TO_USD_RATE = 1.16; // 1.16 multiplier for proportional 2x scaling (€50=$58, €100=$116, €200=$232)
 
@@ -12,7 +12,7 @@ const PricingPlans = () => {
   const { getAccessToken, logout } = useAuth();
   const [plans, setPlans] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeSubscription, setActiveSubscription] = useState(null);
+  // const [activeSubscription, setActiveSubscription] = useState(null);
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const location = useLocation();
   const [showErrorPopup, setShowErrorPopup] = useState(false);
@@ -95,14 +95,15 @@ const PricingPlans = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [apiHeaders, handleUnauthorized]);
+  }, [handleUnauthorized]);
 
   useEffect(() => {
     fetchPricing();
-  }, []);
+  }, [fetchPricing]);
 
   const token = getAccessToken();
 
+  // eslint-disable-next-line no-unused-vars
   const handleSubscribe = async (plan) => {
     if (!token) {
       setShowAuthPopup(true);
@@ -173,7 +174,7 @@ const PricingPlans = () => {
 
       const data = await response.json();
       console.log("Active Subscription:", data);
-      setActiveSubscription(data);
+      // setActiveSubscription(data);
     } catch (err) {
       console.error("Error fetching active subscription:", err);
     }
@@ -186,6 +187,7 @@ const PricingPlans = () => {
     };
     init();
   }, [fetchActiveSubscription, fetchPricing]);
+  // eslint-disable-next-line no-unused-vars
   const handleCancelSubscription = async () => {
     try {
       const response = await fetch(
@@ -254,15 +256,15 @@ const PricingPlans = () => {
       ) : (
         <div className="pricing-cards">
           {plans.map((plan, index) => {
-            const isActive =
-              activeSubscription?.is_subscribed === true &&
-              activeSubscription?.plan?.id === plan.id;
+            // const isActive =
+            //   activeSubscription?.is_subscribed === true &&
+            //   activeSubscription?.plan?.id === plan.id;
 
-            const isFreePlan = plan.name.toLowerCase() === "free";
-            const isExpired =
-              isFreePlan &&
-              activeSubscription?.plan?.id === plan.id &&
-              activeSubscription?.remaining_api_requests === 0;
+            // const isFreePlan = plan.name.toLowerCase() === "free";
+            // const isExpired =
+            //   isFreePlan &&
+            //   activeSubscription?.plan?.id === plan.id &&
+            //   activeSubscription?.remaining_api_requests === 0;
 
             const priceInfo = formatPrice(plan.price, currency);
 
